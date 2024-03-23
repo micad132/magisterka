@@ -17,6 +17,8 @@ module.exports = {
     'prefer-const': 'error', // Enforce use of const for variables
     'prefer-arrow-callback': 'error', // Prefer arrow functions
     'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
+    'import/no-extraneous-dependencies': 'off',
+    'import/no-unresolved': 'off',
   },
   parserOptions: {
     project: './tsconfig.json',
