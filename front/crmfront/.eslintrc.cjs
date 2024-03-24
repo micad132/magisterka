@@ -19,6 +19,7 @@ module.exports = {
     'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
+    'import/extensions': 'off',
   },
   parserOptions: {
     project: './tsconfig.json',
