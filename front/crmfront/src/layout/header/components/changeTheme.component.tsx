@@ -1,4 +1,13 @@
 import { useEffect, useState } from 'react';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import styled from 'styled-components';
+
+const CustomDiv = styled.div`
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  color: var(--font-color);
+`;
 
 const ChangeTheme = () => {
   const [theme, setTheme] = useState(() => {
@@ -9,8 +18,9 @@ const ChangeTheme = () => {
   useEffect(() => {
     const root = document.documentElement;
     const newColor = theme === 'light' ? '#fff' : '#000';
-    console.log('NEW KOLOR', newColor);
-    root.style.setProperty('--test-color', newColor);
+    const fontColor = theme === 'light' ? '#000' : '#fff';
+    root.style.setProperty('--background-color', newColor);
+    root.style.setProperty('--font-color', fontColor);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -19,10 +29,14 @@ const ChangeTheme = () => {
     setTheme(newTheme);
   };
 
+  const properIcon = theme === 'light'
+    ? <MoonIcon boxSize="100%" />
+    : <SunIcon boxSize="100%" />;
+
   return (
-    <button onClick={toggleTheme} style={{ backgroundColor: 'red' }}>
-      ZMIEN THEME
-    </button>
+    <CustomDiv onClick={toggleTheme}>
+      {properIcon}
+    </CustomDiv>
   );
 };
 

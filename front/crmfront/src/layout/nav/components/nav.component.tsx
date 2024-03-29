@@ -5,8 +5,8 @@ const NavWrapper = styled.nav`
     grid-area: nav;
     height: 100vh;
     //background-color: #fff;
-    background-color: var(--test-color);
-    color: #000;  
+    background-color: var(--background-color);
+    color: var(--font-color);  
 `;
 
 const NavComponent = () => (
