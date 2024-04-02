@@ -22,5 +22,6 @@
     "allowSyntheticDefaultImports": true,
   },
   "include": ["src", ".eslintrc.cjs"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./tsconfig.node.json" }],
+  "exclude": ["cypress.config.ts", "cypress", "node_modules"]
 }
