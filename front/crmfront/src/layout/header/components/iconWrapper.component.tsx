@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import ProfileComponent from './profile.component.tsx';
+import ProfileComponent from './profile/profile.component.tsx';
 import ChangeTheme from './changeTheme.component.tsx';
 import ProfileModal from './profile/profileModal.component.tsx';
+import SupportModal from './support/supportModal.component.tsx';
 
 const IconWrapperDiv = styled.div`
   position: absolute;
@@ -24,6 +25,7 @@ const IconWrapper = () => (
   <IconWrapperDiv>
     <ProfileModal />
     <ChangeTheme />
+    <SupportModal />
   </IconWrapperDiv>
 );
 

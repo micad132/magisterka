@@ -20,6 +20,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
+    'react/jsx-one-expression-per-line': 'off',
   },
   parserOptions: {
     project: './tsconfig.json',

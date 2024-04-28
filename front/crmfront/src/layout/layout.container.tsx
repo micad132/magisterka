@@ -5,7 +5,7 @@ import HeaderContainer from './header/header.container.tsx';
 
 const MainWrapper = styled.main`
   grid-area: main;
-  background-color: #201E1F;
+  background-color: var(--main-color);
   height: 100%;
 `;
 

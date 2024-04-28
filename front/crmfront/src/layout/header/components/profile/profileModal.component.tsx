@@ -1,14 +1,17 @@
 import {
+  Button,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton, useDisclosure, Button,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
 } from '@chakra-ui/react';
-import ProfileComponent from '../profile.component.tsx';
+import ProfileComponent from './profile.component.tsx';
 import RoleTag from '../../../../components/roleTag.component.tsx';
+import { RoleType } from '../../../../types/UserType.ts';
 
 const ProfileModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,7 +31,7 @@ const ProfileModal = () => {
           <ModalHeader>Michal Mosiolek</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <RoleTag role="WORKER" />
+            <RoleTag role={RoleType.WORKER} />
           </ModalBody>
 
           <ModalFooter>

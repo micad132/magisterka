@@ -1,6 +1,6 @@
 const HomePage = () => (
   <div>
-    <p style={{ color: '#fff' }}>TEST</p>
+    <p style={{ color: '#000', fontSize: '40px' }}>System CRM zawiera</p>
   </div>
 );
 

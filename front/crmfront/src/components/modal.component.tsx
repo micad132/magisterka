@@ -7,27 +7,32 @@ import {
   ModalBody,
   ModalCloseButton, useDisclosure, Button,
 } from '@chakra-ui/react';
+import { ModalProps } from '../types/UtilTypes.ts';
 
-const ModalComponent = () => {
+interface Props {
+  modalProps: ModalProps,
+}
+
+const ModalComponent = ({ modalProps }:Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
+      <Button onClick={onOpen} colorScheme={modalProps.buttonColor ?? 'teal'} size="lg">{modalProps.buttonText}</Button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>{modalProps.modalHeader}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            TESTTEST
+            {modalProps.modalBody}
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+            <Button colorScheme="teal" mr={3}>
+              {modalProps.modalActionButtonText}
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            <Button variant="ghost" onClick={onClose}>Close</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -6,7 +6,7 @@ const CustomDiv = styled.div`
   cursor: pointer;
   width: 40px;
   height: 40px;
-  color: var(--font-color);
+  color: var(--nav-font-color);
 `;
 
 const ChangeTheme = () => {
@@ -17,10 +17,15 @@ const ChangeTheme = () => {
 
   useEffect(() => {
     const root = document.documentElement;
-    const newColor = theme === 'light' ? '#fff' : '#000';
+    // const newColor = theme === 'light' ? '#51AFDE' : '#000';
+    const newColor = theme === 'light' ? '#319795' : '#000';
     const fontColor = theme === 'light' ? '#000' : '#fff';
+    const navFontColor = theme === 'light' ? '#fff' : '#000';
+    const mainColor = theme === 'light' ? '#fff' : '#000';
     root.style.setProperty('--background-color', newColor);
     root.style.setProperty('--font-color', fontColor);
+    root.style.setProperty('--main-color', mainColor);
+    root.style.setProperty('--nav-font-color', navFontColor);
   }, [theme]);
 
   const toggleTheme = () => {

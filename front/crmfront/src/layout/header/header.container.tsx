@@ -5,7 +5,7 @@ const HeaderWrapper = styled.div`
     grid-area: header;
     background-color: var(--background-color);
     height: 150px;
-    color: var(--font-color);
+    color: var(--nav-font-color);
 `;
 
 const HeaderContainer = () => (
