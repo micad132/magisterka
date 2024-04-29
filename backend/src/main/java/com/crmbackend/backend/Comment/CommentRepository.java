@@ -1,2 +1,6 @@
-package com.crmbackend.backend.Comment;public interface CommentRepository {
+package com.crmbackend.backend.Comment;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CommentRepository extends JpaRepository<Long, CommentModel> {
 }

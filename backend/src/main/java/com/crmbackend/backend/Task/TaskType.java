@@ -1,2 +1,11 @@
-package com.crmbackend.backend.Task;public enum TaskType {
+package com.crmbackend.backend.Task;
+
+
+import lombok.Getter;
+
+@Getter
+public enum TaskType {
+    LOGISTIC,
+    INFORMATIC,
+    SELLING,
 }
