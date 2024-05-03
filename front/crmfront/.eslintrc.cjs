@@ -21,6 +21,7 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'react/jsx-one-expression-per-line': 'off',
+    "linebreak-style": "off"
   },
   parserOptions: {
     project: './tsconfig.json',

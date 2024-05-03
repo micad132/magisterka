@@ -1,6 +1,14 @@
+import styled from 'styled-components';
+
+const HomePageHeader = styled.h1`
+  color: var(--font-color);
+  font-size: 2rem !important;
+  background-color: brown;
+`;
+
 const HomePage = () => (
   <div>
-    <p style={{ color: '#000', fontSize: '40px' }}>System CRM zawiera</p>
+    <HomePageHeader>System CRM zawiera</HomePageHeader>
   </div>
 );
 

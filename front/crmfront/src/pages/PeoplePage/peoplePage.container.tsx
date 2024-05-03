@@ -16,8 +16,10 @@ const PeoplePageContainer = () => {
   console.log('fds');
   const [isOnlyClients, setIsOnlyClients] = useState<boolean>(false);
 
+  const clientUsers = MockedUsers.filter((client) => client.role === RoleType.CLIENT);
+
   const properUsers = isOnlyClients
-    ? MockedUsers.filter((client) => client.role === RoleType.CLIENT)
+    ? clientUsers
     : MockedUsers;
 
   const singlePersonComponents = properUsers.map((user) => <SinglePersonComponent key={user.username} user={user} />);
@@ -25,7 +27,7 @@ const PeoplePageContainer = () => {
   return (
     <HistoryPageWrapper>
       <h3>Total amount of users in system: {MockedUsers.length}</h3>
-      <h3>Total amount of clients in system: {properUsers.length}</h3>
+      <h3>Total amount of clients in system: {clientUsers.length}</h3>
       <Checkbox colorScheme="blue" onChange={(e) => setIsOnlyClients(e.target.checked)}>
         Show only clients
       </Checkbox>

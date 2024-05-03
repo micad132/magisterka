@@ -3,6 +3,7 @@ import { ModalProps } from '../../types/UtilTypes.ts';
 import CreatingTaskModalContent from './components/task/creatingTaskModalContent.component.tsx';
 import TaskWrapper from './components/task/taskWrapper.component.tsx';
 import TaskSettingsContainer from './components/taskSettings/taskSettings.container.tsx';
+import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 
 const modalProps: ModalProps = {
   buttonText: 'Create Task',
@@ -12,13 +13,13 @@ const modalProps: ModalProps = {
 };
 
 const TaskPageContainer = () => (
-  <div>
+  <PageWrapperComponent>
     TASKS
     {/* <CreateTaskButton /> */}
     <ModalComponent modalProps={modalProps} />
     <TaskSettingsContainer />
     <TaskWrapper />
-  </div>
+  </PageWrapperComponent>
 );
 
 export default TaskPageContainer;
