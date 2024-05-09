@@ -1,5 +1,7 @@
 import { SelectValue } from '../types/UtilTypes.ts';
 
+export const API_URL = 'http://localhost:8080/api/v1';
+
 export const TASK_STATUS_OPTIONS: SelectValue[] = [
   {
     text: 'In progress',

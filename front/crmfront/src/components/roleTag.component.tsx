@@ -15,11 +15,11 @@ const RoleTag = ({ role }: Props) => {
   const getProperTag = () => {
     switch (role) {
       case RoleType.ADMIN:
-        return <TagWrapper size="large" variant="solid" colorScheme="blue">ADMIN</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="green">ADMIN</TagWrapper>;
       case RoleType.WORKER:
-        return <TagWrapper size="large" variant="solid" colorScheme="green" key="worker">WORKER</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="teal" key="worker">WORKER</TagWrapper>;
       case RoleType.CLIENT:
-        return <TagWrapper size="large" variant="solid" colorScheme="teal">CLIENT</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="blue">CLIENT</TagWrapper>;
       default:
         return <TagWrapper size="large" variant="solid" colorScheme="teal">Error</TagWrapper>;
     }

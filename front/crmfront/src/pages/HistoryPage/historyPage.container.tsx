@@ -4,6 +4,7 @@ import HistoryTable from './components/historyTable.component.tsx';
 import { RoleType, User } from '../../types/UserType.ts';
 import LoggedUserInfoComponent from './components/loggedUserInfo.component.tsx';
 import HistoryPageHeaderComponent from './components/historyPageHeader.component.tsx';
+import { MOCKED_HISTORIES } from '../../mock/mockHistory.tsx';
 
 const MOCKED_CLIENTS: User[] = [
   {
@@ -42,7 +43,7 @@ const HistoryPageContainer = () => {
     <div style={{ color: '#000' }}>
       <LoggedUserInfoComponent />
       <HistoryPageHeaderComponent />
-      <HistoryTable users={MOCKED_CLIENTS} />
+      <HistoryTable histories={MOCKED_HISTORIES} />
     </div>
   );
 };

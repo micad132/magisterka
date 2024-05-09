@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage/homePage.container.js';
 import TaskPageContainer from '../pages/TaskPage/taskPage.container.tsx';
 import PeoplePageContainer from '../pages/PeoplePage/peoplePage.container.tsx';
 import HistoryPageContainer from '../pages/HistoryPage/historyPage.container.tsx';
+import MessagesPageContainer from '../pages/MessagesPage/messagesPage.container.tsx';
 
 const routes = (
   <Routes>
@@ -14,6 +15,7 @@ const routes = (
     <Route path="/tasks" element={<TaskPageContainer />} />
     <Route path="/people" element={<PeoplePageContainer />} />
     <Route path="/history" element={<HistoryPageContainer />} />
+    <Route path="/messages" element={<MessagesPageContainer />} />
   </Routes>
 );
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import IconWrapper from './components/iconWrapper.component.tsx';
+import AuthNavComponent from './components/authNav/authNav.component.tsx';
 
 const HeaderWrapper = styled.div`
     grid-area: header;

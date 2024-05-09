@@ -6,6 +6,7 @@ import HistoryIcon from '@mui/icons-material/History';
 import HelpIcon from '@mui/icons-material/Help';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
+import MessageIcon from '@mui/icons-material/Message';
 import SingleLink from './singleLink.component.tsx';
 
 const NavWrapper = styled.nav`
@@ -31,6 +32,7 @@ const NavComponent = () => (
       <SingleLink path="/tasks" text="Tasks" icon={<TaskIcon />} />
       <SingleLink path="/people" text="People" icon={<PersonIcon />} />
       <SingleLink path="/workers" text="Workers" icon={<EngineeringIcon />} />
+      <SingleLink path="/messages" text="Messages" icon={<MessageIcon />} />
       <SingleLink path="/history" text="History" icon={<HistoryIcon />} />
       <SingleLink path="/stats" text="Stats" icon={<InsertChartIcon />} />
       <SingleLink path="/support" text="Support" icon={<HelpIcon />} />

@@ -1,0 +1,22 @@
+package com.crmbackend.backend.User.dto.response;
+
+import com.crmbackend.backend.User.enums.UserGender;
+import com.crmbackend.backend.User.enums.UserRole;
+import lombok.Builder;
+
+@Builder
+public class UserDTOResponse {
+    private String name;
+    private String surname;
+    private String username;
+    private String pesel;
+    private String email;
+    private String countryName;
+    private String cityName;
+    private String streetName;
+    private String postalCode;
+    private String phoneNumber;
+    private Integer age;
+    private UserGender userGender;
+    private UserRole userRole;
+}

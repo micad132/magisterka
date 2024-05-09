@@ -17,7 +17,7 @@ const ModalComponent = ({ modalProps }:Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen} colorScheme={modalProps.buttonColor ?? 'teal'} size="lg">{modalProps.buttonText}</Button>
+      <Button onClick={onOpen} colorScheme={modalProps.buttonColor ?? 'teal'} size={modalProps.buttonSize ?? 'lg'}>{modalProps.buttonText}</Button>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />

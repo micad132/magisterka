@@ -6,7 +6,11 @@ import { RoleType, User } from '../../../types/UserType.ts';
 import ModalComponent from '../../../components/modal.component.tsx';
 import { ModalProps } from '../../../types/UtilTypes.ts';
 import RoleTag from '../../../components/roleTag.component.tsx';
-import EditUserContentComponent from './editUserContent.component.tsx';
+import EditUserContentComponent from '../../PeoplePage/components/singlePerson/editUserContent.component.tsx';
+import HISTORY_TABLE_ROWS from './historyTableRows.tsx';
+import ActionTypeTagComponent from '../../../components/actionTypeTag.component.tsx';
+import { ActionType, HistoryType } from '../../../types/HistoryType.ts';
+import DetailsOfHistoryComponent from './detailsOfHistory.component.tsx';
 
 const TableWrapper = styled.div`
     max-width: 1200px;
@@ -14,28 +18,26 @@ const TableWrapper = styled.div`
 `;
 
 interface Props {
-  users: User[],
+  histories: HistoryType[],
 }
 
-const HistoryTable = ({ users }: Props) => {
-  console.log('fdfd');
-
+const HistoryTable = ({ histories }: Props) => {
   const deleteModalContent = (
     <div>
-      <h2>Are you sure you want to delete mikad132?</h2>
+      <h2>Are you sure you want to delete this history?</h2>
     </div>
   );
 
-  const userDetailsModalProps: ModalProps = {
+  const userDetailsModalProps = (id: string): ModalProps => ({
     modalHeader: 'Details',
     modalActionButtonText: 'Clone',
-    modalBody: <h1>COSIK</h1>,
+    modalBody: <DetailsOfHistoryComponent id={id} />,
     buttonText: 'Details',
-  };
+  });
 
   const userEditModalprops: ModalProps = {
     modalHeader: 'Edit Client',
-    modalBody: <EditUserContentComponent />,
+    modalBody: <h1>COSIK</h1>,
     modalActionButtonText: 'Edit',
     buttonText: 'Edit',
   };
@@ -53,30 +55,16 @@ const HistoryTable = ({ users }: Props) => {
       <TableContainer>
         <Table variant="simple">
           <Thead>
-            <Tr>
-              <Th>ID</Th>
-              <Th>Role:</Th>
-              <Th>Username</Th>
-              <Th>Street:</Th>
-              <Th>Postal Code:</Th>
-              <Th>Phone Number:</Th>
-              <Th>Email:</Th>
-              <Th>Details:</Th>
-              <Th>Edit:</Th>
-              <Th>Delete:</Th>
-            </Tr>
+            {HISTORY_TABLE_ROWS}
           </Thead>
           <Tbody>
-            {users.map((user) => (
-              <Tr key={user.id}>
-                <Td>{user.id}</Td>
-                <Td><RoleTag role={user.role} /></Td>
-                <Td>{user.username}</Td>
-                <Td>{user.streetName}</Td>
-                <Td>{user.postalCode}</Td>
-                <Td>{user.phoneNumber}</Td>
-                <Td>{user.email}</Td>
-                <Td><ModalComponent modalProps={userDetailsModalProps} /></Td>
+            {histories.map((history) => (
+              <Tr key={history.id}>
+                <Td>{history.id}</Td>
+                <Td><ActionTypeTagComponent actionType={history.actionType} /></Td>
+                <Td>{history.performer}</Td>
+                <Td>{history.date}</Td>
+                <Td><ModalComponent modalProps={userDetailsModalProps(history.id)} /></Td>
                 <Td><ModalComponent modalProps={userEditModalprops} /></Td>
                 <Td><ModalComponent modalProps={userDeleteModalProps} /></Td>
               </Tr>

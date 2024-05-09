@@ -1,6 +1,8 @@
 package com.crmbackend.backend.Comment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CommentRepository extends JpaRepository<Long, CommentModel> {
+@Repository
+public interface CommentRepository extends JpaRepository<CommentModel, Long> {
 }

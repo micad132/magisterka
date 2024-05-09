@@ -2,8 +2,8 @@ import {
   Button, FormLabel, Input, Select,
 } from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
-import { UserWithoutID, INITIAL_EDIT_USER_VALUES } from '../../../types/UserType.ts';
-import PhoneInput from '../../../components/form/phoneInput.component.tsx';
+import { UserWithoutID, INITIAL_EDIT_USER_VALUES } from '../../../../types/UserType.ts';
+import PhoneInput from '../../../../components/form/phoneInput.component.tsx';
 
 const EditUserContentComponent = () => {
   console.log('JJF');

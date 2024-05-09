@@ -13,6 +13,7 @@ const LinkWrapper = styled(Link)`
   justify-content: center;
   align-items: center;
   gap: 5px;
+  font-size: 2rem;
   
   &:hover {
     

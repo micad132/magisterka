@@ -1,5 +1,8 @@
 import { Button } from '@chakra-ui/react';
 import styled from 'styled-components';
+import ModalComponent from '../../../../components/modal.component.tsx';
+import { ModalProps } from '../../../../types/UtilTypes.ts';
+import EditUserContentComponent from './editUserContent.component.tsx';
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -10,10 +13,32 @@ const ButtonsWrapper = styled.div`
 
 const ButtonsFooterComponent = () => {
   console.log('jfdj');
+
+  const editPersonModalContent: ModalProps = {
+    modalHeader: 'Edit person',
+    buttonText: 'Edit',
+    modalActionButtonText: 'Edit',
+    modalBody: <EditUserContentComponent />,
+    buttonSize: 'md',
+  };
+
+  const deletePersonModalContent: ModalProps = {
+    modalHeader: 'Delete person',
+    buttonText: 'Delete',
+    modalActionButtonText: 'Delete',
+    modalBody: <h1>Are you sure to want to delete?</h1>,
+    buttonColor: 'red',
+    buttonSize: 'md',
+  };
+
   return (
     <ButtonsWrapper>
-      <Button colorScheme="teal">Edit</Button>
-      <Button colorScheme="red">Delete</Button>
+      <ModalComponent
+        modalProps={editPersonModalContent}
+      />
+      <ModalComponent
+        modalProps={deletePersonModalContent}
+      />
     </ButtonsWrapper>
   );
 };

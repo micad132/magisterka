@@ -6,6 +6,7 @@ export type ModalProps = {
   modalBody: ReactNode,
   modalActionButtonText: string,
   buttonColor?: string,
+  buttonSize?: string,
 };
 
 export type SelectValue = {

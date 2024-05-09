@@ -11,6 +11,7 @@ const Wrapper = styled.div`
   Button {
     width: 300px;
     margin: 10px 0;
+    background-color: #fff;
     color: #000;
   }
   

@@ -1,10 +1,10 @@
 package com.crmbackend.backend.Questionnaire;
 
 import com.crmbackend.backend.User.UserModel;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
