@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,6 +22,10 @@ import java.util.List;
 
 
 @Configuration
+@EnableGlobalMethodSecurity(
+        prePostEnabled = true,
+        jsr250Enabled = true
+)
 public class SecurityConfig {
 
 
@@ -29,7 +35,7 @@ public class SecurityConfig {
 
         corsConfiguration.applyPermitDefaultValues();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:5173/"));
         corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PATCH", "DELETE", "PUT", "OPTIONS", "HEAD"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -76,7 +82,7 @@ public class SecurityConfig {
         httpSecurity
                 .csrf()
                 .disable()
-                .cors().configurationSource(corsConfigurationSource)
+                .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .headers()
                 .frameOptions().disable()
@@ -88,6 +94,7 @@ public class SecurityConfig {
                 .and()
                 .formLogin()
                 .failureHandler(authenticationFailureHandler())
+                .successHandler(((request, response, authentication) -> {}))
                 .loginProcessingUrl("/login")
                 .failureUrl("http://localhost:5173/failed")
                 .defaultSuccessUrl("http://localhost:5173")

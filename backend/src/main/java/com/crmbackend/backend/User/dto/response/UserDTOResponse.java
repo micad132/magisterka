@@ -3,8 +3,12 @@ package com.crmbackend.backend.User.dto.response;
 import com.crmbackend.backend.User.enums.UserGender;
 import com.crmbackend.backend.User.enums.UserRole;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Builder
+@Getter
+@Setter
 public class UserDTOResponse {
     private String name;
     private String surname;

@@ -3,7 +3,6 @@ import { RoleType, UserGender, UserGenderType } from './UserType.ts';
 export type LoginAuth = {
   username: string,
   password: string,
-  confirmPassword:string,
 };
 
 export type Login = {
@@ -32,7 +31,6 @@ export type RegisterAuth = {
 export const INITIAL_LOGIN_AUTH_VALUES: LoginAuth = {
   username: '',
   password: '',
-  confirmPassword: '',
 };
 
 export const INITIAL_REGISTER_AUTH_VALUES: RegisterAuth = {

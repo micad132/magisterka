@@ -2,7 +2,7 @@ import { ValuesType } from './UtilTypes.ts';
 
 export type User = {
   id: string,
-  role: RoleType,
+  userRole: RoleType,
   userGender: UserGenderType,
   age: number,
   countryName: string,
@@ -18,9 +18,15 @@ export type User = {
 
 export type UserWithoutID = Omit<User, 'id'>;
 
+export type ProfileModalUser = {
+  name: string,
+  surname: string,
+  userRole: RoleType,
+};
+
 export enum RoleType {
-  ADMIN = 'Admin',
-  WORKER = 'Worker',
+  ADMIN = 'ADMIN',
+  WORKER = 'WORKER',
   CLIENT = 'CLIENT',
 }
 
@@ -32,10 +38,32 @@ export const UserGender = {
 export type UserGenderType = ValuesType<typeof UserGender>;
 
 export const INITIAL_EDIT_USER_VALUES: UserWithoutID = {
+  userRole: RoleType.CLIENT,
+  email: '',
+  phoneNumber: '',
+  postalCode: '',
+  streetName: '',
+  username: '',
+  age: 0,
+  name: '',
+  countryName: '',
+  pesel: '',
+  surname: '',
+  userGender: UserGender.MAN,
+};
+
+export const INITIAL_USER_DETAILS_VALUES: User = {
+  id: '0',
   role: RoleType.CLIENT,
   email: '',
   phoneNumber: '',
   postalCode: '',
   streetName: '',
   username: '',
+  age: 0,
+  name: '',
+  countryName: '',
+  pesel: '',
+  surname: '',
+  userGender: UserGender.MAN,
 };

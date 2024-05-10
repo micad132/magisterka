@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import axios from 'axios';
-import { API_URL } from '../../utils/consts.ts';
+import { useAppDispatch } from '../../utils/hooks.ts';
+import { fetchUserDetailsThunk } from '../../store/userSlice.tsx';
 
 const HomePageHeader = styled.h1`
   color: var(--font-color);
@@ -10,12 +10,9 @@ const HomePageHeader = styled.h1`
 `;
 
 const HomePage = () => {
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    const test = async () => {
-      const cosik = await axios.get(`${API_URL}/user/getLoggedUser`);
-      console.log('DANE', cosik);
-    };
-    test();
+    dispatch(fetchUserDetailsThunk());
   }, []);
   return (
     <div>

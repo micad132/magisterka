@@ -13,7 +13,7 @@ import styled from 'styled-components';
 import MessageIcon from '@mui/icons-material/Message';
 import ProfileComponent from './profile.component.tsx';
 import RoleTag from '../../../../components/roleTag.component.tsx';
-import { RoleType } from '../../../../types/UserType.ts';
+import { ProfileModalUser, RoleType } from '../../../../types/UserType.ts';
 import ProfileModalMessageComponent from './profileModalMessage.component.tsx';
 
 const ProfileModalHeader = styled.div`
@@ -21,8 +21,13 @@ const ProfileModalHeader = styled.div`
   gap: 10px;
 `;
 
-const ProfileModal = () => {
+interface Props {
+  user: ProfileModalUser,
+}
+
+const ProfileModal = ({ user }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  console.log('USER', user);
   return (
     <>
       {/* <Button onClick={onOpen}>Open Modal</Button> */}
@@ -38,7 +43,7 @@ const ProfileModal = () => {
         >
           <ModalHeader>
             <ProfileModalHeader>
-              Michal Mosiolek  <RoleTag role={RoleType.WORKER} />
+              {user.name} {user.surname}  <RoleTag role={user.userRole} />
             </ProfileModalHeader>
           </ModalHeader>
           <ModalCloseButton />
