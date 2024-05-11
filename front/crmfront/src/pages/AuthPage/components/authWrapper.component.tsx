@@ -16,13 +16,10 @@ interface Props {
   children: ReactNode,
 }
 
-const AuthWrapper = ({ children }: Props) => {
-  console.log('DJJD');
-  return (
-    <Wrapper>
-      {children}
-    </Wrapper>
-  );
-};
+const AuthWrapper = ({ children }: Props) => (
+  <Wrapper>
+    {children}
+  </Wrapper>
+);
 
 export default AuthWrapper;

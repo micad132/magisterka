@@ -28,15 +28,12 @@ const RegisterPage = () => {
       <Formik
         initialValues={INITIAL_REGISTER_AUTH_VALUES}
         onSubmit={async (values: RegisterAuth, actions) => {
-          console.log(values); // Możesz zastosować własną logikę obsługi formularza tutaj
-
           const tescik: RegisterAuth = {
             ...values,
             userRole: RoleType.CLIENT,
           };
           try {
             const data = await AuthService.registerUser(tescik);
-            console.log('DATA', data);
             toast({
               title: 'Successfully registered!',
               description: 'You have successfully registered your account!',
@@ -82,6 +79,14 @@ const RegisterPage = () => {
                 placeholder="Surname"
                 label="Surname"
                 type="text"
+              />
+              <InputComponent
+                name="age"
+                value={values.age}
+                onChange={handleChange}
+                placeholder="Age"
+                label="Age"
+                type="number"
               />
               <InputComponent
                 name="username"
@@ -162,14 +167,6 @@ const RegisterPage = () => {
                 />
               </InitialRole>
               <Button type="submit" variant="solid" colorScheme="teal">Submit</Button>
-              <Button
-                variant="solid"
-                colorScheme="teal"
-                onClick={async () => {
-                  const test = await axios.get('http://localhost:8080/api/v1/user/test');
-                }}
-              >TEST
-              </Button>
             </AuthWrapperInside>
           </Form>
         )}

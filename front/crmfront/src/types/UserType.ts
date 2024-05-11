@@ -1,7 +1,7 @@
 import { ValuesType } from './UtilTypes.ts';
 
 export type User = {
-  id: string,
+  id: number,
   userRole: RoleType,
   userGender: UserGenderType,
   age: number,
@@ -14,6 +14,7 @@ export type User = {
   email: string,
   name: string,
   surname: string,
+  cityName: string,
 };
 
 export type UserWithoutID = Omit<User, 'id'>;
@@ -50,11 +51,12 @@ export const INITIAL_EDIT_USER_VALUES: UserWithoutID = {
   pesel: '',
   surname: '',
   userGender: UserGender.MAN,
+  cityName: '',
 };
 
 export const INITIAL_USER_DETAILS_VALUES: User = {
-  id: '0',
-  role: RoleType.CLIENT,
+  id: 0,
+  userRole: RoleType.CLIENT,
   email: '',
   phoneNumber: '',
   postalCode: '',
@@ -66,4 +68,5 @@ export const INITIAL_USER_DETAILS_VALUES: User = {
   pesel: '',
   surname: '',
   userGender: UserGender.MAN,
+  cityName: '',
 };

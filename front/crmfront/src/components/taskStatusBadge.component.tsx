@@ -12,8 +12,6 @@ interface Props {
 }
 
 const TaskStatusBadgeComponent = ({ taskStatus }: Props) => {
-  console.log('fdfd');
-
   const getProperTag = () => {
     switch (taskStatus) {
       case TaskStatus.PENDING:

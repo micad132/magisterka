@@ -8,7 +8,7 @@ const TextInputWrapper = styled.div`
 
 interface Props {
   name: string,
-  value: string,
+  value: string | number,
   onChange: (value: ChangeEvent<HTMLInputElement>) => void,
   placeholder: string,
   label: string,

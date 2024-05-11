@@ -37,7 +37,7 @@ interface Props {
 }
 
 const SingleTask = ({ task }: Props) => {
-  console.log('DJ');
+  const g = 4;
   return (
     <SingleTaskWrapper>
       <TaskTypeBadge taskType={task.taskType} />

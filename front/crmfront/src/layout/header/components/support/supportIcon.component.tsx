@@ -5,13 +5,10 @@ interface Props {
   onClick: () => void,
 }
 
-const SupportIcon = ({ onClick }: Props) => {
-  console.log('dhhd');
-  return (
-    <div onClick={onClick}>
-      <Icon as={HelpIcon} boxSize="100%" />
-    </div>
-  );
-};
+const SupportIcon = ({ onClick }: Props) => (
+  <div onClick={onClick}>
+    <Icon as={HelpIcon} boxSize="100%" />
+  </div>
+);
 
 export default SupportIcon;

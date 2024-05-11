@@ -11,13 +11,10 @@ const LoggedUserInfoWrapper = styled.div`
     gap: 5px;
 `;
 
-const LoggedUserInfoComponent = () => {
-  console.log('fjdj');
-  return (
-    <LoggedUserInfoWrapper>
-      You are logged as mikad132 <RoleTagComponent role={RoleType.CLIENT} />
-    </LoggedUserInfoWrapper>
-  );
-};
+const LoggedUserInfoComponent = () => (
+  <LoggedUserInfoWrapper>
+    You are logged as mikad132 <RoleTagComponent role={RoleType.CLIENT} />
+  </LoggedUserInfoWrapper>
+);
 
 export default LoggedUserInfoComponent;

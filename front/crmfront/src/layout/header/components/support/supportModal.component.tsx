@@ -63,7 +63,6 @@ const SupportModal = () => {
   const toast = useToast();
 
   const onSaveClick = () => {
-    console.log(supportText, supportCategory);
     toast({
       title: 'Support request sent!',
       description: 'You have successfully created support request',
@@ -87,7 +86,7 @@ const SupportModal = () => {
           <ModalBody>
             <ModalBodyWrapper>
               <p>Select support category</p>
-              <SelectComponent options={SELECT_OPTIONS} onChange={setSupportCategory} />
+              <SelectComponent options={SELECT_OPTIONS} onChange={setSupportCategory} label="Select support category" />
               <TextareaCompononent
                 label={properLabel(supportCategory)}
                 onChange={setSupportText}

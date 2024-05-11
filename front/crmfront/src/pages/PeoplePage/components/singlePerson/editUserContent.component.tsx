@@ -4,15 +4,17 @@ import {
 import { Form, Formik } from 'formik';
 import { UserWithoutID, INITIAL_EDIT_USER_VALUES } from '../../../../types/UserType.ts';
 import PhoneInput from '../../../../components/form/phoneInput.component.tsx';
+import InputComponent from '../../../../components/form/input.component.tsx';
+import SelectComponent from '../../../../components/form/select.component.tsx';
+import { GENDER_SELECT_OPTIONS } from '../../../../utils/consts.ts';
 
 const EditUserContentComponent = () => {
-  console.log('JJF');
+  const g = 3;
   return (
     <div>
       <Formik
         initialValues={INITIAL_EDIT_USER_VALUES}
         onSubmit={(values: UserWithoutID, actions) => {
-          console.log(values); // Możesz zastosować własną logikę obsługi formularza tutaj
           actions.setFieldError('email', 'jd');
           actions.setSubmitting(false);
         }}
@@ -29,14 +31,91 @@ const EditUserContentComponent = () => {
                 <option value="client">Client</option>
                 <option value="worker">Worker</option>
               </Select>
-              <FormLabel>Email address</FormLabel>
-              <Input name="email" placeholder="Email" value={values.email} onChange={handleChange} />
-              <FormLabel>Password</FormLabel>
-              <Input name="password" type="password" placeholder="Password" value={values.password} onChange={handleChange} />
-              <FormLabel>Confirm Password</FormLabel>
-              <Input name="confirmpassword" type="password" placeholder="Confirm Password" value={values.confirmPassword} onChange={handleChange} />
-              <FormLabel>Phone number</FormLabel>
-              <PhoneInput />
+              <InputComponent
+                name="name"
+                placeholder="Name"
+                value={values.name}
+                onChange={handleChange}
+                label="Name"
+                type="text"
+              />
+              <InputComponent
+                name="surname"
+                placeholder="Surname"
+                value={values.surname}
+                onChange={handleChange}
+                label="Surname"
+                type="text"
+              />
+              <InputComponent
+                name="username"
+                placeholder="Username"
+                value={values.username}
+                onChange={handleChange}
+                label="Username"
+                type="text"
+              />
+              <InputComponent
+                name="email"
+                placeholder="Email"
+                value={values.email}
+                onChange={handleChange}
+                label="Email"
+                type="text"
+              />
+              <InputComponent
+                name="age"
+                placeholder="Age"
+                value={values.age}
+                onChange={handleChange}
+                label="Age"
+                type="number"
+              />
+              <SelectComponent
+                options={GENDER_SELECT_OPTIONS}
+                onChange={handleChange}
+                label="Gender"
+              />
+              <InputComponent
+                name="countryName"
+                placeholder="Country name"
+                value={values.countryName}
+                onChange={handleChange}
+                label="Country name"
+                type="text"
+              />
+              <InputComponent
+                name="cityName"
+                placeholder="City name"
+                value={values.cityName}
+                onChange={handleChange}
+                label="City name"
+                type="text"
+              />
+              <InputComponent
+                name="streetName"
+                placeholder="Street name"
+                value={values.streetName}
+                onChange={handleChange}
+                label="Street name"
+                type="text"
+              />
+              <InputComponent
+                name="postalCode"
+                placeholder="Postal code"
+                value={values.postalCode}
+                onChange={handleChange}
+                label="Postal code"
+                type="text"
+              />
+              <InputComponent
+                name="phoneNumber"
+                placeholder="Phone number"
+                value={values.phoneNumber}
+                onChange={handleChange}
+                label="Phone number"
+                type="text"
+              />
               <Button type="submit" variant="solid" colorScheme="twitter">Submit</Button>
             </div>
           </Form>

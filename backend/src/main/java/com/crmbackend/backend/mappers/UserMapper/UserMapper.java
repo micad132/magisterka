@@ -18,6 +18,7 @@ public class UserMapper {
                 .name(userDTORequest.getName())
                 .surname(userDTORequest.getSurname())
                 .age(userDTORequest.getAge())
+                .username(userDTORequest.getUsername())
                 .pesel(userDTORequest.getPesel())
                 .userGender(userDTORequest.getUserGender())
                 .email(userDTORequest.getEmail())
@@ -33,6 +34,7 @@ public class UserMapper {
 
     public UserDTOResponse mapEntityToDTO(UserModel userModel) {
         return UserDTOResponse.builder()
+                .id(userModel.getId())
                 .name(userModel.getName())
                 .surname(userModel.getSurname())
                 .age(userModel.getAge())

@@ -6,8 +6,6 @@ interface Props {
 }
 
 const TaskTypeBadge = ({ taskType }: Props) => {
-  console.log('fdfd');
-
   const properTaskType = () => {
     switch (taskType) {
       case TaskType.INFORMATIC:

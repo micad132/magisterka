@@ -50,3 +50,14 @@ export const TASK_TYPE_OPTIONS: SelectValue[] = [
     value: 'informatic',
   },
 ];
+
+export const GENDER_SELECT_OPTIONS: SelectValue[] = [
+  {
+    text: 'Man',
+    value: 'MAN',
+  },
+  {
+    text: 'Woman',
+    value: 'WOMAN',
+  },
+];

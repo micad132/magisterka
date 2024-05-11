@@ -12,7 +12,7 @@ interface Props {
 }
 
 const EstimateFinishTimeComponent = ({ estimateFinishTime }: Props) => {
-  console.log('sjjdjd');
+  const g = 4;
   return (
     <EstimateFinishTimeWrapper>
       <span>Estimate finish time:</span>

@@ -13,8 +13,6 @@ interface Props {
 }
 
 const ActionTypeTagComponent = ({ actionType }: Props) => {
-  console.log('jfjd');
-
   const getProperTag = () => {
     switch (actionType) {
       case ActionType.TASK:

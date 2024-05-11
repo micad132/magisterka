@@ -15,14 +15,11 @@ interface Props {
   text: string
 }
 
-const SinglePersonInfoComponent = ({ label, text }: Props) => {
-  console.log('jdjf');
-  return (
-    <SinglePersonInfoWrapper>
-      <span>{label}:</span>
-      <span>{text}</span>
-    </SinglePersonInfoWrapper>
-  );
-};
+const SinglePersonInfoComponent = ({ label, text }: Props) => (
+  <SinglePersonInfoWrapper>
+    <span>{label}:</span>
+    <span>{text}</span>
+  </SinglePersonInfoWrapper>
+);
 
 export default SinglePersonInfoComponent;

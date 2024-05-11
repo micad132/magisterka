@@ -3,7 +3,7 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import RoleTagComponent from '../../../../components/roleTag.component.tsx';
-import { RoleType, UserWithoutID } from '../../../../types/UserType.ts';
+import { RoleType, User, UserWithoutID } from '../../../../types/UserType.ts';
 import ButtonsFooterComponent from './buttonsFooter.component.tsx';
 import SinglePersonInfoComponent from './singlePersonInfo.component.tsx';
 
@@ -26,7 +26,7 @@ const AccordionHeader = styled.div`
 `;
 
 interface Props {
-  user: UserWithoutID,
+  user: User,
 }
 
 const SinglePersonComponent = ({ user }: Props) => (
@@ -37,15 +37,35 @@ const SinglePersonComponent = ({ user }: Props) => (
         <AccordionButton>
           <AccordionHeader>
             <p>{user.username}</p>
-            <RoleTagComponent role={user.role} />
+            <RoleTagComponent role={user.userRole} />
           </AccordionHeader>
           <AccordionIcon />
         </AccordionButton>
       </h2>
       <AccordionPanel pb={4}>
         <SinglePersonInfoComponent
-          label="Email"
-          text={user.email}
+          label="Name"
+          text={user.name}
+        />
+        <SinglePersonInfoComponent
+          label="Surname"
+          text={user.surname}
+        />
+        <SinglePersonInfoComponent
+          label="Age"
+          text={String(user.age)}
+        />
+        <SinglePersonInfoComponent
+          label="Gender"
+          text={user.userGender}
+        />
+        <SinglePersonInfoComponent
+          label="Role"
+          text={user.userRole}
+        />
+        <SinglePersonInfoComponent
+          label="Country name"
+          text={user.countryName}
         />
         <SinglePersonInfoComponent
           label="Street"
@@ -56,10 +76,14 @@ const SinglePersonComponent = ({ user }: Props) => (
           text={user.postalCode}
         />
         <SinglePersonInfoComponent
-          label="phone number"
+          label="Phone number"
           text={user.phoneNumber}
         />
-        <ButtonsFooterComponent />
+        <SinglePersonInfoComponent
+          label="Pesel"
+          text={user.pesel}
+        />
+        <ButtonsFooterComponent userId={user.id} />
       </AccordionPanel>
     </AccordionItem>
   </StyledAccordion>

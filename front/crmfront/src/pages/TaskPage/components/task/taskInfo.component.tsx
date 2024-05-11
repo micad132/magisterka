@@ -12,7 +12,7 @@ const TaskInfoWrapper = styled.div`
 `;
 
 const TaskInfoComponent = ({ title, text }: Props) => {
-  console.log('fdjjfd');
+  const g = 4;
   return (
     <TaskInfoWrapper>
       <span>{title}</span>

@@ -6,8 +6,6 @@ interface Props {
 }
 
 const AuthNavComponent = ({ isLogged }: Props) => {
-  console.log('djjd');
-
   const toast = useToast();
   const navigate = useNavigate();
 

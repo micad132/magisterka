@@ -29,7 +29,7 @@ const ModalComponent = ({ modalProps }:Props) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="teal" mr={3}>
+            <Button colorScheme="teal" mr={3} onClick={modalProps.mainButtonAction}>
               {modalProps.modalActionButtonText}
             </Button>
             <Button variant="ghost" onClick={onClose}>Close</Button>

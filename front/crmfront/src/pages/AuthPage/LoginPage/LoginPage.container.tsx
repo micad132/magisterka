@@ -22,6 +22,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const [loginValues, setLoginValues] = useState<LoginAuth>(INITIAL_LOGIN_AUTH_VALUES);
+
   return (
     <AuthWrapper>
       <h1>Login</h1>

@@ -41,17 +41,23 @@ const SORTING_TASKS_OPTIONS: SelectValue[] = [
 ];
 
 const TaskSettingsContainer = () => {
-  console.log('djdj');
-
   const [sortingTasks, setSortingTasks] = useState('');
   const [sortingPriorityTask, setSortingPriorityTask] = useState('');
   const [isOnlyCurrentWorkerTasks, setIsOnlyCurrentWorkerTasks] = useState<boolean>(false);
   return (
     <SettingsContainerWrapper>
       Sort tasks by
-      <SelectComponent options={SORTING_OPTIONS} onChange={setSortingTasks} />
+      <SelectComponent
+        options={SORTING_OPTIONS}
+        onChange={setSortingTasks}
+        label="Sort tasks by"
+      />
       Select only tasks with priority
-      <SelectComponent options={SORTING_TASKS_OPTIONS} onChange={setSortingPriorityTask} />
+      <SelectComponent
+        options={SORTING_TASKS_OPTIONS}
+        onChange={setSortingPriorityTask}
+        label="Select only task with priority"
+      />
       <CheckboxComponent isChecked={isOnlyCurrentWorkerTasks} onChange={setIsOnlyCurrentWorkerTasks} text="Preview only logged worker tasks" />
     </SettingsContainerWrapper>
   );

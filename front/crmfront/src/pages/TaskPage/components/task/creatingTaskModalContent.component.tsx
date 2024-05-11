@@ -9,7 +9,7 @@ const CreatingTaskWrapper = styled.div`
 `;
 
 const CreatingTaskModalContent = () => {
-  console.log('gfd');
+  const g = 4;
   return (
     <CreatingTaskWrapper>
       <Input placeholder="Test" />

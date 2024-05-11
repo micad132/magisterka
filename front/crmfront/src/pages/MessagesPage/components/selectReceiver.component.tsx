@@ -21,6 +21,7 @@ const SelectReceiverComponent = ({ options, onChange }: Props) => (
     <SelectComponent
       options={options}
       onChange={onChange}
+      label="Filter messages by user"
     />
   </SelectReceiverWrapper>
 );

@@ -4,14 +4,10 @@ import SingleMessageComponent from './components/singleMessage.component.tsx';
 import MessagesCountComponent from './components/messagesCount.component.tsx';
 import MessagesWrapperComponent from './components/messagesWrapper.component.tsx';
 import { SelectValue } from '../../types/UtilTypes.ts';
-import { MockedUsers } from '../../mock/mockUsers.tsx';
 import SelectReceiverComponent from './components/selectReceiver.component.tsx';
 import { MessageType } from '../../types/MessageType.ts';
-
-const USER_SELECT_VALUES: SelectValue[] = MockedUsers.map((user) => ({
-  text: user.username,
-  value: user.username,
-}));
+import { useAppSelector } from '../../utils/hooks.ts';
+import { getAllUsers } from '../../store/userSlice.tsx';
 
 const MOCKED_MESSAGES: MessageType[] = [
   {
@@ -42,8 +38,14 @@ const MOCKED_MESSAGES: MessageType[] = [
 ];
 
 const MessagesPageContainer = () => {
-  console.log('fjdjfd');
   const [filterUser, setFilterUser] = useState<string>('');
+
+  const users = useAppSelector(getAllUsers);
+
+  const USER_SELECT_VALUES: SelectValue[] = users.map((user) => ({
+    text: user.username,
+    value: user.username,
+  }));
 
   const messages = MOCKED_MESSAGES.map((message) => <SingleMessageComponent key={message.author} message={message} />);
 

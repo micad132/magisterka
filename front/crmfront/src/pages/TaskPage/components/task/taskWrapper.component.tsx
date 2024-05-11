@@ -21,7 +21,7 @@ const TaskWrapperDiv = styled.div`
 `;
 
 const TaskWrapper = () => {
-  console.log('ddhj');
+  const a = 3;
   return (
     <TaskWrapperDiv>
       {/* {MOCKED_TASKS.map((task) => <SingleTask task={task} />)} */}

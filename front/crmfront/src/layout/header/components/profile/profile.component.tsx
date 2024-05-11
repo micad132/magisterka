@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ProfileComponent = ({ onClick }: Props) => {
-  console.log(173);
+  const a = 3;
   return (
     <div onClick={onClick}>
       <Icon as={AccountCircleIcon} boxSize="100%" />

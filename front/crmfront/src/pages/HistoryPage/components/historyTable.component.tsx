@@ -1,15 +1,12 @@
 import {
-  Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr,
+  Table, TableContainer, Tbody, Td, Tfoot, Thead, Tr,
 } from '@chakra-ui/react';
 import styled from 'styled-components';
-import { RoleType, User } from '../../../types/UserType.ts';
 import ModalComponent from '../../../components/modal.component.tsx';
 import { ModalProps } from '../../../types/UtilTypes.ts';
-import RoleTag from '../../../components/roleTag.component.tsx';
-import EditUserContentComponent from '../../PeoplePage/components/singlePerson/editUserContent.component.tsx';
 import HISTORY_TABLE_ROWS from './historyTableRows.tsx';
 import ActionTypeTagComponent from '../../../components/actionTypeTag.component.tsx';
-import { ActionType, HistoryType } from '../../../types/HistoryType.ts';
+import { HistoryType } from '../../../types/HistoryType.ts';
 import DetailsOfHistoryComponent from './detailsOfHistory.component.tsx';
 
 const TableWrapper = styled.div`
@@ -33,6 +30,7 @@ const HistoryTable = ({ histories }: Props) => {
     modalActionButtonText: 'Clone',
     modalBody: <DetailsOfHistoryComponent id={id} />,
     buttonText: 'Details',
+    mainButtonAction: () => {},
   });
 
   const userEditModalprops: ModalProps = {
@@ -40,6 +38,7 @@ const HistoryTable = ({ histories }: Props) => {
     modalBody: <h1>COSIK</h1>,
     modalActionButtonText: 'Edit',
     buttonText: 'Edit',
+    mainButtonAction: () => {},
   };
 
   const userDeleteModalProps: ModalProps = {
@@ -48,6 +47,7 @@ const HistoryTable = ({ histories }: Props) => {
     modalActionButtonText: 'Delete',
     modalBody: deleteModalContent,
     buttonColor: 'red',
+    mainButtonAction: () => {},
   };
 
   return (

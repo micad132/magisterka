@@ -5,9 +5,11 @@ import com.crmbackend.backend.User.dto.response.UserDTOResponse;
 import com.crmbackend.backend.mappers.UserMapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/api/v1/user")
@@ -39,6 +41,19 @@ public class UserController {
     public ResponseEntity<String> registerUser(@RequestBody UserDTORequest userDTORequest) {
         userService.registerUser(userDTORequest);
         return ResponseEntity.ok("Successfully registered!");
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDTOResponse>> getAllUsers() {
+        List<UserDTOResponse> allUsers =  userService.getAllUsers();
+        return ResponseEntity.ok(allUsers);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
+    public ResponseEntity<String> deleteUser(@PathVariable ("id") String id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("Successfully deleted user!");
     }
 
 //    @GetMapping("/details/{id}")

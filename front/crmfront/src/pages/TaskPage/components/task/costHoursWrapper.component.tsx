@@ -7,15 +7,12 @@ const EstimatedCostWrapper = styled.div`
   margin: 30px 0;
 `;
 
-const CostHoursWrapperComponent = () => {
-  console.log('DJJD');
-  return (
-    <EstimatedCostWrapper>
-      <TaskInfoComponent text="12500zl" title="Estimated Cost:" />
-      <TaskInfoComponent text="8h" title="Spent Hours:" />
-      <TaskInfoComponent text="20000zl" title="Actual Cost:" />
-    </EstimatedCostWrapper>
-  );
-};
+const CostHoursWrapperComponent = () => (
+  <EstimatedCostWrapper>
+    <TaskInfoComponent text="12500zl" title="Estimated Cost:" />
+    <TaskInfoComponent text="8h" title="Spent Hours:" />
+    <TaskInfoComponent text="20000zl" title="Actual Cost:" />
+  </EstimatedCostWrapper>
+);
 
 export default CostHoursWrapperComponent;

@@ -7,6 +7,7 @@ export type ModalProps = {
   modalActionButtonText: string,
   buttonColor?: string,
   buttonSize?: string,
+  mainButtonAction: any,
 };
 
 export type SelectValue = {

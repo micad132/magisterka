@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import MessageIcon from '@mui/icons-material/Message';
+import { useNavigate } from 'react-router-dom';
 import ProfileComponent from './profile.component.tsx';
 import RoleTag from '../../../../components/roleTag.component.tsx';
 import { ProfileModalUser, RoleType } from '../../../../types/UserType.ts';
@@ -27,7 +28,7 @@ interface Props {
 
 const ProfileModal = ({ user }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log('USER', user);
+  const navigate = useNavigate();
   return (
     <>
       {/* <Button onClick={onOpen}>Open Modal</Button> */}
@@ -55,7 +56,7 @@ const ProfileModal = ({ user }: Props) => {
             <Button variant="ghost" colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme="teal">Visit profile</Button>
+            <Button colorScheme="teal" onClick={() => navigate('/profile', { replace: true })}>Visit profile</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
