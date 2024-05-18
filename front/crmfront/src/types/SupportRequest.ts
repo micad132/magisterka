@@ -1,5 +1,12 @@
 import { ValuesType } from './UtilTypes.ts';
 
+export type Support = {
+  description: string,
+  date: string,
+  supportType: SupportRequestType,
+  author: string,
+};
+
 export const SupportRequest = {
   IMPROVEMENT: 'improvement',
   BUG: 'bug',

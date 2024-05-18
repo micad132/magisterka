@@ -6,6 +6,7 @@ import PeopleWrapperComponent from './components/peopleWrapper.component.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import { useAppSelector } from '../../utils/hooks.ts';
 import { getAllUsers } from '../../store/userSlice.tsx';
+import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 
 const HistoryPageWrapper = styled.div`
     color: var(--font-color);
@@ -27,6 +28,7 @@ const PeoplePageContainer = () => {
 
   return (
     <HistoryPageWrapper>
+      <PageHeaderComponent text="People" />
       <h3>Total amount of users in system: {allUsers.length}</h3>
       <h3>Total amount of clients in system: {clientUsers.length}</h3>
       <Checkbox colorScheme="blue" onChange={(e) => setIsOnlyClients(e.target.checked)}>

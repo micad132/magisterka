@@ -7,6 +7,8 @@ import PeoplePageContainer from '../pages/PeoplePage/peoplePage.container.tsx';
 import HistoryPageContainer from '../pages/HistoryPage/historyPage.container.tsx';
 import MessagesPageContainer from '../pages/MessagesPage/messagesPage.container.tsx';
 import ProfilePageContainer from '../pages/ProfilePage/profilePage.container.tsx';
+import FailedLoginPageContainer from '../pages/FailedLoginPage/failedLoginPage.container.tsx';
+import SupportPageContainer from '../pages/SupportPage/supportPage.container.tsx';
 
 const routes = (
   <Routes>
@@ -18,6 +20,8 @@ const routes = (
     <Route path="/history" element={<HistoryPageContainer />} />
     <Route path="/messages" element={<MessagesPageContainer />} />
     <Route path="/profile" element={<ProfilePageContainer />} />
+    <Route path="/failed" element={<FailedLoginPageContainer />} />
+    <Route path="/support" element={<SupportPageContainer />} />
   </Routes>
 );
 

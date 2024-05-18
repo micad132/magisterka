@@ -1,4 +1,5 @@
 import { SelectValue } from '../types/UtilTypes.ts';
+import { SupportRequest } from '../types/SupportRequest.ts';
 
 export const API_URL = 'http://localhost:8080/api/v1';
 
@@ -59,5 +60,24 @@ export const GENDER_SELECT_OPTIONS: SelectValue[] = [
   {
     text: 'Woman',
     value: 'WOMAN',
+  },
+];
+
+export const SUPPORT_REQUEST_SELECT_OPTIONS: SelectValue[] = [
+  {
+    text: SupportRequest.SUPPORT,
+    value: 'support',
+  },
+  {
+    text: SupportRequest.BUG,
+    value: 'bug',
+  },
+  {
+    text: SupportRequest.OTHER,
+    value: 'other',
+  },
+  {
+    text: SupportRequest.IMPROVEMENT,
+    value: 'other',
   },
 ];

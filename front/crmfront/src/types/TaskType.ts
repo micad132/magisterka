@@ -13,6 +13,15 @@ export type Task = {
   assignee: string,
 };
 
+export type AddingTask = {
+  description: string,
+  taskStatus: TaskStatusType,
+  taskPriority: TaskPriorityType,
+  taskType: TaskTypeType,
+  estimatedCost: number,
+  assignee: string,
+};
+
 // export enum TaskStatus {
 //   IN_PROGRESS = 'In Progress',
 //   PENDING = 'Pending',
@@ -49,3 +58,12 @@ export const TaskType = {
 export type TaskStatusType = ValuesType<typeof TaskStatus>;
 export type TaskPriorityType = ValuesType<typeof TaskPriority>;
 export type TaskTypeType = ValuesType<typeof TaskType>;
+
+export const ADDING_TASK_INITIAL_VALUE: AddingTask = {
+  description: '',
+  assignee: '',
+  estimatedCost: 0,
+  taskPriority: TaskPriority.MINOR,
+  taskStatus: TaskStatus.IN_PROGRESS,
+  taskType: TaskType.PURCHASE,
+};

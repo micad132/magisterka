@@ -6,6 +6,7 @@ import TaskSettingsContainer from './components/taskSettings/taskSettings.contai
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 
 const modalProps: ModalProps = {
+  mainButtonAction: () => {},
   buttonText: 'Create Task',
   modalHeader: 'Adding Task',
   modalActionButtonText: 'Create',
