@@ -40,6 +40,7 @@ const LoginPage = () => {
             name="username"
             placeholder="Username"
             type="text"
+            isInvalid={false}
           />
           <InputComponent
             label="Password"
@@ -53,6 +54,7 @@ const LoginPage = () => {
             name="password"
             placeholder="Password"
             type="password"
+            isInvalid={false}
           />
           {/* <InputComponent */}
           {/*  label="Confirm password" */}

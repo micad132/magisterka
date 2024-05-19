@@ -1,9 +1,16 @@
-import { FormLabel, Input } from '@chakra-ui/react';
+import { FormErrorMessage, FormLabel, Input } from '@chakra-ui/react';
 import { ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 const TextInputWrapper = styled.div`
     margin: 10px 0;
+`;
+
+const Error = styled.p`
+  color: red;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 5px;
 `;
 
 interface Props {
@@ -13,10 +20,12 @@ interface Props {
   placeholder: string,
   label: string,
   type: string,
+  isInvalid: boolean,
+  error?: string,
 }
 
 const InputComponent = ({
-  name, placeholder, value, onChange, label, type,
+  name, placeholder, value, onChange, label, type, isInvalid, error,
 }: Props) => (
   <TextInputWrapper>
     <FormLabel>{label}</FormLabel>
@@ -25,6 +34,7 @@ const InputComponent = ({
       value={value}
       onChange={onChange}
       placeholder={placeholder}
+      isInvalid={isInvalid}
       type={type}
       sx={{
         '::placeholder': {
@@ -33,6 +43,7 @@ const InputComponent = ({
         },
       }}
     />
+    {error && <Error>{error}</Error>}
   </TextInputWrapper>
 );
 

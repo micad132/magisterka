@@ -10,6 +10,7 @@ import { MockedUsers } from '../../../mock/mockUsers.tsx';
 import SupportDescriptionComponent from './supportDescription.component.tsx';
 import SupportCategoryBadgeComponent from '../../../components/supportCategoryBadge.component.tsx';
 import { Support, SupportRequest } from '../../../types/SupportRequest.ts';
+import MenuComponent from '../../../components/menu.component.tsx';
 
 const SingleSupportWrapper = styled.div`
   -webkit-box-shadow: 9px 3px 12px 3px teal;
@@ -65,8 +66,30 @@ const SingleSupportComponent = ({ support }: Props) => {
     modalBody: <ConvertingToTaskContentComponent values={convertingToTask} setState={setState} selectUsers={SELECT_USERS} />,
   };
 
+  const menuItems: ModalProps[] = [
+    {
+      modalHeader: 'Edit support request',
+      modalBody: <h1>TEST</h1>,
+      buttonSize: 'sm',
+      mainButtonAction: () => console.log('SIEMA'),
+      buttonText: 'Edit',
+      modalActionButtonText: 'Edit',
+      buttonColor: 'teal',
+    },
+    {
+      modalHeader: 'Delete support request',
+      modalBody: <h1>DELETE</h1>,
+      buttonSize: 'sm',
+      mainButtonAction: () => console.log('SIEMA'),
+      buttonText: 'Delete',
+      modalActionButtonText: 'Delete',
+      buttonColor: 'red',
+    },
+  ];
+
   return (
     <SingleSupportWrapper>
+      <MenuComponent menuItems={menuItems} />
       <CreatedDateComponent date={support.date} />
       <AuthorOfRequestComponent author={support.author} />
       <SupportCategoryBadgeComponent supportType={support.supportType} />

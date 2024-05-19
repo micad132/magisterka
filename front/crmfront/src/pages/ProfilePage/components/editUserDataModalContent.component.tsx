@@ -1,20 +1,18 @@
-import {
-  Button, FormLabel, Input, Select,
-} from '@chakra-ui/react';
 import { Form, Formik } from 'formik';
-import { UserWithoutID, INITIAL_EDIT_USER_VALUES } from '../../../../types/UserType.ts';
-import PhoneInput from '../../../../components/form/phoneInput.component.tsx';
-import InputComponent from '../../../../components/form/input.component.tsx';
-import SelectComponent from '../../../../components/form/select.component.tsx';
-import { GENDER_SELECT_OPTIONS } from '../../../../utils/consts.ts';
+import { Button } from '@chakra-ui/react';
+import {
+  INITIAL_SELF_EDIT_USER_VALUES,
+  SelfEditUser,
+} from '../../../types/UserType.ts';
+import InputComponent from '../../../components/form/input.component.tsx';
 
-const EditUserContentComponent = () => {
-  const g = 3;
+const EditUserDataModalContentComponent = () => {
+  const d = 4;
   return (
     <div>
       <Formik
-        initialValues={INITIAL_EDIT_USER_VALUES}
-        onSubmit={(values: UserWithoutID, actions) => {
+        initialValues={INITIAL_SELF_EDIT_USER_VALUES}
+        onSubmit={(values: SelfEditUser, actions) => {
           actions.setFieldError('email', 'jd');
           actions.setSubmitting(false);
         }}
@@ -26,11 +24,6 @@ const EditUserContentComponent = () => {
         }) => (
           <Form>
             <div>
-              <FormLabel>Select role</FormLabel>
-              <Select placeholder="User Role">
-                <option value="client">Client</option>
-                <option value="worker">Worker</option>
-              </Select>
               <InputComponent
                 name="name"
                 placeholder="Name"
@@ -75,11 +68,6 @@ const EditUserContentComponent = () => {
                 label="Age"
                 type="number"
                 isInvalid={false}
-              />
-              <SelectComponent
-                options={GENDER_SELECT_OPTIONS}
-                onChange={handleChange}
-                label="Gender"
               />
               <InputComponent
                 name="countryName"
@@ -135,4 +123,4 @@ const EditUserContentComponent = () => {
   );
 };
 
-export default EditUserContentComponent;
+export default EditUserDataModalContentComponent;

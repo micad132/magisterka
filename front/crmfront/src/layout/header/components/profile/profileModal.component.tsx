@@ -56,7 +56,14 @@ const ProfileModal = ({ user }: Props) => {
             <Button variant="ghost" colorScheme="blue" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme="teal" onClick={() => navigate('/profile', { replace: true })}>Visit profile</Button>
+            <Button
+              colorScheme="teal"
+              onClick={() => {
+                onClose();
+                navigate('/profile', { replace: true });
+              }}
+            >Visit profile
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

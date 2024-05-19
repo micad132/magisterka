@@ -11,7 +11,7 @@ import SingleLink from './singleLink.component.tsx';
 
 const NavWrapper = styled.nav`
     grid-area: nav;
-    height: 100vh;
+    min-height: 100vh;
     //background-color: #fff;
     background-color: var(--background-color);
     color: var(--nav-font-color);
@@ -22,11 +22,13 @@ const LinksWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: sticky;
+  top: 20px;
+  left: 0px;
 `;
 
 const NavComponent = () => (
   <NavWrapper>
-    <h1>CRM</h1>
     <LinksWrapper>
       <SingleLink path="/" text="Home" icon={<HomeIcon />} />
       <SingleLink path="/tasks" text="Tasks" icon={<TaskIcon />} />

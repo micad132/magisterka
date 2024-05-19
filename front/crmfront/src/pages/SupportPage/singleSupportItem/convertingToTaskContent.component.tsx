@@ -54,6 +54,7 @@ const ConvertingToTaskContentComponent = ({ values, setState, selectUsers }: Pro
       placeholder="Estimated cost"
       label="Estimated cost"
       type="number"
+      isInvalid={false}
     />
   </CreatingTaskWrapper>
 );

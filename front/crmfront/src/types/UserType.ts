@@ -17,6 +17,20 @@ export type User = {
   cityName: string,
 };
 
+export type SelfEditUser = {
+  age: number,
+  countryName: string,
+  pesel: string,
+  username: string,
+  streetName: string,
+  postalCode: string,
+  phoneNumber: string,
+  email: string,
+  name: string,
+  surname: string,
+  cityName: string,
+};
+
 export type UserWithoutID = Omit<User, 'id'>;
 
 export type ProfileModalUser = {
@@ -68,5 +82,19 @@ export const INITIAL_USER_DETAILS_VALUES: User = {
   pesel: '',
   surname: '',
   userGender: UserGender.MAN,
+  cityName: '',
+};
+
+export const INITIAL_SELF_EDIT_USER_VALUES: SelfEditUser = {
+  email: '',
+  phoneNumber: '',
+  postalCode: '',
+  streetName: '',
+  username: '',
+  age: 0,
+  name: '',
+  countryName: '',
+  pesel: '',
+  surname: '',
   cityName: '',
 };
