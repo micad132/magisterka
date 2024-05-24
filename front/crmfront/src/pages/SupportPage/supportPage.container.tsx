@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import SingleSupportComponent from './singleSupportItem/singleSupport.component.tsx';
@@ -7,6 +7,8 @@ import { Support, SupportRequest } from '../../types/SupportRequest.ts';
 import PageItemsCountComponent from '../../components/pageItemsCount.component.tsx';
 import FilterSupportRequestAuthorSelectComponent from './filterSupportRequestAuthorSelect.component.tsx';
 import { SelectValue } from '../../types/UtilTypes.ts';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
+import { fetchSupportRequestsThunk, getAllSupportRequests } from '../../store/supportRequestSlice.tsx';
 
 const MOCKED_SUPPORT_REQUESTS: Support[] = [
   {
@@ -37,20 +39,20 @@ const MOCKED_SUPPORT_REQUESTS: Support[] = [
 
 const SUPPORT_REQUEST_SELECT_OPTIONS: SelectValue[] = [
   {
-    text: SupportRequest.SUPPORT,
-    value: 'support',
+    text: 'support',
+    value: SupportRequest.SUPPORT,
   },
   {
-    text: SupportRequest.BUG,
-    value: 'bug',
+    text: 'bug',
+    value: SupportRequest.BUG,
   },
   {
-    text: SupportRequest.OTHER,
-    value: 'other',
+    text: 'other',
+    value: SupportRequest.OTHER,
   },
   {
-    text: SupportRequest.IMPROVEMENT,
-    value: 'other',
+    text: 'improvement',
+    value: SupportRequest.IMPROVEMENT,
   },
   {
     text: 'all',
@@ -59,19 +61,23 @@ const SUPPORT_REQUEST_SELECT_OPTIONS: SelectValue[] = [
 ];
 
 const SupportPageContainer = () => {
-  const a = 5;
-
   const [filteredSupportRequest, setFilteredSupportRequest] = useState<string>('all');
-  const supports = MOCKED_SUPPORT_REQUESTS.map((support, index) => <SingleSupportComponent key={index} support={support} />);
+  const dispatch = useAppDispatch();
+  const supportRequests = useAppSelector(getAllSupportRequests);
+  const supports = supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} />);
+
+  useEffect(() => {
+    dispatch(fetchSupportRequestsThunk());
+  }, []);
 
   const filteredSupports = filteredSupportRequest === 'all'
     ? supports
-    : MOCKED_SUPPORT_REQUESTS.filter(((support) => support.supportType === filteredSupportRequest)).map((item, index) => <SingleSupportComponent key={index} support={item} />);
+    : supportRequests.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} />);
 
   return (
     <PageWrapperComponent>
       <PageHeaderComponent text="Support" />
-      <PageItemsCountComponent count={MOCKED_SUPPORT_REQUESTS.length} text="support requests" />
+      <PageItemsCountComponent count={supportRequests.length} text="support requests" />
       <FilterSupportRequestAuthorSelectComponent onChange={setFilteredSupportRequest} options={SUPPORT_REQUEST_SELECT_OPTIONS} />
       <SupportItemsWrapperComponent>
         {filteredSupports}

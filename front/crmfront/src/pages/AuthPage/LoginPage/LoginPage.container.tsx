@@ -1,17 +1,14 @@
 import {
   Button, FormLabel, Input, useToast,
 } from '@chakra-ui/react';
-import {
-  Formik, Form, FormikHelpers, FormikProps, FormikValues,
-} from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 import AuthWrapperInside from '../../../components/authWrapperInside.component.tsx';
-import { INITIAL_LOGIN_AUTH_VALUES, Login, LoginAuth } from '../../../types/AuthTypes.ts';
+import { INITIAL_LOGIN_AUTH_VALUES, LoginAuth } from '../../../types/AuthTypes.ts';
 import AuthWrapper from '../components/authWrapper.component.tsx';
 import RegisterLink from './components/registerLink.component.tsx';
 import InputComponent from '../../../components/form/input.component.tsx';
-import AuthService from '../../../services/AuthService.ts';
 
 interface LoginFormValues {
   username: string;
@@ -23,10 +20,27 @@ const LoginPage = () => {
   const toast = useToast();
   const [loginValues, setLoginValues] = useState<LoginAuth>(INITIAL_LOGIN_AUTH_VALUES);
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const form = {
+      username: loginValues.username,
+      password: loginValues.password,
+    };
+    const data = await axios.post('http://localhost:8080/login', form, {
+      withCredentials: true,
+    });
+    console.log('wbilem', data);
+  };
+
+  const test = async () => {
+    const res = await axios.get('http://localhost:8080/api/v1/user/test');
+    console.log('res', res);
+  };
+
   return (
     <AuthWrapper>
       <h1>Login</h1>
-      <form method="post" action="http://localhost:8080/login">
+      <form action="http://localhost:8080/login" method="post">
         <AuthWrapperInside>
           <InputComponent
             label="Username"
@@ -70,6 +84,7 @@ const LoginPage = () => {
           {/*  type="password" */}
           {/* /> */}
           <Button type="submit" variant="solid" colorScheme="twitter">Submit</Button>
+          <Button onClick={test} variant="solid" colorScheme="twitter">TEST</Button>
           <RegisterLink />
         </AuthWrapperInside>
       </form>

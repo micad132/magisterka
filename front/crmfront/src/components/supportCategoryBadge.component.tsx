@@ -25,7 +25,7 @@ interface Props {
 }
 
 const SupportCategoryBadgeComponent = ({ supportType }: Props) => {
-  console.log('fjdj');
+  console.log('fjdj', supportType);
 
   const getProperTag = () => {
     switch (supportType) {

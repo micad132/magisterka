@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import {
   fetchAllUsersThunk, fetchUserDetailsThunk, getAllUsers, getUserDetails,
 } from '../../store/userSlice.tsx';
+import { fetchSupportRequestsThunk } from '../../store/supportRequestSlice.tsx';
+import { fetchMessagesThunk } from '../../store/messageSlice.tsx';
 
 const HomePageHeader = styled.h1`
   color: var(--font-color);
@@ -15,13 +18,35 @@ const HomePage = () => {
   const dispatch = useAppDispatch();
   const userDetails = useAppSelector(getUserDetails);
   const allUsers = useAppSelector(getAllUsers);
+  const [isUserDataFetched, setIsUserDataFetched] = useState<boolean>(false);
+  const [userInfoFetched, setUserInfoFetched] = useState(false);
+
   useEffect(() => {
-    if (userDetails.username === '') {
-      dispatch(fetchUserDetailsThunk());
-    } else if (allUsers.length === 0) {
-      dispatch(fetchAllUsersThunk());
-    }
+    // console.log('hej');
+    // if (userDetails.username === '') {
+    //   dispatch(fetchUserDetailsThunk());
+    // } else if (allUsers.length === 0) {
+    //   dispatch(fetchAllUsersThunk());
+    // }
+    // const fetchUserData = async () => {
+    //   try {
+    //     const response = await axios.get('http://localhost:8080/api/v1/user/getLoggedUser');
+    //     setIsUserDataFetched(true);
+    //     setUserInfoFetched(response.data);
+    //     console.log('RESPONSE', response);
+    //   } catch (e) {
+    //     console.error(e);
+    //   }
+    // };
+    // if (!userInfoFetched && !isUserDataFetched) {
+    //   fetchUserData();
+    // }
+    dispatch(fetchAllUsersThunk());
+    dispatch(fetchSupportRequestsThunk());
+    dispatch(fetchUserDetailsThunk());
+    dispatch(fetchMessagesThunk());
   }, []);
+
   return (
     <div>
       <HomePageHeader>System CRM zawiera</HomePageHeader>

@@ -9,6 +9,7 @@ import MessagesPageContainer from '../pages/MessagesPage/messagesPage.container.
 import ProfilePageContainer from '../pages/ProfilePage/profilePage.container.tsx';
 import FailedLoginPageContainer from '../pages/FailedLoginPage/failedLoginPage.container.tsx';
 import SupportPageContainer from '../pages/SupportPage/supportPage.container.tsx';
+import MyComponent from '../pages/TestPage/testPage.container.tsx';
 
 const routes = (
   <Routes>
@@ -22,6 +23,7 @@ const routes = (
     <Route path="/profile" element={<ProfilePageContainer />} />
     <Route path="/failed" element={<FailedLoginPageContainer />} />
     <Route path="/support" element={<SupportPageContainer />} />
+    <Route path="/test" element={<MyComponent />} />
   </Routes>
 );
 

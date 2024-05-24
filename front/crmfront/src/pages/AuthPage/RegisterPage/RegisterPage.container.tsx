@@ -47,6 +47,7 @@ const RegisterPage = () => {
               isClosable: true,
               position: 'bottom-right',
             });
+            actions.resetForm();
           } catch (e) {
             toast({
               title: 'Something went wrong!',

@@ -81,3 +81,9 @@ export const SUPPORT_REQUEST_SELECT_OPTIONS: SelectValue[] = [
     value: 'other',
   },
 ];
+
+export type AllSelectValue = {
+  initialStasuses: SelectValue[],
+  taskPriority: SelectValue[],
+  taskType: SelectValue[],
+};

@@ -14,7 +14,9 @@ import SupportIcon from './supportIcon.component.tsx';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import { SelectValue } from '../../../../types/UtilTypes.ts';
 import TextareaCompononent from '../../../../components/form/textarea.component.tsx';
-import { SupportRequest, SupportRequestType } from '../../../../types/SupportRequest.ts';
+import { AddingSupport, SupportRequest, SupportRequestType } from '../../../../types/SupportRequest.ts';
+import { useAppDispatch } from '../../../../utils/hooks.ts';
+import { addingSupportRequestThunk } from '../../../../store/supportRequestSlice.tsx';
 
 const ModalBodyWrapper = styled.div`
   display: flex;
@@ -25,19 +27,19 @@ const ModalBodyWrapper = styled.div`
 const SELECT_OPTIONS: SelectValue[] = [
   {
     text: 'Improvement',
-    value: 'improvement',
+    value: SupportRequest.IMPROVEMENT,
   },
   {
     text: 'Bug',
-    value: 'bug',
+    value: SupportRequest.BUG,
   },
   {
     text: 'Support',
-    value: 'support',
+    value: SupportRequest.SUPPORT,
   },
   {
     text: 'Other',
-    value: 'other',
+    value: SupportRequest.OTHER,
   },
 ];
 
@@ -58,11 +60,18 @@ const properLabel = (label: SupportRequestType) => {
 
 const SupportModal = () => {
   const [supportText, setSupportText] = useState<string>('');
-  const [supportCategory, setSupportCategory] = useState<SupportRequestType>('improvement');
+  const [supportCategory, setSupportCategory] = useState<SupportRequestType>(SupportRequest.IMPROVEMENT);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
+  const dispatch = useAppDispatch();
 
   const onSaveClick = () => {
+    const addObj: AddingSupport = {
+      supportCategory,
+      userId: 2,
+      description: supportText,
+    };
+    dispatch(addingSupportRequestThunk(addObj));
     toast({
       title: 'Support request sent!',
       description: 'You have successfully created support request',

@@ -36,7 +36,6 @@ interface Props {
 }
 
 const SingleSupportComponent = ({ support }: Props) => {
-  const d = 4;
   const [convertingToTask, setConvertingToTask] = useState<AddingTask>(ADDING_TASK_INITIAL_VALUE);
 
   const setState = (key: string, value: string | number) => {
@@ -55,7 +54,7 @@ const SingleSupportComponent = ({ support }: Props) => {
     value: user.name,
   }));
 
-  console.log('SELECT USERS', SELECT_USERS);
+  console.log('SELECT USERS', support);
 
   const convertToTaskModalProps: ModalProps = {
     modalHeader: 'Convert to task',
@@ -91,8 +90,8 @@ const SingleSupportComponent = ({ support }: Props) => {
     <SingleSupportWrapper>
       <MenuComponent menuItems={menuItems} />
       <CreatedDateComponent date={support.date} />
-      <AuthorOfRequestComponent author={support.author} />
-      <SupportCategoryBadgeComponent supportType={support.supportType} />
+      <AuthorOfRequestComponent author={support.username} />
+      <SupportCategoryBadgeComponent supportType={support.supportCategory} />
       <SupportDescriptionComponent text={support.description} />
 
       <ModalWrapper>

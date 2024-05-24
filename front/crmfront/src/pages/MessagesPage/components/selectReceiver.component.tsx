@@ -13,15 +13,16 @@ const SelectReceiverWrapper = styled.div`
 interface Props {
   options: SelectValue[],
   onChange: (value: string) => void,
+  value?: string,
 }
 
-const SelectReceiverComponent = ({ options, onChange }: Props) => (
+const SelectReceiverComponent = ({ options, onChange, value }: Props) => (
   <SelectReceiverWrapper>
-    <p>Filter messages by user</p>
     <SelectComponent
       options={options}
       onChange={onChange}
-      label="Filter messages by user"
+      label="Filter messages by receiver"
+      value={value ?? undefined}
     />
   </SelectReceiverWrapper>
 );

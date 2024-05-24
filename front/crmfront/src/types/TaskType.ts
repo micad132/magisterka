@@ -1,3 +1,5 @@
+import { date } from 'yup';
+import dayjs, { Dayjs } from 'dayjs';
 import { ValuesType } from './UtilTypes.ts';
 
 export type Task = {
@@ -19,7 +21,7 @@ export type AddingTask = {
   taskPriority: TaskPriorityType,
   taskType: TaskTypeType,
   estimatedCost: number,
-  assignee: string,
+  estimatedFinishTime: Date,
 };
 
 // export enum TaskStatus {
@@ -61,7 +63,7 @@ export type TaskTypeType = ValuesType<typeof TaskType>;
 
 export const ADDING_TASK_INITIAL_VALUE: AddingTask = {
   description: '',
-  assignee: '',
+  estimatedFinishTime: new Date(),
   estimatedCost: 0,
   taskPriority: TaskPriority.MINOR,
   taskStatus: TaskStatus.IN_PROGRESS,

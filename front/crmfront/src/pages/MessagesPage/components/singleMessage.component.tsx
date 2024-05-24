@@ -3,6 +3,7 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import { MessageType } from '../../../types/MessageType.ts';
+import mapDateToString from '../../../utils/mappers/mapDateToString.ts';
 
 const StyledAccordion = styled(Accordion)`
   background-color: teal;
@@ -46,21 +47,21 @@ const SingleMessageComponent = ({ message }: Props) => (
       <Header>
         <Authors>
           <SingleAuthor>
-            <Span>From:</Span> {message.author}
+            <Span>From:</Span> {message.authorName} {message.authorSurname} - {message.authorUsername}
           </SingleAuthor>
           <SingleAuthor>
-            <Span>To:</Span> {message.receiver}
+            <Span>To:</Span> {message.receiverName} {message.receiverSurname} - {message.receiverUsername}
           </SingleAuthor>
         </Authors>
 
         <DateWrapper>
-          <p>Date: 16.03.2023</p>
+          <p>Date: {mapDateToString(message.date)}</p>
           <AccordionIcon />
         </DateWrapper>
 
       </Header>
       <AccordionPanel pb={4}>
-        {message.description}
+        {message.text}
       </AccordionPanel>
     </AccordionItem>
   </StyledAccordion>
