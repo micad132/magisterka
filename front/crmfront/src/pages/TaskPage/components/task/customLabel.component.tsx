@@ -9,8 +9,11 @@ const Label = styled.label`
     font-weight: bold;
 `;
 
-const CustomLabel = ({ text }: Props) => (
-  <Label>{text}</Label>
-);
+const CustomLabel = ({ text }: Props) => {
+  const properLabel = text === '' ? 'N/A' : text;
+  return (
+    <Label>{properLabel}</Label>
+  );
+};
 
 export default CustomLabel;

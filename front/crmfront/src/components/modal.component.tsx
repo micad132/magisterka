@@ -6,7 +6,11 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton, useDisclosure, Button,
+  Icon,
 } from '@chakra-ui/react';
+import {
+  cloneElement, isValidElement, ReactElement, ReactNode,
+} from 'react';
 import { ModalProps } from '../types/UtilTypes.ts';
 
 interface Props {
@@ -15,9 +19,23 @@ interface Props {
 
 const ModalComponent = ({ modalProps }:Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const modalEntry: ReactNode = isValidElement(modalProps.modalIcon)
+    ? cloneElement(modalProps.modalIcon as ReactElement, { onClick: onOpen, style: { cursor: 'pointer' } })
+    : (
+      <Button
+        onClick={onOpen}
+        colorScheme={modalProps.buttonColor ?? 'teal'}
+        size={modalProps.buttonSize ?? 'lg'}
+      >
+        {modalProps.buttonText}
+      </Button>
+    );
+
   return (
     <>
-      <Button onClick={onOpen} colorScheme={modalProps.buttonColor ?? 'teal'} size={modalProps.buttonSize ?? 'lg'}>{modalProps.buttonText}</Button>
+      {/* <Button onClick={onOpen} colorScheme={modalProps.buttonColor ?? 'teal'} size={modalProps.buttonSize ?? 'lg'}>{modalProps.buttonText}</Button> */}
+      {modalEntry}
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />

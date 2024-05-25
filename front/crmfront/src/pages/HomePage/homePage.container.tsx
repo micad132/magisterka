@@ -7,6 +7,7 @@ import {
 } from '../../store/userSlice.tsx';
 import { fetchSupportRequestsThunk } from '../../store/supportRequestSlice.tsx';
 import { fetchMessagesThunk } from '../../store/messageSlice.tsx';
+import { fetchTasksThunk } from '../../store/taskSlice.tsx';
 
 const HomePageHeader = styled.h1`
   color: var(--font-color);
@@ -45,6 +46,7 @@ const HomePage = () => {
     dispatch(fetchSupportRequestsThunk());
     dispatch(fetchUserDetailsThunk());
     dispatch(fetchMessagesThunk());
+    dispatch(fetchTasksThunk());
   }, []);
 
   return (

@@ -10,6 +10,7 @@ import ProfilePageContainer from '../pages/ProfilePage/profilePage.container.tsx
 import FailedLoginPageContainer from '../pages/FailedLoginPage/failedLoginPage.container.tsx';
 import SupportPageContainer from '../pages/SupportPage/supportPage.container.tsx';
 import MyComponent from '../pages/TestPage/testPage.container.tsx';
+import SingleTaskPageContainer from '../pages/SingleTaskPage/singleTaskPage.container.tsx';
 
 const routes = (
   <Routes>
@@ -17,6 +18,7 @@ const routes = (
     <Route path="/login" element={<LoginPage />} />
     <Route path="/register" element={<RegisterPage />} />
     <Route path="/tasks" element={<TaskPageContainer />} />
+    <Route path="/tasks/:id" element={<SingleTaskPageContainer />} />
     <Route path="/people" element={<PeoplePageContainer />} />
     <Route path="/history" element={<HistoryPageContainer />} />
     <Route path="/messages" element={<MessagesPageContainer />} />

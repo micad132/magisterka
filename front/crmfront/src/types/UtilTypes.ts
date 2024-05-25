@@ -8,6 +8,7 @@ export type ModalProps = {
   buttonColor?: string,
   buttonSize?: string,
   mainButtonAction: any,
+  modalIcon?: ReactNode,
 };
 
 export type SelectValue = {

@@ -1,22 +1,19 @@
-import DatePicker from 'react-datepicker';
+import { Input } from '@chakra-ui/react';
 
 interface Props {
-  value: Date,
-  setTime: (value: Date, key?: string) => void,
+  value: string,
+  onChange: (e: any) => void,
+  placeholder: string,
+  label: string,
 }
 
-const DatePickerComponent = ({ value, setTime }: Props) => (
-  <div>
-    <DatePicker
-      selected={value}
-      onChange={() => {}}
-      showTimeSelect
-      timeFormat="HH:mm"
-      timeIntervals={15}
-      timeCaption="time"
-      dateFormat="MMMM d, yyyy h:mm aa"
-    />
-  </div>
+const DatePickerComponent = ({
+  value, onChange, placeholder, label,
+}: Props) => (
+  <>
+    <p>{label}</p>
+    <Input placeholder={placeholder} size="md" type="datetime-local" value={value} onChange={onChange} />
+  </>
 );
 
 export default DatePickerComponent;

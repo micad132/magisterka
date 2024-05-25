@@ -1,6 +1,5 @@
-import { date } from 'yup';
-import dayjs, { Dayjs } from 'dayjs';
 import { ValuesType } from './UtilTypes.ts';
+import { CommentResponseDTO } from './CommentType.ts';
 
 export type Task = {
   description: string,
@@ -15,13 +14,40 @@ export type Task = {
   assignee: string,
 };
 
+export type TaskResponseDTO = {
+  id: number,
+  description: string,
+  taskStatus: TaskStatusType,
+  taskPriority: TaskPriorityType,
+  taskType: TaskTypeType,
+  assigneeUsername: string,
+  creatorUsername: string,
+  comments: CommentResponseDTO[],
+  creationDate: string,
+  estimationFinishTime: string,
+  hoursSpent: number,
+  estimatedCost: number,
+  cost: number,
+};
+
 export type AddingTask = {
   description: string,
   taskStatus: TaskStatusType,
   taskPriority: TaskPriorityType,
   taskType: TaskTypeType,
   estimatedCost: number,
-  estimatedFinishTime: Date,
+  estimatedFinishTime: string,
+};
+
+export type AddingTaskRequest = AddingTask & {
+  creatorId: number,
+};
+
+export type PreviewTask = {
+  taskStatus: TaskStatusType,
+  taskPriority: TaskPriorityType,
+  totalHoursSpent: number,
+  estimatedFinishTime: string,
 };
 
 // export enum TaskStatus {
@@ -32,29 +58,30 @@ export type AddingTask = {
 // }
 
 export type TaskPreview = {
+  id: number,
   taskType: TaskTypeType,
-  assignee: string,
+  assigneeUsername: string,
   taskPriority: TaskPriorityType,
   estimateFinishTime: string,
 };
 
 export const TaskStatus = {
-  PENDING: 'Pending',
-  IN_PROGRESS: 'In progress',
-  DONE: 'Done',
-  CANCELED: 'Canceled',
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  DONE: 'DONE',
+  CANCELED: 'CANCELED',
 } as const;
 
 export const TaskPriority = {
-  MINOR: 'Minor',
-  MAJOR: 'Major',
-  CRITICAL: 'Critical',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+  CRITICAL: 'CRITICAL',
 } as const;
 
 export const TaskType = {
-  LOGISTIC: 'Logistic',
-  PURCHASE: 'Purchase',
-  INFORMATIC: 'Informatic',
+  LOGISTIC: 'LOGISTIC',
+  PURCHASE: 'PURCHASE',
+  INFORMATIC: 'INFORMATIC',
 } as const;
 
 export type TaskStatusType = ValuesType<typeof TaskStatus>;
@@ -63,9 +90,16 @@ export type TaskTypeType = ValuesType<typeof TaskType>;
 
 export const ADDING_TASK_INITIAL_VALUE: AddingTask = {
   description: '',
-  estimatedFinishTime: new Date(),
+  estimatedFinishTime: '',
   estimatedCost: 0,
   taskPriority: TaskPriority.MINOR,
   taskStatus: TaskStatus.IN_PROGRESS,
   taskType: TaskType.PURCHASE,
+};
+
+export const PREVIEW_TASK_INITIAL_VALUES: PreviewTask = {
+  taskStatus: TaskStatus.IN_PROGRESS,
+  totalHoursSpent: 0,
+  taskPriority: TaskPriority.MINOR,
+  estimatedFinishTime: '',
 };

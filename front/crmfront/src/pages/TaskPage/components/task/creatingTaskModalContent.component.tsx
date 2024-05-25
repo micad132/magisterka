@@ -4,6 +4,8 @@ import TextareaComponent from '../../../../components/form/textarea.component.ts
 import { AllSelectValue } from '../../../../utils/consts.ts';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import { AddingTask } from '../../../../types/TaskType.ts';
+import DatePickerComponent from '../../../../components/form/datePicker.component.tsx';
+import InputComponent from '../../../../components/form/input.component.tsx';
 
 const DateTimePickerWrapper = styled.div`
   padding: 10px;
@@ -20,7 +22,7 @@ const CreatingTaskWrapper = styled.div`
 
 interface Props {
   selectValues: AllSelectValue,
-  setTaskValues: (value: string | Date, key: string) => void,
+  setTaskValues: (value: string, key: string) => void,
   taskValues: AddingTask,
 }
 
@@ -52,17 +54,30 @@ const CreatingTaskModalContent = ({ selectValues, setTaskValues, taskValues }: P
         onChange={(e) => setTaskValues(e, 'description')}
         label="Task description"
       />
-      <DateTimePickerWrapper>
-        <DatePicker
-          selected={taskValues.estimatedFinishTime}
-          onChange={(date) => setTaskValues(date!, 'estimatedFinishTime')}
-          showTimeSelect
-          timeFormat="HH:mm"
-          timeIntervals={15}
-          timeCaption="time"
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
-      </DateTimePickerWrapper>
+      {/* <DatePicker */}
+      {/*  selected={taskValues.estimatedFinishTime} */}
+      {/*  onChange={(date) => setTaskValues(date!, 'estimatedFinishTime')} */}
+      {/*  showTimeSelect */}
+      {/*  timeFormat="HH:mm" */}
+      {/*  timeIntervals={15} */}
+      {/*  timeCaption="time" */}
+      {/*  dateFormat="MMMM d, yyyy h:mm aa" */}
+      {/* /> */}
+      <DatePickerComponent
+        label="Select estimated finish time"
+        onChange={(e) => setTaskValues(e.target.value, 'estimatedFinishTime')}
+        value={taskValues.estimatedFinishTime}
+        placeholder="Finish time"
+      />
+      <InputComponent
+        name="estimatedCost"
+        value={taskValues.estimatedCost}
+        onChange={(e) => setTaskValues(e.target.value, 'estimatedCost')}
+        placeholder="Cost"
+        label="Estimated cost"
+        type="number"
+        isInvalid={false}
+      />
 
     </CreatingTaskWrapper>
   );

@@ -25,7 +25,7 @@ interface Props {
 }
 
 const TaskColumnComponent = ({ taskStatus, taskPreviews }: Props) => {
-  const taskPreviewsMapped = taskPreviews.map((taskPreview) => <TaskColumnPreviewComponent taskPreview={taskPreview} taskStatus={taskStatus} />);
+  const taskPreviewsMapped = taskPreviews.map((taskPreview) => <TaskColumnPreviewComponent key={taskPreview.id} taskPreview={taskPreview} taskStatus={taskStatus} />);
 
   return (
     <TaskColumnWrapper>
