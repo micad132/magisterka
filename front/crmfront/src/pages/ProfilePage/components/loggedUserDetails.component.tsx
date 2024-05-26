@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import RoleTag from '../../../components/roleTag.component.tsx';
-import { RoleType } from '../../../types/UserType.ts';
+import { LoggedUserMainDetails, RoleType } from '../../../types/UserType.ts';
+import { useAppSelector } from '../../../utils/hooks.ts';
+import { getUserDetails } from '../../../store/userSlice.tsx';
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,13 +14,21 @@ const Wrapper = styled.div`
   gap: 10px;
 `;
 
-const LoggedUserDetailsComponent = () => (
+interface Props {
+  loggedUserMainDetails: LoggedUserMainDetails,
+}
+
+const LoggedUserDetailsComponent = ({
+  loggedUserMainDetails: {
+    userRole, username, createdAccountDate,
+  },
+}: Props) => (
   <div>
     <Wrapper>
-      <p>Michal Mosiolek</p>
-      <RoleTag role={RoleType.CLIENT} />
+      <p>{username}</p>
+      <RoleTag role={userRole} />
     </Wrapper>
-    User registered on 27.02.2023
+    User registered on {createdAccountDate}
   </div>
 );
 

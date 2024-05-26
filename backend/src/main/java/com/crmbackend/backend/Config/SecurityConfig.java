@@ -17,11 +17,13 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 
 @Configuration
+@EnableWebSecurity
 @EnableGlobalMethodSecurity(
         prePostEnabled = true,
         jsr250Enabled = true
@@ -29,20 +31,38 @@ import java.util.List;
 public class SecurityConfig {
 
 
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration corsConfiguration = new CorsConfiguration();
+//
+//        // Apply default settings and configure allowed origins
+//        corsConfiguration.applyPermitDefaultValues();
+//        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+//        corsConfiguration.setAllowCredentials(true);
+//        corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PATCH", "DELETE", "PUT", "OPTIONS", "HEAD"));
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", corsConfiguration);
+//
+//        return source;
+//    }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration corsConfiguration = new CorsConfiguration();
-
-        corsConfiguration.applyPermitDefaultValues();
-        corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:5173/"));
-        corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PATCH", "DELETE", "PUT", "OPTIONS", "HEAD"));
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.applyPermitDefaultValues();
+//        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+        configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://127.0.0.1:5173"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"));
+        configuration.setAllowCredentials(true);
+//        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", corsConfiguration);
-
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider(UserDetailsService service, PasswordEncoder encoder) {
@@ -54,10 +74,10 @@ public class SecurityConfig {
         return provider;
     }
 
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new CustomAuthenticationFailureHandler();
-    }
+//    @Bean
+//    public AuthenticationFailureHandler authenticationFailureHandler() {
+//        return new CustomAuthenticationFailureHandler();
+//    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -74,41 +94,75 @@ public class SecurityConfig {
     }
 
 
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(
+//            HttpSecurity httpSecurity,
+//            CorsConfigurationSource corsConfigurationSource
+//    ) throws Exception {
+//        httpSecurity
+//                .csrf()
+//                .disable()
+//                .cors().configurationSource(corsConfigurationSource())
+//                .and()
+//                .headers()
+//                .frameOptions().disable()
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/login")
+//                .permitAll()
+//                .anyRequest().permitAll()
+//                .and()
+//                .formLogin()
+////                .failureHandler(authenticationFailureHandler())
+//                .successHandler(((request, response, authentication) -> {}))
+//                .loginProcessingUrl("/login")
+////                .failureUrl("http://localhost:5173/failed")
+//                .defaultSuccessUrl("http://localhost:5173")
+//                .loginPage("http://localhost:5173/login")
+//                .permitAll();
+//
+//        httpSecurity.logout()
+//                .logoutUrl("/logout")
+//                .logoutSuccessUrl("http://localhost:5173")
+//                .deleteCookies("JSESSIONID")
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true);
+//
+////        httpSecurity.cors().configurationSource(corsConfigurationSource);
+//
+//        return httpSecurity.build();
+//    }
+
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity httpSecurity,
-            CorsConfigurationSource corsConfigurationSource
-    ) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, CorsConfigurationSource corsConfigurationSource) throws Exception {
         httpSecurity
-                .csrf()
-                .disable()
-                .cors().configurationSource(corsConfigurationSource())
+                .csrf().disable()
+                .cors().configurationSource(corsConfigurationSource)
                 .and()
-                .headers()
-                .frameOptions().disable()
+                .headers().frameOptions().disable()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login")
-                .permitAll()
-                .anyRequest().permitAll()
+                .antMatchers("/auth/**", "/logout").permitAll()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/api/v1/user/register").permitAll()
+                .antMatchers("/api/v1/user/test").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .failureHandler(authenticationFailureHandler())
-                .successHandler(((request, response, authentication) -> {}))
-                .loginProcessingUrl("/login")
+//                .loginProcessingUrl("/login")
                 .failureUrl("http://localhost:5173/failed")
-                .defaultSuccessUrl("http://localhost:5173")
+                .defaultSuccessUrl("http://localhost:5173", true).successHandler(((request, response, authentication) -> {
+                    response.sendRedirect("http://localhost:5173");
+                }))
                 .loginPage("http://localhost:5173/login")
-                .permitAll();
-
-        httpSecurity.logout()
+                .permitAll()
+                .and()
+                .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("http://localhost:5173")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .clearAuthentication(true);
-
-//        httpSecurity.cors().configurationSource(corsConfigurationSource);
 
         return httpSecurity.build();
     }

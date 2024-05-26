@@ -47,12 +47,12 @@ const IconWrapper = () => {
   return (
     <IconWrapperDiv>
       <Icons>
-        {userDetails && <ProfileModal user={user} />}
+        {userDetails.name !== '' && <ProfileModal user={user} />}
         <ChangeTheme />
         <SupportModal />
       </Icons>
       <AuthNav>
-        <AuthNavComponent isLogged={false} />
+        <AuthNavComponent isLogged={userDetails.name !== ''} />
       </AuthNav>
     </IconWrapperDiv>
   );

@@ -12,7 +12,7 @@ const Span = styled.span`
 
 interface Props {
   label: string,
-  text: string,
+  text: string | number,
 }
 const PersonalInfoLabelComponent = ({ label, text }: Props) => (
   <Info>

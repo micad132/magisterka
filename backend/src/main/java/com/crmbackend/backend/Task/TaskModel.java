@@ -1,8 +1,8 @@
 package com.crmbackend.backend.Task;
 
 import com.crmbackend.backend.Comment.CommentModel;
-import lombok.Getter;
-import lombok.Setter;
+import com.crmbackend.backend.User.UserModel;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +12,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "task_model")
 public class TaskModel {
     @Id
@@ -47,5 +50,17 @@ public class TaskModel {
 
     @OneToMany(mappedBy = "taskModel", orphanRemoval = true)
     private List<CommentModel> commentModels = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "assignee_user_id")
+    private UserModel assigneeUser;
+
+    @ManyToOne
+    @JoinColumn(name = "creator_user_id")
+    private UserModel creatorUser;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "task_status")
+    private TaskStatus taskStatus;
 
 }

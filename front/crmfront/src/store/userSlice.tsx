@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { INITIAL_USER_DETAILS_VALUES, User } from '../types/UserType.ts';
+import { INITIAL_USER_DETAILS_VALUES, SelfEditUserRequest, User } from '../types/UserType.ts';
 import UserService from '../services/UserService.ts';
 import { RootState } from '../utils/hooks.ts';
 
@@ -57,6 +57,19 @@ export const deleteUserThunk = createAsyncThunk(
   },
 );
 
+export const editUserPersonalInfoThunk = createAsyncThunk(
+  'userSlice/editPersonalInfo',
+  async (editBody: SelfEditUserRequest) => {
+    try {
+      const data = await UserService.editPersonalInfo(editBody);
+      const allUsers = await UserService.getAllUsers();
+      return { data, allUsers };
+    } catch (e) {
+      throw e;
+    }
+  },
+);
+
 export const getUserDetails = (state: RootState): User => state.user.userDetails;
 export const getAllUsers = (state: RootState): User[] => state.user.users;
 
@@ -70,17 +83,21 @@ const userSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder
-      .addCase(fetchUserDetailsThunk.fulfilled, (state, action) => {
-        state.userDetails = action.payload;
-      });
+    // builder
+    //   .addCase(fetchUserDetailsThunk.fulfilled, (state, action) => {
+    //     state.userDetails = action.payload;
+    //   });
     builder.addCase(fetchAllUsersThunk.fulfilled, (state, action) => {
       state.users = action.payload;
     });
     builder.addCase(deleteUserThunk.fulfilled, (state, action) => {
       state.users = action.payload;
     });
+    builder.addCase(editUserPersonalInfoThunk.fulfilled, (state, action) => {
+      state.users = action.payload.allUsers;
+      state.userDetails = action.payload.data;
+    });
   },
 });
-
+export const { setLoggedUser } = userSlice.actions;
 export default userSlice.reducer;

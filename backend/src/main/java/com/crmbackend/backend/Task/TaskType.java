@@ -7,5 +7,5 @@ import lombok.Getter;
 public enum TaskType {
     LOGISTIC,
     INFORMATIC,
-    SELLING,
+    PURCHASE,
 }

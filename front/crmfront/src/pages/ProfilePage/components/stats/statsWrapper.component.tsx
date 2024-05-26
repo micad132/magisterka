@@ -18,6 +18,7 @@ const StatsWrapperComponent = () => {
       <SingleStatComponent count={2} text="Support requests" />
       <SingleStatComponent count={1} text="Comments" />
       <SingleStatComponent count={2} text="Profile changes" />
+      <SingleStatComponent count={0} text="Surveys made" />
     </StatsWrapper>
   );
 };

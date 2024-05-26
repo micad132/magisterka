@@ -1,5 +1,6 @@
 package com.crmbackend.backend.User;
 
+import com.crmbackend.backend.User.dto.request.UserDTOEditPersonalInfoRequest;
 import com.crmbackend.backend.User.dto.request.UserDTORequest;
 import com.crmbackend.backend.User.dto.response.UserDTOResponse;
 import com.crmbackend.backend.mappers.UserMapper.UserMapper;
@@ -38,5 +39,23 @@ public class UserService implements UserDetailsService {
     public void deleteUser(String id) {
 //        UserModel userModel = userRepository.findById(Long.valueOf(id)).orElseThrow(() -> new UsernameNotFoundException("Not found"));
         userRepository.deleteById(Long.valueOf(id));
+    }
+
+    public UserDTOResponse editPersonalInfo(UserDTOEditPersonalInfoRequest userDTOEditPersonalInfoRequest) {
+        UserModel userModel = userRepository.findById(userDTOEditPersonalInfoRequest.getId()).orElseThrow();
+        userModel.setAge(userDTOEditPersonalInfoRequest.getAge());
+        userModel.setEmail(userDTOEditPersonalInfoRequest.getEmail());
+        userModel.setName(userDTOEditPersonalInfoRequest.getName());
+        userModel.setSurname(userDTOEditPersonalInfoRequest.getSurname());
+        userModel.setUsername(userDTOEditPersonalInfoRequest.getUsername());
+        userModel.setCityName(userDTOEditPersonalInfoRequest.getCityName());
+        userModel.setCountryName(userDTOEditPersonalInfoRequest.getCountryName());
+        userModel.setStreetName(userDTOEditPersonalInfoRequest.getStreetName());
+        userModel.setPesel(userDTOEditPersonalInfoRequest.getPesel());
+        userModel.setPhoneNumber(userDTOEditPersonalInfoRequest.getPhoneNumber());
+        userModel.setPostalCode(userDTOEditPersonalInfoRequest.getPostalCode());
+        userRepository.save(userModel);
+        UserDTOResponse userDTOResponse = userMapper.mapEntityToDTO(userModel);
+        return userDTOResponse;
     }
 }

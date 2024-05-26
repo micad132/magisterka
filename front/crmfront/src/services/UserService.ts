@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../utils/consts.ts';
+import { SelfEditUserRequest } from '../types/UserType.ts';
 
 const UserService = {
   getUserDetails: async () => {
@@ -15,6 +16,15 @@ const UserService = {
   deleteUser: async (userId: number) => {
     try {
       const res = await axios.delete(`${API_URL}/user/${userId}`);
+      return res.data;
+    } catch (e) {
+      throw e;
+    }
+  },
+
+  editPersonalInfo: async (editData: SelfEditUserRequest) => {
+    try {
+      const res = await axios.patch(`${API_URL}/user/editPersonalInfo`, editData);
       return res.data;
     } catch (e) {
       throw e;

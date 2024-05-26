@@ -11,21 +11,24 @@ import FailedLoginPageContainer from '../pages/FailedLoginPage/failedLoginPage.c
 import SupportPageContainer from '../pages/SupportPage/supportPage.container.tsx';
 import MyComponent from '../pages/TestPage/testPage.container.tsx';
 import SingleTaskPageContainer from '../pages/SingleTaskPage/singleTaskPage.container.tsx';
+import PrivateRouteComponent from '../components/privateRoute.component.tsx';
 
 const routes = (
   <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/register" element={<RegisterPage />} />
-    <Route path="/tasks" element={<TaskPageContainer />} />
-    <Route path="/tasks/:id" element={<SingleTaskPageContainer />} />
-    <Route path="/people" element={<PeoplePageContainer />} />
-    <Route path="/history" element={<HistoryPageContainer />} />
-    <Route path="/messages" element={<MessagesPageContainer />} />
-    <Route path="/profile" element={<ProfilePageContainer />} />
-    <Route path="/failed" element={<FailedLoginPageContainer />} />
-    <Route path="/support" element={<SupportPageContainer />} />
-    <Route path="/test" element={<MyComponent />} />
+    <Route element={<PrivateRouteComponent />}>
+      <Route path="/tasks" element={<TaskPageContainer />} />
+      <Route path="/tasks/:id" element={<SingleTaskPageContainer />} />
+      <Route path="/people" element={<PeoplePageContainer />} />
+      <Route path="/history" element={<HistoryPageContainer />} />
+      <Route path="/messages" element={<MessagesPageContainer />} />
+      <Route path="/profile" element={<ProfilePageContainer />} />
+      <Route path="/failed" element={<FailedLoginPageContainer />} />
+      <Route path="/support" element={<SupportPageContainer />} />
+      <Route path="/test" element={<MyComponent />} />
+    </Route>
   </Routes>
 );
 

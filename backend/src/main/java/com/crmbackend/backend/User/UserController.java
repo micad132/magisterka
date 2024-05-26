@@ -1,5 +1,6 @@
 package com.crmbackend.backend.User;
 
+import com.crmbackend.backend.User.dto.request.UserDTOEditPersonalInfoRequest;
 import com.crmbackend.backend.User.dto.request.UserDTORequest;
 import com.crmbackend.backend.User.dto.response.UserDTOResponse;
 import com.crmbackend.backend.mappers.UserMapper.UserMapper;
@@ -54,6 +55,12 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable ("id") String id) {
         userService.deleteUser(id);
         return ResponseEntity.ok("Successfully deleted user!");
+    }
+
+    @PatchMapping("/editPersonalInfo")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<UserDTOResponse> editPersonalInfo(@RequestBody UserDTOEditPersonalInfoRequest userDTOEditPersonalInfoRequest) {
+        return ResponseEntity.ok(userService.editPersonalInfo(userDTOEditPersonalInfoRequest));
     }
 
 //    @GetMapping("/details/{id}")

@@ -9,6 +9,8 @@ import { INITIAL_LOGIN_AUTH_VALUES, LoginAuth } from '../../../types/AuthTypes.t
 import AuthWrapper from '../components/authWrapper.component.tsx';
 import RegisterLink from './components/registerLink.component.tsx';
 import InputComponent from '../../../components/form/input.component.tsx';
+import { useAppDispatch } from '../../../utils/hooks.ts';
+import { setLoggedUser } from '../../../store/userSlice.tsx';
 
 interface LoginFormValues {
   username: string;
@@ -18,18 +20,46 @@ interface LoginFormValues {
 const LoginPage = () => {
   const navigate = useNavigate();
   const toast = useToast();
+  const dispatch = useAppDispatch();
   const [loginValues, setLoginValues] = useState<LoginAuth>(INITIAL_LOGIN_AUTH_VALUES);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const form = {
-      username: loginValues.username,
-      password: loginValues.password,
-    };
-    const data = await axios.post('http://localhost:8080/login', form, {
-      withCredentials: true,
-    });
-    console.log('wbilem', data);
+    // const formData = new FormData();
+    // formData.append('username', loginValues.username);
+    // formData.append('password', loginValues.password);
+    try {
+      const obj = {
+        username: loginValues.username,
+        password: loginValues.password,
+      };
+      const data = await axios.post('http://localhost:8080/auth/signin', obj, {
+        withCredentials: true,
+      });
+      console.log('wbilem', data.data);
+      dispatch(setLoggedUser(data.data));
+      toast({
+        title: 'Logged in!',
+        description: `You have successfully logged in as ${data.data.name} ${data.data.surname}`,
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 2000);
+    } catch (e) {
+      console.log('e', e);
+      toast({
+        title: 'Login went wrong!',
+        description: `${e.response.data.message}`,
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+    }
   };
 
   const test = async () => {
@@ -40,7 +70,8 @@ const LoginPage = () => {
   return (
     <AuthWrapper>
       <h1>Login</h1>
-      <form action="http://localhost:8080/login" method="post">
+      {/* action="http://localhost:8080/auth/signin" method="post" */}
+      <form onSubmit={onSubmit}>
         <AuthWrapperInside>
           <InputComponent
             label="Username"

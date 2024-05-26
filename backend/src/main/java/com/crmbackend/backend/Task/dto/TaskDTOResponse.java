@@ -1,2 +1,33 @@
-package com.crmbackend.backend.Task.dto;public class TaskDTOResponse {
+package com.crmbackend.backend.Task.dto;
+
+import com.crmbackend.backend.Comment.dto.CommentDTOResponse;
+import com.crmbackend.backend.Task.TaskPriority;
+import com.crmbackend.backend.Task.TaskStatus;
+import com.crmbackend.backend.Task.TaskType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+public class TaskDTOResponse {
+    private Long id;
+    private String description;
+    private TaskStatus taskStatus;
+    private TaskPriority taskPriority;
+    private TaskType taskType;
+    private LocalDateTime creationDate;
+    private LocalDateTime estimationFinishTime;
+    private Double hoursSpent;
+    private Double estimatedCost;
+    private Double cost;
+    private String assigneeUsername;
+    private String creatorUsername;
+    private List<CommentDTOResponse> comments;
 }

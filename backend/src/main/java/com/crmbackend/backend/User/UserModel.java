@@ -1,10 +1,16 @@
 package com.crmbackend.backend.User;
 
+import com.crmbackend.backend.Comment.CommentModel;
+import com.crmbackend.backend.SupportRequest.SupportRequestModel;
+import com.crmbackend.backend.Survey.SurveyModel;
 import com.crmbackend.backend.User.enums.UserGender;
 import com.crmbackend.backend.User.enums.UserRole;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -62,5 +68,17 @@ public class UserModel {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "created_account_date")
+    private LocalDateTime createdAccountDate;
+
+    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    private List<SupportRequestModel> supportRequestModels = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    private List<CommentModel> commentModels = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    private List<SurveyModel> surveyModels = new ArrayList<>();
 
 }

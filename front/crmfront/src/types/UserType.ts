@@ -15,6 +15,7 @@ export type User = {
   name: string,
   surname: string,
   cityName: string,
+  createdAccountDate: string,
 };
 
 export type SelfEditUser = {
@@ -31,12 +32,34 @@ export type SelfEditUser = {
   cityName: string,
 };
 
+export type SelfEditUserRequest = SelfEditUser & {
+  id: number,
+};
+
 export type UserWithoutID = Omit<User, 'id'>;
 
 export type ProfileModalUser = {
   name: string,
   surname: string,
   userRole: RoleTypeType,
+};
+
+export type LoggedUserMainDetails = {
+  username: string,
+  userRole: RoleTypeType,
+  createdAccountDate: string,
+};
+
+export type LoggedUserDetails = {
+  name: string,
+  surname: string,
+  age: number,
+  countryName: string,
+  streetName: string,
+  cityName: string,
+  postalCode: string,
+  phoneNumber: string,
+  email: string,
 };
 
 export const RoleType = {
@@ -67,6 +90,7 @@ export const INITIAL_EDIT_USER_VALUES: UserWithoutID = {
   surname: '',
   userGender: UserGender.MAN,
   cityName: '',
+  createdAccountDate: '',
 };
 
 export const INITIAL_USER_DETAILS_VALUES: User = {
@@ -84,6 +108,7 @@ export const INITIAL_USER_DETAILS_VALUES: User = {
   surname: '',
   userGender: UserGender.MAN,
   cityName: '',
+  createdAccountDate: '',
 };
 
 export const INITIAL_SELF_EDIT_USER_VALUES: SelfEditUser = {

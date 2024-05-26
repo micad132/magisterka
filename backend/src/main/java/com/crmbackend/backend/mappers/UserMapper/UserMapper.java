@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @AllArgsConstructor
 public class UserMapper {
@@ -29,6 +31,7 @@ public class UserMapper {
                 .phoneNumber(userDTORequest.getPhoneNumber())
                 .postalCode(userDTORequest.getPostalCode())
                 .password(passwordEncoder.encode(userDTORequest.getPassword()))
+                .createdAccountDate(LocalDateTime.now())
                 .build();
     }
 
@@ -48,6 +51,7 @@ public class UserMapper {
                 .userRole(userModel.getUserRole())
                 .postalCode(userModel.getPostalCode())
                 .email(userModel.getEmail())
+                .createdAccountDate(userModel.getCreatedAccountDate())
                 .build();
     }
 

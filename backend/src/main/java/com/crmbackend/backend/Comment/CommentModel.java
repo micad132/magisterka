@@ -18,9 +18,7 @@ public class CommentModel {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_model_id")
-    private UserModel userModel;
+
 
     @Column(name = "description")
     private String description;
@@ -31,5 +29,9 @@ public class CommentModel {
     @ManyToOne
     @JoinColumn(name = "task_model_id")
     private TaskModel taskModel;
+
+    @ManyToOne
+    @JoinColumn(name = "user_model_id")
+    private UserModel userModel;
 
 }

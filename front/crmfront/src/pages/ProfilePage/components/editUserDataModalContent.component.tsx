@@ -1,124 +1,105 @@
-import { Form, Formik } from 'formik';
-import { Button } from '@chakra-ui/react';
-import {
-  INITIAL_SELF_EDIT_USER_VALUES,
-  SelfEditUser,
-} from '../../../types/UserType.ts';
 import InputComponent from '../../../components/form/input.component.tsx';
+import { SelfEditUser } from '../../../types/UserType.ts';
 
-const EditUserDataModalContentComponent = () => {
+interface Props {
+  values: SelfEditUser,
+  setPersonalInfo: (value: string | number, key: string) => void,
+}
+
+const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) => {
   const d = 4;
   return (
     <div>
-      <Formik
-        initialValues={INITIAL_SELF_EDIT_USER_VALUES}
-        onSubmit={(values: SelfEditUser, actions) => {
-          actions.setFieldError('email', 'jd');
-          actions.setSubmitting(false);
-        }}
-      >
-        {({
-          values,
-          handleChange,
-          /* and other goodies */
-        }) => (
-          <Form>
-            <div>
-              <InputComponent
-                name="name"
-                placeholder="Name"
-                value={values.name}
-                onChange={handleChange}
-                label="Name"
-                type="text"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="surname"
-                placeholder="Surname"
-                value={values.surname}
-                onChange={handleChange}
-                label="Surname"
-                type="text"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="username"
-                placeholder="Username"
-                value={values.username}
-                onChange={handleChange}
-                label="Username"
-                type="text"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="email"
-                placeholder="Email"
-                value={values.email}
-                onChange={handleChange}
-                label="Email"
-                type="text"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="age"
-                placeholder="Age"
-                value={values.age}
-                onChange={handleChange}
-                label="Age"
-                type="number"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="countryName"
-                placeholder="Country name"
-                value={values.countryName}
-                onChange={handleChange}
-                label="Country name"
-                type="text"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="cityName"
-                placeholder="City name"
-                value={values.cityName}
-                onChange={handleChange}
-                label="City name"
-                type="text"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="streetName"
-                placeholder="Street name"
-                value={values.streetName}
-                onChange={handleChange}
-                label="Street name"
-                type="text"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="postalCode"
-                placeholder="Postal code"
-                value={values.postalCode}
-                onChange={handleChange}
-                label="Postal code"
-                type="text"
-                isInvalid={false}
-              />
-              <InputComponent
-                name="phoneNumber"
-                placeholder="Phone number"
-                value={values.phoneNumber}
-                onChange={handleChange}
-                label="Phone number"
-                type="text"
-                isInvalid={false}
-              />
-              <Button type="submit" variant="solid" colorScheme="twitter">Submit</Button>
-            </div>
-          </Form>
-        )}
-      </Formik>
+      <InputComponent
+        name="editPersonalInfoUsername"
+        value={values.username}
+        onChange={(value) => setPersonalInfo(value.target.value, 'username')}
+        placeholder="New username"
+        label="Edit your username"
+        type="text"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoName"
+        value={values.name}
+        onChange={(value) => setPersonalInfo(value.target.value, 'name')}
+        placeholder="New name"
+        label="Edit your name"
+        type="text"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoSurname"
+        value={values.surname}
+        onChange={(value) => setPersonalInfo(value.target.value, 'surname')}
+        placeholder="New surname"
+        label="Edit your surname"
+        type="text"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoEmail"
+        value={values.email}
+        onChange={(value) => setPersonalInfo(value.target.value, 'email')}
+        placeholder="New email"
+        label="Edit your email"
+        type="email"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoAge"
+        value={values.age}
+        onChange={(value) => setPersonalInfo(value.target.value, 'age')}
+        placeholder="New age"
+        label="Edit your age"
+        type="number"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoCountryName"
+        value={values.countryName}
+        onChange={(value) => setPersonalInfo(value.target.value, 'countryName')}
+        placeholder="New country name"
+        label="Edit your country name"
+        type="text"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoCityName"
+        value={values.cityName}
+        onChange={(value) => setPersonalInfo(value.target.value, 'cityName')}
+        placeholder="New city name"
+        label="Edit your city name"
+        type="text"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoStreetName"
+        value={values.streetName}
+        onChange={(value) => setPersonalInfo(value.target.value, 'streetName')}
+        placeholder="New street name"
+        label="Edit your street name"
+        type="text"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoPostalCode"
+        value={values.postalCode}
+        onChange={(value) => setPersonalInfo(value.target.value, 'postalCode')}
+        placeholder="New postal code"
+        label="Edit your postal code"
+        type="text"
+        isInvalid={false}
+      />
+      <InputComponent
+        name="editPersonalInfoPhoneNumber"
+        value={values.phoneNumber}
+        onChange={(value) => setPersonalInfo(value.target.value, 'phoneNumber')}
+        placeholder="New postal code"
+        label="Edit your postal code"
+        type="text"
+        isInvalid={false}
+      />
     </div>
   );
 };

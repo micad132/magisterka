@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PersonalInfoLabelComponent from './personalInfoLabel.component.tsx';
 import { ModalProps } from '../../../types/UtilTypes.ts';
 import EditUserDataComponent from './editUserData.component.tsx';
+import { LoggedUserDetails } from '../../../types/UserType.ts';
 
 const PersonalInfoWrapper = styled.div`
   position: relative;
@@ -23,20 +24,22 @@ const PersonalInfoDetails = styled.div`
 
 interface Props {
   modalProps: ModalProps,
+  userDetails: LoggedUserDetails,
 }
 
-const PersonalInfoDetailsComponent = ({ modalProps }: Props) => (
+const PersonalInfoDetailsComponent = ({ modalProps, userDetails }: Props) => (
   <PersonalInfoWrapper>
     <EditUserDataComponent modalProps={modalProps} />
     <PersonalInfoDetails>
-      <PersonalInfoLabelComponent label="Name" text="Michal" />
-      <PersonalInfoLabelComponent label="Surname" text="Mosiolek" />
-      <PersonalInfoLabelComponent label="Age" text="24" />
-      <PersonalInfoLabelComponent label="Country name" text="Poland" />
-      <PersonalInfoLabelComponent label="City name" text="Kielce" />
-      <PersonalInfoLabelComponent label="Street name" text="Leszczynska" />
-      <PersonalInfoLabelComponent label="Postal code" text="12-453" />
-      <PersonalInfoLabelComponent label="Phone number" text="123456789" />
+      <PersonalInfoLabelComponent label="Name" text={userDetails.name} />
+      <PersonalInfoLabelComponent label="Surname" text={userDetails.surname} />
+      <PersonalInfoLabelComponent label="Email" text={userDetails.email} />
+      <PersonalInfoLabelComponent label="Age" text={userDetails.age} />
+      <PersonalInfoLabelComponent label="Country name" text={userDetails.countryName} />
+      <PersonalInfoLabelComponent label="City name" text={userDetails.cityName} />
+      <PersonalInfoLabelComponent label="Street name" text={userDetails.streetName} />
+      <PersonalInfoLabelComponent label="Postal code" text={userDetails.postalCode} />
+      <PersonalInfoLabelComponent label="Phone number" text={userDetails.phoneNumber} />
     </PersonalInfoDetails>
   </PersonalInfoWrapper>
 );
