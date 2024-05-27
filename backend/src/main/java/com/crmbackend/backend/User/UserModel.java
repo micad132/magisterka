@@ -81,4 +81,13 @@ public class UserModel {
     @OneToMany(mappedBy = "userModel", orphanRemoval = true)
     private List<SurveyModel> surveyModels = new ArrayList<>();
 
+    //2FA
+
+    @Column(name = "secret_2fa")
+    private String secret2FA;
+
+
+
+
+
 }

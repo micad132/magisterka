@@ -9,7 +9,7 @@ import { ADDING_TASK_INITIAL_VALUE, AddingTask } from '../../../types/TaskType.t
 import { MockedUsers } from '../../../mock/mockUsers.tsx';
 import SupportDescriptionComponent from './supportDescription.component.tsx';
 import SupportCategoryBadgeComponent from '../../../components/supportCategoryBadge.component.tsx';
-import { Support, SupportRequest } from '../../../types/SupportRequest.ts';
+import { Support } from '../../../types/SupportRequest.ts';
 import MenuComponent from '../../../components/menu.component.tsx';
 
 const SingleSupportWrapper = styled.div`

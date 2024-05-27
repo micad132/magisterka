@@ -1,17 +1,24 @@
 import axios from 'axios';
-import { Login, RegisterAuth } from '../types/AuthTypes.ts';
+import { Login, RegisterAuth, RegisterAuthResponse } from '../types/AuthTypes.ts';
 import { API_URL } from '../utils/consts.ts';
 
 const AuthService = {
 
-  registerUser: async (registerModel: RegisterAuth): Promise<string> => axios({
-    method: 'POST',
-    url: `${API_URL}/user/register`,
-    data: registerModel,
-    headers: {
-      'Content-Type': 'application/json', // Dodanie nagłówka Content-Type
-    },
-  }),
+  registerUser: async (registerModel: RegisterAuth): Promise<RegisterAuthResponse> => {
+    try {
+      const response = await axios({
+        method: 'POST',
+        url: 'http://localhost:8080/auth/register',
+        data: registerModel,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 
   loginUser: async (loginModel: FormData): Promise<string> => axios.post('http://localhost:8080/login', loginModel)
   // return axios({

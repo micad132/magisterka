@@ -20,6 +20,7 @@ import EditTaskPreviewComponent from './editTaskPreview.component.tsx';
 import { useAppSelector } from '../../../../utils/hooks.ts';
 import { getAllUsers } from '../../../../store/userSlice.tsx';
 import { TASK_PRIORITY_OPTIONS } from '../../../../utils/consts.ts';
+import { RoleType } from '../../../../types/UserType.ts';
 
 interface Props {
   taskPreview: TaskPreview,
@@ -45,8 +46,10 @@ const TaskColumnPreviewComponent = ({
   const users = useAppSelector(getAllUsers);
   console.log('PREVIEW', taskPreview);
 
+  const workerUsers = users.filter((user) => user.userRole === RoleType.WORKER);
+
   const options = {
-    assigneeOptions: users.map((user): SelectValue => ({
+    assigneeOptions: workerUsers.map((user): SelectValue => ({
       value: String(user.id),
       text: user.username,
     })),

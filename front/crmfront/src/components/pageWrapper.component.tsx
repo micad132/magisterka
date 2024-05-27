@@ -6,6 +6,9 @@ const PageWrapper = styled.div`
   width: 90%;
   max-width: 1800px;
   color: var(--font-color);
+  > * {
+    margin-top: 20px;
+  }
 `;
 
 interface Props {

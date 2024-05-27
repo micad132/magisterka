@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import UserService from '../services/UserService.ts';
 import { RootState } from '../utils/hooks.ts';
-import { AddingSupport, Support, SupportRequestType } from '../types/SupportRequest.ts';
 import SupportRequestService from '../services/SupportRequestService.ts';
 import { AddingTask, TaskPreview, TaskResponseDTO } from '../types/TaskType.ts';
 import TaskService from '../services/TaskService.ts';

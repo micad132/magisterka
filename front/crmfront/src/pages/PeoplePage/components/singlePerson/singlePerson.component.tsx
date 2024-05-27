@@ -1,17 +1,15 @@
 import {
-  Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel, Box,
+  Accordion, AccordionButton, AccordionIcon, AccordionItem, AccordionPanel,
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import RoleTagComponent from '../../../../components/roleTag.component.tsx';
-import { RoleType, User, UserWithoutID } from '../../../../types/UserType.ts';
+import { User } from '../../../../types/UserType.ts';
 import ButtonsFooterComponent from './buttonsFooter.component.tsx';
 import SinglePersonInfoComponent from './singlePersonInfo.component.tsx';
 
 const StyledAccordion = styled(Accordion)`
   width: 400px;
   margin-left: 20px;
-  //border: 2px solid var(--background-color);
-  //background-color: chocolate;
 `;
 
 const AccordionHeader = styled.div`

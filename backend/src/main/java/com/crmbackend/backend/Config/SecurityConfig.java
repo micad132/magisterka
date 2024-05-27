@@ -50,13 +50,13 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.applyPermitDefaultValues();
+//        configuration.applyPermitDefaultValues();
 //        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
         configuration.setAllowedOriginPatterns(Collections.singletonList("*"));
         configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://127.0.0.1:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"));
         configuration.setAllowCredentials(true);
-//        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -144,7 +144,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/auth/**", "/logout").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/api/v1/user/register").permitAll()
+                .antMatchers("/api/v1/auth/register").permitAll()
                 .antMatchers("/api/v1/user/test").permitAll()
                 .anyRequest().authenticated()
                 .and()

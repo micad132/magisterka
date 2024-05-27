@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import { SelectValue } from '../../../../types/UtilTypes.ts';
 import CheckboxComponent from '../../../../components/form/checkbox.component.tsx';
+import { TaskPriority } from '../../../../types/TaskType.ts';
 
 const SettingsContainerWrapper = styled.div`
     color: var(--font-color);
@@ -28,34 +29,42 @@ const SORTING_OPTIONS: SelectValue[] = [
 const SORTING_TASKS_OPTIONS: SelectValue[] = [
   {
     text: 'Minor',
-    value: 'minor',
+    value: TaskPriority.MINOR,
   },
   {
     text: 'Major',
-    value: 'major',
+    value: TaskPriority.MAJOR,
   },
   {
     text: 'Critical',
-    value: 'critical',
+    value: TaskPriority.CRITICAL,
+  },
+  {
+    text: 'All',
+    value: 'ALL',
   },
 ];
 
-const TaskSettingsContainer = () => {
+interface Props {
+  sortingPriorityValue: string,
+  setSortingPriorityValue: (value: string) => void,
+}
+
+const TaskSettingsContainer = ({ sortingPriorityValue, setSortingPriorityValue }: Props) => {
   const [sortingTasks, setSortingTasks] = useState('');
-  const [sortingPriorityTask, setSortingPriorityTask] = useState('');
+
   const [isOnlyCurrentWorkerTasks, setIsOnlyCurrentWorkerTasks] = useState<boolean>(false);
   return (
     <SettingsContainerWrapper>
-      Sort tasks by
       <SelectComponent
         options={SORTING_OPTIONS}
         onChange={setSortingTasks}
         label="Sort tasks by"
       />
-      Select only tasks with priority
       <SelectComponent
         options={SORTING_TASKS_OPTIONS}
-        onChange={setSortingPriorityTask}
+        onChange={setSortingPriorityValue}
+        value={sortingPriorityValue}
         label="Select only task with priority"
       />
       <CheckboxComponent isChecked={isOnlyCurrentWorkerTasks} onChange={setIsOnlyCurrentWorkerTasks} text="Preview only logged worker tasks" />

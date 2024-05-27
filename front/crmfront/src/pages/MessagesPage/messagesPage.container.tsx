@@ -10,7 +10,6 @@ import {
   AddingMessage,
   AddingMessageStateType,
   INITIAL_ADDING_MESSAGE_VALUE,
-  MessageType,
 } from '../../types/MessageType.ts';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { getAllUsers, getUserDetails } from '../../store/userSlice.tsx';
@@ -18,38 +17,6 @@ import ModalComponent from '../../components/modal.component.tsx';
 import AddingMessageModalBodyComponent from './components/addingMessage/addingMessageModalBody.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import { addingMessageThunk, getAllMessages } from '../../store/messageSlice.tsx';
-
-const MOCKED_MESSAGES: MessageType[] = [
-  {
-    id: 1,
-    authorName: 'mikad132',
-    receiverName: 'kimek132',
-    date: '04.03.2000',
-    text: 'lorehj fdsfkhdks hfkdshvkfds',
-  },
-  {
-    id: 2,
-    authorName: 'mikad132',
-    receiverName: 'kimek132',
-    date: '04.03.2000',
-    text: 'lorehj fdsfkhdks hfkdshvkfds',
-  },
-  {
-    id: 3,
-    authorName: 'mikad132',
-    receiverName: 'kimek132',
-    date: '04.03.2000',
-    text: 'lorehj fdsfkhdks hfkdshvkfds',
-  },
-  {
-    id: 4,
-    authorName: 'mikad132',
-    receiverName: 'kimek132',
-    date: '04.03.2000',
-    text: 'lorehj fdsfkhdks hfkdshvkfds',
-  },
-
-];
 
 const MessagesPageContainer = () => {
   const [filterUser, setFilterUser] = useState<string>('all');

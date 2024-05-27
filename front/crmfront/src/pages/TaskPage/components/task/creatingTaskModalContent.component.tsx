@@ -1,18 +1,10 @@
 import styled from 'styled-components';
-import DatePicker from 'react-datepicker';
 import TextareaComponent from '../../../../components/form/textarea.component.tsx';
 import { AllSelectValue } from '../../../../utils/consts.ts';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import { AddingTask } from '../../../../types/TaskType.ts';
 import DatePickerComponent from '../../../../components/form/datePicker.component.tsx';
 import InputComponent from '../../../../components/form/input.component.tsx';
-
-const DateTimePickerWrapper = styled.div`
-  padding: 10px;
-  border-radius: 5px;
-  width: max-content;
-  border: 1px solid #E2E8F0;
-`;
 
 const CreatingTaskWrapper = styled.div`
     display: flex;
@@ -54,15 +46,6 @@ const CreatingTaskModalContent = ({ selectValues, setTaskValues, taskValues }: P
         onChange={(e) => setTaskValues(e, 'description')}
         label="Task description"
       />
-      {/* <DatePicker */}
-      {/*  selected={taskValues.estimatedFinishTime} */}
-      {/*  onChange={(date) => setTaskValues(date!, 'estimatedFinishTime')} */}
-      {/*  showTimeSelect */}
-      {/*  timeFormat="HH:mm" */}
-      {/*  timeIntervals={15} */}
-      {/*  timeCaption="time" */}
-      {/*  dateFormat="MMMM d, yyyy h:mm aa" */}
-      {/* /> */}
       <DatePickerComponent
         label="Select estimated finish time"
         onChange={(e) => setTaskValues(e.target.value, 'estimatedFinishTime')}

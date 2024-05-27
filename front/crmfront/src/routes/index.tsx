@@ -11,17 +11,20 @@ import FailedLoginPageContainer from '../pages/FailedLoginPage/failedLoginPage.c
 import SupportPageContainer from '../pages/SupportPage/supportPage.container.tsx';
 import MyComponent from '../pages/TestPage/testPage.container.tsx';
 import SingleTaskPageContainer from '../pages/SingleTaskPage/singleTaskPage.container.tsx';
-import PrivateRouteComponent from '../components/privateRoute.component.tsx';
+import PrivateRouteComponent from '../components/routesComponents/privateRoute.component.tsx';
+import AdminOnlyRouteComponent from '../components/routesComponents/adminOnlyRoute.component.tsx';
 
-const routes = (
+const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<HomePage />} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/register" element={<RegisterPage />} />
     <Route element={<PrivateRouteComponent />}>
+      <Route element={<AdminOnlyRouteComponent />}>
+        <Route path="/people" element={<PeoplePageContainer />} />
+      </Route>
       <Route path="/tasks" element={<TaskPageContainer />} />
       <Route path="/tasks/:id" element={<SingleTaskPageContainer />} />
-      <Route path="/people" element={<PeoplePageContainer />} />
       <Route path="/history" element={<HistoryPageContainer />} />
       <Route path="/messages" element={<MessagesPageContainer />} />
       <Route path="/profile" element={<ProfilePageContainer />} />
@@ -32,4 +35,4 @@ const routes = (
   </Routes>
 );
 
-export default routes;
+export default AppRoutes;

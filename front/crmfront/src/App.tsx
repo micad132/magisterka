@@ -1,8 +1,14 @@
 import './App.css';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useEffect } from 'react';
 import LayoutContainer from './layout/layout.container.tsx';
-import routes from './routes';
+import { useAppDispatch } from './utils/hooks.ts';
+import { fetchAllUsersThunk, fetchUserDetailsThunk } from './store/userSlice.tsx';
+import { fetchSupportRequestsThunk } from './store/supportRequestSlice.tsx';
+import { fetchMessagesThunk } from './store/messageSlice.tsx';
+import { fetchTasksThunk } from './store/taskSlice.tsx';
+import AppRoutes from './routes';
 
 axios.defaults.withCredentials = true;
 
@@ -14,12 +20,22 @@ const AppWrapper = styled.div`
     color: #fff;
 `;
 
-const App = () => (
-  <AppWrapper>
-    <LayoutContainer>
-      {routes}
-    </LayoutContainer>
-  </AppWrapper>
-);
+const App = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchAllUsersThunk());
+    dispatch(fetchSupportRequestsThunk());
+    dispatch(fetchUserDetailsThunk());
+    dispatch(fetchMessagesThunk());
+    dispatch(fetchTasksThunk());
+  }, []);
+  return (
+    <AppWrapper>
+      <LayoutContainer>
+        <AppRoutes />
+      </LayoutContainer>
+    </AppWrapper>
+  );
+};
 
 export default App;

@@ -1,6 +1,6 @@
 import { Tag } from '@chakra-ui/react';
 import styled from 'styled-components';
-import { RoleType } from '../types/UserType.ts';
+import { RoleType, RoleTypeType } from '../types/UserType.ts';
 
 const TagWrapper = styled(Tag)`
   padding: 5px 10px !important;
@@ -8,18 +8,18 @@ const TagWrapper = styled(Tag)`
 `;
 
 interface Props {
-  role: RoleType,
+  role: RoleTypeType,
 }
 
 const RoleTag = ({ role }: Props) => {
   const getProperTag = () => {
     switch (role) {
       case RoleType.ADMIN:
-        return <TagWrapper size="large" variant="solid" colorScheme="green">ADMIN</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="green">{RoleType.ADMIN}</TagWrapper>;
       case RoleType.WORKER:
-        return <TagWrapper size="large" variant="solid" colorScheme="teal" key="worker">WORKER</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="teal" key="worker">{RoleType.WORKER}</TagWrapper>;
       case RoleType.CLIENT:
-        return <TagWrapper size="large" variant="solid" colorScheme="blue">CLIENT</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="blue">{RoleType.CLIENT}</TagWrapper>;
       default:
         return <TagWrapper size="large" variant="solid" colorScheme="teal">Error</TagWrapper>;
     }

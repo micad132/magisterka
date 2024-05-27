@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import CustomLabel from './customLabel.component.tsx';
+import mapDateToString from '../../../../utils/mappers/mapDateToString.ts';
 
 const EstimateFinishTimeWrapper = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ const EstimateFinishTimeComponent = ({ estimateFinishTime }: Props) => {
   return (
     <EstimateFinishTimeWrapper>
       <span>Estimate finish time:</span>
-      <CustomLabel text={estimateFinishTime} />
+      <CustomLabel text={mapDateToString(estimateFinishTime)} />
     </EstimateFinishTimeWrapper>
   );
 };

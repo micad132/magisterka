@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../../utils/hooks.ts';
 import {
-  fetchAllUsersThunk, fetchUserDetailsThunk, getAllUsers, getUserDetails,
+  fetchAllUsersThunk, fetchUserDetailsThunk,
 } from '../../store/userSlice.tsx';
 import { fetchSupportRequestsThunk } from '../../store/supportRequestSlice.tsx';
 import { fetchMessagesThunk } from '../../store/messageSlice.tsx';
@@ -17,10 +16,10 @@ const HomePageHeader = styled.h1`
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const userDetails = useAppSelector(getUserDetails);
-  const allUsers = useAppSelector(getAllUsers);
-  const [isUserDataFetched, setIsUserDataFetched] = useState<boolean>(false);
-  const [userInfoFetched, setUserInfoFetched] = useState(false);
+  // const userDetails = useAppSelector(getUserDetails);
+  // const allUsers = useAppSelector(getAllUsers);
+  // const [isUserDataFetched, setIsUserDataFetched] = useState<boolean>(false);
+  // const [userInfoFetched, setUserInfoFetched] = useState(false);
 
   useEffect(() => {
     // console.log('hej');
@@ -42,11 +41,11 @@ const HomePage = () => {
     // if (!userInfoFetched && !isUserDataFetched) {
     //   fetchUserData();
     // }
-    dispatch(fetchAllUsersThunk());
-    dispatch(fetchSupportRequestsThunk());
-    dispatch(fetchUserDetailsThunk());
-    dispatch(fetchMessagesThunk());
-    dispatch(fetchTasksThunk());
+    // dispatch(fetchAllUsersThunk());
+    // dispatch(fetchSupportRequestsThunk());
+    // dispatch(fetchUserDetailsThunk());
+    // dispatch(fetchMessagesThunk());
+    // dispatch(fetchTasksThunk());
   }, []);
 
   return (

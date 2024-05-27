@@ -12,11 +12,8 @@ const CustomText = styled.p`
   }
 `;
 
-const SendingMessageAuthorComponent = ({ author }: Props) => {
-  const g = 4;
-  return (
-    <CustomText>You are sending message as <span>{author}</span></CustomText>
-  );
-};
+const SendingMessageAuthorComponent = ({ author }: Props) => (
+  <CustomText>You are sending message as <span>{author}</span></CustomText>
+);
 
 export default SendingMessageAuthorComponent;

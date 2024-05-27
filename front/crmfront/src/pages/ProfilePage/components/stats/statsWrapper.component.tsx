@@ -9,18 +9,15 @@ const StatsWrapper = styled.div`
   margin-top: 20px;
 `;
 
-const StatsWrapperComponent = () => {
-  const a = 3;
-  return (
-    <StatsWrapper>
-      <SingleStatComponent count={7} text="Messages" />
-      <SingleStatComponent count={4} text="Tasks made" />
-      <SingleStatComponent count={2} text="Support requests" />
-      <SingleStatComponent count={1} text="Comments" />
-      <SingleStatComponent count={2} text="Profile changes" />
-      <SingleStatComponent count={0} text="Surveys made" />
-    </StatsWrapper>
-  );
-};
+const StatsWrapperComponent = () => (
+  <StatsWrapper>
+    <SingleStatComponent count={7} text="Messages" />
+    <SingleStatComponent count={4} text="Tasks made" />
+    <SingleStatComponent count={2} text="Support requests" />
+    <SingleStatComponent count={1} text="Comments" />
+    <SingleStatComponent count={2} text="Profile changes" />
+    <SingleStatComponent count={0} text="Surveys made" />
+  </StatsWrapper>
+);
 
 export default StatsWrapperComponent;

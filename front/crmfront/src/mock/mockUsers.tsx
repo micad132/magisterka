@@ -16,6 +16,7 @@ export const MockedUsers: UserWithoutID[] = [
     name: '',
     surname: '',
     cityName: '',
+    createdAccountDate: '',
   },
   {
     username: 'john_doe',
@@ -31,6 +32,7 @@ export const MockedUsers: UserWithoutID[] = [
     cityName: '',
     userGender: 'MAN',
     age: 0,
+    createdAccountDate: '',
   },
   {
     username: 'alice_smith',
@@ -46,6 +48,7 @@ export const MockedUsers: UserWithoutID[] = [
     name: '',
     surname: '',
     cityName: '',
+    createdAccountDate: '',
   },
   {
     username: 'sam_green',
@@ -61,6 +64,7 @@ export const MockedUsers: UserWithoutID[] = [
     name: '',
     surname: '',
     cityName: '',
+    createdAccountDate: '',
   },
   {
     username: 'emily_wang',
@@ -76,6 +80,7 @@ export const MockedUsers: UserWithoutID[] = [
     name: '',
     surname: '',
     cityName: '',
+    createdAccountDate: '',
   },
   {
     username: 'david_brown',
@@ -91,6 +96,7 @@ export const MockedUsers: UserWithoutID[] = [
     name: '',
     surname: '',
     cityName: '',
+    createdAccountDate: '',
   },
   {
     username: 'sarah_kim',
@@ -106,5 +112,6 @@ export const MockedUsers: UserWithoutID[] = [
     name: '',
     surname: '',
     cityName: '',
+    createdAccountDate: '',
   },
 ];

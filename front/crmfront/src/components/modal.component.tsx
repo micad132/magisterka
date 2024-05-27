@@ -6,7 +6,6 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton, useDisclosure, Button,
-  Icon,
 } from '@chakra-ui/react';
 import {
   cloneElement, isValidElement, ReactElement, ReactNode,

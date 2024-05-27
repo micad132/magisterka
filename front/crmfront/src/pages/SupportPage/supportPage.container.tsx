@@ -3,39 +3,12 @@ import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import SingleSupportComponent from './singleSupportItem/singleSupport.component.tsx';
 import SupportItemsWrapperComponent from './supportItemsWrapper.component.tsx';
-import { Support, SupportRequest } from '../../types/SupportRequest.ts';
+import { SupportRequest } from '../../types/SupportRequest.ts';
 import PageItemsCountComponent from '../../components/pageItemsCount.component.tsx';
 import FilterSupportRequestAuthorSelectComponent from './filterSupportRequestAuthorSelect.component.tsx';
 import { SelectValue } from '../../types/UtilTypes.ts';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { fetchSupportRequestsThunk, getAllSupportRequests } from '../../store/supportRequestSlice.tsx';
-
-const MOCKED_SUPPORT_REQUESTS: Support[] = [
-  {
-    author: 'mikad132',
-    supportType: SupportRequest.SUPPORT,
-    date: '13.02.2021',
-    description: 'nbnnnghjgfihugif',
-  },
-  {
-    author: 'kimek6',
-    supportType: SupportRequest.BUG,
-    date: '24.12.2023',
-    description: 'jboghfgjifhbgfbhgbhg',
-  },
-  {
-    author: 'cosik',
-    supportType: SupportRequest.OTHER,
-    date: '12.06.1993',
-    description: 'jcjchdhhhhxcxxx',
-  },
-  {
-    author: 'grzesiek6',
-    supportType: SupportRequest.IMPROVEMENT,
-    date: '12.12.2012',
-    description: 'Jjjfjdsguhdfhgidhfghifd',
-  },
-];
 
 const SUPPORT_REQUEST_SELECT_OPTIONS: SelectValue[] = [
   {

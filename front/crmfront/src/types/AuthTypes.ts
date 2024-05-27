@@ -1,8 +1,11 @@
-import { RoleType, UserGender, UserGenderType } from './UserType.ts';
+import {
+  RoleType, RoleTypeType, UserGender, UserGenderType,
+} from './UserType.ts';
 
 export type LoginAuth = {
   username: string,
   password: string,
+  code: string,
 };
 
 export type Login = {
@@ -10,8 +13,13 @@ export type Login = {
   password: string,
 };
 
+export type RegisterAuthResponse = {
+  message: string,
+  qrURL: string,
+};
+
 export type RegisterAuth = {
-  userRole: RoleType,
+  userRole: RoleTypeType,
   userGender: UserGenderType,
   age: number,
   countryName: string,
@@ -31,6 +39,7 @@ export type RegisterAuth = {
 export const INITIAL_LOGIN_AUTH_VALUES: LoginAuth = {
   username: '',
   password: '',
+  code: '',
 };
 
 export const INITIAL_REGISTER_AUTH_VALUES: RegisterAuth = {

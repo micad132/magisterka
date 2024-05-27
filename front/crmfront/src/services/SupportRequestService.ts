@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../utils/consts.ts';
-import { AddingSupport, Support } from '../types/SupportRequest.ts';
+import { AddingSupport } from '../types/SupportRequest.ts';
 
 const SupportRequestService = {
   getSupportRequests: async () => {

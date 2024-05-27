@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import { useAppSelector } from '../utils/hooks.ts';
-import { getUserDetails } from '../store/userSlice.tsx';
+import { useAppSelector } from '../../utils/hooks.ts';
+import { getUserDetails } from '../../store/userSlice.tsx';
 import NotLoggedComponent from './notLogged.component.tsx';
 
 const PrivateRouteComponent = () => {

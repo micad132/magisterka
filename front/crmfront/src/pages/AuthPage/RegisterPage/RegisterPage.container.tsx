@@ -1,7 +1,9 @@
 import { Form, Formik } from 'formik';
-import { Button, useToast } from '@chakra-ui/react';
+import { Button, useDisclosure, useToast } from '@chakra-ui/react';
 import styled from 'styled-components';
-import { INITIAL_REGISTER_AUTH_VALUES, RegisterAuth } from '../../../types/AuthTypes.ts';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { INITIAL_REGISTER_AUTH_VALUES, RegisterAuth, RegisterAuthResponse } from '../../../types/AuthTypes.ts';
 import AuthWrapperInside from '../../../components/authWrapperInside.component.tsx';
 import AuthWrapper from '../components/authWrapper.component.tsx';
 import InputComponent from '../../../components/form/input.component.tsx';
@@ -9,6 +11,7 @@ import RoleTagComponent from '../../../components/roleTag.component.tsx';
 import { RoleType } from '../../../types/UserType.ts';
 import AuthService from '../../../services/AuthService.ts';
 import { registerScheme } from '../../../services/validators/UserValidator.ts';
+import CodeModalComponent from './components/codeModal.component.tsx';
 
 const InitialRole = styled.div`
     display: flex;
@@ -21,6 +24,14 @@ const InitialRole = styled.div`
 
 const RegisterPage = () => {
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [qrURL2FA, setQRURL] = useState<string>('');
+  const navigate = useNavigate();
+
+  const onCloseHandler = () => {
+    onClose();
+    navigate('/login', { replace: true });
+  };
 
   return (
     <AuthWrapper>
@@ -38,7 +49,11 @@ const RegisterPage = () => {
               ...values,
               userRole: RoleType.CLIENT,
             };
-            const data = await AuthService.registerUser(tescik);
+            const { message, qrURL }: RegisterAuthResponse = await AuthService.registerUser(tescik);
+            setQRURL(qrURL);
+            onOpen();
+            console.log('DATA', message);
+            console.log('CODE QRURL', qrURL);
             toast({
               title: 'Successfully registered!',
               description: 'You have successfully registered your account!',
@@ -213,6 +228,7 @@ const RegisterPage = () => {
           </Form>
         )}
       </Formik>
+      <CodeModalComponent isOpen={isOpen} onClose={onCloseHandler} qrURL={qrURL2FA} />
     </AuthWrapper>
   );
 };

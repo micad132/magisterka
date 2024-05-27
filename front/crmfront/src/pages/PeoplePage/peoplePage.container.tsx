@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Checkbox } from '@chakra-ui/react';
 import { useState } from 'react';
 import SinglePersonComponent from './components/singlePerson/singlePerson.component.tsx';
 import PeopleWrapperComponent from './components/peopleWrapper.component.tsx';
@@ -10,10 +9,6 @@ import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import SelectComponent from '../../components/form/select.component.tsx';
 import { USER_ROLES_OPTIONS } from '../../utils/consts.ts';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
-
-const HistoryPageWrapper = styled.div`
-    color: var(--font-color);
-`;
 
 const SelectWrapper = styled.div`
   max-width: 400px;

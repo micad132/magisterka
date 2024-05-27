@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TaskStatus } from '../../../../types/TaskType.ts';
+import { TaskStatusType } from '../../../../types/TaskType.ts';
 import CustomLabel from './customLabel.component.tsx';
 
 const TaskStatusComponentWrapper = styled.div`
@@ -9,7 +9,7 @@ const TaskStatusComponentWrapper = styled.div`
 `;
 
 interface Props {
-  taskStatus: TaskStatus,
+  taskStatus: TaskStatusType,
 }
 
 const TaskStatusComponent = ({ taskStatus }: Props) => (

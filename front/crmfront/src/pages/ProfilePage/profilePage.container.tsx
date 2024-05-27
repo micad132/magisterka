@@ -9,12 +9,11 @@ import EditUserDataModalContentComponent from './components/editUserDataModalCon
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { editUserPersonalInfoThunk, getUserDetails } from '../../store/userSlice.tsx';
 import {
-  INITIAL_SELF_EDIT_USER_VALUES,
   LoggedUserDetails,
   LoggedUserMainDetails,
   SelfEditUser, SelfEditUserRequest,
 } from '../../types/UserType.ts';
-import NotLoggedComponent from '../../components/notLogged.component.tsx';
+import NotLoggedComponent from '../../components/routesComponents/notLogged.component.tsx';
 import mapDateToString from '../../utils/mappers/mapDateToString.ts';
 
 const ProfilePageWrapper = styled.div`

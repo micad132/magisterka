@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ProfileComponent from './profile/profile.component.tsx';
 import ChangeTheme from './changeTheme.component.tsx';
 import ProfileModal from './profile/profileModal.component.tsx';
 import SupportModal from './support/supportModal.component.tsx';
@@ -49,7 +48,7 @@ const IconWrapper = () => {
       <Icons>
         {userDetails.name !== '' && <ProfileModal user={user} />}
         <ChangeTheme />
-        <SupportModal />
+        {userDetails.name !== '' && <SupportModal />}
       </Icons>
       <AuthNav>
         <AuthNavComponent isLogged={userDetails.name !== ''} />

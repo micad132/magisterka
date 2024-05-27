@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import TextareaComponent from '../../../components/form/textarea.component.tsx';
-import { ADDING_TASK_INITIAL_VALUE, AddingTask } from '../../../types/TaskType.ts';
+import { AddingTask } from '../../../types/TaskType.ts';
 import SelectComponent from '../../../components/form/select.component.tsx';
 import { TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS, TASK_TYPE_OPTIONS } from '../../../utils/consts.ts';
 import InputComponent from '../../../components/form/input.component.tsx';

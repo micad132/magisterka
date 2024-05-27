@@ -1,8 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { INITIAL_USER_DETAILS_VALUES, User } from '../types/UserType.ts';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import UserService from '../services/UserService.ts';
 import { RootState } from '../utils/hooks.ts';
-import { AddingSupport, Support, SupportRequestType } from '../types/SupportRequest.ts';
 import SupportRequestService from '../services/SupportRequestService.ts';
 import { AddingMessage, MessageType } from '../types/MessageType.ts';
 import MessagesService from '../services/MessagesService.ts';

@@ -11,9 +11,11 @@ import { ADDING_TASK_INITIAL_VALUE, AddingTask, AddingTaskRequest } from '../../
 import {
   AllSelectValue, TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS, TASK_TYPE_OPTIONS,
 } from '../../utils/consts.ts';
-import { addingTaskRequestThunk } from '../../store/taskSlice.tsx';
+import { addingTaskRequestThunk, getAllTasks } from '../../store/taskSlice.tsx';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { getUserDetails } from '../../store/userSlice.tsx';
+import NoItemsComponent from '../../components/noItems.component.tsx';
+import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 
 const ALL_SELECT_VALUES: AllSelectValue = {
   initialStasuses: TASK_STATUS_OPTIONS,
@@ -23,9 +25,11 @@ const ALL_SELECT_VALUES: AllSelectValue = {
 
 const TaskPageContainer = () => {
   const [addingTask, setAddingTask] = useState<AddingTask>(ADDING_TASK_INITIAL_VALUE);
+  const [sortingPriorityTask, setSortingPriorityTask] = useState<string>('ALL');
   const dispatch = useAppDispatch();
   const toast = useToast();
   const loggedUser = useAppSelector(getUserDetails);
+  const tasks = useAppSelector(getAllTasks);
 
   const setTaskValues = (value: string, key: string) => {
     console.log('VALUE', value, key);
@@ -41,9 +45,9 @@ const TaskPageContainer = () => {
       estimatedFinishTime: String(addingTask.estimatedFinishTime),
       estimatedCost: Number(addingTask.estimatedCost),
       description: addingTask.description,
-      taskStatus: 'PENDING',
-      taskPriority: 'MINOR',
-      taskType: 'LOGISTIC',
+      taskStatus: addingTask.taskStatus,
+      taskPriority: addingTask.taskPriority,
+      taskType: addingTask.taskType,
       creatorId: loggedUser.id,
     };
     try {
@@ -56,6 +60,7 @@ const TaskPageContainer = () => {
         isClosable: true,
         position: 'bottom-right',
       });
+      setAddingTask(ADDING_TASK_INITIAL_VALUE);
     } catch (e) {
       toast({
         title: 'Something went wrong!',
@@ -76,13 +81,23 @@ const TaskPageContainer = () => {
     modalBody: <CreatingTaskModalContent selectValues={ALL_SELECT_VALUES} setTaskValues={setTaskValues} taskValues={addingTask} />,
   };
 
+  if (tasks.length === 0) {
+    return (
+      <PageWrapperComponent>
+        <PageHeaderComponent text="TASKS" />
+        <ModalComponent modalProps={modalProps} />
+        <NoItemsComponent itemName="tasks" />
+      </PageWrapperComponent>
+    );
+  }
+
   return (
     <PageWrapperComponent>
-      TASKS
+      <PageHeaderComponent text="TASKS" />
       {/* <CreateTaskButton /> */}
       <ModalComponent modalProps={modalProps} />
-      <TaskSettingsContainer />
-      <TaskWrapper />
+      <TaskSettingsContainer sortingPriorityValue={sortingPriorityTask} setSortingPriorityValue={setSortingPriorityTask} />
+      <TaskWrapper tasks={tasks} />
     </PageWrapperComponent>
   );
 };

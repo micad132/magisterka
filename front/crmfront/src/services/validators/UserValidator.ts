@@ -7,7 +7,7 @@ export const loginScheme = Yup.object().shape({
 
 export const registerScheme = Yup.object().shape({
   username: Yup.string().required('Username is required').min(5).max(30),
-  name: Yup.string().required('Name is required').min(5).max(30),
+  name: Yup.string().required('Name is required').min(3).max(30),
   age: Yup.number().required('Age is required').positive('Age must be a positive number').integer('Age must be an integer'),
   email: Yup.string().required('Email is required').email(),
   surname: Yup.string()

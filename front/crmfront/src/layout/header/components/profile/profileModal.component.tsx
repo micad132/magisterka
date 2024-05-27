@@ -10,11 +10,10 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import styled from 'styled-components';
-import MessageIcon from '@mui/icons-material/Message';
 import { useNavigate } from 'react-router-dom';
 import ProfileComponent from './profile.component.tsx';
 import RoleTag from '../../../../components/roleTag.component.tsx';
-import { ProfileModalUser, RoleType } from '../../../../types/UserType.ts';
+import { ProfileModalUser } from '../../../../types/UserType.ts';
 import ProfileModalMessageComponent from './profileModalMessage.component.tsx';
 
 const ProfileModalHeader = styled.div`

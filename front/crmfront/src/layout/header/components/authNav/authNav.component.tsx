@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { getUserDetails, setLoggedUser } from '../../../../store/userSlice.tsx';
-import { INITIAL_USER_DETAILS_VALUES, User } from '../../../../types/UserType.ts';
+import { INITIAL_USER_DETAILS_VALUES } from '../../../../types/UserType.ts';
 
 interface Props {
   isLogged: boolean,

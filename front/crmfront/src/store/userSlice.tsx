@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { INITIAL_USER_DETAILS_VALUES, SelfEditUserRequest, User } from '../types/UserType.ts';
 import UserService from '../services/UserService.ts';
-import { RootState } from '../utils/hooks.ts';
+import { RootState } from '../types/StoreTypes.ts';
 
 // interface ResponseType<T> {
 //   success: boolean;
@@ -83,10 +83,10 @@ const userSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    // builder
-    //   .addCase(fetchUserDetailsThunk.fulfilled, (state, action) => {
-    //     state.userDetails = action.payload;
-    //   });
+    builder
+      .addCase(fetchUserDetailsThunk.fulfilled, (state, action) => {
+        state.userDetails = action.payload;
+      });
     builder.addCase(fetchAllUsersThunk.fulfilled, (state, action) => {
       state.users = action.payload;
     });
