@@ -30,9 +30,9 @@ const TaskPageContainer = () => {
   const toast = useToast();
   const loggedUser = useAppSelector(getUserDetails);
   const tasks = useAppSelector(getAllTasks);
+  console.log('TASKS', tasks);
 
   const setTaskValues = (value: string, key: string) => {
-    console.log('VALUE', value, key);
     setAddingTask((prevState) => ({
       ...prevState,
       [key]: value,
@@ -91,13 +91,19 @@ const TaskPageContainer = () => {
     );
   }
 
+  const properTasks = sortingPriorityTask === 'ALL'
+    ? tasks
+    : tasks.filter((task) => task.taskPriority === sortingPriorityTask);
+
+  console.log('PROPER TASKS', properTasks);
+
   return (
     <PageWrapperComponent>
-      <PageHeaderComponent text="TASKS" />
+      <PageHeaderComponent text="SERVICES (AS TASKS)" />
       {/* <CreateTaskButton /> */}
       <ModalComponent modalProps={modalProps} />
       <TaskSettingsContainer sortingPriorityValue={sortingPriorityTask} setSortingPriorityValue={setSortingPriorityTask} />
-      <TaskWrapper tasks={tasks} />
+      <TaskWrapper tasks={properTasks} />
     </PageWrapperComponent>
   );
 };

@@ -1,9 +1,12 @@
 package com.crmbackend.backend.mappers.UserMapper;
 
 import com.crmbackend.backend.Config.PasswordEncoderConfig;
+import com.crmbackend.backend.Task.TaskModel;
 import com.crmbackend.backend.User.UserModel;
 import com.crmbackend.backend.User.dto.request.UserDTORequest;
 import com.crmbackend.backend.User.dto.response.UserDTOResponse;
+import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsAssignee;
+import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsCreator;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -52,6 +55,26 @@ public class UserMapper {
                 .postalCode(userModel.getPostalCode())
                 .email(userModel.getEmail())
                 .createdAccountDate(userModel.getCreatedAccountDate())
+                .build();
+    }
+
+    public UserDTOTaskDetailsAssignee mapEntityToUserDetailsAssignee(UserModel userModel) {
+        return UserDTOTaskDetailsAssignee.builder()
+                .assigneeUsername(userModel.getUsername())
+                .assigneeCountry(userModel.getCountryName())
+                .assigneeSurname(userModel.getSurname())
+                .assigneeName(userModel.getName())
+                .assigneeAge(userModel.getAge())
+                .build();
+    }
+
+    public UserDTOTaskDetailsCreator mapEntityToUserDetailsCreator(UserModel userModel) {
+        return UserDTOTaskDetailsCreator.builder()
+                .creatorUsername(userModel.getUsername())
+                .creatorName(userModel.getName())
+                .creatorSurname(userModel.getSurname())
+                .creatorAge(userModel.getAge())
+                .creatorCountry(userModel.getCountryName())
                 .build();
     }
 

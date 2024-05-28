@@ -8,13 +8,11 @@ import { getUserDetails } from '../../../store/userSlice.tsx';
 import { ProfileModalUser } from '../../../types/UserType.ts';
 
 const IconWrapperDiv = styled.div`
-  position: absolute;
-  top: 30px;
-  right: 50px;
   display: flex;
   flex-direction: column;
   width: 200px;
   gap: 10px;
+  margin-right: 5rem;
 `;
 
 const Icons = styled.div`

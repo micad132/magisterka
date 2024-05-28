@@ -14,6 +14,7 @@ import { fetchAllUsersThunk, fetchUserDetailsThunk, setLoggedUser } from '../../
 import { fetchSupportRequestsThunk } from '../../../store/supportRequestSlice.tsx';
 import { fetchMessagesThunk } from '../../../store/messageSlice.tsx';
 import { fetchTasksThunk } from '../../../store/taskSlice.tsx';
+import PinInputComponent from '../../../components/form/pinInput.component.tsx';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -96,19 +97,15 @@ const LoginPage = () => {
             type="password"
             isInvalid={false}
           />
-          <InputComponent
-            name="2facode"
-            value={loginValues.code}
-            onChange={(e) => {
+          <PinInputComponent
+            setValue={(e) => {
               setLoginValues((prevState) => ({
                 ...prevState,
-                code: e.target.value,
+                code: e,
               }));
             }}
-            placeholder="2FA code"
+            value={loginValues.code}
             label="Provide your secret 2fa code"
-            type="number"
-            isInvalid={false}
           />
           <Button type="submit" variant="solid" colorScheme="twitter">Submit</Button>
           <RegisterLink />

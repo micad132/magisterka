@@ -4,7 +4,7 @@ import { TaskPreview, TaskStatusType } from '../../../../types/TaskType.ts';
 import TaskColumnPreviewComponent from './taskColumnPreview.component.tsx';
 
 const TaskColumnWrapper = styled.div`
-  width: 400px;
+  width: 500px;
   min-height: min-content;
   border-right: 3px solid var(--background-color);
   //overflow: auto;
@@ -25,6 +25,7 @@ interface Props {
 }
 
 const TaskColumnComponent = ({ taskStatus, taskPreviews }: Props) => {
+  console.log('task preview', taskPreviews);
   const taskPreviewsMapped = taskPreviews.map((taskPreview) => <TaskColumnPreviewComponent key={taskPreview.id} taskPreview={taskPreview} taskStatus={taskStatus} />);
 
   return (

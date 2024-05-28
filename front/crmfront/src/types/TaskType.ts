@@ -47,15 +47,9 @@ export type PreviewTask = {
   taskStatus: TaskStatusType,
   taskPriority: TaskPriorityType,
   totalHoursSpent: number,
-  estimatedFinishTime: string,
+  actualCost: number,
+  assigneeUsername: string,
 };
-
-// export enum TaskStatus {
-//   IN_PROGRESS = 'In Progress',
-//   PENDING = 'Pending',
-//   DONE = 'Done',
-//   CANCELED = 'Canceled',
-// }
 
 export type TaskPreview = {
   id: number,
@@ -63,6 +57,19 @@ export type TaskPreview = {
   assigneeUsername: string,
   taskPriority: TaskPriorityType,
   estimateFinishTime: string,
+  actualCost: number,
+  creatorUsername: string,
+  estimateCost: number,
+  hoursSpent: number,
+};
+
+export type EditTaskPreview = {
+  id: number,
+  assigneeId: number,
+  taskPriority: TaskPriorityType,
+  taskStatus: TaskStatusType,
+  hoursSpent: number,
+  actualCost: number,
 };
 
 export const TaskStatus = {
@@ -101,5 +108,6 @@ export const PREVIEW_TASK_INITIAL_VALUES: PreviewTask = {
   taskStatus: TaskStatus.IN_PROGRESS,
   totalHoursSpent: 0,
   taskPriority: TaskPriority.MINOR,
-  estimatedFinishTime: '',
+  actualCost: 0,
+  assigneeUsername: '',
 };

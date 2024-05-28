@@ -4,7 +4,7 @@ import { SupportRequestType } from '../../types/SupportRequest.ts';
 
 interface Props {
   options: SelectValue[],
-  onChange: (value: SupportRequestType) => void,
+  onChange: (value: string) => void,
   label: string,
   value?: string,
 }
@@ -14,7 +14,7 @@ const SelectComponent = ({
 }: Props) => (
   <>
     <FormLabel>{label}</FormLabel>
-    <Select onChange={(e) => onChange(e.target.value as SupportRequestType)} value={value}>
+    <Select onChange={(e) => onChange(e.target.value)} value={value}>
       {options.map((option) => <option key={option.value} value={option.value}>{option.text}</option>)}
     </Select>
   </>

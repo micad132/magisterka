@@ -16,10 +16,12 @@ import AdminOnlyRouteComponent from '../components/routesComponents/adminOnlyRou
 
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<HomePage />} />
+    <Route element={<PrivateRouteComponent isHomeScreen />}>
+      <Route path="/" element={<HomePage />} />
+    </Route>
     <Route path="/login" element={<LoginPage />} />
     <Route path="/register" element={<RegisterPage />} />
-    <Route element={<PrivateRouteComponent />}>
+    <Route element={<PrivateRouteComponent isHomeScreen={false} />}>
       <Route element={<AdminOnlyRouteComponent />}>
         <Route path="/people" element={<PeoplePageContainer />} />
       </Route>

@@ -4,6 +4,8 @@ import com.crmbackend.backend.Comment.dto.CommentDTOResponse;
 import com.crmbackend.backend.Task.TaskPriority;
 import com.crmbackend.backend.Task.TaskStatus;
 import com.crmbackend.backend.Task.TaskType;
+import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsAssignee;
+import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsCreator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,7 +29,7 @@ public class TaskDTOResponse {
     private Double hoursSpent;
     private Double estimatedCost;
     private Double cost;
-    private String assigneeUsername;
-    private String creatorUsername;
+    private UserDTOTaskDetailsCreator userDTOTaskDetailsCreator;
+    private UserDTOTaskDetailsAssignee userDTOTaskDetailsAssignee;
     private List<CommentDTOResponse> comments;
 }

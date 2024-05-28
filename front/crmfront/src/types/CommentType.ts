@@ -5,3 +5,7 @@ export type CommentResponseDTO = {
   createdTime: string,
   taskId: number,
 };
+
+// export type AddingComment = {
+//   description: string,
+// }

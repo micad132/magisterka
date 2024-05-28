@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { TaskStatusType } from '../../../../types/TaskType.ts';
-import CustomLabel from './customLabel.component.tsx';
+import { TaskStatusType } from '../../../../../types/TaskType.ts';
+import CustomLabel from '../customLabel.component.tsx';
 
 const TaskStatusComponentWrapper = styled.div`
   display: flex;

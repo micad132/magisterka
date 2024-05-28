@@ -6,6 +6,7 @@ const TaskPreviewWrapper = styled.div<{ $taskStatus: TaskStatusType }>`
   margin-top: 40px;
   color: black;
   overflow: auto;
+  width: 350px;
   ${({ $taskStatus }) => {
     switch ($taskStatus) {
       case TaskStatus.PENDING:

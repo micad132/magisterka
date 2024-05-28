@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import CustomLabel from './customLabel.component.tsx';
+import CustomLabel from '../customLabel.component.tsx';
 
 const AsigneeFieldWraper = styled.div`
   display: flex;

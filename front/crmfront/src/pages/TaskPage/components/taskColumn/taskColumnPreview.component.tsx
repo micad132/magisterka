@@ -2,25 +2,32 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { Tooltip } from '@chakra-ui/react';
+import { Tooltip, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import TaskTypeBadge from '../../../../components/taskTypeBadge.component.tsx';
 import {
+  EditTaskPreview,
   PREVIEW_TASK_INITIAL_VALUES,
   PreviewTask,
   TaskPreview, TaskStatusType,
 } from '../../../../types/TaskType.ts';
-import AssigneField from '../task/assigneField.component.tsx';
-import TaskPriorityComponent from '../task/taskPriority.component.tsx';
-import EstimateFinishTimeComponent from '../task/estimateFinishTime.component.tsx';
+import AssigneField from '../task/taskPreviewDetails/assigneField.component.tsx';
+import TaskPriorityComponent from '../task/taskPreviewDetails/taskPriority.component.tsx';
+import EstimateFinishTimeComponent from '../task/taskPreviewDetails/estimateFinishTime.component.tsx';
 import TaskColumnPreviewWrapperComponent from './taskColumnPreviewWrapper.component.tsx';
 import { ModalProps, SelectValue } from '../../../../types/UtilTypes.ts';
 import ModalComponent from '../../../../components/modal.component.tsx';
 import EditTaskPreviewComponent from './editTaskPreview.component.tsx';
-import { useAppSelector } from '../../../../utils/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { getAllUsers } from '../../../../store/userSlice.tsx';
-import { TASK_PRIORITY_OPTIONS } from '../../../../utils/consts.ts';
+import { TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS } from '../../../../utils/consts.ts';
 import { RoleType } from '../../../../types/UserType.ts';
+import TotalHoursSpentComponent from '../task/taskPreviewDetails/totalHoursSpent.component.tsx';
+import EstimatedCostComponent from '../task/taskPreviewDetails/estimatedCost.component.tsx';
+import RowInfoWrapperComponent from '../task/taskPreviewDetails/rowInfoWrapper.component.tsx';
+import CreatedByComponent from '../task/taskPreviewDetails/createdBy.component.tsx';
+import ActualCostComponent from '../task/taskPreviewDetails/actualCost.component.tsx';
+import { editTaskPreviewThunk } from '../../../../store/taskSlice.tsx';
 
 interface Props {
   taskPreview: TaskPreview,
@@ -44,20 +51,59 @@ const TaskColumnPreviewComponent = ({
   const [previewTask, setPreviewTask] = useState<PreviewTask>(PREVIEW_TASK_INITIAL_VALUES);
   const navigate = useNavigate();
   const users = useAppSelector(getAllUsers);
+  const dispatch = useAppDispatch();
+  const toast = useToast();
   console.log('PREVIEW', taskPreview);
 
   const workerUsers = users.filter((user) => user.userRole === RoleType.WORKER);
 
   const options = {
     assigneeOptions: workerUsers.map((user): SelectValue => ({
-      value: String(user.id),
+      value: user.username,
       text: user.username,
     })),
     priorityOptions: TASK_PRIORITY_OPTIONS,
+    statusOptions: TASK_STATUS_OPTIONS,
+  };
+
+  const setPreview = (key: string, value: string) => {
+    setPreviewTask((prevState) => ({
+      ...prevState,
+      [key]: value,
+    }));
   };
 
   const editPreview = () => {
     console.log('PREVIEW TASK', previewTask);
+    const assigneeId = workerUsers.find((worker) => worker.username === previewTask.assigneeUsername);
+    const obj: EditTaskPreview = {
+      id: taskPreview.id,
+      taskPriority: previewTask.taskPriority,
+      actualCost: previewTask.actualCost,
+      taskStatus: previewTask.taskStatus,
+      hoursSpent: previewTask.totalHoursSpent,
+      assigneeId: assigneeId?.id!,
+    };
+    try {
+      dispatch(editTaskPreviewThunk(obj));
+      toast({
+        title: 'Task preview edited!',
+        description: 'You have successfully edited this task preview',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+    } catch (e) {
+      toast({
+        title: 'Something went wrong',
+        description: 'Contact with your admin',
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+    }
   };
 
   const editTaskPreview: ModalProps = {
@@ -67,7 +113,7 @@ const TaskColumnPreviewComponent = ({
     buttonSize: 'md',
     modalActionButtonText: 'Edit',
     modalHeader: 'Edit task basic info',
-    modalBody: <EditTaskPreviewComponent options={options} />,
+    modalBody: <EditTaskPreviewComponent options={options} setPreview={setPreview} previewTask={previewTask} />,
   };
 
   return (
@@ -75,7 +121,7 @@ const TaskColumnPreviewComponent = ({
       <IconsWrapper>
         <IconWrapper>
           <Tooltip label="Navigate to task details page">
-            <OpenInNewIcon onClick={() => navigate(`/tasks/${2}`)} />
+            <OpenInNewIcon onClick={() => navigate(`/tasks/${taskPreview.id}`)} />
           </Tooltip>
         </IconWrapper>
         <IconWrapper>
@@ -84,8 +130,18 @@ const TaskColumnPreviewComponent = ({
       </IconsWrapper>
 
       <TaskTypeBadge taskType={taskPreview.taskType} />
-      <AssigneField assignee={taskPreview.assigneeUsername} />
-      <TaskPriorityComponent taskPriority={taskPreview.taskPriority} />
+      <RowInfoWrapperComponent>
+        <AssigneField assignee={taskPreview.assigneeUsername} />
+        <CreatedByComponent creator={taskPreview.creatorUsername} />
+      </RowInfoWrapperComponent>
+      <RowInfoWrapperComponent>
+        <TaskPriorityComponent taskPriority={taskPreview.taskPriority} />
+        <TotalHoursSpentComponent totalHoursSpent={taskPreview.hoursSpent} />
+      </RowInfoWrapperComponent>
+      <RowInfoWrapperComponent>
+        <EstimatedCostComponent estimatedCost={taskPreview.estimateCost} />
+        <ActualCostComponent actualCost={taskPreview.actualCost} />
+      </RowInfoWrapperComponent>
       <EstimateFinishTimeComponent estimateFinishTime={taskPreview.estimateFinishTime} />
     </TaskColumnPreviewWrapperComponent>
   );

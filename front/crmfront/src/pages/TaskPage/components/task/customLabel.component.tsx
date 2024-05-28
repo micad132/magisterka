@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface Props {
-  text: string,
+  text: string | number,
 }
 
 const Label = styled.label`

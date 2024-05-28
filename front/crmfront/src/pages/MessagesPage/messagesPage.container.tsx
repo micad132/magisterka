@@ -17,6 +17,8 @@ import ModalComponent from '../../components/modal.component.tsx';
 import AddingMessageModalBodyComponent from './components/addingMessage/addingMessageModalBody.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import { addingMessageThunk, getAllMessages } from '../../store/messageSlice.tsx';
+import RoleTag from '../../components/roleTag.component.tsx';
+import { RoleType } from '../../types/UserType.ts';
 
 const MessagesPageContainer = () => {
   const [filterUser, setFilterUser] = useState<string>('all');
@@ -100,11 +102,15 @@ const MessagesPageContainer = () => {
 
   console.log('MESSAGES', messages);
 
-  const properMessages = filterUser === 'all'
+  const properMessages = loggedUser.userRole === RoleType.ADMIN
     ? messages
-    : messages.filter((filteredMessage) => filteredMessage.receiverUsername === filterUser);
+    : messages.filter((msg) => msg.authorUsername === loggedUser.username || msg.receiverUsername === loggedUser.username);
 
-  const messagesComponents = properMessages.map((messageType) => <SingleMessageComponent key={messageType.id} message={messageType} />);
+  const filteredMessages = filterUser === 'all'
+    ? properMessages
+    : properMessages.filter((filteredMessage) => filteredMessage.receiverUsername === filterUser);
+
+  const messagesComponents = filteredMessages.map((messageType) => <SingleMessageComponent key={messageType.id} message={messageType} />);
 
   console.log('FILTERED', filterUser);
 
@@ -114,7 +120,7 @@ const MessagesPageContainer = () => {
       <ModalComponent
         modalProps={addingMessageModalProps}
       />
-      <MessagesCountComponent />
+      <MessagesCountComponent count={messages.length} isAdmin={loggedUser.userRole === RoleType.ADMIN} />
       <SelectReceiverComponent
         onChange={setFilterUser}
         options={USER_SELECT_VALUES}

@@ -19,5 +19,5 @@ public class TaskDTOEditPreviewRequest {
     private TaskPriority taskPriority;
     private TaskStatus taskStatus;
     private Double hoursSpent;
-    private String estimatedFinishTime;
+    private Double actualCost;
 }

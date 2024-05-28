@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import UserService from '../services/UserService.ts';
 import { RootState } from '../utils/hooks.ts';
 import SupportRequestService from '../services/SupportRequestService.ts';
-import { AddingTask, TaskPreview, TaskResponseDTO } from '../types/TaskType.ts';
+import {
+  AddingTask, EditTaskPreview, TaskPreview, TaskResponseDTO,
+} from '../types/TaskType.ts';
 import TaskService from '../services/TaskService.ts';
 
 // interface ResponseType<T> {
@@ -59,6 +61,19 @@ export const deleteTaskThunk = createAsyncThunk(
   },
 );
 
+export const editTaskPreviewThunk = createAsyncThunk(
+  'supportSlice/editTaskPreview',
+  async (editPreview: EditTaskPreview, { rejectWithValue }) => {
+    try {
+      await TaskService.editPreview(editPreview);
+      const data = await TaskService.getAllTasks();
+      return data;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
 export const getAllTasks = (state: RootState): TaskResponseDTO[] => state.task.tasks;
 
 const taskSlice = createSlice({
@@ -75,6 +90,9 @@ const taskSlice = createSlice({
       state.tasks = action.payload;
     });
     builder.addCase(addingTaskRequestThunk.fulfilled, (state, action) => {
+      state.tasks = action.payload;
+    });
+    builder.addCase(editTaskPreviewThunk.fulfilled, (state, action) => {
       state.tasks = action.payload;
     });
   },

@@ -48,6 +48,9 @@ public class AuthService {
         if(userRepository.existsByEmail(userDTORequest.getEmail())) {
             throw new UserAlreadyExistsException("User with that email already exists in the system!");
         }
+        if(userRepository.existsByUsername(userDTORequest.getUsername())) {
+            throw new UserAlreadyExistsException("User with that username already exists in the system!");
+        }
         String secretCode = totpService.generateSecret();
         UserModel userModel = userMapper.mapUserDTOToEntity(userDTORequest);
         userModel.setSecret2FA(secretCode);

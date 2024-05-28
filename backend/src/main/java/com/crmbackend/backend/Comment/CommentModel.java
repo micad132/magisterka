@@ -2,12 +2,14 @@ package com.crmbackend.backend.Comment;
 
 import com.crmbackend.backend.Task.TaskModel;
 import com.crmbackend.backend.User.UserModel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity

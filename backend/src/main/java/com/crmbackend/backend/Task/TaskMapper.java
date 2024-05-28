@@ -5,6 +5,9 @@ import com.crmbackend.backend.Task.dto.TaskDTORequest;
 import com.crmbackend.backend.Task.dto.TaskDTOResponse;
 import com.crmbackend.backend.User.UserModel;
 import com.crmbackend.backend.User.UserRepository;
+import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsAssignee;
+import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsCreator;
+import com.crmbackend.backend.mappers.UserMapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +22,7 @@ public class TaskMapper {
 
     private final CommentMapper commentMapper;
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     public TaskDTOResponse mapEntityToDTO(TaskModel taskModel) {
         return TaskDTOResponse.builder()
                 .id(taskModel.getId())
@@ -26,8 +30,8 @@ public class TaskMapper {
                 .taskPriority(taskModel.getTaskPriority())
                 .taskStatus(taskModel.getTaskStatus())
                 .taskType(taskModel.getTaskType())
-                .assigneeUsername(Optional.ofNullable(taskModel.getAssigneeUser()).map(UserModel::getUsername).orElse(""))
-                .creatorUsername(Optional.ofNullable(taskModel.getCreatorUser()).map(UserModel::getUsername).orElse(""))
+                .userDTOTaskDetailsAssignee(Optional.ofNullable(taskModel.getAssigneeUser()).map(userMapper::mapEntityToUserDetailsAssignee).orElse(new UserDTOTaskDetailsAssignee()))
+                .userDTOTaskDetailsCreator(Optional.ofNullable(taskModel.getCreatorUser()).map(userMapper::mapEntityToUserDetailsCreator).orElse(new UserDTOTaskDetailsCreator()))
                 .cost(taskModel.getCost())
                 .estimatedCost(taskModel.getEstimatedCost())
                 .estimationFinishTime(taskModel.getEstimationFinishTime())

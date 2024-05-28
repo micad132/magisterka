@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { TaskPriorityType } from '../../../../types/TaskType.ts';
-import CustomLabel from './customLabel.component.tsx';
+import { TaskPriorityType } from '../../../../../types/TaskType.ts';
+import CustomLabel from '../customLabel.component.tsx';
 
 const TaskPriorityComponentWrapper = styled.div`
   display: flex;

@@ -28,7 +28,7 @@ const TaskStatusBadgeComponent = ({ taskStatus }: Props) => {
   };
 
   return (
-    <div style={{ fontSize: '20px' }}>{getProperTag()}</div>
+    <div style={{ fontSize: '1rem' }}>{getProperTag()}</div>
   );
 };
 

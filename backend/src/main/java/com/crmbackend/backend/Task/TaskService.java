@@ -38,8 +38,9 @@ public class TaskService {
         taskModel.setTaskPriority(taskDTOEditPreviewRequest.getTaskPriority());
         taskModel.setTaskStatus(taskDTOEditPreviewRequest.getTaskStatus());
         taskModel.setHoursSpent(taskDTOEditPreviewRequest.getHoursSpent());
-        LocalDateTime editedDate = LocalDateTime.parse(taskDTOEditPreviewRequest.getEstimatedFinishTime());
-        taskModel.setEstimationFinishTime(editedDate);
+//        LocalDateTime editedDate = LocalDateTime.parse(taskDTOEditPreviewRequest.getEstimatedFinishTime());
+//        taskModel.setEstimationFinishTime(editedDate);
+        taskModel.setCost(taskDTOEditPreviewRequest.getActualCost());
         taskRepository.save(taskModel);
     }
 

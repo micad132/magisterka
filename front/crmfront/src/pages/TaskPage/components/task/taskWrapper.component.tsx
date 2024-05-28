@@ -23,6 +23,10 @@ const TaskWrapper = ({ tasks }: Props) => {
     taskType: preview.taskType,
     estimateFinishTime: preview.estimationFinishTime,
     assigneeUsername: preview.assigneeUsername,
+    actualCost: preview.cost,
+    creatorUsername: preview.creatorUsername,
+    estimateCost: preview.estimatedCost,
+    hoursSpent: preview.hoursSpent,
   }));
   const inProgressTasks = tasks.filter((task) => task.taskStatus === TaskStatus.IN_PROGRESS).map((preview): TaskPreview => ({
     id: preview.id,
@@ -30,6 +34,10 @@ const TaskWrapper = ({ tasks }: Props) => {
     taskType: preview.taskType,
     estimateFinishTime: preview.estimationFinishTime,
     assigneeUsername: preview.assigneeUsername,
+    actualCost: preview.cost,
+    creatorUsername: preview.creatorUsername,
+    estimateCost: preview.estimatedCost,
+    hoursSpent: preview.hoursSpent,
   }));
   const doneTasks = tasks.filter((task) => task.taskStatus === TaskStatus.DONE).map((preview): TaskPreview => ({
     id: preview.id,
@@ -37,6 +45,10 @@ const TaskWrapper = ({ tasks }: Props) => {
     taskType: preview.taskType,
     estimateFinishTime: preview.estimationFinishTime,
     assigneeUsername: preview.assigneeUsername,
+    actualCost: preview.cost,
+    creatorUsername: preview.creatorUsername,
+    estimateCost: preview.estimatedCost,
+    hoursSpent: preview.hoursSpent,
   }));
   const canceledTasks = tasks.filter((task) => task.taskStatus === TaskStatus.CANCELED).map((preview): TaskPreview => ({
     id: preview.id,
@@ -44,6 +56,10 @@ const TaskWrapper = ({ tasks }: Props) => {
     taskType: preview.taskType,
     estimateFinishTime: preview.estimationFinishTime,
     assigneeUsername: preview.assigneeUsername,
+    actualCost: preview.cost,
+    creatorUsername: preview.creatorUsername,
+    estimateCost: preview.estimatedCost,
+    hoursSpent: preview.hoursSpent,
   }));
   return (
     <TaskWrapperDiv>

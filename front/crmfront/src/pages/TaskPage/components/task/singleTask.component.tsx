@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import TaskTypeBadge from '../../../../components/taskTypeBadge.component.tsx';
 import { Task } from '../../../../types/TaskType.ts';
-import EstimateFinishTimeComponent from './estimateFinishTime.component.tsx';
+import EstimateFinishTimeComponent from './taskPreviewDetails/estimateFinishTime.component.tsx';
 
 const SingleTaskWrapper = styled.div`
   width: 500px;
