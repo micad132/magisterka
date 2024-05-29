@@ -9,6 +9,9 @@ import FilterSupportRequestAuthorSelectComponent from './filterSupportRequestAut
 import { SelectValue } from '../../types/UtilTypes.ts';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { fetchSupportRequestsThunk, getAllSupportRequests } from '../../store/supportRequestSlice.tsx';
+import { getUserDetails } from '../../store/userSlice.tsx';
+import { RoleType } from '../../types/UserType.ts';
+import ClientItemsCountComponent from '../../components/clientItemsCount.component.tsx';
 
 const SUPPORT_REQUEST_SELECT_OPTIONS: SelectValue[] = [
   {
@@ -37,6 +40,7 @@ const SupportPageContainer = () => {
   const [filteredSupportRequest, setFilteredSupportRequest] = useState<string>('all');
   const dispatch = useAppDispatch();
   const supportRequests = useAppSelector(getAllSupportRequests);
+  const loggedUser = useAppSelector(getUserDetails);
   const supports = supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} />);
 
   useEffect(() => {
@@ -47,10 +51,14 @@ const SupportPageContainer = () => {
     ? supports
     : supportRequests.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} />);
 
+  const properHeaderInfo = loggedUser.userRole === RoleType.CLIENT
+    ? <ClientItemsCountComponent count={12} itemName="support requests" />
+    : <PageItemsCountComponent count={supportRequests.length} text="support requests" />;
+
   return (
     <PageWrapperComponent>
       <PageHeaderComponent text="Support" />
-      <PageItemsCountComponent count={supportRequests.length} text="support requests" />
+      {properHeaderInfo}
       <FilterSupportRequestAuthorSelectComponent onChange={setFilteredSupportRequest} options={SUPPORT_REQUEST_SELECT_OPTIONS} />
       <SupportItemsWrapperComponent>
         {filteredSupports}

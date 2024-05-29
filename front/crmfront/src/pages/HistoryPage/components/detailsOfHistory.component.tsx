@@ -16,11 +16,7 @@ const Span = styled.span`
 const DetailsOfHistoryComponent = ({ id }: Props) => (
   <DetailsWrapper>
     <div>
-      <Span>Date</Span>
-      04.03.2000
-    </div>
-    <div>
-      <Span>Details:</Span>
+      <Span>Description:</Span>
       focsjsjs
     </div>
   </DetailsWrapper>

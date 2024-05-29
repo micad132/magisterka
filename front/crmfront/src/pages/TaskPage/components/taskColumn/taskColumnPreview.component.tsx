@@ -16,10 +16,10 @@ import TaskPriorityComponent from '../task/taskPreviewDetails/taskPriority.compo
 import EstimateFinishTimeComponent from '../task/taskPreviewDetails/estimateFinishTime.component.tsx';
 import TaskColumnPreviewWrapperComponent from './taskColumnPreviewWrapper.component.tsx';
 import { ModalProps, SelectValue } from '../../../../types/UtilTypes.ts';
-import ModalComponent from '../../../../components/modal.component.tsx';
+import ModalComponent from '../../../../components/modals/modal.component.tsx';
 import EditTaskPreviewComponent from './editTaskPreview.component.tsx';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
-import { getAllUsers } from '../../../../store/userSlice.tsx';
+import { getAllUsers, getUserDetails } from '../../../../store/userSlice.tsx';
 import { TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS } from '../../../../utils/consts.ts';
 import { RoleType } from '../../../../types/UserType.ts';
 import TotalHoursSpentComponent from '../task/taskPreviewDetails/totalHoursSpent.component.tsx';
@@ -52,6 +52,7 @@ const TaskColumnPreviewComponent = ({
   const navigate = useNavigate();
   const users = useAppSelector(getAllUsers);
   const dispatch = useAppDispatch();
+  const loggedUser = useAppSelector(getUserDetails);
   const toast = useToast();
   console.log('PREVIEW', taskPreview);
 
@@ -124,15 +125,17 @@ const TaskColumnPreviewComponent = ({
             <OpenInNewIcon onClick={() => navigate(`/tasks/${taskPreview.id}`)} />
           </Tooltip>
         </IconWrapper>
+        {loggedUser.userRole !== RoleType.CLIENT && (
         <IconWrapper>
           <ModalComponent modalProps={editTaskPreview} />
         </IconWrapper>
+        )}
       </IconsWrapper>
 
       <TaskTypeBadge taskType={taskPreview.taskType} />
       <RowInfoWrapperComponent>
-        <AssigneField assignee={taskPreview.assigneeUsername} />
-        <CreatedByComponent creator={taskPreview.creatorUsername} />
+        <AssigneField assignee={taskPreview.userDTOTaskDetailsAssignee.assigneeUsername} />
+        <CreatedByComponent creator={taskPreview.userDTOTaskDetailsCreator.creatorUsername} />
       </RowInfoWrapperComponent>
       <RowInfoWrapperComponent>
         <TaskPriorityComponent taskPriority={taskPreview.taskPriority} />

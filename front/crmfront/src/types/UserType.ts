@@ -62,6 +62,22 @@ export type LoggedUserDetails = {
   email: string,
 };
 
+export type UserDTOTaskDetailsCreator = {
+  creatorUsername: string,
+  creatorAge: number,
+  creatorCountry: string,
+  creatorName: string,
+  creatorSurname: string,
+};
+
+export type UserDTOTaskDetailsAssignee = {
+  assigneeUsername: string,
+  assigneeAge: number,
+  assigneeCountry: string,
+  assigneeName: string,
+  assigneeSurname: string,
+};
+
 export const RoleType = {
   ADMIN: 'ADMIN',
   WORKER: 'WORKER',

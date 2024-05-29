@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import SingleCommentComponent from './singleComment.component.tsx';
-import ModalComponent from '../../../components/modal.component.tsx';
+import ModalComponent from '../../../components/modals/modal.component.tsx';
 import { ModalProps } from '../../../types/UtilTypes.ts';
 import TextareaComponent from '../../../components/form/textarea.component.tsx';
 import AddingCommentContent from './addingCommentContent.tsx';

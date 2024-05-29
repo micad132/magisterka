@@ -1,15 +1,19 @@
 import { Th, Tr } from '@chakra-ui/react';
 
-const HISTORY_TABLE_ROWS = (
+interface Props {
+  isAdmin: boolean,
+}
+
+const HistoryTableRows = ({ isAdmin }: Props) => (
   <Tr>
     <Th>ID</Th>
     <Th>Action type:</Th>
     <Th>Performer</Th>
     <Th>Date:</Th>
-    <Th>Details:</Th>
-    <Th>Edit</Th>
-    <Th>Delete</Th>
+    <Th>Description:</Th>
+    {isAdmin && <Th>Edit</Th>}
+    {isAdmin && <Th>Delete</Th>}
   </Tr>
 );
 
-export default HISTORY_TABLE_ROWS;
+export default HistoryTableRows;

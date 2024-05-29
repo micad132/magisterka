@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useToast } from '@chakra-ui/react';
-import ModalComponent from '../../../../components/modal.component.tsx';
+import ModalComponent from '../../../../components/modals/modal.component.tsx';
 import { ModalProps } from '../../../../types/UtilTypes.ts';
 import EditUserContentComponent from './editUserContent.component.tsx';
 import { useAppDispatch } from '../../../../utils/hooks.ts';

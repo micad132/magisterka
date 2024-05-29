@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import ModalComponent from '../../../components/modal.component.tsx';
+import ModalComponent from '../../../components/modals/modal.component.tsx';
 import { ModalProps, SelectValue } from '../../../types/UtilTypes.ts';
 import AuthorOfRequestComponent from './authorOfRequest.component.tsx';
 import CreatedDateComponent from './createdDate.component.tsx';

@@ -41,6 +41,18 @@ const ActionTypeTagComponent = ({ actionType }: Props) => {
             <TagWrapper size="large" variant="solid" colorScheme="orange">{ActionType.PROFILE}</TagWrapper>
           </Tooltip>
         );
+      case ActionType.MESSAGE:
+        return (
+          <Tooltip label="Profile related action">
+            <TagWrapper size="large" variant="solid" colorScheme="blue">{ActionType.MESSAGE}</TagWrapper>
+          </Tooltip>
+        );
+      case ActionType.SURVEY:
+        return (
+          <Tooltip label="Profile related action">
+            <TagWrapper size="large" variant="solid" colorScheme="pink">{ActionType.SURVEY}</TagWrapper>
+          </Tooltip>
+        );
       default:
         return <TagWrapper size="large" variant="solid" colorScheme="teal">Error</TagWrapper>;
     }

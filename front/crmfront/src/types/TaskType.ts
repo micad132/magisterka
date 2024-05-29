@@ -1,5 +1,6 @@
 import { ValuesType } from './UtilTypes.ts';
 import { CommentResponseDTO } from './CommentType.ts';
+import { UserDTOTaskDetailsAssignee, UserDTOTaskDetailsCreator } from './UserType.ts';
 
 export type Task = {
   description: string,
@@ -20,9 +21,9 @@ export type TaskResponseDTO = {
   taskStatus: TaskStatusType,
   taskPriority: TaskPriorityType,
   taskType: TaskTypeType,
-  assigneeUsername: string,
-  creatorUsername: string,
   comments: CommentResponseDTO[],
+  userDTOTaskDetailsCreator: UserDTOTaskDetailsCreator,
+  userDTOTaskDetailsAssignee: UserDTOTaskDetailsAssignee,
   creationDate: string,
   estimationFinishTime: string,
   hoursSpent: number,
@@ -54,11 +55,11 @@ export type PreviewTask = {
 export type TaskPreview = {
   id: number,
   taskType: TaskTypeType,
-  assigneeUsername: string,
+  userDTOTaskDetailsCreator: UserDTOTaskDetailsCreator,
+  userDTOTaskDetailsAssignee: UserDTOTaskDetailsAssignee,
   taskPriority: TaskPriorityType,
   estimateFinishTime: string,
   actualCost: number,
-  creatorUsername: string,
   estimateCost: number,
   hoursSpent: number,
 };

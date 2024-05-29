@@ -1,13 +1,11 @@
 package com.crmbackend.backend.Task.dto;
 
-import com.crmbackend.backend.Task.TaskPriority;
-import com.crmbackend.backend.Task.TaskStatus;
+import com.crmbackend.backend.Task.enums.TaskPriority;
+import com.crmbackend.backend.Task.enums.TaskStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Builder
 @Getter

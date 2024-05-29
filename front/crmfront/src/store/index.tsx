@@ -3,6 +3,7 @@ import userReducer from './userSlice';
 import supportRequestReducer from './supportRequestSlice.tsx';
 import messagesReducer from './messageSlice.tsx';
 import taskReducer from './taskSlice.tsx';
+import historyReducer from './historySlice.tsx';
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     supportRequest: supportRequestReducer,
     messages: messagesReducer,
     task: taskReducer,
+    history: historyReducer,
   },
 });

@@ -15,8 +15,11 @@ import SelectComponent from '../../../../components/form/select.component.tsx';
 import { SelectValue } from '../../../../types/UtilTypes.ts';
 import TextareaCompononent from '../../../../components/form/textarea.component.tsx';
 import { AddingSupport, SupportRequest, SupportRequestType } from '../../../../types/SupportRequest.ts';
-import { useAppDispatch } from '../../../../utils/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { addingSupportRequestThunk } from '../../../../store/supportRequestSlice.tsx';
+import { ActionType, AddHistory } from '../../../../types/HistoryType.ts';
+import { getUserDetails } from '../../../../store/userSlice.tsx';
+import { addHistoryThunk } from '../../../../store/historySlice.tsx';
 
 const ModalBodyWrapper = styled.div`
   display: flex;
@@ -62,16 +65,23 @@ const SupportModal = () => {
   const [supportText, setSupportText] = useState<string>('');
   const [supportCategory, setSupportCategory] = useState<SupportRequestType>(SupportRequest.IMPROVEMENT);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const loggedUser = useAppSelector(getUserDetails);
   const toast = useToast();
   const dispatch = useAppDispatch();
 
   const onSaveClick = () => {
     const addObj: AddingSupport = {
       supportCategory,
-      userId: 2,
+      userId: loggedUser.id,
       description: supportText,
     };
+    const historyObj: AddHistory = {
+      performerId: loggedUser.id,
+      historyActionType: ActionType.SUPPORT,
+      description: `Support request with category ${supportCategory} made by ${loggedUser.username}`,
+    };
     dispatch(addingSupportRequestThunk(addObj));
+    dispatch(addHistoryThunk(historyObj));
     toast({
       title: 'Support request sent!',
       description: 'You have successfully created support request',

@@ -4,7 +4,7 @@ import {
 import {
   HamburgerIcon,
 } from '@chakra-ui/icons';
-import ModalComponent from './modal.component.tsx';
+import ModalComponent from './modals/modal.component.tsx';
 import { ModalProps } from '../types/UtilTypes.ts';
 
 interface Props {

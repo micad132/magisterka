@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { UserDTOTaskDetailsCreator } from '../../../types/UserType.ts';
 
 const Wrapper = styled.div`
   //background-color: teal;
@@ -19,22 +20,18 @@ const Wrapper = styled.div`
 `;
 
 interface Props {
-  creatorName: string,
-  creatorSurname: string,
-  creatorUsername: string,
-  creatorAge: number,
-  creatorCountry: string,
+  creatorPreview: UserDTOTaskDetailsCreator,
 }
 
 const CreatorDetailsComponent = ({
-  creatorName, creatorCountry, creatorSurname, creatorUsername, creatorAge,
+  creatorPreview,
 }: Props) => (
   <Wrapper>
     <h2>Creator:</h2>
-    <p><span>Creator:</span> {creatorName} {creatorSurname} </p>
-    <p><span>Username:</span> {creatorUsername}</p>
-    <p><span>Age:</span> {creatorAge}  </p>
-    <p><span>From:</span> {creatorCountry}</p>
+    <p><span>Creator:</span> {creatorPreview.creatorName} {creatorPreview.creatorSurname} </p>
+    <p><span>Username:</span> {creatorPreview.creatorUsername}</p>
+    <p><span>Age:</span> {creatorPreview.creatorAge}  </p>
+    <p><span>From:</span> {creatorPreview.creatorAge}</p>
   </Wrapper>
 );
 

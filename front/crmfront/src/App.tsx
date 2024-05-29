@@ -9,6 +9,7 @@ import { fetchSupportRequestsThunk } from './store/supportRequestSlice.tsx';
 import { fetchMessagesThunk } from './store/messageSlice.tsx';
 import { fetchTasksThunk } from './store/taskSlice.tsx';
 import AppRoutes from './routes';
+import { fetchHistoriesThunk } from './store/historySlice.tsx';
 
 axios.defaults.withCredentials = true;
 
@@ -28,6 +29,7 @@ const App = () => {
     dispatch(fetchUserDetailsThunk());
     dispatch(fetchMessagesThunk());
     dispatch(fetchTasksThunk());
+    dispatch(fetchHistoriesThunk());
   }, []);
   return (
     <AppWrapper>

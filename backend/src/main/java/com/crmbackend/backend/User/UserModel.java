@@ -1,6 +1,7 @@
 package com.crmbackend.backend.User;
 
 import com.crmbackend.backend.Comment.CommentModel;
+import com.crmbackend.backend.History.HistoryModel;
 import com.crmbackend.backend.SupportRequest.SupportRequestModel;
 import com.crmbackend.backend.Survey.SurveyModel;
 import com.crmbackend.backend.User.enums.UserGender;
@@ -87,7 +88,7 @@ public class UserModel {
     private String secret2FA;
 
 
-
-
+    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    private List<HistoryModel> historyModels = new ArrayList<>();
 
 }

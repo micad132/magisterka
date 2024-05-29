@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CustomExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<String> handleAccessDeniedException(AccessDeniedException ex) {
+    public ResponseEntity<MessageResponse> handleAccessDeniedException(AccessDeniedException ex) {
         // Tutaj możesz zdefiniować niestandardowy komunikat błędu
         String errorMessage = "You have no permission to do this!";
 
-        return new ResponseEntity<>(errorMessage, HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(new MessageResponse(errorMessage), HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)

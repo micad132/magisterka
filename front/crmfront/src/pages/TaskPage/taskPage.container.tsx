@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { useToast } from '@chakra-ui/react';
-import ModalComponent from '../../components/modal.component.tsx';
+import ModalComponent from '../../components/modals/modal.component.tsx';
 import { ModalProps, SelectValue } from '../../types/UtilTypes.ts';
 import CreatingTaskModalContent from './components/task/creatingTaskModalContent.component.tsx';
 import TaskWrapper from './components/task/taskWrapper.component.tsx';
@@ -16,6 +16,8 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { getUserDetails } from '../../store/userSlice.tsx';
 import NoItemsComponent from '../../components/noItems.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
+import { ActionType, AddHistory } from '../../types/HistoryType.ts';
+import { addHistoryThunk } from '../../store/historySlice.tsx';
 
 const ALL_SELECT_VALUES: AllSelectValue = {
   initialStasuses: TASK_STATUS_OPTIONS,
@@ -41,7 +43,7 @@ const TaskPageContainer = () => {
 
   const addTaskHandler = () => {
     console.log('ADDING TASK', addingTask);
-    const test: AddingTaskRequest = {
+    const taskBody: AddingTaskRequest = {
       estimatedFinishTime: String(addingTask.estimatedFinishTime),
       estimatedCost: Number(addingTask.estimatedCost),
       description: addingTask.description,
@@ -50,8 +52,14 @@ const TaskPageContainer = () => {
       taskType: addingTask.taskType,
       creatorId: loggedUser.id,
     };
+    const historyObj: AddHistory = {
+      performerId: loggedUser.id,
+      historyActionType: ActionType.TASK,
+      description: `User ${loggedUser.username} created a task with type ${addingTask.taskType}`,
+    };
     try {
-      dispatch(addingTaskRequestThunk(test));
+      dispatch(addingTaskRequestThunk(taskBody));
+      dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Task added!',
         description: 'You have successfully added task!',

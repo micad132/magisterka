@@ -42,13 +42,11 @@ const SingleTaskPageContainer = () => {
       <TaskDatesComponent createdTime={mapDateToString(singleTask?.creationDate!)} estimatedFinishTime={mapDateToString(singleTask?.estimationFinishTime!)} />
       <UserDetailsWrapper>
         <CreatorDetailsComponent
-          creatorAge={24}
-          creatorCountry=""
-          creatorName=""
-          creatorSurname=""
-          creatorUsername={singleTask?.creatorUsername!}
+          creatorPreview={singleTask?.userDTOTaskDetailsCreator!}
         />
-        <AssigneeDetailsComponent />
+        <AssigneeDetailsComponent
+          assigneePreview={singleTask?.userDTOTaskDetailsAssignee!}
+        />
       </UserDetailsWrapper>
 
       <TaskDetailInfoWrapper>

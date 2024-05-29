@@ -13,12 +13,14 @@ import {
 } from '../../types/MessageType.ts';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { getAllUsers, getUserDetails } from '../../store/userSlice.tsx';
-import ModalComponent from '../../components/modal.component.tsx';
+import ModalComponent from '../../components/modals/modal.component.tsx';
 import AddingMessageModalBodyComponent from './components/addingMessage/addingMessageModalBody.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import { addingMessageThunk, getAllMessages } from '../../store/messageSlice.tsx';
 import RoleTag from '../../components/roleTag.component.tsx';
 import { RoleType } from '../../types/UserType.ts';
+import { ActionType, AddHistory } from '../../types/HistoryType.ts';
+import { addHistoryThunk } from '../../store/historySlice.tsx';
 
 const MessagesPageContainer = () => {
   const [filterUser, setFilterUser] = useState<string>('all');
@@ -63,8 +65,14 @@ const MessagesPageContainer = () => {
       receiverId: receiver?.id ?? 0,
       authorId: loggedUser.id ?? 0,
     };
+    const historyObj: AddHistory = {
+      historyActionType: ActionType.MESSAGE,
+      performerId: loggedUser.id,
+      description: `Message sent from ${loggedUser.username} to ${receiver?.username}`,
+    };
     try {
       dispatch(addingMessageThunk(obj));
+      dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Message sent!',
         description: `You have successfully sent a message to ${receiver?.username}`,

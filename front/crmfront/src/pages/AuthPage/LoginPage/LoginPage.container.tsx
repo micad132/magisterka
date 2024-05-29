@@ -15,6 +15,7 @@ import { fetchSupportRequestsThunk } from '../../../store/supportRequestSlice.ts
 import { fetchMessagesThunk } from '../../../store/messageSlice.tsx';
 import { fetchTasksThunk } from '../../../store/taskSlice.tsx';
 import PinInputComponent from '../../../components/form/pinInput.component.tsx';
+import { fetchHistoriesThunk } from '../../../store/historySlice.tsx';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ const LoginPage = () => {
       dispatch(fetchUserDetailsThunk());
       dispatch(fetchMessagesThunk());
       dispatch(fetchTasksThunk());
+      dispatch(fetchHistoriesThunk());
       setTimeout(() => {
         navigate('/', { replace: true });
       }, 2000);

@@ -1,4 +1,4 @@
-package com.crmbackend.backend.Task;
+package com.crmbackend.backend.Task.enums;
 
 import lombok.Getter;
 

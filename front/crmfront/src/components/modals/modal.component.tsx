@@ -10,7 +10,7 @@ import {
 import {
   cloneElement, isValidElement, ReactElement, ReactNode,
 } from 'react';
-import { ModalProps } from '../types/UtilTypes.ts';
+import { ModalProps } from '../../types/UtilTypes.ts';
 
 interface Props {
   modalProps: ModalProps,

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import RoleTagComponent from '../../../components/roleTag.component.tsx';
-import { RoleType } from '../../../types/UserType.ts';
+import { RoleType, RoleTypeType } from '../../../types/UserType.ts';
 
 const LoggedUserInfoWrapper = styled.div`
     display: flex;
@@ -11,9 +11,15 @@ const LoggedUserInfoWrapper = styled.div`
     gap: 5px;
 `;
 
-const LoggedUserInfoComponent = () => (
+interface Props {
+  name: string,
+  surname: string,
+  role: RoleTypeType,
+}
+
+const LoggedUserInfoComponent = ({ name, surname, role }: Props) => (
   <LoggedUserInfoWrapper>
-    You are logged as mikad132 <RoleTagComponent role={RoleType.CLIENT} />
+    You are logged as {name} {surname} <RoleTagComponent role={role} />
   </LoggedUserInfoWrapper>
 );
 

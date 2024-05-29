@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ModalComponent from '../../../components/modal.component.tsx';
+import ModalComponent from '../../../components/modals/modal.component.tsx';
 import { ModalProps } from '../../../types/UtilTypes.ts';
 
 const ModalWrapper = styled.div`

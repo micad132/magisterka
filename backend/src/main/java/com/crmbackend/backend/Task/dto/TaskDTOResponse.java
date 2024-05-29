@@ -1,9 +1,9 @@
 package com.crmbackend.backend.Task.dto;
 
 import com.crmbackend.backend.Comment.dto.CommentDTOResponse;
-import com.crmbackend.backend.Task.TaskPriority;
-import com.crmbackend.backend.Task.TaskStatus;
-import com.crmbackend.backend.Task.TaskType;
+import com.crmbackend.backend.Task.enums.TaskPriority;
+import com.crmbackend.backend.Task.enums.TaskStatus;
+import com.crmbackend.backend.Task.enums.TaskType;
 import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsAssignee;
 import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsCreator;
 import lombok.AllArgsConstructor;

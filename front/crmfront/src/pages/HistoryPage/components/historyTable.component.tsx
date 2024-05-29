@@ -2,12 +2,17 @@ import {
   Table, TableContainer, Tbody, Td, Tfoot, Thead, Tr,
 } from '@chakra-ui/react';
 import styled from 'styled-components';
-import ModalComponent from '../../../components/modal.component.tsx';
+import ModalComponent from '../../../components/modals/modal.component.tsx';
 import { ModalProps } from '../../../types/UtilTypes.ts';
 import HISTORY_TABLE_ROWS from './historyTableRows.tsx';
 import ActionTypeTagComponent from '../../../components/actionTypeTag.component.tsx';
 import { HistoryType } from '../../../types/HistoryType.ts';
-import DetailsOfHistoryComponent from './detailsOfHistory.component.tsx';
+import HistoryDetailsModalComponent from './historyDetailsModal.component.tsx';
+import HistoryTableRows from './historyTableRows.tsx';
+import { useAppSelector } from '../../../utils/hooks.ts';
+import { getUserDetails } from '../../../store/userSlice.tsx';
+import { RoleType } from '../../../types/UserType.ts';
+import mapDateToString from '../../../utils/mappers/mapDateToString.ts';
 
 const TableWrapper = styled.div`
     max-width: 1200px;
@@ -19,19 +24,20 @@ interface Props {
 }
 
 const HistoryTable = ({ histories }: Props) => {
+  const loggedUser = useAppSelector(getUserDetails);
   const deleteModalContent = (
     <div>
       <h2>Are you sure you want to delete this history?</h2>
     </div>
   );
 
-  const userDetailsModalProps = (id: string): ModalProps => ({
-    modalHeader: 'Details',
-    modalActionButtonText: 'Clone',
-    modalBody: <DetailsOfHistoryComponent id={id} />,
-    buttonText: 'Details',
-    mainButtonAction: () => {},
-  });
+  // const userDetailsModalProps = (id: string): ModalProps => ({
+  //   modalHeader: 'Details',
+  //   modalActionButtonText: 'Clone',
+  //   modalBody: <DetailsOfHistoryComponent id={id} />,
+  //   buttonText: 'Details',
+  //   mainButtonAction: () => {},
+  // });
 
   const userEditModalprops: ModalProps = {
     modalHeader: 'Edit Client',
@@ -55,18 +61,21 @@ const HistoryTable = ({ histories }: Props) => {
       <TableContainer>
         <Table variant="simple">
           <Thead>
-            {HISTORY_TABLE_ROWS}
+            <HistoryTableRows isAdmin={loggedUser.userRole === RoleType.ADMIN} />
           </Thead>
           <Tbody>
             {histories.map((history) => (
               <Tr key={history.id}>
                 <Td>{history.id}</Td>
-                <Td><ActionTypeTagComponent actionType={history.actionType} /></Td>
-                <Td>{history.performer}</Td>
-                <Td>{history.date}</Td>
-                <Td><ModalComponent modalProps={userDetailsModalProps(history.id)} /></Td>
-                <Td><ModalComponent modalProps={userEditModalprops} /></Td>
-                <Td><ModalComponent modalProps={userDeleteModalProps} /></Td>
+                <Td><ActionTypeTagComponent actionType={history.historyActionType} /></Td>
+                <Td>{history.performerUsername}</Td>
+                <Td>{mapDateToString(history.createdTime)}</Td>
+                {/* <Td><ModalComponent modalProps={userDetailsModalProps(history.id)} /></Td> */}
+                <Td>
+                  <HistoryDetailsModalComponent buttonText="Description" modalTitle="Description of history" description={history.description} />
+                </Td>
+                {loggedUser.userRole === RoleType.ADMIN && <Td><ModalComponent modalProps={userEditModalprops} /></Td>}
+                {loggedUser.userRole === RoleType.ADMIN && <Td><ModalComponent modalProps={userDeleteModalProps} /></Td>}
               </Tr>
             ))}
           </Tbody>

@@ -1,6 +1,9 @@
 package com.crmbackend.backend.Task;
 
 import com.crmbackend.backend.Comment.CommentModel;
+import com.crmbackend.backend.Task.enums.TaskPriority;
+import com.crmbackend.backend.Task.enums.TaskStatus;
+import com.crmbackend.backend.Task.enums.TaskType;
 import com.crmbackend.backend.User.UserModel;
 import lombok.*;
 
