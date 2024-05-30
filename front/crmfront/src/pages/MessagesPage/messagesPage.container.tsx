@@ -58,12 +58,11 @@ const MessagesPageContainer = () => {
   };
 
   const onSendMessage = () => {
-    console.log('MESSAGE', message);
     const receiver = users.find((user) => user.username === message.receiver);
     const obj: AddingMessage = {
       text: message.description,
       receiverId: receiver?.id ?? 0,
-      authorId: loggedUser.id ?? 0,
+      authorId: loggedUser.id,
     };
     const historyObj: AddHistory = {
       historyActionType: ActionType.MESSAGE,

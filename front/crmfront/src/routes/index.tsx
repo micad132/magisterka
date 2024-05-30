@@ -13,6 +13,7 @@ import MyComponent from '../pages/TestPage/testPage.container.tsx';
 import SingleTaskPageContainer from '../pages/SingleTaskPage/singleTaskPage.container.tsx';
 import PrivateRouteComponent from '../components/routesComponents/privateRoute.component.tsx';
 import AdminOnlyRouteComponent from '../components/routesComponents/adminOnlyRoute.component.tsx';
+import StatsPageContainer from '../pages/StatsPage/statsPage.container.tsx';
 
 const AppRoutes = () => (
   <Routes>
@@ -24,6 +25,7 @@ const AppRoutes = () => (
     <Route element={<PrivateRouteComponent isHomeScreen={false} />}>
       <Route element={<AdminOnlyRouteComponent />}>
         <Route path="/people" element={<PeoplePageContainer />} />
+        <Route path="/stats" element={<StatsPageContainer />} />
       </Route>
       <Route path="/tasks" element={<TaskPageContainer />} />
       <Route path="/tasks/:id" element={<SingleTaskPageContainer />} />

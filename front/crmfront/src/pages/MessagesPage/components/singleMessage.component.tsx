@@ -3,7 +3,7 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import { MessageType } from '../../../types/MessageType.ts';
-import mapDateToString from '../../../utils/mappers/mapDateToString.ts';
+import { mapDateToString } from '../../../utils/mappers/mapDateToString.ts';
 
 const StyledAccordion = styled(Accordion)`
   background-color: teal;

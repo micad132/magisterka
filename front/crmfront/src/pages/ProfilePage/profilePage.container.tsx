@@ -14,7 +14,7 @@ import {
   SelfEditUser, SelfEditUserRequest,
 } from '../../types/UserType.ts';
 import NotLoggedComponent from '../../components/routesComponents/notLogged.component.tsx';
-import mapDateToString from '../../utils/mappers/mapDateToString.ts';
+import { mapDateToString } from '../../utils/mappers/mapDateToString.ts';
 
 const ProfilePageWrapper = styled.div`
   margin: 20px auto;

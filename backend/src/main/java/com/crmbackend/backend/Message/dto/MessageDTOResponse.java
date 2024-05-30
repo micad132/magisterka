@@ -1,5 +1,6 @@
 package com.crmbackend.backend.Message.dto;
 
+import com.crmbackend.backend.User.enums.UserRole;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -17,4 +18,6 @@ public class MessageDTOResponse {
     private String receiverSurname;
     private String text;
     private LocalDateTime date;
+    private UserRole authorRole;
+    private UserRole receiverRole;
 }

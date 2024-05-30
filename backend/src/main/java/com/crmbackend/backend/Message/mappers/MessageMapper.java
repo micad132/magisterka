@@ -42,6 +42,8 @@ public class MessageMapper {
                 .receiverUsername(messageModel.getReceiverModel().getUsername())
                 .text(messageModel.getText())
                 .date(messageModel.getDate())
+                .receiverRole(messageModel.getReceiverModel().getUserRole())
+                .authorRole(messageModel.getAuthorModel().getUserRole())
                 .build();
     }
 }

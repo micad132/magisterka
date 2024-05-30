@@ -12,7 +12,7 @@ import HistoryTableRows from './historyTableRows.tsx';
 import { useAppSelector } from '../../../utils/hooks.ts';
 import { getUserDetails } from '../../../store/userSlice.tsx';
 import { RoleType } from '../../../types/UserType.ts';
-import mapDateToString from '../../../utils/mappers/mapDateToString.ts';
+import { mapDateToString } from '../../../utils/mappers/mapDateToString.ts';
 
 const TableWrapper = styled.div`
     max-width: 1200px;

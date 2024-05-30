@@ -8,12 +8,10 @@ import TaskDatesComponent from './task/taskDates.component.tsx';
 import TaskDescriptionComponent from './task/taskDescription.component.tsx';
 import CreatorDetailsComponent from './task/creatorDetails.component.tsx';
 import AssigneeDetailsComponent from './task/assigneeDetails.component.tsx';
-import ActualCostComponent from './task/actualCost.component.tsx';
-import TotalHoursSpentComponent from './task/totalHoursSpent.component.tsx';
 import TaskDetailInfoComponent from './task/taskDetailInfo.component.tsx';
 import { useAppSelector } from '../../utils/hooks.ts';
 import { getAllTasks } from '../../store/taskSlice.tsx';
-import mapDateToString from '../../utils/mappers/mapDateToString.ts';
+import { mapDateToString } from '../../utils/mappers/mapDateToString.ts';
 
 const UserDetailsWrapper = styled.div`
   display: flex;

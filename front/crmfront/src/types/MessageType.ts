@@ -1,3 +1,5 @@
+import { RoleTypeType } from './UserType.ts';
+
 export type MessageType = {
   id: number,
   text: string,
@@ -8,6 +10,8 @@ export type MessageType = {
   receiverSurname: string,
   receiverName: string,
   date: string,
+  authorRole: RoleTypeType,
+  receiverRole: RoleTypeType,
 };
 
 export type AddingMessageStateType = {

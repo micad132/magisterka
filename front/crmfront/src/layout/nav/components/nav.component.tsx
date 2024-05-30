@@ -40,7 +40,7 @@ const NavComponent = () => {
         <SingleLink path="/workers" text="Workers" icon={<EngineeringIcon />} />
         <SingleLink path="/messages" text="Messages" icon={<MessageIcon />} />
         <SingleLink path="/history" text="History" icon={<HistoryIcon />} />
-        <SingleLink path="/stats" text="Stats" icon={<InsertChartIcon />} />
+        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/stats" text="Stats" icon={<InsertChartIcon />} />}
         <SingleLink path="/support" text="Support" icon={<HelpIcon />} />
       </LinksWrapper>
     </NavWrapper>
