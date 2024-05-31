@@ -1,5 +1,12 @@
 package com.crmbackend.backend.User.dto.response;
 
+import com.crmbackend.backend.Comment.CommentModel;
+import com.crmbackend.backend.Comment.dto.CommentDTOResponse;
+import com.crmbackend.backend.History.dto.HistoryDTOResponse;
+import com.crmbackend.backend.Message.dto.MessageDTOResponse;
+import com.crmbackend.backend.Stat.dto.StatDTOResponse;
+import com.crmbackend.backend.SupportRequest.SupportRequestModel;
+import com.crmbackend.backend.Survey.dto.SurveyDTOResponse;
 import com.crmbackend.backend.User.enums.UserGender;
 import com.crmbackend.backend.User.enums.UserRole;
 import lombok.Builder;
@@ -7,6 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @Getter
@@ -27,4 +35,10 @@ public class UserDTOResponse {
     private UserGender userGender;
     private UserRole userRole;
     private LocalDateTime createdAccountDate;
+    private List<MessageDTOResponse> messages;
+    private List<CommentDTOResponse> comments;
+    private List<StatDTOResponse> stats;
+    private List<SupportRequestModel> supportRequestModels;
+    private List<SurveyDTOResponse> surveys;
+    private List<HistoryDTOResponse> histories;
 }

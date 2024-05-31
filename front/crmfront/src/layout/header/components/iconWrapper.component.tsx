@@ -5,7 +5,8 @@ import SupportModal from './support/supportModal.component.tsx';
 import AuthNavComponent from './authNav/authNav.component.tsx';
 import { useAppSelector } from '../../../utils/hooks.ts';
 import { getUserDetails } from '../../../store/userSlice.tsx';
-import { ProfileModalUser } from '../../../types/UserType.ts';
+import { ProfileModalUser, RoleType } from '../../../types/UserType.ts';
+import SurveyModalComponent from './survey/surveyModal.component.tsx';
 
 const IconWrapperDiv = styled.div`
   display: flex;
@@ -46,7 +47,8 @@ const IconWrapper = () => {
       <Icons>
         {userDetails.name !== '' && <ProfileModal user={user} />}
         <ChangeTheme />
-        {userDetails.name !== '' && <SupportModal />}
+        {userDetails.userRole === RoleType.CLIENT && <SupportModal />}
+        {userDetails.userRole === RoleType.CLIENT && <SurveyModalComponent />}
       </Icons>
       <AuthNav>
         <AuthNavComponent isLogged={userDetails.name !== ''} />

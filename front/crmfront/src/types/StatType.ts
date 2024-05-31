@@ -26,6 +26,7 @@ export type StatResponse = {
   userRole: RoleTypeType,
   statCategory: StatCategoryType,
   statType: StatTypeType,
+  description: string,
 };
 
 export type AddStat = {
@@ -33,6 +34,7 @@ export type AddStat = {
   creatorId: number,
   statCategory: StatCategoryType,
   statType: StatTypeType,
+  description: string,
 };
 
 export type Dataset = {

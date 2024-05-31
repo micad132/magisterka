@@ -3,17 +3,15 @@ import { Button } from '@chakra-ui/react';
 import { ChartData } from 'chart.js';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import { SelectValue } from '../../../../types/UtilTypes.ts';
-import { MessageType } from '../../../../types/MessageType.ts';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { getAllMessages } from '../../../../store/messageSlice.tsx';
 import { RoleType } from '../../../../types/UserType.ts';
-import { taskPriorityPieChart, taskStatusPieChart, taskTypePieChart } from '../../../../utils/diagramUtils.ts';
 import { roleMessageCountDoughnout, roleMessagesWithTimeLine } from '../../../../utils/messageCharts.ts';
 import { AddStat, StatCategory, StatType } from '../../../../types/StatType.ts';
 import { getUserDetails } from '../../../../store/userSlice.tsx';
 import { addingStatThunk, getAllStats } from '../../../../store/statSlice.tsx';
 import PieChartComponent from '../../../../components/diagrams/pieChart.component.tsx';
-import { mapJsonToChart, mapJsonToDoughnutChart } from '../../../../utils/mappers/chartUtils/mapJsonToChart.ts';
+import { mapJsonToDoughnutChart } from '../../../../utils/mappers/chartUtils/mapJsonToChart.ts';
 import TaskChartWrapperComponent from '../taskChartWrapper.component.tsx';
 import {
   countMessageRolesByCount,
@@ -21,19 +19,24 @@ import {
   mapDateToYearMonthDay,
 } from '../../../../utils/mappers/mapDateToString.ts';
 
+const MESSAGE_DIAGRAM_TYPE_VALUES = {
+  MESSAGES_IN_TIME: 'messagesInTime',
+  ROLE_MESSAGES: 'roleMessages',
+};
+
 const MESSAGE_DIAGRAM_TYPE: SelectValue[] = [
   {
     text: 'Messages in time',
-    value: 'messagesInTime',
+    value: MESSAGE_DIAGRAM_TYPE_VALUES.MESSAGES_IN_TIME,
   },
   {
     text: 'Role messages count',
-    value: 'roleMessages',
+    value: MESSAGE_DIAGRAM_TYPE_VALUES.ROLE_MESSAGES,
   },
 ];
 
 const MessagesPanelContainer = () => {
-  const [messageDiagramType, setMessageDiagramType] = useState<string>('clientMessages');
+  const [messageDiagramType, setMessageDiagramType] = useState<string>(MESSAGE_DIAGRAM_TYPE_VALUES.MESSAGES_IN_TIME);
   const messages = useAppSelector(getAllMessages);
   const loggedUser = useAppSelector(getUserDetails);
   const stats = useAppSelector(getAllStats);
@@ -53,12 +56,14 @@ const MessagesPanelContainer = () => {
   console.log('MESSAGES', messages);
   const g = 4;
 
-  const properTaskBody = (): ChartData<'doughnut'> => {
+  const properTaskBody = (): ChartData<'doughnut' | 'line'> => {
     switch (messageDiagramType) {
-      case 'roleMessages':
+      case MESSAGE_DIAGRAM_TYPE_VALUES.ROLE_MESSAGES:
         return roleMessageCountDoughnout([clientMessages.length, workerMessages.length]);
-      case 'messagesInTime':
+      case MESSAGE_DIAGRAM_TYPE_VALUES.MESSAGES_IN_TIME:
         return roleMessagesWithTimeLine(dates, clientCounts, workerCounts);
+      default:
+        roleMessageCountDoughnout([0, 0, 0, 0]);
     }
     return roleMessageCountDoughnout([0, 0, 0, 0]);
   };
@@ -70,6 +75,7 @@ const MessagesPanelContainer = () => {
       chartData: JSON.stringify(properTaskBody()),
       statCategory: StatCategory.MESSAGE,
       statType: properStatType,
+      description: '',
     };
     try {
       dispatch(addingStatThunk(statBody));
@@ -79,7 +85,7 @@ const MessagesPanelContainer = () => {
   };
 
   const messageChart = stats.filter((s) => s.statCategory === StatCategory.MESSAGE).map((stat) => (
-    <PieChartComponent key={stat.id} chartData={mapJsonToDoughnutChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />
+    <PieChartComponent key={stat.id} description={stat.description} chartData={mapJsonToDoughnutChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />
   ));
 
   return (

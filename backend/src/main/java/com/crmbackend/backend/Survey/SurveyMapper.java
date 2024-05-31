@@ -18,8 +18,9 @@ public class SurveyMapper {
     public SurveyModel mapDTOToEntity(SurveyDTORequest surveyDTORequest) {
         UserModel userModel = userRepository.findById(surveyDTORequest.getAuthorId()).orElseThrow();
         return SurveyModel.builder()
-                .description(surveyDTORequest.getDescription())
-                .rate(surveyDTORequest.getRate())
+                .messageRate(surveyDTORequest.getMessageRate())
+                .taskRate(surveyDTORequest.getTaskRate())
+                .supportRate(surveyDTORequest.getSupportRate())
                 .userModel(userModel)
                 .createdDate(LocalDateTime.now())
                 .build();
@@ -32,8 +33,9 @@ public class SurveyMapper {
                 .authorName(surveyModel.getUserModel().getName())
                 .authorUsername(surveyModel.getUserModel().getUsername())
                 .createdTime(surveyModel.getCreatedDate())
-                .rate(surveyModel.getRate())
-                .description(surveyModel.getDescription())
+                .taskRate(surveyModel.getTaskRate())
+                .messageRate(surveyModel.getMessageRate())
+                .supportRate(surveyModel.getSupportRate())
                 .build();
     }
 }

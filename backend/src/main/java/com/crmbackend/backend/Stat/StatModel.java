@@ -37,4 +37,7 @@ public class StatModel {
     @Column(name = "stat_category")
     private StatCategory statCategory;
 
+    @Column(name = "description")
+    private String description;
+
 }

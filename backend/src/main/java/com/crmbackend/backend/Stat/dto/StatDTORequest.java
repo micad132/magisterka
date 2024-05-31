@@ -12,4 +12,5 @@ public class StatDTORequest {
     private Long creatorId;
     private StatCategory statCategory;
     private StatType statType;
+    private String description;
 }

@@ -23,13 +23,18 @@ public class SurveyModel {
     @JoinColumn(name = "user_model_id")
     private UserModel userModel;
 
-    @Column(name = "rate")
-    private Double rate;
+    @Column(name = "taskRate")
+    private Double taskRate;
 
-    @Column(name = "description")
-    private String description;
+
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
+
+    @Column(name = "message_rate")
+    private Double messageRate;
+
+    @Column(name = "support_rate")
+    private Double supportRate;
 
 }

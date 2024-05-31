@@ -95,6 +95,7 @@ const ProfilePageContainer = () => {
     phoneNumber: loggedUser.phoneNumber,
     postalCode: loggedUser.postalCode,
     streetName: loggedUser.streetName,
+    userGender: loggedUser.userGender,
   };
 
   const editUserModal: ModalProps = {

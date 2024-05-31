@@ -22,6 +22,7 @@ public class StatMapper {
                 .userModel(userModel)
                 .statType(statDTORequest.getStatType())
                 .statCategory(statDTORequest.getStatCategory())
+                .description(statDTORequest.getDescription())
                 .build();
     }
 
@@ -34,6 +35,7 @@ public class StatMapper {
                 .userRole(statModel.getUserModel().getUserRole())
                 .statCategory(statModel.getStatCategory())
                 .statType(statModel.getStatType())
+                .description(statModel.getDescription())
                 .build();
     }
 }

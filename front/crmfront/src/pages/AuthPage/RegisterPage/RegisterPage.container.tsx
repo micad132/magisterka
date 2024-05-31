@@ -8,10 +8,12 @@ import AuthWrapperInside from '../../../components/authWrapperInside.component.t
 import AuthWrapper from '../components/authWrapper.component.tsx';
 import InputComponent from '../../../components/form/input.component.tsx';
 import RoleTagComponent from '../../../components/roleTag.component.tsx';
-import { RoleType } from '../../../types/UserType.ts';
+import { RoleType, UserGender } from '../../../types/UserType.ts';
 import AuthService from '../../../services/AuthService.ts';
 import { registerScheme } from '../../../services/validators/UserValidator.ts';
 import CodeModalComponent from './components/codeModal.component.tsx';
+import SelectComponent from '../../../components/form/select.component.tsx';
+import { SelectValue } from '../../../types/UtilTypes.ts';
 
 const InitialRole = styled.div`
     display: flex;
@@ -21,6 +23,17 @@ const InitialRole = styled.div`
     gap: 10px;
     margin: 10px 0;
 `;
+
+const USER_GENDER: SelectValue[] = [
+  {
+    text: 'Man',
+    value: UserGender.MAN,
+  },
+  {
+    text: 'Woman',
+    value: UserGender.WOMAN,
+  },
+];
 
 const RegisterPage = () => {
   const toast = useToast();
@@ -216,6 +229,11 @@ const RegisterPage = () => {
                 type="string"
                 isInvalid={false}
                 error={errors.phoneNumber}
+              />
+              <SelectComponent
+                options={USER_GENDER}
+                onChange={handleChange}
+                label="Select gender"
               />
               <InitialRole>
                 <p>Your initial role:</p>

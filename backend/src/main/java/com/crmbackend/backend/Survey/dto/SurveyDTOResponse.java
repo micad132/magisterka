@@ -12,7 +12,9 @@ import java.time.LocalDateTime;
 public class SurveyDTOResponse {
     private Long id;
     private String description;
-    private Double rate;
+    private Double taskRate;
+    private Double messageRate;
+    private Double supportRate;
     private LocalDateTime createdTime;
     private String authorName;
     private String authorSurname;

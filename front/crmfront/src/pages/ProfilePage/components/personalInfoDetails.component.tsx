@@ -33,6 +33,7 @@ const PersonalInfoDetailsComponent = ({ modalProps, userDetails }: Props) => (
     <PersonalInfoDetails>
       <PersonalInfoLabelComponent label="Name" text={userDetails.name} />
       <PersonalInfoLabelComponent label="Surname" text={userDetails.surname} />
+      <PersonalInfoLabelComponent label="Gender" text={userDetails.userGender} />
       <PersonalInfoLabelComponent label="Email" text={userDetails.email} />
       <PersonalInfoLabelComponent label="Age" text={userDetails.age} />
       <PersonalInfoLabelComponent label="Country name" text={userDetails.countryName} />

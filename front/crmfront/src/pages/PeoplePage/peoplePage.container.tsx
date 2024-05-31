@@ -16,7 +16,7 @@ const SelectWrapper = styled.div`
 `;
 
 const PeoplePageContainer = () => {
-  const [filteredUser, setFilteredUser] = useState<string>('all');
+  const [filteredUser, setFilteredUser] = useState<string>('ALL');
   const allUsers = useAppSelector(getAllUsers);
 
   console.log('ALL USERS', allUsers);
@@ -24,7 +24,7 @@ const PeoplePageContainer = () => {
 
   const clientUsers = allUsers?.filter((client) => client.userRole === RoleType.CLIENT);
 
-  const properUsers = filteredUser === 'all'
+  const properUsers = filteredUser === 'ALL'
     ? allUsers
     : allUsers.filter((user) => user.userRole === filteredUser);
 

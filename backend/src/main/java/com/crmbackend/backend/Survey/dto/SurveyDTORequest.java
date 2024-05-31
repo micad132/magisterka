@@ -10,5 +10,7 @@ import lombok.*;
 public class SurveyDTORequest {
     private String description;
     private Long authorId;
-    private Double rate;
+    private Double taskRate;
+    private Double messageRate;
+    private Double supportRate;
 }

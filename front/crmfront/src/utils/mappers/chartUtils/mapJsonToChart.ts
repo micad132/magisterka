@@ -1,5 +1,5 @@
 import { ChartData } from 'chart.js';
-import { ChartDataObject } from '../../../types/StatType.ts';
+import { ChartDataObject, StatType, StatTypeType } from '../../../types/StatType.ts';
 
 // export const mapJsonToChart = <T extends ChartTypes>(json: string): ChartData<T> => {
 //   const parsedData: ChartDataObject = JSON.parse(json);
@@ -32,4 +32,27 @@ export const mapJsonToPieChart = (json: string): ChartData<'pie'> => {
     })),
   };
   return chartData;
+};
+
+export const mapJsonToBarChart = (json: string): ChartData<'bar'> => {
+  const parsedData: ChartDataObject = JSON.parse(json);
+  const chartData: ChartData<'bar'> = {
+    labels: parsedData.labels,
+    datasets: parsedData.datasets.map((dataset) => ({
+      ...dataset,
+    })),
+  };
+  return chartData;
+};
+
+export const getProperJsonMap = (chartType: StatTypeType, json: string) => {
+  switch (chartType) {
+    case StatType.PIE:
+      return mapJsonToPieChart(json);
+    case StatType.DOUGHNUT:
+      return mapJsonToDoughnutChart(json);
+    case StatType.BAR:
+      return mapJsonToBarChart(json);
+  }
+  return mapJsonToDoughnutChart(json);
 };

@@ -20,4 +20,5 @@ public class StatDTOResponse {
     private UserRole userRole;
     private StatType statType;
     private StatCategory statCategory;
+    private String description;
 }

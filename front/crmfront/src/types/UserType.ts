@@ -60,6 +60,7 @@ export type LoggedUserDetails = {
   postalCode: string,
   phoneNumber: string,
   email: string,
+  userGender: UserGenderType,
 };
 
 export type UserDTOTaskDetailsCreator = {
@@ -86,7 +87,7 @@ export const RoleType = {
 
 export const UserGender = {
   MAN: 'MAN',
-  WOMAN: 'Woman',
+  WOMAN: 'WOMAN',
 } as const;
 
 export type UserGenderType = ValuesType<typeof UserGender>;

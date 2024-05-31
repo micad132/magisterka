@@ -1,12 +1,15 @@
-import { ChartData, ChartType } from 'chart.js';
-import { Doughnut, Line, Pie } from 'react-chartjs-2';
+import { ChartData, ChartOptions, ChartType } from 'chart.js';
+import {
+  Bar, Doughnut, Line, Pie,
+} from 'react-chartjs-2';
 import styled from 'styled-components';
 import RoleTagComponent from '../roleTag.component.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import { StatType, StatTypeType } from '../../types/StatType.ts';
 
 interface Props {
-  chartData: ChartData<'pie' | 'doughnut' | 'line'>,
+  description: string,
+  chartData: ChartData<'pie' | 'doughnut' | 'line' | 'bar'>,
   creatorUsername: string,
   createdTime: string,
   chartType: StatTypeType,
@@ -23,8 +26,25 @@ const RoleTag = styled.div`
   align-items: center;
 `;
 
+const BAR_OPTIONS: ChartOptions<'bar'> = {
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        stepSize: 1,
+        callback(value) {
+          if (Number.isInteger(value)) {
+            return value;
+          }
+          return null;
+        },
+      },
+    },
+  },
+};
+
 const PieChartComponent = ({
-  chartData, createdTime, creatorUsername, chartType,
+  chartData, createdTime, creatorUsername, chartType, description,
 }: Props) => {
   const getProperChart = (chartTypee: StatTypeType) => {
     switch (chartTypee) {
@@ -34,12 +54,15 @@ const PieChartComponent = ({
         return <Doughnut data={chartData as ChartData<'doughnut'>} />;
       case StatType.LINE:
         return <Line data={chartData as ChartData<'line'>} />;
+      case StatType.BAR:
+        return <Bar data={chartData as ChartData<'bar'>} options={BAR_OPTIONS} />;
     }
   };
 
   return (
 
     <PieChartWrapper>
+      <p>{description}</p>
       <p>Created: {createdTime}</p>
       <RoleTag>By: {creatorUsername} <RoleTagComponent role={RoleType.ADMIN} /></RoleTag>
       {getProperChart(chartType)}

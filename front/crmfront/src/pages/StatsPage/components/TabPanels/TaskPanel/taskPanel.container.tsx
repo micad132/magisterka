@@ -70,7 +70,7 @@ const TaskPanelContainer = () => {
 
   const taskPieCharts = stats.filter((s) => s.statCategory === StatCategory.TASK).map((stat) => (
 
-    <PieChartComponent key={stat.id} chartData={mapJsonToPieChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />));
+    <PieChartComponent key={stat.id} description={stat.description} chartData={mapJsonToPieChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />));
 
   return (
     <div>

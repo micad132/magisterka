@@ -9,8 +9,9 @@ import {
   Legend,
   CategoryScale,
   LinearScale,
-  Title, PointElement, LineElement,
+  Title, PointElement, LineElement, BarElement,
 } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 import LayoutContainer from './layout/layout.container.tsx';
 import { useAppDispatch } from './utils/hooks.ts';
 import { fetchAllUsersThunk, fetchUserDetailsThunk } from './store/userSlice.tsx';
@@ -31,7 +32,7 @@ ChartJS.register(
   Title,
   PointElement,
   LineElement,
-
+  BarElement,
 );
 
 axios.defaults.withCredentials = true;
