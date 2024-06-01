@@ -1,24 +1,25 @@
 import styled from 'styled-components';
 
 interface Props {
-  itemName: string,
+  message: string,
 }
 
 const NoItemsWrapper = styled.div`
   background-color: teal;
   padding: 20px;
   max-width: 300px;
-  margin: 0 auto;
+  margin: 20px auto;
+  border-radius: 10px;
   p {
     font-weight: bold;
     color: #fff;
   }
 `;
 
-const NoItemsComponent = ({ itemName }: Props) => (
+const MessageComponent = ({ message }: Props) => (
   <NoItemsWrapper>
-    <p>There are no {itemName} in system</p>
+    <p>{message}</p>
   </NoItemsWrapper>
 );
 
-export default NoItemsComponent;
+export default MessageComponent;

@@ -12,6 +12,7 @@ import TaskDetailInfoComponent from './task/taskDetailInfo.component.tsx';
 import { useAppSelector } from '../../utils/hooks.ts';
 import { getAllTasks } from '../../store/taskSlice.tsx';
 import { mapDateToString } from '../../utils/mappers/mapDateToString.ts';
+import MessageComponent from '../../components/message.component.tsx';
 
 const UserDetailsWrapper = styled.div`
   display: flex;
@@ -32,6 +33,15 @@ const SingleTaskPageContainer = () => {
   const tasks = useAppSelector(getAllTasks);
   const singleTask = tasks.find((task) => task.id === Number(id));
   console.log('TYESY', singleTask);
+
+  if (singleTask === undefined) {
+    return (
+      <PageWrapperComponent>
+        <MessageComponent message="There is no task with this id" />
+      </PageWrapperComponent>
+    );
+  }
+
   return (
     <PageWrapperComponent>
       <PageHeaderComponent text="Task details" />

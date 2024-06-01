@@ -12,6 +12,7 @@ import PieChartComponent from '../../../../components/diagrams/pieChart.componen
 import { getProperJsonMap, mapJsonToDoughnutChart } from '../../../../utils/mappers/chartUtils/mapJsonToChart.ts';
 import { mapDateToString } from '../../../../utils/mappers/mapDateToString.ts';
 import TaskChartWrapperComponent from '../taskChartWrapper.component.tsx';
+import SelectWrapperComponent from '../selectWrapper.component.tsx';
 
 const PEOPLE_CHART_VALUES: SelectValue[] = [
   {
@@ -101,17 +102,18 @@ const PeoplePanelContainer = () => {
     }
   };
 
-  const peopleStats = stats.filter((stat) => stat.statCategory === StatCategory.PEOPLE)
+  const peopleStats = stats?.filter((stat) => stat.statCategory === StatCategory.PEOPLE)
     .map((s) => <PieChartComponent key={s.id} description={s.description} chartData={getProperJsonMap(s.statType, s.chartData)} creatorUsername={s.creatorUsername} createdTime={mapDateToString(s.createdTime)} chartType={s.statType} />);
 
   return (
     <div>
-      People page container
-      <SelectComponent
-        options={PEOPLE_CHART_VALUES}
-        onChange={setPeopleChartType}
-        label="Select people chart"
-      />
+      <SelectWrapperComponent>
+        <SelectComponent
+          options={PEOPLE_CHART_VALUES}
+          onChange={setPeopleChartType}
+          label="Select which people chart you want to make"
+        />
+      </SelectWrapperComponent>
       <Button colorScheme="teal" onClick={createPeopleChartHandler}>Create people chart</Button>
       <TaskChartWrapperComponent>
         {peopleStats}

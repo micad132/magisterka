@@ -11,6 +11,7 @@ import TaskChartWrapperComponent from '../taskChartWrapper.component.tsx';
 import PieChartComponent from '../../../../components/diagrams/pieChart.component.tsx';
 import { mapJsonToPieChart } from '../../../../utils/mappers/chartUtils/mapJsonToChart.ts';
 import { mapDateToString } from '../../../../utils/mappers/mapDateToString.ts';
+import SelectWrapperComponent from '../selectWrapper.component.tsx';
 
 const SUPPORT_REQUESTS_CHART_VALUES: SelectValue[] = [{
   text: 'Chart of support requests category',
@@ -23,7 +24,7 @@ const SupportRequestPanelContainer = () => {
   const loggedUser = useAppSelector(getUserDetails);
   const stats = useAppSelector(getAllStats);
 
-  const supportStats = stats.filter((stat) => stat.statCategory === StatCategory.SUPPORT).map((s) => (
+  const supportStats = stats?.filter((stat) => stat.statCategory === StatCategory.SUPPORT).map((s) => (
     <PieChartComponent key={s.id} description={s.description} chartData={mapJsonToPieChart(s.chartData)} creatorUsername={s.creatorUsername} createdTime={mapDateToString(s.createdTime)} chartType={s.statType} />
   ));
 
@@ -43,14 +44,15 @@ const SupportRequestPanelContainer = () => {
 
   return (
     <div>
-      SUPPORT REQUEST PANEL CONTAINER
-      <SelectComponent
-        options={SUPPORT_REQUESTS_CHART_VALUES}
-        onChange={setSupportRequestChartType}
-        label="Select support request type chart"
-        value={supportRequestChartType}
-      />
-      <Button colorScheme="teal" onClick={createChartHandler}>Create chart</Button>
+      <SelectWrapperComponent>
+        <SelectComponent
+          options={SUPPORT_REQUESTS_CHART_VALUES}
+          onChange={setSupportRequestChartType}
+          label="Select which support request type chart you want to make"
+          value={supportRequestChartType}
+        />
+      </SelectWrapperComponent>
+      <Button colorScheme="teal" onClick={createChartHandler}>Create support request chart</Button>
       <TaskChartWrapperComponent>
         {supportStats}
       </TaskChartWrapperComponent>

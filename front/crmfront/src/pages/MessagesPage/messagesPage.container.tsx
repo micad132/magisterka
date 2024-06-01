@@ -21,6 +21,7 @@ import RoleTag from '../../components/roleTag.component.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import { ActionType, AddHistory } from '../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../store/historySlice.tsx';
+import MessageComponent from '../../components/message.component.tsx';
 
 const MessagesPageContainer = () => {
   const [filterUser, setFilterUser] = useState<string>('all');
@@ -120,6 +121,17 @@ const MessagesPageContainer = () => {
   const messagesComponents = filteredMessages.map((messageType) => <SingleMessageComponent key={messageType.id} message={messageType} />);
 
   console.log('FILTERED', filterUser);
+
+  if (messages.length === 0) {
+    return (
+      <PageWrapperComponent>
+        <ModalComponent
+          modalProps={addingMessageModalProps}
+        />
+        <MessageComponent message="There are no messages in the system" />
+      </PageWrapperComponent>
+    );
+  }
 
   return (
     <PageWrapperComponent>

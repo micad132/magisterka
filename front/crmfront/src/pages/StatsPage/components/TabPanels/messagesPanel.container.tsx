@@ -18,6 +18,7 @@ import {
   mapDateToString,
   mapDateToYearMonthDay,
 } from '../../../../utils/mappers/mapDateToString.ts';
+import SelectWrapperComponent from '../selectWrapper.component.tsx';
 
 const MESSAGE_DIAGRAM_TYPE_VALUES = {
   MESSAGES_IN_TIME: 'messagesInTime',
@@ -84,20 +85,21 @@ const MessagesPanelContainer = () => {
     }
   };
 
-  const messageChart = stats.filter((s) => s.statCategory === StatCategory.MESSAGE).map((stat) => (
+  const messageChart = stats?.filter((s) => s.statCategory === StatCategory.MESSAGE).map((stat) => (
     <PieChartComponent key={stat.id} description={stat.description} chartData={mapJsonToDoughnutChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />
   ));
 
   return (
     <div>
-      MESSAGES PANEL CONTAINER
-      <SelectComponent
-        options={MESSAGE_DIAGRAM_TYPE}
-        onChange={setMessageDiagramType}
-        label="Select which message diagram you want to make"
-        value={messageDiagramType}
-      />
-      <Button onClick={onAddMessageChart} colorScheme="teal">Add message chart</Button>
+      <SelectWrapperComponent>
+        <SelectComponent
+          options={MESSAGE_DIAGRAM_TYPE}
+          onChange={setMessageDiagramType}
+          label="Select which message chart you want to make"
+          value={messageDiagramType}
+        />
+      </SelectWrapperComponent>
+      <Button onClick={onAddMessageChart} colorScheme="teal">Create message chart</Button>
       <TaskChartWrapperComponent>
         {messageChart}
       </TaskChartWrapperComponent>

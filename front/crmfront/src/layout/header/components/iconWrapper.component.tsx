@@ -42,13 +42,15 @@ const IconWrapper = () => {
     userRole: userDetails.userRole,
   };
 
+  const isLoggedClient = userDetails.userRole === RoleType.CLIENT && userDetails.name !== '';
+
   return (
     <IconWrapperDiv>
       <Icons>
         {userDetails.name !== '' && <ProfileModal user={user} />}
         <ChangeTheme />
-        {userDetails.userRole === RoleType.CLIENT && <SupportModal />}
-        {userDetails.userRole === RoleType.CLIENT && <SurveyModalComponent />}
+        {isLoggedClient && <SupportModal />}
+        {isLoggedClient && <SurveyModalComponent />}
       </Icons>
       <AuthNav>
         <AuthNavComponent isLogged={userDetails.name !== ''} />

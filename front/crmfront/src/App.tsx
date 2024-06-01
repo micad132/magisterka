@@ -14,13 +14,14 @@ import {
 import { Bar } from 'react-chartjs-2';
 import LayoutContainer from './layout/layout.container.tsx';
 import { useAppDispatch } from './utils/hooks.ts';
-import { fetchAllUsersThunk, fetchUserDetailsThunk } from './store/userSlice.tsx';
+import { fetchAllUsersThunk, fetchUserDetailsThunk, setLoggedUser } from './store/userSlice.tsx';
 import { fetchSupportRequestsThunk } from './store/supportRequestSlice.tsx';
 import { fetchMessagesThunk } from './store/messageSlice.tsx';
 import { fetchTasksThunk } from './store/taskSlice.tsx';
 import AppRoutes from './routes';
 import { fetchHistoriesThunk } from './store/historySlice.tsx';
 import { fetchStatsThunk } from './store/statSlice.tsx';
+import { RoleType, UserGender } from './types/UserType.ts';
 
 // Rejestrowanie elementów Chart.js
 ChartJS.register(
@@ -55,6 +56,23 @@ const App = () => {
     dispatch(fetchTasksThunk());
     dispatch(fetchHistoriesThunk());
     dispatch(fetchStatsThunk());
+    dispatch(setLoggedUser({
+      name: 'michal',
+      userRole: RoleType.ADMIN,
+      age: 12,
+      cityName: 'Krakow',
+      countryName: 'Polska',
+      createdAccountDate: '2024-12-23',
+      email: 'mikad@mikad.pl',
+      pesel: '111',
+      surname: 'mosiolek',
+      username: 'mikad132',
+      id: 1,
+      phoneNumber: '72',
+      postalCode: '84',
+      streetName: 'aab',
+      userGender: UserGender.MAN,
+    }));
   }, []);
   return (
     <AppWrapper>

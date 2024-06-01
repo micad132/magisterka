@@ -12,6 +12,7 @@ import { fetchSupportRequestsThunk, getAllSupportRequests } from '../../store/su
 import { getUserDetails } from '../../store/userSlice.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import ClientItemsCountComponent from '../../components/clientItemsCount.component.tsx';
+import MessageComponent from '../../components/message.component.tsx';
 
 const SUPPORT_REQUEST_SELECT_OPTIONS: SelectValue[] = [
   {
@@ -54,6 +55,15 @@ const SupportPageContainer = () => {
   const properHeaderInfo = loggedUser.userRole === RoleType.CLIENT
     ? <ClientItemsCountComponent count={12} itemName="support requests" />
     : <PageItemsCountComponent count={supportRequests.length} text="support requests" />;
+
+  if (supports.length === 0) {
+    return (
+      <PageWrapperComponent>
+        <PageHeaderComponent text="Support" />
+        <MessageComponent message="There are no support requests in the system" />
+      </PageWrapperComponent>
+    );
+  }
 
   return (
     <PageWrapperComponent>

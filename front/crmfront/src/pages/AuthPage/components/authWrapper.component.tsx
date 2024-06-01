@@ -10,6 +10,10 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 15px;
+  
+  @media(max-width: 1600px) {
+    max-width: 600px;
+  }
 `;
 
 interface Props {

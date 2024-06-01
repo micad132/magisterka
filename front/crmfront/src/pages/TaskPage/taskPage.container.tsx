@@ -14,7 +14,7 @@ import {
 import { addingTaskRequestThunk, getAllTasks } from '../../store/taskSlice.tsx';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { getUserDetails } from '../../store/userSlice.tsx';
-import NoItemsComponent from '../../components/noItems.component.tsx';
+import MessageComponent from '../../components/message.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import { ActionType, AddHistory } from '../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../store/historySlice.tsx';
@@ -94,7 +94,7 @@ const TaskPageContainer = () => {
       <PageWrapperComponent>
         <PageHeaderComponent text="TASKS" />
         <ModalComponent modalProps={modalProps} />
-        <NoItemsComponent itemName="tasks" />
+        <MessageComponent message="There are no tasks in the system" />
       </PageWrapperComponent>
     );
   }
