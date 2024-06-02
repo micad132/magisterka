@@ -8,7 +8,6 @@ import lombok.*;
 @Getter
 @Setter
 public class SurveyDTORequest {
-    private String description;
     private Long authorId;
     private Double taskRate;
     private Double messageRate;

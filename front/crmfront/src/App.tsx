@@ -22,6 +22,7 @@ import AppRoutes from './routes';
 import { fetchHistoriesThunk } from './store/historySlice.tsx';
 import { fetchStatsThunk } from './store/statSlice.tsx';
 import { RoleType, UserGender } from './types/UserType.ts';
+import { fetchSurveysThunk } from './store/surveySlice.tsx';
 
 // Rejestrowanie elementów Chart.js
 ChartJS.register(
@@ -56,23 +57,24 @@ const App = () => {
     dispatch(fetchTasksThunk());
     dispatch(fetchHistoriesThunk());
     dispatch(fetchStatsThunk());
-    dispatch(setLoggedUser({
-      name: 'michal',
-      userRole: RoleType.ADMIN,
-      age: 12,
-      cityName: 'Krakow',
-      countryName: 'Polska',
-      createdAccountDate: '2024-12-23',
-      email: 'mikad@mikad.pl',
-      pesel: '111',
-      surname: 'mosiolek',
-      username: 'mikad132',
-      id: 1,
-      phoneNumber: '72',
-      postalCode: '84',
-      streetName: 'aab',
-      userGender: UserGender.MAN,
-    }));
+    dispatch(fetchSurveysThunk());
+    // dispatch(setLoggedUser({
+    //   name: 'michal',
+    //   userRole: RoleType.ADMIN,
+    //   age: 12,
+    //   cityName: 'Krakow',
+    //   countryName: 'Polska',
+    //   createdAccountDate: '2024-12-23',
+    //   email: 'mikad@mikad.pl',
+    //   pesel: '111',
+    //   surname: 'mosiolek',
+    //   username: 'mikad132',
+    //   id: 1,
+    //   phoneNumber: '72',
+    //   postalCode: '84',
+    //   streetName: 'aab',
+    //   userGender: UserGender.MAN,
+    // }));
   }, []);
   return (
     <AppWrapper>

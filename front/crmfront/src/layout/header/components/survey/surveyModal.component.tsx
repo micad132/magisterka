@@ -1,6 +1,6 @@
 import QuizIcon from '@mui/icons-material/Quiz';
 import styled from 'styled-components';
-import { Icon } from '@chakra-ui/react';
+import { Icon, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import ModalComponent from '../../../../components/modals/modal.component.tsx';
 import { ModalProps } from '../../../../types/UtilTypes.ts';
@@ -11,9 +11,10 @@ import {
   AddSurveyState,
   SURVEY_ERRORS_INITIAL_VALUES, SurveyErrors,
 } from '../../../../types/SurveyType.ts';
-import { useAppSelector } from '../../../../utils/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { getUserDetails } from '../../../../store/userSlice.tsx';
 import { surveyScheme, SurveyValidatorErrors } from '../../../../services/validators/SurveyValidator.ts';
+import { addingSurveyThunk } from '../../../../store/surveySlice.tsx';
 
 const Wrapper = styled.div`
 `;
@@ -22,6 +23,8 @@ const SurveyModalComponent = () => {
   const [surveyValues, setSurveyValues] = useState<AddSurveyState>(ADD_SURVEY_STATE_INITIAL_VALUES);
   const [surveyErrors, setSurveyErrors] = useState<SurveyErrors>(SURVEY_ERRORS_INITIAL_VALUES);
   const loggedUser = useAppSelector(getUserDetails);
+  const dispatch = useAppDispatch();
+  const toast = useToast();
 
   const setValues = (key: string, value: string) => {
     setSurveyValues((prevState) => ({
@@ -59,8 +62,30 @@ const SurveyModalComponent = () => {
       supportRate: Number(surveyValues.supportRate),
       messageRate: Number(surveyValues.messageRate),
       taskRate: Number(surveyValues.taskRate),
-      creatorId: loggedUser.id,
+      authorId: loggedUser.id,
     };
+    try {
+      dispatch(addingSurveyThunk(obj));
+      toast({
+        title: 'Survey made!',
+        description: 'You have successfully made a survey',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'top-right',
+      });
+      setSurveyErrors(SURVEY_ERRORS_INITIAL_VALUES);
+      setSurveyValues(ADD_SURVEY_STATE_INITIAL_VALUES);
+    } catch (e) {
+      toast({
+        title: 'Survey not made',
+        description: 'Something went wrong, contact with your admin!',
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    }
   };
 
   const modalProps: ModalProps = {

@@ -7,6 +7,7 @@ import HelpIcon from '@mui/icons-material/Help';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import MessageIcon from '@mui/icons-material/Message';
+import QuizIcon from '@mui/icons-material/Quiz';
 import SingleLink from './singleLink.component.tsx';
 import { useAppSelector } from '../../../utils/hooks.ts';
 import { getUserDetails } from '../../../store/userSlice.tsx';
@@ -42,6 +43,7 @@ const NavComponent = () => {
         <SingleLink path="/history" text="History" icon={<HistoryIcon />} />
         {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/stats" text="Stats" icon={<InsertChartIcon />} />}
         <SingleLink path="/support" text="Support" icon={<HelpIcon />} />
+        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/survey" text="Survey" icon={<QuizIcon />} />}
       </LinksWrapper>
     </NavWrapper>
   );

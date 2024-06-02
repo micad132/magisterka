@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class SurveyDTOResponse {
     private Long id;
-    private String description;
     private Double taskRate;
     private Double messageRate;
     private Double supportRate;

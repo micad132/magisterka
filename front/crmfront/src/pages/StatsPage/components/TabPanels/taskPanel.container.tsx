@@ -12,6 +12,7 @@ import { mapJsonToPieChart } from '../../../../utils/mappers/chartUtils/mapJsonT
 import SelectWrapperComponent from '../selectWrapper.component.tsx';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import TaskChartWrapperComponent from '../taskChartWrapper.component.tsx';
+import { mapDateToString } from '../../../../utils/mappers/mapDateToString.ts';
 
 const TASK_DIAGRAM_TYPE: SelectValue[] = [
   {
@@ -33,7 +34,6 @@ const TASK_DIAGRAM_TYPE: SelectValue[] = [
 ];
 
 const TaskPanelContainer = () => {
-  const f = 5;
   const [taskDiagramType, setTaskDiagramType] = useState<string>('taskStatus');
   const dispatch = useAppDispatch();
   const loggedUser = useAppSelector(getUserDetails);
