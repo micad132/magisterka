@@ -53,6 +53,8 @@ export const getProperJsonMap = (chartType: StatTypeType, json: string) => {
       return mapJsonToDoughnutChart(json);
     case StatType.BAR:
       return mapJsonToBarChart(json);
+    default:
+      mapJsonToDoughnutChart(json);
   }
   return mapJsonToDoughnutChart(json);
 };

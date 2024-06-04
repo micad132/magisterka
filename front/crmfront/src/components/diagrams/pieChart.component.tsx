@@ -16,14 +16,19 @@ interface Props {
 }
 
 const PieChartWrapper = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: min-content;
+  padding: 20px 0;
 `;
 
 const RoleTag = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Chart = styled.div`
+  height: 350px;
 `;
 
 const BAR_OPTIONS: ChartOptions<'bar'> = {
@@ -49,11 +54,24 @@ const PieChartComponent = ({
   const getProperChart = (chartTypee: StatTypeType) => {
     switch (chartTypee) {
       case StatType.PIE:
-        return <Pie data={chartData as ChartData<'pie'>} />;
+        return (
+          <Chart>
+            <Pie data={chartData as ChartData<'pie'>} />
+          </Chart>
+        );
+
       case StatType.DOUGHNUT:
-        return <Doughnut data={chartData as ChartData<'doughnut'>} />;
+        return (
+          <Chart>
+            <Doughnut data={chartData as ChartData<'doughnut'>} />
+          </Chart>
+        );
       case StatType.LINE:
-        return <Line data={chartData as ChartData<'line'>} />;
+        return (
+          <Chart>
+            <Line data={chartData as ChartData<'line'>} />
+          </Chart>
+        );
       case StatType.BAR:
         return <Bar data={chartData as ChartData<'bar'>} options={BAR_OPTIONS} />;
     }

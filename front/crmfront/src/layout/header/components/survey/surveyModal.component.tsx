@@ -27,6 +27,8 @@ const SurveyModalComponent = () => {
   const toast = useToast();
 
   const setValues = (key: string, value: string) => {
+    console.log('KEY', key);
+    console.log('VALUE', typeof value);
     setSurveyValues((prevState) => ({
       ...prevState,
       [key]: value,

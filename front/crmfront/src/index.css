@@ -8,3 +8,24 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Stylizacja paska przewijania */
+body::-webkit-scrollbar {
+  height: 12px; /* Wysokość paska przewijania */
+}
+
+/* Stylizacja toru (track) */
+body::-webkit-scrollbar-track {
+  background: red; /* Kolor tła toru */
+}
+
+/* Stylizacja uchwytu (thumb) */
+body::-webkit-scrollbar-thumb {
+  background: red /* Kolor uchwytu */
+  border-radius: 10px; /* Zaokrąglenie uchwytu */
+}
+
+/* Stylizacja uchwytu podczas najechania kursorem */
+body::-webkit-scrollbar-thumb:hover {
+  background: red; /* Kolor uchwytu po najechaniu kursorem */
+}

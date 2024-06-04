@@ -1,7 +1,7 @@
 export type AddSurveyState = {
-  taskRate: string,
-  messageRate: string,
-  supportRate: string,
+  taskRate: number,
+  messageRate: number,
+  supportRate: number,
 };
 
 export type Survey = {
@@ -29,9 +29,9 @@ export type SurveyErrors = {
 };
 
 export const ADD_SURVEY_STATE_INITIAL_VALUES: AddSurveyState = {
-  taskRate: '',
-  messageRate: '',
-  supportRate: '',
+  taskRate: 0.1,
+  messageRate: 0.1,
+  supportRate: 0.1,
 };
 
 export const SURVEY_ERRORS_INITIAL_VALUES: SurveyErrors = {

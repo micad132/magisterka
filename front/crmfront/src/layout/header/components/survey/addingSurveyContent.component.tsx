@@ -1,5 +1,6 @@
 import InputComponent from '../../../../components/form/input.component.tsx';
 import { AddSurveyState, SurveyErrors } from '../../../../types/SurveyType.ts';
+import NumberInputComponent from '../../../../components/form/numberInput.component.tsx';
 
 interface Props {
   surveyValues: AddSurveyState,
@@ -12,35 +13,32 @@ const AddingSurveyContentComponent = ({ surveyValues, setValues, errors }: Props
   return (
     <div>
       <p>Rates from 0 to 5</p>
-      <InputComponent
-        name="taskRate"
+      <NumberInputComponent
+        defaultValue={0.1}
+        minValue={0.1}
+        maxValue={5.0}
         value={surveyValues.taskRate}
-        onChange={(e) => setValues('taskRate', e.target.value)}
-        placeholder="From 0 to 5"
+        onChange={(e) => setValues('taskRate', e)}
+        step={0.1}
         label="How do you rate task experience?"
-        type="number"
-        isInvalid={errors.taskRate !== ''}
-        error={errors.taskRate}
       />
-      <InputComponent
-        name="messageRate"
+      <NumberInputComponent
+        defaultValue={0.1}
+        minValue={0.1}
+        maxValue={5.0}
         value={surveyValues.messageRate}
-        onChange={(e) => setValues('messageRate', e.target.value)}
-        placeholder="From 0 to 5"
+        onChange={(e) => setValues('messageRate', e)}
+        step={0.1}
         label="How do you rate message experience?"
-        type="number"
-        isInvalid={errors.messageRate !== ''}
-        error={errors.messageRate}
       />
-      <InputComponent
-        name="supportRate"
+      <NumberInputComponent
+        defaultValue={0.1}
+        minValue={0.1}
+        maxValue={5.0}
         value={surveyValues.supportRate}
-        onChange={(e) => setValues('supportRate', e.target.value)}
-        placeholder="From 0 to 5"
-        label="How do you rate support experience?"
-        type="number"
-        isInvalid={errors.supportRate !== ''}
-        error={errors.supportRate}
+        onChange={(e) => setValues('supportRate', e)}
+        step={0.1}
+        label="How do you rate support request experience?"
       />
     </div>
   );

@@ -9,6 +9,7 @@ import { fetchMessagesThunk } from '../../store/messageSlice.tsx';
 import { fetchTasksThunk } from '../../store/taskSlice.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
+import AdminHomePageContainer from './components/adminHomePage/adminHomePage.container.tsx';
 
 const HomePageHeader = styled.h1`
   color: var(--font-color);
@@ -62,7 +63,15 @@ const HomePage = () => {
     return (
       <PageWrapperComponent>
         <HomePageHeader>Hello {loggedUser.name} {loggedUser.surname}</HomePageHeader>
+        <p>You created account in this system at 28.03.2024 18:21</p>
+        <p>Until now you created:</p>
       </PageWrapperComponent>
+    );
+  }
+
+  if (loggedUser.userRole === RoleType.ADMIN) {
+    return (
+      <AdminHomePageContainer />
     );
   }
 
