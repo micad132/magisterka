@@ -7,6 +7,13 @@ import { useAppSelector } from '../../../../utils/hooks.ts';
 import { getAllStats } from '../../../../store/statSlice.tsx';
 import { StatCategory } from '../../../../types/StatType.ts';
 import ChartsWrapperComponent from './chartsWrapper.component.tsx';
+import SystemSingleInfoComponent from './systemSingleInfo.component.tsx';
+import SystemInfoComponent from './systemInfo/systemInfo.component.tsx';
+
+const MainHeader = styled.h1`
+  font-weight: bold;
+  font-size: 1.5rem;
+`;
 
 const CustomTabList = styled(TabList)`
   display: flex !important;
@@ -33,7 +40,7 @@ const AdminHomePageContainer = () => {
   console.log('task stats', taskStats);
   return (
     <PageWrapperComponent>
-      Hello admin132
+      <MainHeader>As a admin on main screen you can preview all data in system</MainHeader>
       <Tabs>
         <CustomTabList>
           <Tab>System info</Tab>
@@ -43,7 +50,7 @@ const AdminHomePageContainer = () => {
         <TabPanels>
 
           <TabPanel>
-            COSIK
+            <SystemInfoComponent />
           </TabPanel>
           <div>
             <h1>Here you can preview all existing charts in system</h1>
