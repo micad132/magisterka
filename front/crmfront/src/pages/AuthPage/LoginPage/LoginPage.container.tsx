@@ -61,7 +61,8 @@ const LoginPage = () => {
       console.log('e', e);
       toast({
         title: 'Login went wrong!',
-        description: `${e.response.data.message}`,
+        // description: `${e.response.data.message}`,
+        description: 'test',
         status: 'error',
         duration: 4000,
         isClosable: true,

@@ -7,9 +7,9 @@ import com.crmbackend.backend.SupportRequest.SupportRequestModel;
 import com.crmbackend.backend.Survey.SurveyModel;
 import com.crmbackend.backend.User.enums.UserGender;
 import com.crmbackend.backend.User.enums.UserRole;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

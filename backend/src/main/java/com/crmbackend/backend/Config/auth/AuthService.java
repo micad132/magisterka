@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final TotpService totpService;
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 

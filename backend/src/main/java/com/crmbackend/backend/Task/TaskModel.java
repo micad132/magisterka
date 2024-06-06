@@ -5,17 +5,17 @@ import com.crmbackend.backend.Task.enums.TaskPriority;
 import com.crmbackend.backend.Task.enums.TaskStatus;
 import com.crmbackend.backend.Task.enums.TaskType;
 import com.crmbackend.backend.User.UserModel;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-@Entity
 @Builder
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "task_model")

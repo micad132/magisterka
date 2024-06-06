@@ -1,9 +1,9 @@
 package com.crmbackend.backend.History;
 
 import com.crmbackend.backend.User.UserModel;
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter

@@ -14,7 +14,12 @@ const TaskService = {
   }),
 
   getAllTasks: async () => {
-    const res = await axios.get(`${API_URL}/task`);
+    const token = localStorage.getItem('accessToken');
+    const res = await axios.get(`${API_URL}/task`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // Dodaj token do nagłówka Authorization
+      },
+    });
     return res.data;
   },
 
