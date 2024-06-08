@@ -41,8 +41,13 @@ const SupportPageContainer = () => {
   const [filteredSupportRequest, setFilteredSupportRequest] = useState<string>('all');
   const dispatch = useAppDispatch();
   const supportRequests = useAppSelector(getAllSupportRequests);
+  console.log('supports', supportRequests);
   const loggedUser = useAppSelector(getUserDetails);
-  const supports = supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} />);
+
+  const clientSupports = supportRequests.filter((support) => support.username === loggedUser.username);
+  const supports = (loggedUser.userRole === RoleType.ADMIN || loggedUser.userRole === RoleType.WORKER)
+    ? supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} isAdminOrWorker />)
+    : clientSupports.map((support) => <SingleSupportComponent key={support.id} support={support} isAdminOrWorker={false} />);
 
   useEffect(() => {
     dispatch(fetchSupportRequestsThunk());
@@ -50,10 +55,10 @@ const SupportPageContainer = () => {
 
   const filteredSupports = filteredSupportRequest === 'all'
     ? supports
-    : supportRequests.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} />);
+    : supportRequests.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} isAdminOrWorker />);
 
   const properHeaderInfo = loggedUser.userRole === RoleType.CLIENT
-    ? <ClientItemsCountComponent count={12} itemName="support requests" />
+    ? <ClientItemsCountComponent count={clientSupports.length} itemName="support requests" />
     : <PageItemsCountComponent count={supportRequests.length} text="support requests" />;
 
   if (supports.length === 0) {

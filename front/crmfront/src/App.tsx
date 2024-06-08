@@ -23,6 +23,7 @@ import { fetchHistoriesThunk } from './store/historySlice.tsx';
 import { fetchStatsThunk } from './store/statSlice.tsx';
 import { RoleType, UserGender } from './types/UserType.ts';
 import { fetchSurveysThunk } from './store/surveySlice.tsx';
+import { fetchCommentsThunk } from './store/commentsSlice.tsx';
 
 // Rejestrowanie elementów Chart.js
 ChartJS.register(
@@ -58,6 +59,7 @@ const App = () => {
     dispatch(fetchHistoriesThunk());
     dispatch(fetchStatsThunk());
     dispatch(fetchSurveysThunk());
+    dispatch(fetchCommentsThunk());
     // dispatch(setLoggedUser({
     //   name: 'michal',
     //   userRole: RoleType.ADMIN,

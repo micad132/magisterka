@@ -27,6 +27,17 @@ export const registerScheme = Yup.object().shape({
     .min(11, 'Pesel must contain 11 digits')
     .max(11, 'Pesel must contain 11 digits')
     .matches(/^[0-9]+$/, 'Pesel must contain only digits'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(10)
+    .max(30)
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
+      'Password must be at least 10 characters long, contain one uppercase letter, one lowercase letter, one number, and one special character.',
+    ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password')], 'Confirmed password must be the same as password')
+    .required('Confirm password is required'),
   streetName: Yup.string()
     .required('Street name is required')
     .matches(/^[a-zA-Z]+$/, 'Street name must contain only letters'),

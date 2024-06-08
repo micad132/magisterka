@@ -22,6 +22,7 @@ import { RoleType } from '../../types/UserType.ts';
 import { ActionType, AddHistory } from '../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../store/historySlice.tsx';
 import MessageComponent from '../../components/message.component.tsx';
+import { sanitizeInput } from '../../utils/utilFunctions.ts';
 
 const MessagesPageContainer = () => {
   const [filterUser, setFilterUser] = useState<string>('all');
@@ -46,7 +47,7 @@ const MessagesPageContainer = () => {
   const onMessageTextChange = (value: string) => {
     setMessage((prevState) => ({
       ...prevState,
-      description: value,
+      description: sanitizeInput(value),
     }));
   };
 

@@ -69,6 +69,7 @@ export type UserDTOTaskDetailsCreator = {
   creatorCountry: string,
   creatorName: string,
   creatorSurname: string,
+  creatorRole: RoleTypeType,
 };
 
 export type UserDTOTaskDetailsAssignee = {

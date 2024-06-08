@@ -30,6 +30,7 @@ public class TaskMapper {
                 .taskPriority(taskModel.getTaskPriority())
                 .taskStatus(taskModel.getTaskStatus())
                 .taskType(taskModel.getTaskType())
+                .taskOrigin(taskModel.getTaskOrigin())
                 .userDTOTaskDetailsAssignee(Optional.ofNullable(taskModel.getAssigneeUser()).map(userMapper::mapEntityToUserDetailsAssignee).orElse(new UserDTOTaskDetailsAssignee()))
                 .userDTOTaskDetailsCreator(Optional.ofNullable(taskModel.getCreatorUser()).map(userMapper::mapEntityToUserDetailsCreator).orElse(new UserDTOTaskDetailsCreator()))
                 .cost(taskModel.getCost())
@@ -44,15 +45,19 @@ public class TaskMapper {
 
     public TaskModel mapDTOToEntity(TaskDTORequest taskDTORequest) {
         UserModel userModel = userRepository.findById(taskDTORequest.getCreatorId()).orElseThrow();
+        UserModel assigneeModel = Optional.ofNullable(taskDTORequest.getAssigneeId())
+                .flatMap(userRepository::findById)
+                .orElse(null);
         LocalDateTime localDateTime = LocalDateTime.parse(taskDTORequest.getEstimatedFinishTime());
         return TaskModel.builder()
                 .description(taskDTORequest.getDescription())
                 .cost(0.0)
-                .assigneeUser(null)
+                .assigneeUser(assigneeModel)
                 .creationDate(LocalDateTime.now())
                 .taskType(taskDTORequest.getTaskType())
                 .taskPriority(taskDTORequest.getTaskPriority())
                 .taskStatus(taskDTORequest.getTaskStatus())
+                .taskOrigin(taskDTORequest.getTaskOrigin())
                 .hoursSpent(0.0)
                 .creatorUser(userModel)
                 .estimatedCost(taskDTORequest.getEstimatedCost())

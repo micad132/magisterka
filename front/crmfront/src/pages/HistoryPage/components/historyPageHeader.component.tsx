@@ -1,7 +1,10 @@
-const HistoryPageHeaderComponent = () => (
+interface Props {
+  text: string,
+}
+
+const HistoryPageHeaderComponent = ({ text }: Props) => (
   <div>
-    <h2>Here you can check your own actions history</h2>
-    <h2>You performed 7 actions</h2>
+    <h2>{text}</h2>
   </div>
 );
 

@@ -7,16 +7,19 @@ const TaskColumnWrapper = styled.div`
   width: 500px;
   min-height: min-content;
   border-right: 3px solid var(--background-color);
-  //overflow: auto;
+ 
   padding: 0 30px;
+ 
   //background-color: chocolate;
 `;
 
 const TaskWrapper = styled.div`
-  
+
+  overflow: auto;
   //TODO FIX TO
-  //height: 1000px;
+  height: 700px;
   //overflow: auto;
+  padding: 30px;
 `;
 
 interface Props {

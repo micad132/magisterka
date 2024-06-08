@@ -43,6 +43,8 @@ public class SecurityConfig {
 
 
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final String ACCESS_TOKEN = "accessToken";
+    private final String REFRESH_TOKEN = "refreshToken";
 
     @Bean
     public HttpSessionIdResolver httpSessionIdResolver() {
@@ -114,7 +116,8 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("http://localhost:5173")
-                        .deleteCookies("JSESSIONID")
+                        .deleteCookies(ACCESS_TOKEN)
+                        .deleteCookies(REFRESH_TOKEN)
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                 )

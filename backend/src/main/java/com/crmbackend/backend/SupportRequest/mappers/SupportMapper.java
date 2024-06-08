@@ -30,6 +30,7 @@ public class SupportMapper {
 
     public SupportRequestResponse mapEntityToDTO(SupportRequestModel supportRequestModel) {
         return SupportRequestResponse.builder()
+                .id(supportRequestModel.getId())
                 .description(supportRequestModel.getDescription())
                 .supportCategory(supportRequestModel.getSupportCategory())
                 .dateTime(supportRequestModel.getCreatedTime())

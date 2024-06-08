@@ -49,7 +49,7 @@ export const deleteSupportRequestThunk = createAsyncThunk(
   async (supportId: number) => {
     try {
       await SupportRequestService.deleteSupportRequest(supportId);
-      const data = await UserService.getAllUsers();
+      const data = await SupportRequestService.getSupportRequests();
       return data;
     } catch (e: any) {
       // eslint-disable-next-line @typescript-eslint/no-throw-literal
@@ -71,6 +71,9 @@ const supportRequestSlice = createSlice({
         state.supportRequests = action.payload;
       });
     builder.addCase(deleteSupportRequestThunk.fulfilled, (state, action) => {
+      state.supportRequests = action.payload;
+    });
+    builder.addCase(addingSupportRequestThunk.fulfilled, (state, action) => {
       state.supportRequests = action.payload;
     });
   },

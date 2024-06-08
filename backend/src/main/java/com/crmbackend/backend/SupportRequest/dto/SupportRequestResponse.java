@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class SupportRequestResponse {
+    private Long id;
     private String description;
     private LocalDateTime dateTime;
     private SupportCategory supportCategory;

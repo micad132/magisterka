@@ -1,3 +1,5 @@
+import { ValuesType } from './UtilTypes.ts';
+
 export type AddSurveyState = {
   taskRate: number,
   messageRate: number,
@@ -27,6 +29,14 @@ export type SurveyErrors = {
   messageRate: string,
   supportRate: string,
 };
+
+export const SurveyRating = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+} as const;
+
+export type SurveyRatingType = ValuesType<typeof SurveyRating>;
 
 export const ADD_SURVEY_STATE_INITIAL_VALUES: AddSurveyState = {
   taskRate: 0.1,

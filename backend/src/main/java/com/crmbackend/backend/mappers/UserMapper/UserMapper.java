@@ -75,6 +75,7 @@ public class UserMapper {
                 .creatorSurname(userModel.getSurname())
                 .creatorAge(userModel.getAge())
                 .creatorCountry(userModel.getCountryName())
+                .creatorRole(userModel.getUserRole())
                 .build();
     }
 

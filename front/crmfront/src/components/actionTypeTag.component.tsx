@@ -43,13 +43,13 @@ const ActionTypeTagComponent = ({ actionType }: Props) => {
         );
       case ActionType.MESSAGE:
         return (
-          <Tooltip label="Profile related action">
+          <Tooltip label="Message related action">
             <TagWrapper size="large" variant="solid" colorScheme="blue">{ActionType.MESSAGE}</TagWrapper>
           </Tooltip>
         );
       case ActionType.SURVEY:
         return (
-          <Tooltip label="Profile related action">
+          <Tooltip label="Survey related action">
             <TagWrapper size="large" variant="solid" colorScheme="pink">{ActionType.SURVEY}</TagWrapper>
           </Tooltip>
         );

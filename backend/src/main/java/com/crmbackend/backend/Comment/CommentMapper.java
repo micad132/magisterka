@@ -25,6 +25,9 @@ public class CommentMapper {
                 .description(commentModel.getDescription())
                 .taskId(commentModel.getTaskModel().getId())
                 .authorUsername(commentModel.getUserModel().getUsername())
+                .authorName(commentModel.getUserModel().getName())
+                .authorSurname(commentModel.getUserModel().getSurname())
+                .authorRole(commentModel.getUserModel().getUserRole())
                 .build();
     }
 

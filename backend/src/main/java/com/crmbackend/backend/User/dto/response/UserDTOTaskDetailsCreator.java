@@ -1,6 +1,7 @@
 package com.crmbackend.backend.User.dto.response;
 
 
+import com.crmbackend.backend.User.enums.UserRole;
 import lombok.*;
 
 @Builder
@@ -14,4 +15,5 @@ public class UserDTOTaskDetailsCreator {
     private String creatorCountry;
     private String creatorName;
     private String creatorSurname;
+    private UserRole creatorRole;
 }

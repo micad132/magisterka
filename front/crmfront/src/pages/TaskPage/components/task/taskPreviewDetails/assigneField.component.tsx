@@ -14,7 +14,7 @@ interface Props {
 const AssigneField = ({ assignee }: Props) => (
   <AsigneeFieldWraper>
     <span>Assignee:</span>
-    <CustomLabel text={assignee} />
+    {assignee === null ? <CustomLabel text="N/A" /> : <CustomLabel text={assignee} />}
   </AsigneeFieldWraper>
 );
 

@@ -21,15 +21,21 @@ const Description = styled.p`
 `;
 
 interface Props {
+  authorUsername: string,
+  authorSurname: string,
   authorName: string,
   date: string,
   description: string,
 }
 
-const SingleCommentComponent = ({ authorName, date, description }: Props) => (
+const SingleCommentComponent = ({
+  authorName, date, description, authorSurname, authorUsername,
+}: Props) => (
   <SingleComment>
     <AuthorAndDate>
-      <p>{authorName}</p>
+      <p>{authorUsername}</p>
+      <p>- {authorName}</p>
+      <p>{authorSurname}</p>
       <p>{date}</p>
     </AuthorAndDate>
     <Description>{description}</Description>

@@ -15,6 +15,7 @@ import PrivateRouteComponent from '../components/routesComponents/privateRoute.c
 import AdminOnlyRouteComponent from '../components/routesComponents/adminOnlyRoute.component.tsx';
 import StatsPageContainer from '../pages/StatsPage/statsPage.container.tsx';
 import SurveyPageContainer from '../pages/SurveyPage/surveyPage.container.tsx';
+import CommentPageContainer from '../pages/CommentPage/commentPage.container.tsx';
 
 const AppRoutes = () => (
   <Routes>
@@ -36,7 +37,7 @@ const AppRoutes = () => (
       <Route path="/profile" element={<ProfilePageContainer />} />
       <Route path="/failed" element={<FailedLoginPageContainer />} />
       <Route path="/support" element={<SupportPageContainer />} />
-      <Route path="/test" element={<MyComponent />} />
+      <Route path="/comments" element={<CommentPageContainer />} />
     </Route>
   </Routes>
 );

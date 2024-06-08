@@ -12,7 +12,7 @@ export type ModalProps = {
 };
 
 export type SelectValue = {
-  value: string,
+  value: string | number,
   text: string,
 };
 

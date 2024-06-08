@@ -5,6 +5,7 @@ import SelectComponent from '../../../components/form/select.component.tsx';
 import { TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS, TASK_TYPE_OPTIONS } from '../../../utils/consts.ts';
 import InputComponent from '../../../components/form/input.component.tsx';
 import { SelectValue } from '../../../types/UtilTypes.ts';
+import DatePickerComponent from '../../../components/form/datePicker.component.tsx';
 
 const CreatingTaskWrapper = styled.div`
     display: flex;
@@ -23,7 +24,7 @@ const ConvertingToTaskContentComponent = ({ values, setState, selectUsers }: Pro
   <CreatingTaskWrapper>
     <SelectComponent
       options={selectUsers}
-      onChange={(value) => setState('assignee', value)}
+      onChange={(value) => setState('assigneeId', value)}
       label="Assignee"
     />
     <SelectComponent
@@ -46,6 +47,12 @@ const ConvertingToTaskContentComponent = ({ values, setState, selectUsers }: Pro
       value={values.description}
       onChange={(value) => setState('description', value)}
       label="Task description"
+    />
+    <DatePickerComponent
+      label="Select estimated finish time"
+      onChange={(e) => setState('estimatedFinishTime', e.target.value)}
+      value={values.estimatedFinishTime}
+      placeholder="Finish time"
     />
     <InputComponent
       name="estimatedCost"

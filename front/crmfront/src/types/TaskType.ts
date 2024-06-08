@@ -12,6 +12,7 @@ export type Task = {
   taskStatus: TaskStatusType,
   taskPriority: TaskPriorityType,
   taskType: TaskTypeType,
+  taskOrigin: TaskOriginType,
   assignee: string,
 };
 
@@ -21,6 +22,7 @@ export type TaskResponseDTO = {
   taskStatus: TaskStatusType,
   taskPriority: TaskPriorityType,
   taskType: TaskTypeType,
+  taskOrigin: TaskOriginType,
   comments: CommentResponseDTO[],
   userDTOTaskDetailsCreator: UserDTOTaskDetailsCreator,
   userDTOTaskDetailsAssignee: UserDTOTaskDetailsAssignee,
@@ -36,8 +38,10 @@ export type AddingTask = {
   taskStatus: TaskStatusType,
   taskPriority: TaskPriorityType,
   taskType: TaskTypeType,
+  taskOrigin: TaskOriginType,
   estimatedCost: number,
   estimatedFinishTime: string,
+  assigneeId: number | null,
 };
 
 export type AddingTaskRequest = AddingTask & {
@@ -92,9 +96,15 @@ export const TaskType = {
   INFORMATIC: 'INFORMATIC',
 } as const;
 
+export const TaskOrigin = {
+  CREATED: 'CREATED',
+  FROM_SUPPORT: 'FROM_SUPPORT',
+} as const;
+
 export type TaskStatusType = ValuesType<typeof TaskStatus>;
 export type TaskPriorityType = ValuesType<typeof TaskPriority>;
 export type TaskTypeType = ValuesType<typeof TaskType>;
+export type TaskOriginType = ValuesType<typeof TaskOrigin>;
 
 export const ADDING_TASK_INITIAL_VALUE: AddingTask = {
   description: '',
@@ -103,6 +113,8 @@ export const ADDING_TASK_INITIAL_VALUE: AddingTask = {
   taskPriority: TaskPriority.MINOR,
   taskStatus: TaskStatus.IN_PROGRESS,
   taskType: TaskType.PURCHASE,
+  taskOrigin: TaskOrigin.CREATED,
+  assigneeId: null,
 };
 
 export const PREVIEW_TASK_INITIAL_VALUES: PreviewTask = {

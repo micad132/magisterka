@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import TaskStatusBadgeComponent from '../../../components/taskStatusBadge.component.tsx';
 import TaskTypeBadge from '../../../components/taskTypeBadge.component.tsx';
 import {
+  TaskOriginType,
   TaskPriority,
   TaskPriorityType,
   TaskStatus,
@@ -10,6 +11,7 @@ import {
   TaskTypeType,
 } from '../../../types/TaskType.ts';
 import TaskPriorityBadgeComponent from '../../../components/taskPriorityBadge.component.tsx';
+import TaskOriginTagComponent from '../../../components/taskOriginTag.component.tsx';
 
 const SingleTaskStatuses = styled.div`
   display: flex;
@@ -27,9 +29,12 @@ interface Props {
   taskStatus: TaskStatusType,
   taskType: TaskTypeType,
   taskPriority: TaskPriorityType,
+  taskOrigin: TaskOriginType,
 }
 
-const SingleTaskStasusesComponent = ({ taskType, taskPriority, taskStatus }: Props) => (
+const SingleTaskStasusesComponent = ({
+  taskType, taskPriority, taskStatus, taskOrigin,
+}: Props) => (
   <SingleTaskStatuses>
     <SingleStatus>
       <span>Task status</span>
@@ -42,6 +47,10 @@ const SingleTaskStasusesComponent = ({ taskType, taskPriority, taskStatus }: Pro
     <SingleStatus>
       <span>Task priority</span>
       <TaskPriorityBadgeComponent taskPriority={taskPriority} />
+    </SingleStatus>
+    <SingleStatus>
+      <span>Task origin</span>
+      <TaskOriginTagComponent taskOrigin={taskOrigin} />
     </SingleStatus>
 
   </SingleTaskStatuses>

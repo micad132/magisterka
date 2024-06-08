@@ -24,7 +24,7 @@ public class TaskController {
     }
 
     @PostMapping
-    @PreAuthorize("isAuthenticated() && (hasAnyAuthority('CLIENT'))")
+    @PreAuthorize("isAuthenticated() && (hasAnyAuthority('CLIENT') || hasAnyAuthority('WORKER'))")
     public ResponseEntity<String> addTask(@RequestBody TaskDTORequest taskDTORequest) {
         taskService.addTask(taskDTORequest);
         return ResponseEntity.ok("Successfully added!");

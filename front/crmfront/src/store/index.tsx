@@ -6,6 +6,7 @@ import taskReducer from './taskSlice.tsx';
 import historyReducer from './historySlice.tsx';
 import statReducer from './statSlice.tsx';
 import surveyReducer from './surveySlice.tsx';
+import commentReducer from './commentsSlice.tsx';
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     history: historyReducer,
     stat: statReducer,
     survey: surveyReducer,
+    comment: commentReducer,
   },
 });

@@ -20,6 +20,7 @@ import { addingSupportRequestThunk } from '../../../../store/supportRequestSlice
 import { ActionType, AddHistory } from '../../../../types/HistoryType.ts';
 import { getUserDetails } from '../../../../store/userSlice.tsx';
 import { addHistoryThunk } from '../../../../store/historySlice.tsx';
+import { sanitizeInput } from '../../../../utils/utilFunctions.ts';
 
 const ModalBodyWrapper = styled.div`
   display: flex;
@@ -69,6 +70,10 @@ const SupportModal = () => {
   const toast = useToast();
   const dispatch = useAppDispatch();
 
+  const setText = (value: string) => {
+    setSupportText(sanitizeInput(value));
+  };
+
   const onSaveClick = () => {
     const addObj: AddingSupport = {
       supportCategory,
@@ -108,7 +113,7 @@ const SupportModal = () => {
               <SelectComponent options={SELECT_OPTIONS} onChange={setSupportCategory} label="Select support category" />
               <TextareaCompononent
                 label={properLabel(supportCategory)}
-                onChange={setSupportText}
+                onChange={setText}
                 placeholder={supportCategory}
                 value={supportText}
               />

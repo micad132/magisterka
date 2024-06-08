@@ -1,6 +1,7 @@
 package com.crmbackend.backend.Task.dto;
 
 import com.crmbackend.backend.Comment.dto.CommentDTOResponse;
+import com.crmbackend.backend.Task.enums.TaskOrigin;
 import com.crmbackend.backend.Task.enums.TaskPriority;
 import com.crmbackend.backend.Task.enums.TaskStatus;
 import com.crmbackend.backend.Task.enums.TaskType;
@@ -24,6 +25,7 @@ public class TaskDTOResponse {
     private TaskStatus taskStatus;
     private TaskPriority taskPriority;
     private TaskType taskType;
+    private TaskOrigin taskOrigin;
     private LocalDateTime creationDate;
     private LocalDateTime estimationFinishTime;
     private Double hoursSpent;

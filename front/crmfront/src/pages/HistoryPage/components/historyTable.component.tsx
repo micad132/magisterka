@@ -17,6 +17,8 @@ import { mapDateToString } from '../../../utils/mappers/mapDateToString.ts';
 const TableWrapper = styled.div`
     max-width: 1200px;
     margin: 20px auto 0 auto;
+  height: 1000px;
+  overflow-y: auto;
 `;
 
 interface Props {

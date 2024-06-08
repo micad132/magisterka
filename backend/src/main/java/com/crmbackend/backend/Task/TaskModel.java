@@ -1,6 +1,7 @@
 package com.crmbackend.backend.Task;
 
 import com.crmbackend.backend.Comment.CommentModel;
+import com.crmbackend.backend.Task.enums.TaskOrigin;
 import com.crmbackend.backend.Task.enums.TaskPriority;
 import com.crmbackend.backend.Task.enums.TaskStatus;
 import com.crmbackend.backend.Task.enums.TaskType;
@@ -65,5 +66,9 @@ public class TaskModel {
     @Enumerated(EnumType.STRING)
     @Column(name = "task_status")
     private TaskStatus taskStatus;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "task_origin")
+    private TaskOrigin taskOrigin;
 
 }

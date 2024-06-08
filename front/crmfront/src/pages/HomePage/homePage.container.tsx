@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
+import { Button } from '@chakra-ui/react';
+import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import {
   fetchAllUsersThunk, fetchUserDetailsThunk, getUserDetails,
@@ -10,6 +12,7 @@ import { fetchTasksThunk } from '../../store/taskSlice.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 import AdminHomePageContainer from './components/adminHomePage/adminHomePage.container.tsx';
+import { API_URL } from '../../utils/consts.ts';
 
 const HomePageHeader = styled.h1`
   color: var(--font-color);
@@ -23,6 +26,11 @@ const HomePage = () => {
   // const allUsers = useAppSelector(getAllUsers);
   // const [isUserDataFetched, setIsUserDataFetched] = useState<boolean>(false);
   // const [userInfoFetched, setUserInfoFetched] = useState(false);
+
+  const test = async () => {
+    const data = await axios.get(`${API_URL}/task`);
+    console.log('data', data);
+  };
 
   useEffect(() => {
     // console.log('hej');
@@ -65,6 +73,7 @@ const HomePage = () => {
         <HomePageHeader>Hello {loggedUser.name} {loggedUser.surname}</HomePageHeader>
         <p>You created account in this system at 28.03.2024 18:21</p>
         <p>Until now you created:</p>
+        <Button colorScheme="teal" onClick={test}>TEST</Button>
       </PageWrapperComponent>
     );
   }

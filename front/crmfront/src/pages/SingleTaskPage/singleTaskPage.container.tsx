@@ -46,7 +46,7 @@ const SingleTaskPageContainer = () => {
     <PageWrapperComponent>
       <PageHeaderComponent text="Task details" />
       <h1>TASK ID: {id}</h1>
-      <SingleTaskStasusesComponent taskPriority={singleTask?.taskPriority!} taskType={singleTask?.taskType!} taskStatus={singleTask?.taskStatus!} />
+      <SingleTaskStasusesComponent taskPriority={singleTask?.taskPriority!} taskType={singleTask?.taskType!} taskStatus={singleTask?.taskStatus!} taskOrigin={singleTask.taskOrigin} />
       <TaskDatesComponent createdTime={mapDateToString(singleTask?.creationDate!)} estimatedFinishTime={mapDateToString(singleTask?.estimationFinishTime!)} />
       <UserDetailsWrapper>
         <CreatorDetailsComponent
@@ -64,7 +64,7 @@ const SingleTaskPageContainer = () => {
       </TaskDetailInfoWrapper>
 
       <TaskDescriptionComponent description={singleTask?.description!} />
-      <CommentsWrapperComponent />
+      <CommentsWrapperComponent taskId={Number(id)} />
     </PageWrapperComponent>
   );
 };

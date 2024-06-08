@@ -15,6 +15,7 @@ import {
 } from '../../types/UserType.ts';
 import NotLoggedComponent from '../../components/routesComponents/notLogged.component.tsx';
 import { mapDateToString } from '../../utils/mappers/mapDateToString.ts';
+import { sanitizeInput } from '../../utils/utilFunctions.ts';
 
 const ProfilePageWrapper = styled.div`
   margin: 20px auto;
@@ -46,10 +47,17 @@ const ProfilePageContainer = () => {
   const [editPersonalInfo, setEditPersonalInfo] = useState<SelfEditUser>(initialUser);
 
   const setPersonalInfo = (value: string | number, key: string) => {
-    setEditPersonalInfo((prevState) => ({
-      ...prevState,
-      [key]: value,
-    }));
+    if (typeof value === 'string') {
+      setEditPersonalInfo((prevState) => ({
+        ...prevState,
+        [key]: sanitizeInput(value),
+      }));
+    } else {
+      setEditPersonalInfo((prevState) => ({
+        ...prevState,
+        [key]: value,
+      }));
+    }
   };
 
   const editPersonalInfoHandler = () => {

@@ -66,7 +66,7 @@ public class AuthController {
             Cookie accessTokenCookie = new Cookie("accessToken", accessToken);
             accessTokenCookie.setHttpOnly(true);
             accessTokenCookie.setPath("/");
-            accessTokenCookie.setMaxAge(86400); // 60 sekund
+            accessTokenCookie.setMaxAge(3600); // 60 sekund
             accessTokenCookie.setDomain("localhost");
 
             Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);

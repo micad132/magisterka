@@ -7,7 +7,9 @@ import CreatingTaskModalContent from './components/task/creatingTaskModalContent
 import TaskWrapper from './components/task/taskWrapper.component.tsx';
 import TaskSettingsContainer from './components/taskSettings/taskSettings.container.tsx';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
-import { ADDING_TASK_INITIAL_VALUE, AddingTask, AddingTaskRequest } from '../../types/TaskType.ts';
+import {
+  ADDING_TASK_INITIAL_VALUE, AddingTask, AddingTaskRequest, TaskOrigin, TaskStatus,
+} from '../../types/TaskType.ts';
 import {
   AllSelectValue, TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS, TASK_TYPE_OPTIONS,
 } from '../../utils/consts.ts';
@@ -18,6 +20,8 @@ import MessageComponent from '../../components/message.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import { ActionType, AddHistory } from '../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../store/historySlice.tsx';
+import { RoleType } from '../../types/UserType.ts';
+import { sanitizeInput } from '../../utils/utilFunctions.ts';
 
 const ALL_SELECT_VALUES: AllSelectValue = {
   initialStasuses: TASK_STATUS_OPTIONS,
@@ -32,25 +36,41 @@ const TaskPageContainer = () => {
   const toast = useToast();
   const loggedUser = useAppSelector(getUserDetails);
   const tasks = useAppSelector(getAllTasks);
+  const loggedUserTasks = tasks.filter((task) => task.userDTOTaskDetailsCreator.creatorUsername === loggedUser.username);
   console.log('TASKS', tasks);
 
+  const properUserTasks = loggedUser.userRole === RoleType.CLIENT
+    ? loggedUserTasks
+    : tasks;
+
   const setTaskValues = (value: string, key: string) => {
-    setAddingTask((prevState) => ({
-      ...prevState,
-      [key]: value,
-    }));
+    if (key === 'description') {
+      console.log('WBILEM');
+      setAddingTask((prevState) => ({
+        ...prevState,
+        description: sanitizeInput(value),
+      }));
+    } else {
+      setAddingTask((prevState) => ({
+        ...prevState,
+        [key]: value,
+      }));
+    }
   };
 
   const addTaskHandler = () => {
     console.log('ADDING TASK', addingTask);
+
     const taskBody: AddingTaskRequest = {
       estimatedFinishTime: String(addingTask.estimatedFinishTime),
       estimatedCost: Number(addingTask.estimatedCost),
       description: addingTask.description,
-      taskStatus: addingTask.taskStatus,
+      taskStatus: TaskStatus.PENDING,
       taskPriority: addingTask.taskPriority,
       taskType: addingTask.taskType,
       creatorId: loggedUser.id,
+      taskOrigin: TaskOrigin.CREATED,
+      assigneeId: null,
     };
     const historyObj: AddHistory = {
       performerId: loggedUser.id,
@@ -59,7 +79,7 @@ const TaskPageContainer = () => {
     };
     try {
       dispatch(addingTaskRequestThunk(taskBody));
-      dispatch(addHistoryThunk(historyObj));
+      // dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Task added!',
         description: 'You have successfully added task!',
@@ -100,8 +120,8 @@ const TaskPageContainer = () => {
   }
 
   const properTasks = sortingPriorityTask === 'ALL'
-    ? tasks
-    : tasks.filter((task) => task.taskPriority === sortingPriorityTask);
+    ? properUserTasks
+    : properUserTasks.filter((task) => task.taskPriority === sortingPriorityTask);
 
   console.log('PROPER TASKS', properTasks);
 
