@@ -17,8 +17,10 @@ import MenuComponent from '../../../components/menu.component.tsx';
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks.ts';
 import { deleteSupportRequestThunk } from '../../../store/supportRequestSlice.tsx';
 import { getAllUsers, getUserDetails } from '../../../store/userSlice.tsx';
-import { RoleType } from '../../../types/UserType.ts';
+import { RoleType, User } from '../../../types/UserType.ts';
 import { addingTaskRequestThunk } from '../../../store/taskSlice.tsx';
+import { ActionType, AddHistory } from '../../../types/HistoryType.ts';
+import { addHistoryThunk } from '../../../store/historySlice.tsx';
 
 const SingleSupportWrapper = styled.div`
   -webkit-box-shadow: 9px 3px 12px 3px teal;
@@ -52,6 +54,7 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
   const users = useAppSelector(getAllUsers);
+  const workerUsers = users.filter((user) => user.userRole === RoleType.WORKER);
   const loggedUser = useAppSelector(getUserDetails);
 
   const setState = (key: string, value: string | number) => {
@@ -63,7 +66,12 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
 
   const convertToTask = () => {
     console.log('STEJT', convertingToTask);
-    const assigneeId = users.find((user) => user.id === Number(convertingToTask.assigneeId));
+    let assignee: User | undefined;
+    if (workerUsers.length === 1) {
+      assignee = workerUsers[0];
+    } else {
+      assignee = workerUsers.find((user) => user.id === Number(convertingToTask.assigneeId));
+    }
     const taskBody: AddingTaskRequest = {
       estimatedFinishTime: String(convertingToTask.estimatedFinishTime),
       estimatedCost: Number(convertingToTask.estimatedCost),
@@ -73,10 +81,16 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
       taskType: convertingToTask.taskType,
       creatorId: loggedUser.id,
       taskOrigin: TaskOrigin.FROM_SUPPORT,
-      assigneeId: assigneeId?.id ?? null,
+      assigneeId: assignee?.id || null,
+    };
+    const historyObj: AddHistory = {
+      performerId: loggedUser.id,
+      historyActionType: ActionType.TASK,
+      description: `Worker ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} converted support request to task`,
     };
     try {
       dispatch(addingTaskRequestThunk(taskBody));
+      dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Support request converted to task',
         description: 'You have successfully converted support request to task',

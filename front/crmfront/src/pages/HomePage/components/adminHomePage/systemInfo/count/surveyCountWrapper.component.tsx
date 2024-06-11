@@ -5,6 +5,7 @@ import CountDivComponent from './countDiv.component.tsx';
 import CountDivContentComponent from './countDivContent.component.tsx';
 import RateTagComponent from '../../../../../../components/rateTag.component.tsx';
 import { SurveyRating } from '../../../../../../types/SurveyType.ts';
+import { calculateSurveyStatistics } from '../../../../../../utils/utilFunctions.ts';
 
 const Wrapper = styled.div`
   font-size: 1.3rem;
@@ -29,21 +30,24 @@ const HighRating = styled.p`
 
 const SurveyCountWrapperComponent = () => {
   const surveys = useAppSelector(getAllSurveys);
+
+  const stats = calculateSurveyStatistics(surveys);
+
   return (
     <Wrapper>
       <p>Surveys by ratings</p>
       <CountDivComponent>
         <CountDivContentComponent>
           <RateTagComponent rate={SurveyRating.LOW} />
-          <Count>3</Count>
+          <Count>{stats.lowRate}</Count>
         </CountDivContentComponent>
         <CountDivContentComponent>
           <RateTagComponent rate={SurveyRating.MEDIUM} />
-          <Count>3</Count>
+          <Count>{stats.mediumRate}</Count>
         </CountDivContentComponent>
         <CountDivContentComponent>
           <RateTagComponent rate={SurveyRating.HIGH} />
-          <Count>3</Count>
+          <Count>{stats.highRate}</Count>
         </CountDivContentComponent>
       </CountDivComponent>
     </Wrapper>

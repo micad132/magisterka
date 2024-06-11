@@ -17,8 +17,22 @@ const CommentPageContainer = () => {
   const loggedUser = useAppSelector(getUserDetails);
   console.log('co,ments', comments);
 
-  const clientComments = comments.filter((comment) => comment.authorUsername === loggedUser.username);
-  const clientComponents = clientComments.map((comment) => (
+  const clientComments = comments?.filter((comment) => comment.authorUsername === loggedUser.username);
+  const clientComponents = clientComments?.map((comment) => (
+    <SingleCommentComponent
+      key={comment.id}
+      taskId={comment.taskId}
+      createdAt={mapDateToString(comment.createdTime)}
+      authorName={comment.authorName}
+      authorSurname={comment.authorSurname}
+      authorRole={comment.authorRole}
+      description={comment.description}
+      isAdmin
+      commentId={comment.id}
+    />
+  ));
+
+  const workerComponents = comments?.map((comment) => (
     <SingleCommentComponent
       key={comment.id}
       taskId={comment.taskId}
@@ -32,21 +46,7 @@ const CommentPageContainer = () => {
     />
   ));
 
-  const workerComponents = comments.map((comment) => (
-    <SingleCommentComponent
-      key={comment.id}
-      taskId={comment.taskId}
-      createdAt={mapDateToString(comment.createdTime)}
-      authorName={comment.authorName}
-      authorSurname={comment.authorSurname}
-      authorRole={comment.authorRole}
-      description={comment.description}
-      isAdmin={false}
-      commentId={comment.id}
-    />
-  ));
-
-  const adminComponents = comments.map((comment) => (
+  const adminComponents = comments?.map((comment) => (
     <SingleCommentComponent
       key={comment.id}
       taskId={comment.taskId}
@@ -85,7 +85,7 @@ const CommentPageContainer = () => {
     return (
       <PageWrapperComponent>
         <PageHeaderComponent text="Comments" />
-        <PageItemsCountComponent count={comments.length} text="support requests" />;
+        <PageItemsCountComponent count={comments.length} text="comments" />
         <CommentsWrapperComponent>
           {adminComponents}
         </CommentsWrapperComponent>
@@ -97,7 +97,7 @@ const CommentPageContainer = () => {
     return (
       <PageWrapperComponent>
         <PageHeaderComponent text="Comments" />
-        <PageItemsCountComponent count={comments.length} text="support requests" />;
+        <PageItemsCountComponent count={comments.length} text="comments" />
         <CommentsWrapperComponent>
           {workerComponents}
         </CommentsWrapperComponent>

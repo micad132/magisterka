@@ -25,11 +25,11 @@ public class MessageModel {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @OneToOne(orphanRemoval = true)
+    @ManyToOne
     @JoinColumn(name = "author_model_id")
     private UserModel authorModel;
 
-    @OneToOne(orphanRemoval = true)
+    @ManyToOne
     @JoinColumn(name = "receiver_model_id")
     private UserModel receiverModel;
 

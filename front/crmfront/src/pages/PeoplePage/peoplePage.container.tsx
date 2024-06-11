@@ -9,6 +9,7 @@ import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import SelectComponent from '../../components/form/select.component.tsx';
 import { USER_ROLES_OPTIONS } from '../../utils/consts.ts';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
+import { SelectValue } from '../../types/UtilTypes.ts';
 
 const SelectWrapper = styled.div`
   max-width: 400px;
@@ -17,9 +18,30 @@ const SelectWrapper = styled.div`
 
 const PeoplePageContainer = () => {
   const [filteredUser, setFilteredUser] = useState<string>('ALL');
+  const [countryFilter, setCountryFilter] = useState<string>('ALL');
   const allUsers = useAppSelector(getAllUsers);
 
-  console.log('ALL USERS', allUsers);
+  const uniqueCountries = new Set<string>();
+
+  const countrySelectValues: SelectValue[] = allUsers
+    .filter((user) => {
+      if (!uniqueCountries.has(user.countryName)) {
+        uniqueCountries.add(user.countryName);
+        return true;
+      }
+      return false;
+    })
+    .map((user) => ({
+      value: user.countryName,
+      text: user.countryName,
+    }));
+
+  countrySelectValues.push({
+    value: 'ALL',
+    text: 'ALL',
+  });
+
+  console.log('country', countrySelectValues);
   console.log('filtered', filteredUser);
 
   const clientUsers = allUsers?.filter((client) => client.userRole === RoleType.CLIENT);
@@ -28,7 +50,11 @@ const PeoplePageContainer = () => {
     ? allUsers
     : allUsers.filter((user) => user.userRole === filteredUser);
 
-  const singlePersonComponents = properUsers.map((user) => <SinglePersonComponent key={user.username} user={user} />);
+  const properUsersAfterCountryFilter = countryFilter === 'ALL'
+    ? properUsers
+    : properUsers.filter((user) => user.countryName === countryFilter);
+
+  const singlePersonComponents = properUsersAfterCountryFilter.map((user) => <SinglePersonComponent key={user.username} user={user} />);
 
   return (
     <PageWrapperComponent>
@@ -41,6 +67,14 @@ const PeoplePageContainer = () => {
           onChange={setFilteredUser}
           label="Select only people with role"
           value={filteredUser}
+        />
+      </SelectWrapper>
+      <SelectWrapper>
+        <SelectComponent
+          options={countrySelectValues}
+          onChange={setCountryFilter}
+          label="Select only people from country"
+          value={countryFilter}
         />
       </SelectWrapper>
 

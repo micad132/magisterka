@@ -5,6 +5,7 @@ import com.crmbackend.backend.Task.dto.TaskDTORequest;
 import com.crmbackend.backend.Task.dto.TaskDTOResponse;
 import com.crmbackend.backend.User.UserModel;
 import com.crmbackend.backend.User.UserRepository;
+import com.crmbackend.backend.mappers.UserMapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,10 @@ public class TaskService {
 
     private final TaskMapper taskMapper;
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     public List<TaskDTOResponse> getAllTasks() {
-        return taskRepository.findAll().stream().map(taskMapper::mapEntityToDTO).collect(Collectors.toList());
+        return taskRepository.findAll().stream().map(userMapper::mapEntityToDTO).collect(Collectors.toList());
     }
 
     public void addTask(TaskDTORequest taskDTORequest) {
@@ -34,7 +36,7 @@ public class TaskService {
     public void editPreview(TaskDTOEditPreviewRequest taskDTOEditPreviewRequest) {
         TaskModel taskModel = taskRepository.findById(taskDTOEditPreviewRequest.getId()).orElseThrow();
         UserModel userModel = userRepository.findById(taskDTOEditPreviewRequest.getAssigneeId()).orElseThrow();
-        taskModel.setAssigneeUser(userModel);
+        taskModel.setAssigneeModel(userModel);
         taskModel.setTaskPriority(taskDTOEditPreviewRequest.getTaskPriority());
         taskModel.setTaskStatus(taskDTOEditPreviewRequest.getTaskStatus());
         taskModel.setHoursSpent(taskDTOEditPreviewRequest.getHoursSpent());

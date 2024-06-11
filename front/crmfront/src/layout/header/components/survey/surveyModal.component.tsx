@@ -15,6 +15,8 @@ import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { getUserDetails } from '../../../../store/userSlice.tsx';
 import { surveyScheme, SurveyValidatorErrors } from '../../../../services/validators/SurveyValidator.ts';
 import { addingSurveyThunk } from '../../../../store/surveySlice.tsx';
+import { ActionType, AddHistory } from '../../../../types/HistoryType.ts';
+import { addHistoryThunk } from '../../../../store/historySlice.tsx';
 
 const Wrapper = styled.div`
 `;
@@ -66,8 +68,14 @@ const SurveyModalComponent = () => {
       taskRate: Number(surveyValues.taskRate),
       authorId: loggedUser.id,
     };
+    const historyObj: AddHistory = {
+      performerId: loggedUser.id,
+      historyActionType: ActionType.SURVEY,
+      description: `User ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} created a survey`,
+    };
     try {
       dispatch(addingSurveyThunk(obj));
+      dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Survey made!',
         description: 'You have successfully made a survey',

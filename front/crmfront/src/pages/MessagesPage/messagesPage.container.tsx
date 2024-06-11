@@ -34,7 +34,7 @@ const MessagesPageContainer = () => {
   const loggedUser = useAppSelector(getUserDetails);
   const messages = useAppSelector(getAllMessages);
 
-  const USER_SELECT_VALUES: SelectValue[] = users.filter((user) => user.username !== loggedUser.username).map((user) => ({
+  const USER_SELECT_VALUES: SelectValue[] = users?.filter((user) => user.username !== loggedUser.username).map((user) => ({
     text: `${user.name} ${user.surname} - ${user.username}`,
     value: user.username,
   }));
@@ -60,7 +60,7 @@ const MessagesPageContainer = () => {
   };
 
   const onSendMessage = () => {
-    const receiver = users.find((user) => user.username === message.receiver);
+    const receiver = users?.find((user) => user.username === message.receiver);
     const obj: AddingMessage = {
       text: message.description,
       receiverId: receiver?.id ?? 0,
@@ -69,7 +69,7 @@ const MessagesPageContainer = () => {
     const historyObj: AddHistory = {
       historyActionType: ActionType.MESSAGE,
       performerId: loggedUser.id,
-      description: `Message sent from ${loggedUser.username} to ${receiver?.username}`,
+      description: `Message sent from ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} to ${receiver?.username}`,
     };
     try {
       dispatch(addingMessageThunk(obj));
@@ -113,13 +113,13 @@ const MessagesPageContainer = () => {
 
   const properMessages = loggedUser.userRole === RoleType.ADMIN
     ? messages
-    : messages.filter((msg) => msg.authorUsername === loggedUser.username || msg.receiverUsername === loggedUser.username);
+    : messages?.filter((msg) => msg.authorUsername === loggedUser.username || msg.receiverUsername === loggedUser.username);
 
   const filteredMessages = filterUser === 'all'
     ? properMessages
-    : properMessages.filter((filteredMessage) => filteredMessage.receiverUsername === filterUser);
+    : properMessages?.filter((filteredMessage) => filteredMessage.receiverUsername === filterUser);
 
-  const messagesComponents = filteredMessages.map((messageType) => <SingleMessageComponent key={messageType.id} message={messageType} />);
+  const messagesComponents = filteredMessages?.map((messageType) => <SingleMessageComponent key={messageType.id} message={messageType} />);
 
   console.log('FILTERED', filterUser);
 

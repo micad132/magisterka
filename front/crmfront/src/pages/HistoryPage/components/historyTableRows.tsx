@@ -11,7 +11,6 @@ const HistoryTableRows = ({ isAdmin }: Props) => (
     <Th>Performer</Th>
     <Th>Date:</Th>
     <Th>Description:</Th>
-    {isAdmin && <Th>Edit</Th>}
     {isAdmin && <Th>Delete</Th>}
   </Tr>
 );

@@ -12,6 +12,7 @@ import PieChartComponent from '../../../../components/diagrams/pieChart.componen
 import { mapJsonToPieChart } from '../../../../utils/mappers/chartUtils/mapJsonToChart.ts';
 import { mapDateToString } from '../../../../utils/mappers/mapDateToString.ts';
 import SelectWrapperComponent from '../selectWrapper.component.tsx';
+import { ActionType, AddHistory } from '../../../../types/HistoryType.ts';
 
 const SUPPORT_REQUESTS_CHART_VALUES: SelectValue[] = [{
   text: 'Chart of support requests category',
@@ -34,7 +35,9 @@ const SupportRequestPanelContainer = () => {
       statType: StatType.DOUGHNUT,
       statCategory: StatCategory.SUPPORT,
       chartData: JSON.stringify(supportRequestCategoriesPie([1, 2, 3, 4])),
+      description: '',
     };
+
     try {
       dispatch(addingStatThunk(obj));
     } catch (e) {

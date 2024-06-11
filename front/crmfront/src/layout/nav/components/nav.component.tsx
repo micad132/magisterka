@@ -33,19 +33,20 @@ const LinksWrapper = styled.div`
 
 const NavComponent = () => {
   const loggedUser = useAppSelector(getUserDetails);
+  const isLoggedUser = loggedUser.username !== '';
   return (
     <NavWrapper>
       <LinksWrapper>
         <SingleLink path="/" text="Home" icon={<HomeIcon />} />
-        <SingleLink path="/tasks" text="Tasks" icon={<TaskIcon />} />
+        {isLoggedUser && <SingleLink path="/tasks" text="Tasks" icon={<TaskIcon />} />}
         {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/people" text="People" icon={<PersonIcon />} />}
-        <SingleLink path="/workers" text="Workers" icon={<EngineeringIcon />} />
-        <SingleLink path="/messages" text="Messages" icon={<MessageIcon />} />
-        <SingleLink path="/history" text="History" icon={<HistoryIcon />} />
+        {/* {isLoggedUser && <SingleLink path="/workers" text="Workers" icon={<EngineeringIcon />} />} */}
+        {isLoggedUser && <SingleLink path="/messages" text="Messages" icon={<MessageIcon />} />}
+        {isLoggedUser && <SingleLink path="/history" text="History" icon={<HistoryIcon />} />}
         {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/stats" text="Stats" icon={<InsertChartIcon />} />}
-        <SingleLink path="/support" text="Support" icon={<HelpIcon />} />
+        {isLoggedUser && <SingleLink path="/support" text="Support" icon={<HelpIcon />} />}
         {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/survey" text="Survey" icon={<QuizIcon />} />}
-        <SingleLink path="/comments" text="Comments" icon={<CommentIcon />} />
+        {isLoggedUser && <SingleLink path="/comments" text="Comments" icon={<CommentIcon />} />}
       </LinksWrapper>
     </NavWrapper>
   );

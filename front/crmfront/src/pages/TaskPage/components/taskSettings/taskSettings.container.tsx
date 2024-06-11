@@ -48,9 +48,10 @@ const SORTING_TASKS_OPTIONS: SelectValue[] = [
 interface Props {
   sortingPriorityValue: string,
   setSortingPriorityValue: (value: string) => void,
+  isWorkerLogged: boolean,
 }
 
-const TaskSettingsContainer = ({ sortingPriorityValue, setSortingPriorityValue }: Props) => {
+const TaskSettingsContainer = ({ sortingPriorityValue, setSortingPriorityValue, isWorkerLogged }: Props) => {
   const [sortingTasks, setSortingTasks] = useState('');
 
   const [isOnlyCurrentWorkerTasks, setIsOnlyCurrentWorkerTasks] = useState<boolean>(false);
@@ -67,7 +68,7 @@ const TaskSettingsContainer = ({ sortingPriorityValue, setSortingPriorityValue }
         value={sortingPriorityValue}
         label="Select only task with priority"
       />
-      <CheckboxComponent isChecked={isOnlyCurrentWorkerTasks} onChange={setIsOnlyCurrentWorkerTasks} text="Preview only logged worker tasks" />
+      {isWorkerLogged && <CheckboxComponent isChecked={isOnlyCurrentWorkerTasks} onChange={setIsOnlyCurrentWorkerTasks} text="Preview only logged worker tasks" />}
     </SettingsContainerWrapper>
   );
 };

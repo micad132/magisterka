@@ -40,10 +40,10 @@ export const addCommentThunk = createAsyncThunk(
 
 export const deleteCommentThunk = createAsyncThunk(
   'commentSlice/deleteComment',
-  async (supportId: number) => {
+  async (commentId: number) => {
     try {
-      await SupportRequestService.deleteSupportRequest(supportId);
-      const data = await UserService.getAllUsers();
+      await CommentService.deleteComment(commentId);
+      const data = await CommentService.getAllComments();
       return data;
     } catch (e: any) {
       // eslint-disable-next-line @typescript-eslint/no-throw-literal

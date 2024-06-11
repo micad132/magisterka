@@ -3,7 +3,7 @@ import { ValuesType } from './UtilTypes.ts';
 export type Support = {
   id: number,
   description: string,
-  date: string,
+  dateTime: string,
   supportCategory: SupportRequestType,
   username: string,
 };

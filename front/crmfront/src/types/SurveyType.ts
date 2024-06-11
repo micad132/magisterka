@@ -30,6 +30,12 @@ export type SurveyErrors = {
   supportRate: string,
 };
 
+export type SurveyStatistics = {
+  lowRate: number;
+  mediumRate: number;
+  highRate: number;
+};
+
 export const SurveyRating = {
   LOW: 'LOW',
   MEDIUM: 'MEDIUM',

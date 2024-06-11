@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { UserDTOTaskDetailsAssignee } from '../../../types/UserType.ts';
+import RoleTagComponent from '../../../components/roleTag.component.tsx';
 
 const Wrapper = styled.div`
   width: 400px;
@@ -31,6 +32,13 @@ const NotAssignedWrapper = styled.div`
   }
 `;
 
+const RoleWrapper = styled.div`
+  display: flex;
+  width: min-content;
+  align-items: center;
+  margin: 0 auto;
+`;
+
 interface Props {
   assigneePreview: UserDTOTaskDetailsAssignee
 }
@@ -48,6 +56,7 @@ const AssigneeDetailsComponent = ({ assigneePreview }: Props) => {
       <h2>Assignee:</h2>
       <p><span>Assignee</span> {assigneePreview.assigneeName} {assigneePreview.assigneeSurname}</p>
       <p><span>Username:</span> {assigneePreview.assigneeUsername}</p>
+      <RoleWrapper><span>Role:</span> <RoleTagComponent role={assigneePreview.assigneeRole} /> </RoleWrapper>
       <p><span>Age:</span> {assigneePreview.assigneeAge}</p>
       <p><span>From:</span> {assigneePreview.assigneeCountry}</p>
     </Wrapper>

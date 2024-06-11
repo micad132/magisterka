@@ -14,7 +14,7 @@ interface Props {
 
 const NotLoggedUserFunctionsComponent = ({ functions }: Props) => (
   <Wrapper>
-    <UnorderedList>{functions.map((func) => <NotLoggedUserSingleFuncComponent text={func} />)}</UnorderedList>
+    <UnorderedList>{functions.map((func) => <NotLoggedUserSingleFuncComponent key={func} text={func} />)}</UnorderedList>
   </Wrapper>
 );
 

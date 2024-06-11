@@ -8,12 +8,16 @@ import InputComponent from '../../../../components/form/input.component.tsx';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import { GENDER_SELECT_OPTIONS } from '../../../../utils/consts.ts';
 
-const EditUserContentComponent = () => {
+interface Props {
+  user: UserWithoutID,
+}
+
+const EditUserContentComponent = ({ user }: Props) => {
   const g = 3;
   return (
     <div>
       <Formik
-        initialValues={INITIAL_EDIT_USER_VALUES}
+        initialValues={user}
         onSubmit={(values: UserWithoutID, actions) => {
           actions.setFieldError('email', 'jd');
           actions.setSubmitting(false);
@@ -126,7 +130,6 @@ const EditUserContentComponent = () => {
                 type="text"
                 isInvalid={false}
               />
-              <Button type="submit" variant="solid" colorScheme="twitter">Submit</Button>
             </div>
           </Form>
         )}

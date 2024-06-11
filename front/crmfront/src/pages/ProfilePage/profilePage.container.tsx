@@ -10,12 +10,14 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { editUserPersonalInfoThunk, getUserDetails } from '../../store/userSlice.tsx';
 import {
   LoggedUserDetails,
-  LoggedUserMainDetails,
+  LoggedUserMainDetails, ProfileCount,
   SelfEditUser, SelfEditUserRequest,
 } from '../../types/UserType.ts';
 import NotLoggedComponent from '../../components/routesComponents/notLogged.component.tsx';
 import { mapDateToString } from '../../utils/mappers/mapDateToString.ts';
 import { sanitizeInput } from '../../utils/utilFunctions.ts';
+import { ActionType, AddHistory } from '../../types/HistoryType.ts';
+import { addHistoryThunk } from '../../store/historySlice.tsx';
 
 const ProfilePageWrapper = styled.div`
   margin: 20px auto;
@@ -65,8 +67,14 @@ const ProfilePageContainer = () => {
       ...editPersonalInfo,
       id: loggedUser.id,
     };
+    const historyObj: AddHistory = {
+      performerId: loggedUser.id,
+      historyActionType: ActionType.PROFILE,
+      description: `User ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} changed account details`,
+    };
     try {
       dispatch(editUserPersonalInfoThunk(editBody));
+      dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Personal info edited!',
         description: 'You have successfully edited your personal info!',
@@ -106,6 +114,16 @@ const ProfilePageContainer = () => {
     userGender: loggedUser.userGender,
   };
 
+  const statsCount: ProfileCount = {
+    commentsCount: loggedUser.comments.length,
+    historiesCount: loggedUser.histories.length,
+    messagesCount: loggedUser.messages.length,
+    surveysCount: loggedUser.surveys.length,
+    taskAssigneeCount: loggedUser.assignedTasks.length,
+    tasksMadeCount: loggedUser.createdTasks.length,
+    supportsCount: loggedUser.supportRequestModels.length,
+  };
+
   const editUserModal: ModalProps = {
     modalHeader: 'Edit your data',
     buttonText: 'Edit',
@@ -123,7 +141,7 @@ const ProfilePageContainer = () => {
     <ProfilePageWrapper>
       <LoggedUserDetailsComponent loggedUserMainDetails={loggedUserMainDetails} />
       <PersonalInfoDetailsComponent modalProps={editUserModal} userDetails={userDetails} />
-      <StatsWrapperComponent />
+      <StatsWrapperComponent count={statsCount} />
     </ProfilePageWrapper>
   );
 };

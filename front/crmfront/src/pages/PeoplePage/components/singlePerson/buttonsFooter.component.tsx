@@ -5,6 +5,7 @@ import { ModalProps } from '../../../../types/UtilTypes.ts';
 import EditUserContentComponent from './editUserContent.component.tsx';
 import { useAppDispatch } from '../../../../utils/hooks.ts';
 import { deleteUserThunk } from '../../../../store/userSlice.tsx';
+import { User } from '../../../../types/UserType.ts';
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -15,9 +16,10 @@ const ButtonsWrapper = styled.div`
 
 interface Props {
   userId: number,
+  user: User,
 }
 
-const ButtonsFooterComponent = ({ userId }: Props) => {
+const ButtonsFooterComponent = ({ userId, user }: Props) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
 
@@ -25,7 +27,7 @@ const ButtonsFooterComponent = ({ userId }: Props) => {
     modalHeader: 'Edit person',
     buttonText: 'Edit',
     modalActionButtonText: 'Edit',
-    modalBody: <EditUserContentComponent />,
+    modalBody: <EditUserContentComponent user={user} />,
     buttonSize: 'md',
     mainButtonAction: () => {},
   };
@@ -34,7 +36,7 @@ const ButtonsFooterComponent = ({ userId }: Props) => {
     modalHeader: 'Delete person',
     buttonText: 'Delete',
     modalActionButtonText: 'Delete',
-    modalBody: <h1>Are you sure to want to delete?</h1>,
+    modalBody: <h1>Are you sure to want to delete this user?</h1>,
     buttonColor: 'red',
     buttonSize: 'md',
     mainButtonAction: async () => {

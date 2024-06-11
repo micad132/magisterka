@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import SingleStatComponent from './singleStat.component.tsx';
+import { ProfileCount } from '../../../../types/UserType.ts';
 
 const StatsWrapper = styled.div`
   display: flex;
@@ -9,14 +10,18 @@ const StatsWrapper = styled.div`
   margin-top: 20px;
 `;
 
-const StatsWrapperComponent = () => (
+interface Props {
+  count: ProfileCount,
+}
+
+const StatsWrapperComponent = ({ count }: Props) => (
   <StatsWrapper>
-    <SingleStatComponent count={7} text="Messages" />
-    <SingleStatComponent count={4} text="Tasks made" />
-    <SingleStatComponent count={2} text="Support requests" />
-    <SingleStatComponent count={1} text="Comments" />
-    <SingleStatComponent count={2} text="Profile changes" />
-    <SingleStatComponent count={0} text="Surveys made" />
+    <SingleStatComponent count={count.messagesCount} text="Messages" />
+    <SingleStatComponent count={count.tasksMadeCount} text="Tasks made" />
+    <SingleStatComponent count={count.supportsCount} text="Support requests" />
+    <SingleStatComponent count={count.commentsCount} text="Comments" />
+    <SingleStatComponent count={count.historiesCount} text="Histories" />
+    <SingleStatComponent count={count.surveysCount} text="Surveys made" />
   </StatsWrapper>
 );
 

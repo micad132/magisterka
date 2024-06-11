@@ -4,6 +4,7 @@ import com.crmbackend.backend.Comment.dto.CommentDTORequest;
 import com.crmbackend.backend.Comment.dto.CommentDTOResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +27,9 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getAllComments());
     }
 
+
     @DeleteMapping("/{id}")
+    @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<String> deleteComment(@PathVariable("id") Long id) {
         commentService.deleteComment(id);
         return ResponseEntity.ok("Successfully deleted comment!");

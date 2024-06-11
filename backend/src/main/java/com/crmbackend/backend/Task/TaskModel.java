@@ -55,13 +55,6 @@ public class TaskModel {
     @OneToMany(mappedBy = "taskModel", orphanRemoval = true)
     private List<CommentModel> commentModels = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "assignee_user_id")
-    private UserModel assigneeUser;
-
-    @ManyToOne
-    @JoinColumn(name = "creator_user_id")
-    private UserModel creatorUser;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "task_status")
@@ -70,5 +63,13 @@ public class TaskModel {
     @Enumerated(EnumType.STRING)
     @Column(name = "task_origin")
     private TaskOrigin taskOrigin;
+
+    @ManyToOne
+    @JoinColumn(name = "creator_model_id")
+    private UserModel creatorModel;
+
+    @ManyToOne
+    @JoinColumn(name = "assignee_model_id")
+    private UserModel assigneeModel;
 
 }

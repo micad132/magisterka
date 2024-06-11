@@ -1,5 +1,6 @@
 package com.crmbackend.backend.User.dto.response;
 
+import com.crmbackend.backend.User.enums.UserRole;
 import lombok.*;
 
 @Builder
@@ -13,4 +14,5 @@ public class UserDTOTaskDetailsAssignee {
     private String assigneeCountry;
     private String assigneeName;
     private String assigneeSurname;
+    private UserRole assigneeRole;
 }

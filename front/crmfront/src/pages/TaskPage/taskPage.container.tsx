@@ -11,7 +11,7 @@ import {
   ADDING_TASK_INITIAL_VALUE, AddingTask, AddingTaskRequest, TaskOrigin, TaskStatus,
 } from '../../types/TaskType.ts';
 import {
-  AllSelectValue, TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS, TASK_TYPE_OPTIONS,
+  AllSelectValue, TASK_PRIORITY_OPTIONS, TASK_TYPE_OPTIONS,
 } from '../../utils/consts.ts';
 import { addingTaskRequestThunk, getAllTasks } from '../../store/taskSlice.tsx';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
@@ -19,12 +19,17 @@ import { getUserDetails } from '../../store/userSlice.tsx';
 import MessageComponent from '../../components/message.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import { ActionType, AddHistory } from '../../types/HistoryType.ts';
-import { addHistoryThunk } from '../../store/historySlice.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import { sanitizeInput } from '../../utils/utilFunctions.ts';
+import { addHistoryThunk } from '../../store/historySlice.tsx';
 
 const ALL_SELECT_VALUES: AllSelectValue = {
-  initialStasuses: TASK_STATUS_OPTIONS,
+  initialStasuses: [
+    {
+      text: 'In progress',
+      value: TaskStatus.IN_PROGRESS,
+    },
+  ],
   taskPriority: TASK_PRIORITY_OPTIONS,
   taskType: TASK_TYPE_OPTIONS,
 };
@@ -38,6 +43,8 @@ const TaskPageContainer = () => {
   const tasks = useAppSelector(getAllTasks);
   const loggedUserTasks = tasks.filter((task) => task.userDTOTaskDetailsCreator.creatorUsername === loggedUser.username);
   console.log('TASKS', tasks);
+
+  const isLoggedWorker = loggedUser.userRole === RoleType.WORKER;
 
   const properUserTasks = loggedUser.userRole === RoleType.CLIENT
     ? loggedUserTasks
@@ -79,7 +86,7 @@ const TaskPageContainer = () => {
     };
     try {
       dispatch(addingTaskRequestThunk(taskBody));
-      // dispatch(addHistoryThunk(historyObj));
+      dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Task added!',
         description: 'You have successfully added task!',
@@ -113,7 +120,7 @@ const TaskPageContainer = () => {
     return (
       <PageWrapperComponent>
         <PageHeaderComponent text="TASKS" />
-        <ModalComponent modalProps={modalProps} />
+        {loggedUser.userRole === RoleType.CLIENT && <ModalComponent modalProps={modalProps} />}
         <MessageComponent message="There are no tasks in the system" />
       </PageWrapperComponent>
     );
@@ -129,8 +136,8 @@ const TaskPageContainer = () => {
     <PageWrapperComponent>
       <PageHeaderComponent text="SERVICES (AS TASKS)" />
       {/* <CreateTaskButton /> */}
-      <ModalComponent modalProps={modalProps} />
-      <TaskSettingsContainer sortingPriorityValue={sortingPriorityTask} setSortingPriorityValue={setSortingPriorityTask} />
+      {loggedUser.userRole === RoleType.CLIENT && <ModalComponent modalProps={modalProps} />}
+      <TaskSettingsContainer sortingPriorityValue={sortingPriorityTask} setSortingPriorityValue={setSortingPriorityTask} isWorkerLogged={isLoggedWorker} />
       <TaskWrapper tasks={properTasks} />
     </PageWrapperComponent>
   );

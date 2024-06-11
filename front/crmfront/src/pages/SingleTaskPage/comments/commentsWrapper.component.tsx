@@ -11,6 +11,8 @@ import { addCommentThunk, getAllComments } from '../../../store/commentsSlice.ts
 import { AddingComment } from '../../../types/CommentType.ts';
 import { getUserDetails } from '../../../store/userSlice.tsx';
 import { mapDateToString } from '../../../utils/mappers/mapDateToString.ts';
+import { ActionType, AddHistory } from '../../../types/HistoryType.ts';
+import { addHistoryThunk } from '../../../store/historySlice.tsx';
 
 const Wrapper = styled.div`
 `;
@@ -39,7 +41,13 @@ const CommentsWrapperComponent = ({ taskId }: Props) => {
         description: comment,
         taskId,
       };
+      const historyObj: AddHistory = {
+        performerId: loggedUser.id,
+        historyActionType: ActionType.COMMENT,
+        description: `User ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} created comment in task with id: ${taskId}`,
+      };
       dispatch(addCommentThunk(addingCommentObj));
+      dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Comment added!',
         description: 'You have successfully added a comment to this task',

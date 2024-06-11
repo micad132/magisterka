@@ -6,7 +6,9 @@ import com.crmbackend.backend.History.dto.HistoryDTOResponse;
 import com.crmbackend.backend.Message.dto.MessageDTOResponse;
 import com.crmbackend.backend.Stat.dto.StatDTOResponse;
 import com.crmbackend.backend.SupportRequest.SupportRequestModel;
+import com.crmbackend.backend.SupportRequest.dto.SupportRequestResponse;
 import com.crmbackend.backend.Survey.dto.SurveyDTOResponse;
+import com.crmbackend.backend.Task.dto.TaskDTOResponse;
 import com.crmbackend.backend.User.enums.UserGender;
 import com.crmbackend.backend.User.enums.UserRole;
 import lombok.Builder;
@@ -38,7 +40,9 @@ public class UserDTOResponse {
     private List<MessageDTOResponse> messages;
     private List<CommentDTOResponse> comments;
     private List<StatDTOResponse> stats;
-    private List<SupportRequestModel> supportRequestModels;
+    private List<SupportRequestResponse> supportRequestModels;
     private List<SurveyDTOResponse> surveys;
     private List<HistoryDTOResponse> histories;
+    private List<TaskDTOResponse> createdTasks;
+    private List<TaskDTOResponse> assignedTasks;
 }

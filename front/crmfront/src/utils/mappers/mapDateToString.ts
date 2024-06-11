@@ -9,7 +9,9 @@ export const mapDateToString = (dateString: string): string => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
 
-  const formattedDate = `${day}.${month}.${year} ${hours}:${minutes}`;
+  const padToTwoDigits = (num: number): string => num.toString().padStart(2, '0');
+
+  const formattedDate = `${padToTwoDigits(day)}.${padToTwoDigits(month)}.${year} ${padToTwoDigits(hours)}:${padToTwoDigits(minutes)}`;
   return formattedDate;
 };
 

@@ -60,6 +60,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String jwt = getJwtFromRequest(request);
         String accessToken = getJwtFromCookies(request, "accessToken");
         String refreshToken = getJwtFromCookies(request, "refreshToken");
+        String requestURI = request.getRequestURI();
+        if (requestURI.equals("/auth/signin") || requestURI.equals("/auth/register")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
 //
         if (accessToken != null && jwtTokenProvider.validateToken(accessToken)) {
             String username = jwtTokenProvider.getUsernameFromJwt(accessToken);
@@ -83,6 +89,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             cookie.setPath("/");
             cookie.setMaxAge(24 * 60 * 60); // czas życia ciasteczka w sekundach (1 dzień)
             response.addCookie(cookie);
+        } else {
+            // Brak ważnych tokenów - ustawienie odpowiedzi na 401 Unauthorized
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
         }
 //        } else if (refreshToken != null && jwtTokenProvider.validateToken(refreshToken)) {
 //            String newAccessToken = refreshAccessToken(refreshToken);

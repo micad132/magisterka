@@ -7,21 +7,24 @@ const clientFunc: string[] = [
   'Send support requests',
   'Do surveys',
   'Message to other poeple in system',
+  'Create comments in tasks',
 ];
 
 const workerFunc: string[] = [
-  'Edit task',
+  'Edit task details',
   'Change task info',
+  'Preview existing data in system',
 
 ];
 
 const adminFunc: string[] = [
-  'Manage tasks',
-  'Manage messages',
+  'Delete tasks',
+  'Delete messages',
   'Manage support requests',
   'Manage surveys',
   'Manage people',
   'Manage stats',
+  'Filter people',
 ];
 
 const NotLoggedUserHomeComponent = () => (

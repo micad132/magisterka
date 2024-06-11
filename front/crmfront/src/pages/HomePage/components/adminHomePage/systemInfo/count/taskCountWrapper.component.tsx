@@ -10,7 +10,6 @@ import CountDivComponent from './countDiv.component.tsx';
 
 const Wrapper = styled.div`
   font-size: 1.3rem;
-  border: 2px solid teal;
   max-width: 1200px;
   padding: 5px 10px;
   display: flex;

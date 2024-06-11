@@ -2,9 +2,11 @@ package com.crmbackend.backend.User;
 
 import com.crmbackend.backend.Comment.CommentModel;
 import com.crmbackend.backend.History.HistoryModel;
+import com.crmbackend.backend.Message.MessageModel;
 import com.crmbackend.backend.Stat.StatModel;
 import com.crmbackend.backend.SupportRequest.SupportRequestModel;
 import com.crmbackend.backend.Survey.SurveyModel;
+import com.crmbackend.backend.Task.TaskModel;
 import com.crmbackend.backend.User.enums.UserGender;
 import com.crmbackend.backend.User.enums.UserRole;
 import jakarta.persistence.*;
@@ -94,5 +96,18 @@ public class UserModel {
 
     @OneToMany(mappedBy = "userModel", orphanRemoval = true)
     private List<StatModel> statModels = new ArrayList<>();
+
+    @OneToMany(mappedBy = "authorModel", orphanRemoval = true)
+    private List<MessageModel> authorMessageModels = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "creatorModel", orphanRemoval = true)
+    private List<TaskModel> createdTaskModels = new ArrayList<>();
+
+    @OneToMany(mappedBy = "assigneeModel", orphanRemoval = true)
+    private List<TaskModel> assignedTaskModels = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiverModel", orphanRemoval = true)
+    private List<MessageModel> receivedMessages = new ArrayList<>();
 
 }

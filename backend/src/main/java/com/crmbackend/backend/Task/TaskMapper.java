@@ -22,26 +22,26 @@ public class TaskMapper {
 
     private final CommentMapper commentMapper;
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
-    public TaskDTOResponse mapEntityToDTO(TaskModel taskModel) {
-        return TaskDTOResponse.builder()
-                .id(taskModel.getId())
-                .description(taskModel.getDescription())
-                .taskPriority(taskModel.getTaskPriority())
-                .taskStatus(taskModel.getTaskStatus())
-                .taskType(taskModel.getTaskType())
-                .taskOrigin(taskModel.getTaskOrigin())
-                .userDTOTaskDetailsAssignee(Optional.ofNullable(taskModel.getAssigneeUser()).map(userMapper::mapEntityToUserDetailsAssignee).orElse(new UserDTOTaskDetailsAssignee()))
-                .userDTOTaskDetailsCreator(Optional.ofNullable(taskModel.getCreatorUser()).map(userMapper::mapEntityToUserDetailsCreator).orElse(new UserDTOTaskDetailsCreator()))
-                .cost(taskModel.getCost())
-                .estimatedCost(taskModel.getEstimatedCost())
-                .estimationFinishTime(taskModel.getEstimationFinishTime())
-                .creationDate(taskModel.getCreationDate())
-                .hoursSpent(taskModel.getHoursSpent())
-                .comments(taskModel.getCommentModels().stream().map(commentMapper::mapEntityToDTO).collect(Collectors.toList()))
-                .build();
 
-    }
+//    public TaskDTOResponse mapEntityToDTO(TaskModel taskModel) {
+//        return TaskDTOResponse.builder()
+//                .id(taskModel.getId())
+//                .description(taskModel.getDescription())
+//                .taskPriority(taskModel.getTaskPriority())
+//                .taskStatus(taskModel.getTaskStatus())
+//                .taskType(taskModel.getTaskType())
+//                .taskOrigin(taskModel.getTaskOrigin())
+//                .userDTOTaskDetailsAssignee(Optional.ofNullable(taskModel.getAssigneeModel()).map(userMapper::mapEntityToUserDetailsAssignee).orElse(new UserDTOTaskDetailsAssignee()))
+//                .userDTOTaskDetailsCreator(Optional.ofNullable(taskModel.getCreatorModel()).map(userMapper::mapEntityToUserDetailsCreator).orElse(new UserDTOTaskDetailsCreator()))
+//                .cost(taskModel.getCost())
+//                .estimatedCost(taskModel.getEstimatedCost())
+//                .estimationFinishTime(taskModel.getEstimationFinishTime())
+//                .creationDate(taskModel.getCreationDate())
+//                .hoursSpent(taskModel.getHoursSpent())
+//                .comments(taskModel.getCommentModels().stream().map(commentMapper::mapEntityToDTO).collect(Collectors.toList()))
+//                .build();
+//
+//    }
 
     public TaskModel mapDTOToEntity(TaskDTORequest taskDTORequest) {
         UserModel userModel = userRepository.findById(taskDTORequest.getCreatorId()).orElseThrow();
@@ -52,14 +52,14 @@ public class TaskMapper {
         return TaskModel.builder()
                 .description(taskDTORequest.getDescription())
                 .cost(0.0)
-                .assigneeUser(assigneeModel)
+                .assigneeModel(assigneeModel)
                 .creationDate(LocalDateTime.now())
                 .taskType(taskDTORequest.getTaskType())
                 .taskPriority(taskDTORequest.getTaskPriority())
                 .taskStatus(taskDTORequest.getTaskStatus())
                 .taskOrigin(taskDTORequest.getTaskOrigin())
                 .hoursSpent(0.0)
-                .creatorUser(userModel)
+                .creatorModel(userModel)
                 .estimatedCost(taskDTORequest.getEstimatedCost())
                 .commentModels(new ArrayList<>())
                 .estimationFinishTime(localDateTime)

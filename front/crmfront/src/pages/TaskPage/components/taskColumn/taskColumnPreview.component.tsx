@@ -21,13 +21,15 @@ import EditTaskPreviewComponent from './editTaskPreview.component.tsx';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { getAllUsers, getUserDetails } from '../../../../store/userSlice.tsx';
 import { TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS } from '../../../../utils/consts.ts';
-import { RoleType } from '../../../../types/UserType.ts';
+import { RoleType, User } from '../../../../types/UserType.ts';
 import TotalHoursSpentComponent from '../task/taskPreviewDetails/totalHoursSpent.component.tsx';
 import EstimatedCostComponent from '../task/taskPreviewDetails/estimatedCost.component.tsx';
 import RowInfoWrapperComponent from '../task/taskPreviewDetails/rowInfoWrapper.component.tsx';
 import CreatedByComponent from '../task/taskPreviewDetails/createdBy.component.tsx';
 import ActualCostComponent from '../task/taskPreviewDetails/actualCost.component.tsx';
 import { editTaskPreviewThunk } from '../../../../store/taskSlice.tsx';
+import { ActionType, AddHistory } from '../../../../types/HistoryType.ts';
+import { addHistoryThunk } from '../../../../store/historySlice.tsx';
 
 interface Props {
   taskPreview: TaskPreview,
@@ -76,17 +78,28 @@ const TaskColumnPreviewComponent = ({
 
   const editPreview = () => {
     console.log('PREVIEW TASK', previewTask);
-    const assigneeId = workerUsers.find((worker) => worker.username === previewTask.assigneeUsername);
+    let assignee: User | undefined;
+    if (workerUsers.length === 1) {
+      assignee = workerUsers[0];
+    } else {
+      assignee = workerUsers.find((worker) => worker.username === previewTask.assigneeUsername);
+    }
     const obj: EditTaskPreview = {
       id: taskPreview.id,
       taskPriority: previewTask.taskPriority,
       actualCost: previewTask.actualCost,
       taskStatus: previewTask.taskStatus,
       hoursSpent: previewTask.totalHoursSpent,
-      assigneeId: assigneeId?.id!,
+      assigneeId: assignee?.id ?? 0,
+    };
+    const historyObj: AddHistory = {
+      performerId: loggedUser.id,
+      historyActionType: ActionType.TASK,
+      description: `Worker ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} edited task with id: ${taskPreview.id}`,
     };
     try {
       dispatch(editTaskPreviewThunk(obj));
+      dispatch(addHistoryThunk(historyObj));
       toast({
         title: 'Task preview edited!',
         description: 'You have successfully edited this task preview',

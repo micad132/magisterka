@@ -81,7 +81,7 @@ const SinglePersonComponent = ({ user }: Props) => (
           label="Pesel"
           text={user.pesel}
         />
-        <ButtonsFooterComponent userId={user.id} />
+        <ButtonsFooterComponent userId={user.id} user={user} />
       </AccordionPanel>
     </AccordionItem>
   </StyledAccordion>

@@ -41,16 +41,8 @@ const HistoryTable = ({ histories }: Props) => {
   //   mainButtonAction: () => {},
   // });
 
-  const userEditModalprops: ModalProps = {
-    modalHeader: 'Edit Client',
-    modalBody: <h1>COSIK</h1>,
-    modalActionButtonText: 'Edit',
-    buttonText: 'Edit',
-    mainButtonAction: () => {},
-  };
-
   const userDeleteModalProps: ModalProps = {
-    modalHeader: 'Delete Client',
+    modalHeader: 'Delete history',
     buttonText: 'Delete',
     modalActionButtonText: 'Delete',
     modalBody: deleteModalContent,
@@ -76,7 +68,6 @@ const HistoryTable = ({ histories }: Props) => {
                 <Td>
                   <HistoryDetailsModalComponent buttonText="Description" modalTitle="Description of history" description={history.description} />
                 </Td>
-                {loggedUser.userRole === RoleType.ADMIN && <Td><ModalComponent modalProps={userEditModalprops} /></Td>}
                 {loggedUser.userRole === RoleType.ADMIN && <Td><ModalComponent modalProps={userDeleteModalProps} /></Td>}
               </Tr>
             ))}

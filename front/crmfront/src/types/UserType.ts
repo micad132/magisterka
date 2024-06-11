@@ -1,4 +1,11 @@
 import { ValuesType } from './UtilTypes.ts';
+import { MessageType } from './MessageType.ts';
+import { CommentResponseDTO } from './CommentType.ts';
+import { StatResponse } from './StatType.ts';
+import { Support } from './SupportRequest.ts';
+import { Survey } from './SurveyType.ts';
+import { HistoryType } from './HistoryType.ts';
+import { TaskResponseDTO } from './TaskType.ts';
 
 export type User = {
   id: number,
@@ -16,6 +23,14 @@ export type User = {
   surname: string,
   cityName: string,
   createdAccountDate: string,
+  messages: MessageType[],
+  comments: CommentResponseDTO[],
+  stats: StatResponse[],
+  supportRequestModels: Support[],
+  surveys: Survey[],
+  histories:HistoryType[],
+  createdTasks: TaskResponseDTO[],
+  assignedTasks: TaskResponseDTO[],
 };
 
 export type SelfEditUser = {
@@ -78,6 +93,7 @@ export type UserDTOTaskDetailsAssignee = {
   assigneeCountry: string,
   assigneeName: string,
   assigneeSurname: string,
+  assigneeRole: RoleTypeType,
 };
 
 export const RoleType = {
@@ -109,6 +125,14 @@ export const INITIAL_EDIT_USER_VALUES: UserWithoutID = {
   userGender: UserGender.MAN,
   cityName: '',
   createdAccountDate: '',
+  assignedTasks: [],
+  supportRequestModels: [],
+  comments: [],
+  createdTasks: [],
+  histories: [],
+  messages: [],
+  stats: [],
+  surveys: [],
 };
 
 export const INITIAL_USER_DETAILS_VALUES: User = {
@@ -127,6 +151,14 @@ export const INITIAL_USER_DETAILS_VALUES: User = {
   userGender: UserGender.MAN,
   cityName: '',
   createdAccountDate: '',
+  assignedTasks: [],
+  supportRequestModels: [],
+  comments: [],
+  createdTasks: [],
+  histories: [],
+  messages: [],
+  stats: [],
+  surveys: [],
 };
 
 export const INITIAL_SELF_EDIT_USER_VALUES: SelfEditUser = {
@@ -141,4 +173,14 @@ export const INITIAL_SELF_EDIT_USER_VALUES: SelfEditUser = {
   pesel: '',
   surname: '',
   cityName: '',
+};
+
+export type ProfileCount = {
+  messagesCount: number,
+  surveysCount: number,
+  tasksMadeCount: number,
+  taskAssigneeCount: number,
+  historiesCount: number,
+  commentsCount: number,
+  supportsCount: number,
 };

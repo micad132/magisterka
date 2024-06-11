@@ -19,6 +19,7 @@ import { fetchHistoriesThunk } from '../../../store/historySlice.tsx';
 import { fetchStatsThunk } from '../../../store/statSlice.tsx';
 import { fetchSurveysThunk } from '../../../store/surveySlice.tsx';
 import { fetchCommentsThunk } from '../../../store/commentsSlice.tsx';
+import { sanitizeInput } from '../../../utils/utilFunctions.ts';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -84,7 +85,7 @@ const LoginPage = () => {
             onChange={(e) => {
               setLoginValues((prevState) => ({
                 ...prevState,
-                username: e.target.value,
+                username: sanitizeInput(e.target.value),
               }));
             }}
             name="username"
@@ -98,7 +99,7 @@ const LoginPage = () => {
             onChange={(e) => {
               setLoginValues((prevState) => ({
                 ...prevState,
-                password: e.target.value,
+                password: sanitizeInput(e.target.value),
               }));
             }}
             name="password"

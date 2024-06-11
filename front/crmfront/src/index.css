@@ -7,6 +7,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --background-color: #319795; /* Default light theme color */
+  --font-color: #000;
+  --main-color: #fff;
+  --nav-font-color: #fff;
 }
 
 /* Stylizacja paska przewijania */

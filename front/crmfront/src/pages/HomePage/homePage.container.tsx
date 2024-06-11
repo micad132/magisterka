@@ -78,7 +78,7 @@ const HomePage = () => {
     );
   }
 
-  if (loggedUser.userRole === RoleType.ADMIN) {
+  if (loggedUser.userRole === RoleType.ADMIN || loggedUser.userRole === RoleType.WORKER) {
     return (
       <AdminHomePageContainer />
     );
