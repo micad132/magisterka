@@ -49,14 +49,13 @@ export const addingTaskRequestThunk = createAsyncThunk(
 
 export const deleteTaskThunk = createAsyncThunk(
   'supportSlice/deleteSupportRequest',
-  async (supportId: number) => {
+  async (taskId: number, { rejectWithValue }) => {
     try {
-      await SupportRequestService.deleteSupportRequest(supportId);
-      const data = await UserService.getAllUsers();
+      await TaskService.deleteTask(taskId);
+      const data = await TaskService.getAllTasks();
       return data;
     } catch (e: any) {
-      // eslint-disable-next-line @typescript-eslint/no-throw-literal
-      throw e.response.data;
+      return rejectWithValue(e);
     }
   },
 );

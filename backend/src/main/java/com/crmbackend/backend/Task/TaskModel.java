@@ -52,7 +52,7 @@ public class TaskModel {
     @Column(name = "cost")
     private Double cost;
 
-    @OneToMany(mappedBy = "taskModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "taskModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CommentModel> commentModels = new ArrayList<>();
 
 

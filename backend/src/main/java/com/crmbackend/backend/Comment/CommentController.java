@@ -17,12 +17,14 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> addComment(@RequestBody CommentDTORequest commentDTORequest) {
         commentService.addComment(commentDTORequest);
         return ResponseEntity.ok("Successfully added message!");
     }
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<CommentDTOResponse>> getAllComments() {
         return ResponseEntity.ok(commentService.getAllComments());
     }

@@ -20,6 +20,14 @@ const HistoryService = {
     }
   },
 
+  deleteHistory: async (historyId: number) => {
+    try {
+      await axios.delete(`${API_URL}/history/${historyId}`);
+    } catch (e) {
+      throw e;
+    }
+  },
+
 };
 
 export default HistoryService;

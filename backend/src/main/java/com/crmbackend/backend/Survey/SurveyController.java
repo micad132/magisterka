@@ -17,6 +17,7 @@ public class SurveyController {
     private final SurveyService surveyService;
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<SurveyDTOResponse>> getAllSurveys() {
         return ResponseEntity.ok(surveyService.getAllSurveys());
     }

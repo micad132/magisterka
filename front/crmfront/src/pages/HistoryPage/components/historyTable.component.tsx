@@ -1,5 +1,5 @@
 import {
-  Table, TableContainer, Tbody, Td, Tfoot, Thead, Tr,
+  Table, TableContainer, Tbody, Td, Tfoot, Thead, Tr, useToast,
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import ModalComponent from '../../../components/modals/modal.component.tsx';
@@ -9,10 +9,11 @@ import ActionTypeTagComponent from '../../../components/actionTypeTag.component.
 import { HistoryType } from '../../../types/HistoryType.ts';
 import HistoryDetailsModalComponent from './historyDetailsModal.component.tsx';
 import HistoryTableRows from './historyTableRows.tsx';
-import { useAppSelector } from '../../../utils/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../utils/hooks.ts';
 import { getUserDetails } from '../../../store/userSlice.tsx';
 import { RoleType } from '../../../types/UserType.ts';
 import { mapDateToString } from '../../../utils/mappers/mapDateToString.ts';
+import { deleteHistoryThunk } from '../../../store/historySlice.tsx';
 
 const TableWrapper = styled.div`
     max-width: 1200px;
@@ -27,28 +28,46 @@ interface Props {
 
 const HistoryTable = ({ histories }: Props) => {
   const loggedUser = useAppSelector(getUserDetails);
+  const dispatch = useAppDispatch();
+  const toast = useToast();
+
   const deleteModalContent = (
     <div>
-      <h2>Are you sure you want to delete this history?</h2>
+      <h1>Are you sure you want to delete this history?</h1>
     </div>
   );
 
-  // const userDetailsModalProps = (id: string): ModalProps => ({
-  //   modalHeader: 'Details',
-  //   modalActionButtonText: 'Clone',
-  //   modalBody: <DetailsOfHistoryComponent id={id} />,
-  //   buttonText: 'Details',
-  //   mainButtonAction: () => {},
-  // });
+  const deleteHistory = async (historyId: number) => {
+    try {
+      await dispatch(deleteHistoryThunk(historyId));
+      toast({
+        title: 'History deleted',
+        description: 'You have successfully deleted history',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    } catch (e) {
+      toast({
+        title: 'Something went wrong',
+        description: 'Contact with your admin',
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    }
+  };
 
-  const userDeleteModalProps: ModalProps = {
+  const userDeleteModalProps = (historyId: number): ModalProps => ({
     modalHeader: 'Delete history',
     buttonText: 'Delete',
     modalActionButtonText: 'Delete',
-    modalBody: deleteModalContent,
+    modalBody: deleteModalContent, // Upewnij się, że deleteModalContent jest typu string lub zmień typ na odpowiedni
     buttonColor: 'red',
-    mainButtonAction: () => {},
-  };
+    mainButtonAction: () => deleteHistory(historyId), // Zakładając, że deleteHistory zwraca funkcję
+  });
 
   return (
     <TableWrapper>
@@ -68,7 +87,7 @@ const HistoryTable = ({ histories }: Props) => {
                 <Td>
                   <HistoryDetailsModalComponent buttonText="Description" modalTitle="Description of history" description={history.description} />
                 </Td>
-                {loggedUser.userRole === RoleType.ADMIN && <Td><ModalComponent modalProps={userDeleteModalProps} /></Td>}
+                {loggedUser.userRole === RoleType.ADMIN && <Td><ModalComponent modalProps={userDeleteModalProps(history.id)} /></Td>}
               </Tr>
             ))}
           </Tbody>

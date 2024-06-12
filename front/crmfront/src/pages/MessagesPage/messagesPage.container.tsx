@@ -119,7 +119,7 @@ const MessagesPageContainer = () => {
     ? properMessages
     : properMessages?.filter((filteredMessage) => filteredMessage.receiverUsername === filterUser);
 
-  const messagesComponents = filteredMessages?.map((messageType) => <SingleMessageComponent key={messageType.id} message={messageType} />);
+  const messagesComponents = filteredMessages?.map((messageType) => <SingleMessageComponent key={messageType.id} message={messageType} loggedUserRole={loggedUser.userRole} />);
 
   console.log('FILTERED', filterUser);
 

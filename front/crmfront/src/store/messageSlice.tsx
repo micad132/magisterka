@@ -45,14 +45,14 @@ export const addingMessageThunk = createAsyncThunk(
 
 export const deleteMessageThunk = createAsyncThunk(
   'messageSlice/deleteMessage',
-  async (supportId: number) => {
+  async (messageId: number, { rejectWithValue }) => {
     try {
-      await SupportRequestService.deleteSupportRequest(supportId);
-      const data = await UserService.getAllUsers();
+      await MessagesService.deleteMessage(messageId);
+      const data = await MessagesService.getAllMessages();
       return data;
     } catch (e: any) {
       // eslint-disable-next-line @typescript-eslint/no-throw-literal
-      throw e.response.data;
+      return rejectWithValue(e);
     }
   },
 );
@@ -70,6 +70,9 @@ const messagesSlice = createSlice({
         state.messages = action.payload;
       });
     builder.addCase(addingMessageThunk.fulfilled, (state, action) => {
+      state.messages = action.payload;
+    });
+    builder.addCase(deleteMessageThunk.fulfilled, (state, action) => {
       state.messages = action.payload;
     });
   },

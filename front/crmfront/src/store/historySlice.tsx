@@ -30,6 +30,8 @@ export const addHistoryThunk = createAsyncThunk(
   async (historyBody: AddHistory, { rejectWithValue }) => {
     try {
       await HistoryService.addHistory(historyBody);
+      const data = await HistoryService.getAllHistories();
+      return data.data;
     } catch (e) {
       return rejectWithValue(e);
     }
@@ -38,14 +40,14 @@ export const addHistoryThunk = createAsyncThunk(
 
 export const deleteHistoryThunk = createAsyncThunk(
   'historySlice/deleteHistory',
-  async (supportId: number) => {
+  async (historyId: number, { rejectWithValue }) => {
     try {
-      await SupportRequestService.deleteSupportRequest(supportId);
-      const data = await UserService.getAllUsers();
-      return data;
-    } catch (e: any) {
+      await HistoryService.deleteHistory(historyId);
+      const data = await HistoryService.getAllHistories();
+      return data.data;
+    } catch (e) {
       // eslint-disable-next-line @typescript-eslint/no-throw-literal
-      throw e.response.data;
+      return rejectWithValue(e);
     }
   },
 );
@@ -59,6 +61,12 @@ const historySlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(fetchHistoriesThunk.fulfilled, (state, action) => {
+      state.histories = action.payload;
+    });
+    builder.addCase(addHistoryThunk.fulfilled, (state, action) => {
+      state.histories = action.payload;
+    });
+    builder.addCase(deleteHistoryThunk.fulfilled, (state, action) => {
       state.histories = action.payload;
     });
   },

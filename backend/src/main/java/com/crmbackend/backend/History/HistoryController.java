@@ -31,7 +31,7 @@ public class HistoryController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<MessageResponse> deleteHistory(@PathVariable("id") Long id) {
         historyService.deleteHistory(id);
         return ResponseEntity.ok(new MessageResponse("Successfully deleted history!"));

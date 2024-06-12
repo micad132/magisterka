@@ -22,6 +22,7 @@ public class UserController {
     private final UserMapper userMapper;
 
     @GetMapping("/getLoggedUser")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<UserDTOResponse> getLoggedUser(Authentication authentication){
         UserDTOResponse loggedUser = Optional.ofNullable(authentication)
                 .filter(f -> f.getPrincipal() instanceof  UserWrapper)
@@ -45,6 +46,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<UserDTOResponse>> getAllUsers() {
         List<UserDTOResponse> allUsers =  userService.getAllUsers();
         return ResponseEntity.ok(allUsers);

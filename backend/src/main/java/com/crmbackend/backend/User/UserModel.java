@@ -76,13 +76,13 @@ public class UserModel {
     @Column(name = "created_account_date")
     private LocalDateTime createdAccountDate;
 
-    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<SupportRequestModel> supportRequestModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CommentModel> commentModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<SurveyModel> surveyModels = new ArrayList<>();
 
     //2FA
@@ -91,23 +91,23 @@ public class UserModel {
     private String secret2FA;
 
 
-    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<HistoryModel> historyModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<StatModel> statModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "authorModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "authorModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<MessageModel> authorMessageModels = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "creatorModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "creatorModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<TaskModel> createdTaskModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "assigneeModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "assigneeModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<TaskModel> assignedTaskModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "receiverModel", orphanRemoval = true)
+    @OneToMany(mappedBy = "receiverModel", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<MessageModel> receivedMessages = new ArrayList<>();
 
 }

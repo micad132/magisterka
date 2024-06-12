@@ -21,6 +21,13 @@ const MessagesService = {
       throw e;
     }
   },
+  deleteMessage: async (messageId: number) => {
+    try {
+      await axios.delete(`${API_URL}/message/${messageId}`);
+    } catch (e) {
+      throw e;
+    }
+  },
 
 };
 

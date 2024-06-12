@@ -14,17 +14,15 @@ const TaskService = {
   }),
 
   getAllTasks: async () => {
-    const token = localStorage.getItem('accessToken');
-    const res = await axios.get(`${API_URL}/task`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Dodaj token do nagłówka Authorization
-      },
-    });
+    const res = await axios.get(`${API_URL}/task`);
     return res.data;
   },
 
   editPreview: async (editPreview: EditTaskPreview) => {
     await axios.patch(`${API_URL}/task/editPreview`, editPreview);
+  },
+  deleteTask: async (taskId: number) => {
+    await axios.delete(`${API_URL}/task/${taskId}`);
   },
 };
 

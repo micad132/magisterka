@@ -19,9 +19,25 @@ interface Props {
   user: User,
 }
 
+const DeletingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: bold;
+  color: red;
+`;
+
 const ButtonsFooterComponent = ({ userId, user }: Props) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
+
+  const deletingUserContent = (
+    <DeletingWrapper>
+      <h1>Are you sure you want to delete this user?</h1>
+      <p>Deleting this user will also delete all connected and created data by this user</p>
+      <p>All surveys, supports, charts, messages, comments, tasks will be gone!</p>
+    </DeletingWrapper>
+  );
 
   const editPersonModalContent: ModalProps = {
     modalHeader: 'Edit person',
@@ -36,7 +52,7 @@ const ButtonsFooterComponent = ({ userId, user }: Props) => {
     modalHeader: 'Delete person',
     buttonText: 'Delete',
     modalActionButtonText: 'Delete',
-    modalBody: <h1>Are you sure to want to delete this user?</h1>,
+    modalBody: deletingUserContent,
     buttonColor: 'red',
     buttonSize: 'md',
     mainButtonAction: async () => {

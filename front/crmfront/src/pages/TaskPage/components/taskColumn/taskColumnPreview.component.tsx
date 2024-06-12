@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { Tooltip, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
+import { DeleteIcon } from '@chakra-ui/icons';
 import TaskTypeBadge from '../../../../components/taskTypeBadge.component.tsx';
 import {
   EditTaskPreview,
@@ -27,7 +28,7 @@ import EstimatedCostComponent from '../task/taskPreviewDetails/estimatedCost.com
 import RowInfoWrapperComponent from '../task/taskPreviewDetails/rowInfoWrapper.component.tsx';
 import CreatedByComponent from '../task/taskPreviewDetails/createdBy.component.tsx';
 import ActualCostComponent from '../task/taskPreviewDetails/actualCost.component.tsx';
-import { editTaskPreviewThunk } from '../../../../store/taskSlice.tsx';
+import { deleteTaskThunk, editTaskPreviewThunk } from '../../../../store/taskSlice.tsx';
 import { ActionType, AddHistory } from '../../../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../../../store/historySlice.tsx';
 
@@ -45,6 +46,11 @@ const IconsWrapper = styled.div`
 const IconWrapper = styled.div`
   width: max-content;
   cursor: pointer;
+`;
+
+const EditDelete = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 const TaskColumnPreviewComponent = ({
@@ -74,6 +80,29 @@ const TaskColumnPreviewComponent = ({
       ...prevState,
       [key]: value,
     }));
+  };
+
+  const deleteTask = async () => {
+    try {
+      await dispatch(deleteTaskThunk(taskPreview.id));
+      toast({
+        title: 'Task deleted!',
+        description: 'You have successfully deleted task!',
+        status: 'success',
+        duration: 4000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    } catch (e) {
+      toast({
+        title: 'Something went wrong',
+        description: 'Contact with your admin',
+        status: 'error',
+        duration: 4000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    }
   };
 
   const editPreview = () => {
@@ -115,7 +144,7 @@ const TaskColumnPreviewComponent = ({
         status: 'error',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
     }
   };
@@ -130,19 +159,39 @@ const TaskColumnPreviewComponent = ({
     modalBody: <EditTaskPreviewComponent options={options} setPreview={setPreview} previewTask={previewTask} />,
   };
 
+  const deletingTaskModalProps: ModalProps = {
+    modalIcon: <DeleteIcon color="red.500" boxSize={5} />,
+    buttonText: '',
+    mainButtonAction: deleteTask,
+    buttonSize: 'md',
+    modalActionButtonText: 'Delete',
+    modalHeader: 'Delete task',
+    modalBody: <h1>Are you sure you want to delete this task?</h1>,
+  };
+
   return (
     <TaskColumnPreviewWrapperComponent taskStatus={taskStatus}>
       <IconsWrapper>
-        <IconWrapper>
-          <Tooltip label="Navigate to task details page">
-            <OpenInNewIcon onClick={() => navigate(`/tasks/${taskPreview.id}`)} />
-          </Tooltip>
-        </IconWrapper>
-        {loggedUser.userRole !== RoleType.CLIENT && (
-        <IconWrapper>
-          <ModalComponent modalProps={editTaskPreview} />
-        </IconWrapper>
-        )}
+        <div>
+          <IconWrapper>
+            <Tooltip label="Navigate to task details page">
+              <OpenInNewIcon onClick={() => navigate(`/tasks/${taskPreview.id}`)} />
+            </Tooltip>
+          </IconWrapper>
+        </div>
+        <EditDelete>
+          {loggedUser.userRole !== RoleType.CLIENT && (
+          <IconWrapper>
+            <ModalComponent modalProps={editTaskPreview} />
+          </IconWrapper>
+          )}
+          {loggedUser.userRole === RoleType.ADMIN && (
+          <IconWrapper>
+            <ModalComponent modalProps={deletingTaskModalProps} />
+          </IconWrapper>
+          )}
+        </EditDelete>
+
       </IconsWrapper>
 
       <TaskTypeBadge taskType={taskPreview.taskType} />
