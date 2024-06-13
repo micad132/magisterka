@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SmsService {
 
-    @Value("${twilio.phone-number}")
+    @Value("${TWILIO_PHONE_NUMBER}")
     private String twilioPhoneNumber;
 
     public void sendSms(String to, String body) {

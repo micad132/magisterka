@@ -2,6 +2,7 @@ package com.crmbackend.backend.Config;
 
 import com.crmbackend.backend.Config.jwt.JwtAuthenticationFilter;
 import com.crmbackend.backend.User.CustomUserDetailsService;
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,6 +46,7 @@ public class SecurityConfig {
     private JwtAuthenticationFilter jwtAuthenticationFilter;
     private final String ACCESS_TOKEN = "accessToken";
     private final String REFRESH_TOKEN = "refreshToken";
+
 
     @Bean
     public HttpSessionIdResolver httpSessionIdResolver() {
