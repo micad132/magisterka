@@ -17,14 +17,7 @@ import { getAllSupportRequests } from '../../../../../store/supportRequestSlice.
 import { getAllSurveys } from '../../../../../store/surveySlice.tsx';
 import { getAllComments } from '../../../../../store/commentsSlice.tsx';
 import { filterMessagesByCurrentWeek, filterSurveysByCurrentWeek } from '../../../../../utils/utilFunctions.ts';
-
-const SingleInfoWrapper = styled.div`
-  display: flex;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-`;
+import SingleInfoWrapperComponent from '../../singleInfoWrapper.component.tsx';
 
 const FlexContainer = styled.div`
   display: flex;
@@ -53,28 +46,28 @@ const SystemInfoComponent = () => {
   return (
     <div>
       <LabelTextComponent text="Total system count" />
-      <SingleInfoWrapper>
-        <SystemSingleInfoComponent count={users.length} text="People" linkUrl="/people" />
-        <SystemSingleInfoComponent count={tasks.length} text="Tasks" linkUrl="/tasks" />
-        <SystemSingleInfoComponent count={messages.length} text="Messages" linkUrl="/messages" />
-        <SystemSingleInfoComponent count={histories.length} text="History" linkUrl="/history" />
-        <SystemSingleInfoComponent count={stats.length} text="Charts" linkUrl="/stats" />
-        <SystemSingleInfoComponent count={supports.length} text="Support" linkUrl="/support" />
-        <SystemSingleInfoComponent count={surveys.length} text="Surveys" linkUrl="/survey" />
-        <SystemSingleInfoComponent count={comments.length} text="Comments" linkUrl="/comments" />
-      </SingleInfoWrapper>
+      <SingleInfoWrapperComponent>
+        <SystemSingleInfoComponent count={users.length} text="People" />
+        <SystemSingleInfoComponent count={tasks.length} text="Tasks" />
+        <SystemSingleInfoComponent count={messages.length} text="Messages" />
+        <SystemSingleInfoComponent count={histories.length} text="History" />
+        <SystemSingleInfoComponent count={stats.length} text="Charts" />
+        <SystemSingleInfoComponent count={supports.length} text="Support" />
+        <SystemSingleInfoComponent count={surveys.length} text="Surveys" />
+        <SystemSingleInfoComponent count={comments.length} text="Comments" />
+      </SingleInfoWrapperComponent>
 
       <LabelTextComponent text="This week (current week from monday to sunday)" />
-      <SingleInfoWrapper>
-        <SystemSingleInfoComponent count={users.length} text="People" linkUrl="/people" />
-        <SystemSingleInfoComponent count={tasks.length} text="Tasks" linkUrl="/tasks" />
-        <SystemSingleInfoComponent count={messagesCountThisWeek} text="Messages" linkUrl="/messages" />
-        <SystemSingleInfoComponent count={histories.length} text="History" linkUrl="/history" />
-        <SystemSingleInfoComponent count={stats.length} text="Charts" linkUrl="/stats" />
-        <SystemSingleInfoComponent count={supports.length} text="Support" linkUrl="/support" />
-        <SystemSingleInfoComponent count={surveysCountThisWeek} text="Surveys" linkUrl="/survey" />
-        <SystemSingleInfoComponent count={comments.length} text="Comments" linkUrl="/comments" />
-      </SingleInfoWrapper>
+      <SingleInfoWrapperComponent>
+        <SystemSingleInfoComponent count={users.length} text="People" />
+        <SystemSingleInfoComponent count={tasks.length} text="Tasks" />
+        <SystemSingleInfoComponent count={messagesCountThisWeek} text="Messages" />
+        <SystemSingleInfoComponent count={histories.length} text="History" />
+        <SystemSingleInfoComponent count={stats.length} text="Charts" />
+        <SystemSingleInfoComponent count={supports.length} text="Support" />
+        <SystemSingleInfoComponent count={surveysCountThisWeek} text="Surveys" />
+        <SystemSingleInfoComponent count={comments.length} text="Comments" />
+      </SingleInfoWrapperComponent>
       {/* <LabelTextComponent text="This month" /> */}
       {/* <SingleInfoWrapper> */}
       {/*  <SystemSingleInfoComponent count={127} text="People" linkUrl="/people" /> */}

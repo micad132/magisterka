@@ -5,7 +5,6 @@ import styled from 'styled-components';
 interface Props {
   text: string,
   count: number,
-  linkUrl: string,
 }
 
 const SystemSingleInfoWrapper = styled.div`
@@ -16,6 +15,12 @@ const SystemSingleInfoWrapper = styled.div`
   border-radius: 10px;
   font-size: 1.2rem;
   min-width: 100px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 `;
 
 const Text = styled.p`
@@ -26,20 +31,11 @@ const Count = styled.p`
   font-weight: bold;
 `;
 
-const CustomIcon = styled(OpenInNewIcon)`
-  cursor: pointer;
-`;
-
-const SystemSingleInfoComponent = ({ text, count, linkUrl }: Props) => {
-  const g = 4;
-  const navigate = useNavigate();
-  return (
-    <SystemSingleInfoWrapper>
-      <CustomIcon onClick={() => navigate(linkUrl)} />
-      <Text>{text}</Text>
-      <Count>{count}</Count>
-    </SystemSingleInfoWrapper>
-  );
-};
+const SystemSingleInfoComponent = ({ text, count }: Props) => (
+  <SystemSingleInfoWrapper>
+    <Text>{text}</Text>
+    <Count>{count}</Count>
+  </SystemSingleInfoWrapper>
+);
 
 export default SystemSingleInfoComponent;

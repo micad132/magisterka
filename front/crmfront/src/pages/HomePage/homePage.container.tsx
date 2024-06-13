@@ -13,11 +13,14 @@ import { RoleType } from '../../types/UserType.ts';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 import AdminHomePageContainer from './components/adminHomePage/adminHomePage.container.tsx';
 import { API_URL } from '../../utils/consts.ts';
+import InfoCountWrapperComponent from './components/userHomePage/infoCountWrapper.component.tsx';
+import SingleItemCountComponent from './components/userHomePage/singleItemCount.component.tsx';
+import SystemSingleInfoComponent from './components/adminHomePage/systemSingleInfo.component.tsx';
+import SingleInfoWrapperComponent from './components/singleInfoWrapper.component.tsx';
 
 const HomePageHeader = styled.h1`
   color: var(--font-color);
   font-size: 2rem !important;
-  background-color: brown;
 `;
 
 const HomePage = () => {
@@ -26,11 +29,6 @@ const HomePage = () => {
   // const allUsers = useAppSelector(getAllUsers);
   // const [isUserDataFetched, setIsUserDataFetched] = useState<boolean>(false);
   // const [userInfoFetched, setUserInfoFetched] = useState(false);
-
-  const test = async () => {
-    const data = await axios.get(`${API_URL}/task`);
-    console.log('data', data);
-  };
 
   useEffect(() => {
     // console.log('hej');
@@ -73,7 +71,14 @@ const HomePage = () => {
         <HomePageHeader>Hello {loggedUser.name} {loggedUser.surname}</HomePageHeader>
         <p>You created account in this system at 28.03.2024 18:21</p>
         <p>Until now you created:</p>
-        <Button colorScheme="teal" onClick={test}>TEST</Button>
+        <SingleInfoWrapperComponent>
+          <SystemSingleInfoComponent count={2} text="Usługi" />
+          <SystemSingleInfoComponent count={3} text="Wiadomości" />
+          <SystemSingleInfoComponent count={12} text="Historia" />
+          <SystemSingleInfoComponent count={4} text="Ankiety" />
+          <SystemSingleInfoComponent count={5} text="Zgłoszenia" />
+          <SystemSingleInfoComponent count={5} text="Komentarze" />
+        </SingleInfoWrapperComponent>
       </PageWrapperComponent>
     );
   }
