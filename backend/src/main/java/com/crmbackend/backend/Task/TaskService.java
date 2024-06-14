@@ -6,13 +6,11 @@ import com.crmbackend.backend.Task.dto.TaskDTOResponse;
 import com.crmbackend.backend.Task.enums.TaskStatus;
 import com.crmbackend.backend.User.UserModel;
 import com.crmbackend.backend.User.UserRepository;
-import com.crmbackend.backend.mappers.UserMapper.UserMapper;
+import com.crmbackend.backend.User.UserMapper;
 import com.crmbackend.backend.utils.SmsService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 

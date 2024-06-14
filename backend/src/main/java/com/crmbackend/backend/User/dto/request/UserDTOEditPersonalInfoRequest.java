@@ -13,7 +13,7 @@ public class UserDTOEditPersonalInfoRequest {
     private String name;
     private String surname;
     private Integer age;
-    private String countryName;
+    private String provinceName;
     private String cityName;
     private String streetName;
     private String pesel;

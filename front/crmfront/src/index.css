@@ -25,7 +25,7 @@ body::-webkit-scrollbar-track {
 
 /* Stylizacja uchwytu (thumb) */
 body::-webkit-scrollbar-thumb {
-  background: red /* Kolor uchwytu */
+  background: red; /* Kolor uchwytu */
   border-radius: 10px; /* Zaokrąglenie uchwytu */
 }
 

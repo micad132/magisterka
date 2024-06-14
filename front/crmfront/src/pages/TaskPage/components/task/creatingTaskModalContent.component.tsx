@@ -25,39 +25,39 @@ const CreatingTaskModalContent = ({ selectValues, setTaskValues, taskValues }: P
       <SelectComponent
         options={selectValues.taskType}
         onChange={(e) => setTaskValues(e, 'taskType')}
-        label="Select task type"
+        label="Wybierz typ usługi"
         value={taskValues.taskType}
       />
       <SelectComponent
         options={selectValues.taskPriority}
         onChange={(e) => setTaskValues(e, 'taskPriority')}
-        label="Select task priority"
+        label="Wybierz priorytet usługi"
         value={taskValues.taskPriority}
       />
       <SelectComponent
         options={selectValues.initialStasuses}
         onChange={(e) => setTaskValues(e, 'taskStatus')}
-        label="Select task status"
+        label="Wybierz status usługi"
         value={taskValues.taskStatus}
       />
       <TextareaComponent
-        placeholder="Task description"
+        placeholder="Opis usługi"
         value={taskValues.description}
         onChange={(e) => setTaskValues(e, 'description')}
-        label="Task description"
+        label="Opis usługi"
       />
       <DatePickerComponent
-        label="Select estimated finish time"
+        label="Wybierz przewidywalna date zakończenia"
         onChange={(e) => setTaskValues(e.target.value, 'estimatedFinishTime')}
         value={taskValues.estimatedFinishTime}
-        placeholder="Finish time"
+        placeholder="Czas zakończenia(h)"
       />
       <InputComponent
         name="estimatedCost"
         value={taskValues.estimatedCost}
         onChange={(e) => setTaskValues(e.target.value, 'estimatedCost')}
-        placeholder="Cost"
-        label="Estimated cost"
+        placeholder="Koszt"
+        label="Przewidywalny koszt(zł)"
         type="number"
         isInvalid={false}
       />

@@ -12,8 +12,8 @@ interface Props {
 
 const TaskDatesComponent = ({ createdTime, estimatedFinishTime }: Props) => (
   <TaskDatesWrapper>
-    <p>Created: {createdTime}</p>
-    <p>Estimated finish time: {estimatedFinishTime}</p>
+    <p>Utworzona: {createdTime}</p>
+    <p>Przewidywany czas zakończenia: {estimatedFinishTime}</p>
   </TaskDatesWrapper>
 );
 

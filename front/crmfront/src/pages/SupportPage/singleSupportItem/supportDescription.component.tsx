@@ -10,7 +10,7 @@ interface Props {
 
 const SupportDescriptionComponent = ({ text }: Props) => (
   <>
-    <FontBold>Description:</FontBold>
+    <FontBold>Opis:</FontBold>
     <p>{text}</p>
   </>
 );

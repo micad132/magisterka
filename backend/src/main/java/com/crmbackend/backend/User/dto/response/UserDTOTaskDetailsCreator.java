@@ -12,7 +12,7 @@ import lombok.*;
 public class UserDTOTaskDetailsCreator {
     private String creatorUsername;
     private Integer creatorAge;
-    private String creatorCountry;
+    private String creatorProvince;
     private String creatorName;
     private String creatorSurname;
     private UserRole creatorRole;

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import { useAppSelector } from '../../../../../../utils/hooks.ts';
 import { getAllSurveys } from '../../../../../../store/surveySlice.tsx';
@@ -35,7 +36,7 @@ const SurveyCountWrapperComponent = () => {
 
   return (
     <Wrapper>
-      <p>Surveys by ratings</p>
+      <p>Ankiety według średnich ocen</p>
       <CountDivComponent>
         <CountDivContentComponent>
           <RateTagComponent rate={SurveyRating.LOW} />

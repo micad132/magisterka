@@ -3,7 +3,7 @@ import SelectComponent from '../../../components/form/select.component.tsx';
 import { SelectValue } from '../../../types/UtilTypes.ts';
 
 const SelectReceiverWrapper = styled.div`
-      width: 300px;
+      width: 350px;
       margin: 10px auto;
       display: flex;
       flex-direction: column;
@@ -21,7 +21,7 @@ const SelectReceiverComponent = ({ options, onChange, value }: Props) => (
     <SelectComponent
       options={options}
       onChange={onChange}
-      label="Filter messages by receiver"
+      label="Przefiltruj wiadomości według odbiorcy"
       value={value ?? undefined}
     />
   </SelectReceiverWrapper>

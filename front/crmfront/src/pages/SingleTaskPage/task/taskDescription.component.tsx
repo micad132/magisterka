@@ -12,7 +12,7 @@ interface Props {
 
 const TaskDescriptionComponent = ({ description }: Props) => (
   <TaskDescription>
-    <span>Description:</span>
+    <span>Opis:</span>
     <p>{description}</p>
   </TaskDescription>
 );

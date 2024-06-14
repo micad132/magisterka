@@ -124,23 +124,23 @@ const TaskColumnPreviewComponent = ({
     const historyObj: AddHistory = {
       performerId: loggedUser.id,
       historyActionType: ActionType.TASK,
-      description: `Worker ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} edited task with id: ${taskPreview.id}`,
+      description: `Pracownik ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} edytował usługę z id: ${taskPreview.id}`,
     };
     try {
       dispatch(editTaskPreviewThunk(obj));
       dispatch(addHistoryThunk(historyObj));
       toast({
-        title: 'Task preview edited!',
-        description: 'You have successfully edited this task preview',
+        title: 'Szczegóły usługi zostały edytowane!',
+        description: 'Pomyślnie zedytowałeś szczegóły usługi',
         status: 'success',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
     } catch (e) {
       toast({
-        title: 'Something went wrong',
-        description: 'Contact with your admin',
+        title: 'Coś poszło nie tak',
+        description: 'Skontaktuj się z adminem!',
         status: 'error',
         duration: 4000,
         isClosable: true,
@@ -154,9 +154,9 @@ const TaskColumnPreviewComponent = ({
     buttonText: '',
     mainButtonAction: editPreview,
     buttonSize: 'md',
-    modalActionButtonText: 'Edit',
-    modalHeader: 'Edit task basic info',
-    modalBody: <EditTaskPreviewComponent options={options} setPreview={setPreview} previewTask={previewTask} />,
+    modalActionButtonText: 'Edytuj',
+    modalHeader: 'Edytuj szczegóły zadania',
+    modalBody: <EditTaskPreviewComponent options={options} setPreview={setPreview} previewTask={previewTask} oldValues={taskPreview} />,
   };
 
   const deletingTaskModalProps: ModalProps = {
@@ -166,7 +166,7 @@ const TaskColumnPreviewComponent = ({
     buttonSize: 'md',
     modalActionButtonText: 'Delete',
     modalHeader: 'Delete task',
-    modalBody: <h1>Are you sure you want to delete this task?</h1>,
+    modalBody: <h1>Czy na pewno chcesz usunąć te usługę?</h1>,
   };
 
   return (

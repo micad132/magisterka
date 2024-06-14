@@ -1,4 +1,4 @@
-package com.crmbackend.backend.mappers.UserMapper;
+package com.crmbackend.backend.User;
 
 import com.crmbackend.backend.Comment.CommentMapper;
 import com.crmbackend.backend.Config.PasswordEncoderConfig;
@@ -42,7 +42,7 @@ public class UserMapper {
                 .userGender(userDTORequest.getUserGender())
                 .email(userDTORequest.getEmail())
                 .userRole(userDTORequest.getUserRole())
-                .countryName(userDTORequest.getCountryName())
+                .provinceName(userDTORequest.getProvinceName())
                 .streetName(userDTORequest.getStreetName())
                 .cityName(userDTORequest.getCityName())
                 .phoneNumber(userDTORequest.getPhoneNumber())
@@ -61,7 +61,7 @@ public class UserMapper {
                 .username(userModel.getUsername())
                 .userGender(userModel.getUserGender())
                 .pesel(userModel.getPesel())
-                .countryName(userModel.getCountryName())
+                .provinceName(userModel.getProvinceName())
                 .streetName(userModel.getStreetName())
                 .cityName(userModel.getCityName())
                 .phoneNumber(userModel.getPhoneNumber())
@@ -82,7 +82,7 @@ public class UserMapper {
     public UserDTOTaskDetailsAssignee mapEntityToUserDetailsAssignee(UserModel userModel) {
         return UserDTOTaskDetailsAssignee.builder()
                 .assigneeUsername(userModel.getUsername())
-                .assigneeCountry(userModel.getCountryName())
+                .assigneeProvince(userModel.getProvinceName())
                 .assigneeSurname(userModel.getSurname())
                 .assigneeName(userModel.getName())
                 .assigneeAge(userModel.getAge())
@@ -96,7 +96,7 @@ public class UserMapper {
                 .creatorName(userModel.getName())
                 .creatorSurname(userModel.getSurname())
                 .creatorAge(userModel.getAge())
-                .creatorCountry(userModel.getCountryName())
+                .creatorProvince(userModel.getProvinceName())
                 .creatorRole(userModel.getUserRole())
                 .build();
     }

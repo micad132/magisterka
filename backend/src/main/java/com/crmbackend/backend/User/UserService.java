@@ -3,7 +3,6 @@ package com.crmbackend.backend.User;
 import com.crmbackend.backend.User.dto.request.UserDTOEditPersonalInfoRequest;
 import com.crmbackend.backend.User.dto.request.UserDTORequest;
 import com.crmbackend.backend.User.dto.response.UserDTOResponse;
-import com.crmbackend.backend.mappers.UserMapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -49,7 +46,7 @@ public class UserService implements UserDetailsService {
         userModel.setSurname(userDTOEditPersonalInfoRequest.getSurname());
         userModel.setUsername(userDTOEditPersonalInfoRequest.getUsername());
         userModel.setCityName(userDTOEditPersonalInfoRequest.getCityName());
-        userModel.setCountryName(userDTOEditPersonalInfoRequest.getCountryName());
+        userModel.setProvinceName(userDTOEditPersonalInfoRequest.getProvinceName());
         userModel.setStreetName(userDTOEditPersonalInfoRequest.getStreetName());
         userModel.setPesel(userDTOEditPersonalInfoRequest.getPesel());
         userModel.setPhoneNumber(userDTOEditPersonalInfoRequest.getPhoneNumber());

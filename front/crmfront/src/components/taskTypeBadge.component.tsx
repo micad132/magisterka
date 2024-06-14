@@ -1,4 +1,4 @@
-import { Badge, Tag } from '@chakra-ui/react';
+import { Tag } from '@chakra-ui/react';
 import styled from 'styled-components';
 import { TaskType, TaskTypeType } from '../types/TaskType.ts';
 
@@ -15,11 +15,11 @@ const TaskTypeBadge = ({ taskType }: Props) => {
   const properTaskType = () => {
     switch (taskType) {
       case TaskType.INFORMATIC:
-        return <StyledTag size="large" colorScheme="teal" variant="solid">{TaskType.INFORMATIC}</StyledTag>;
+        return <StyledTag size="large" colorScheme="teal" variant="solid">INFORMATYCZNA</StyledTag>;
       case TaskType.PURCHASE:
-        return <StyledTag size="large" colorScheme="purple" variant="solid">{TaskType.PURCHASE}</StyledTag>;
+        return <StyledTag size="large" colorScheme="purple" variant="solid">ZAKUPOWA</StyledTag>;
       case TaskType.LOGISTIC:
-        return <StyledTag size="large" colorScheme="blue" variant="solid">{TaskType.LOGISTIC}</StyledTag>;
+        return <StyledTag size="large" colorScheme="blue" variant="solid">LOGISTYCZNA</StyledTag>;
       default:
         return <StyledTag size="large" colorScheme="teal" variant="solid">Success</StyledTag>;
     }

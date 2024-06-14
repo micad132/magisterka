@@ -31,16 +31,16 @@ const PersonalInfoDetailsComponent = ({ modalProps, userDetails }: Props) => (
   <PersonalInfoWrapper>
     <EditUserDataComponent modalProps={modalProps} />
     <PersonalInfoDetails>
-      <PersonalInfoLabelComponent label="Name" text={userDetails.name} />
-      <PersonalInfoLabelComponent label="Surname" text={userDetails.surname} />
-      <PersonalInfoLabelComponent label="Gender" text={userDetails.userGender} />
+      <PersonalInfoLabelComponent label="Imię" text={userDetails.name} />
+      <PersonalInfoLabelComponent label="Nazwisko" text={userDetails.surname} />
+      <PersonalInfoLabelComponent label="Płeć" text={userDetails.userGender} />
       <PersonalInfoLabelComponent label="Email" text={userDetails.email} />
-      <PersonalInfoLabelComponent label="Age" text={userDetails.age} />
-      <PersonalInfoLabelComponent label="Country name" text={userDetails.countryName} />
-      <PersonalInfoLabelComponent label="City name" text={userDetails.cityName} />
-      <PersonalInfoLabelComponent label="Street name" text={userDetails.streetName} />
-      <PersonalInfoLabelComponent label="Postal code" text={userDetails.postalCode} />
-      <PersonalInfoLabelComponent label="Phone number" text={userDetails.phoneNumber} />
+      <PersonalInfoLabelComponent label="Wiek" text={userDetails.age} />
+      <PersonalInfoLabelComponent label="Województwo" text={userDetails.provinceName} />
+      <PersonalInfoLabelComponent label="Nazwa miasta" text={userDetails.cityName} />
+      <PersonalInfoLabelComponent label="Nazwa ulicy" text={userDetails.streetName} />
+      <PersonalInfoLabelComponent label="Kod pocztowy" text={userDetails.postalCode} />
+      <PersonalInfoLabelComponent label="Numer telefonu" text={userDetails.phoneNumber} />
     </PersonalInfoDetails>
   </PersonalInfoWrapper>
 );

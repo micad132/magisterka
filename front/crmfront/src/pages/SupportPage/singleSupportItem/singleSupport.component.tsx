@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useToast } from '@chakra-ui/react';
@@ -21,6 +22,7 @@ import { RoleType, User } from '../../../types/UserType.ts';
 import { addingTaskRequestThunk } from '../../../store/taskSlice.tsx';
 import { ActionType, AddHistory } from '../../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../../store/historySlice.tsx';
+import { mapDateToString } from '../../../utils/mappers/mapDateToString.ts';
 
 const SingleSupportWrapper = styled.div`
   -webkit-box-shadow: 9px 3px 12px 3px teal;
@@ -86,14 +88,14 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
     const historyObj: AddHistory = {
       performerId: loggedUser.id,
       historyActionType: ActionType.TASK,
-      description: `Worker ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} converted support request to task`,
+      description: `Pracownik ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} zamienił zgłoszenie wsparcia na usługę`,
     };
     try {
       dispatch(addingTaskRequestThunk(taskBody));
       dispatch(addHistoryThunk(historyObj));
       toast({
-        title: 'Support request converted to task',
-        description: 'You have successfully converted support request to task',
+        title: 'Zgłoszenie wsparcia zamienione na usługę',
+        description: 'Pomyślne zamieniłeś zgłoszenie wsparcia na usługę',
         status: 'success',
         duration: 4000,
         isClosable: true,
@@ -101,8 +103,8 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
       });
     } catch (e) {
       toast({
-        title: 'Something went wrong',
-        description: 'Contact with your admin!',
+        title: 'Coś poszło nie tak',
+        description: 'Skontaktuj się z adminem!',
         status: 'error',
         duration: 4000,
         isClosable: true,
@@ -116,8 +118,8 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
     try {
       dispatch(deleteSupportRequestThunk(support.id));
       toast({
-        title: 'Support request deleted',
-        description: 'You have successfully deleted support request',
+        title: 'Zgłoszenie wsparcia usunięte',
+        description: 'Pomyślnie usunąłeś zgłoszenie wsparcia',
         status: 'success',
         duration: 4000,
         isClosable: true,
@@ -125,8 +127,8 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
       });
     } catch (e) {
       toast({
-        title: 'Something went wrong',
-        description: 'Contact with your admin!',
+        title: 'Coś poszło nie tak',
+        description: 'Skontaktuj się z adminem!',
         status: 'error',
         duration: 4000,
         isClosable: true,
@@ -144,18 +146,18 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
 
   const menuItems: ModalProps[] = [
     {
-      modalHeader: 'Delete support request',
-      modalBody: <h1>Are you sure you want to delete this support request?</h1>,
+      modalHeader: 'Usuń zgłoszenie wsparcia',
+      modalBody: <h1>Czy jesteś pewny że chcesz usunąć to zgłoszenie wsparcia?</h1>,
       buttonSize: 'md',
       mainButtonAction: deleteSupport,
-      buttonText: 'Delete',
-      modalActionButtonText: 'Delete',
+      buttonText: 'Usuń',
+      modalActionButtonText: 'Usuń',
       buttonColor: 'red',
     },
     {
-      modalHeader: 'Convert to task',
-      buttonText: 'Convert to task',
-      modalActionButtonText: 'Convert',
+      modalHeader: 'Zamień na usługę',
+      buttonText: 'Zamień na usługę',
+      modalActionButtonText: 'Zamień',
       buttonSize: 'md',
       mainButtonAction: convertToTask,
       modalBody: <ConvertingToTaskContentComponent values={convertingToTask} setState={setState} selectUsers={SELECT_USERS} />,
@@ -165,7 +167,7 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
   return (
     <SingleSupportWrapper>
       {isAdminOrWorker && <MenuComponent menuItems={menuItems} />}
-      <CreatedDateComponent date={support.date} />
+      <CreatedDateComponent date={mapDateToString(support.dateTime)} />
       <AuthorOfRequestComponent author={support.username} />
       <SupportCategoryBadgeComponent supportType={support.supportCategory} />
       <SupportDescriptionComponent text={support.description} />

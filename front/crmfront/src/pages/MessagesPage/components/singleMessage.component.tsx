@@ -87,9 +87,9 @@ const SingleMessageComponent = ({ message, loggedUserRole }: Props) => {
     buttonText: '',
     mainButtonAction: deleteMessage,
     buttonSize: 'md',
-    modalActionButtonText: 'Delete',
-    modalHeader: 'Delete message',
-    modalBody: <h1>Are you sure you want to delete this message?</h1>,
+    modalActionButtonText: 'Usuń',
+    modalHeader: 'Usuń wiadomość',
+    modalBody: <h1>Czy jesteś pewny że chcesz usunąć tę wiadomość?</h1>,
   };
 
   return (
@@ -104,15 +104,15 @@ const SingleMessageComponent = ({ message, loggedUserRole }: Props) => {
         <Header>
           <Authors>
             <SingleAuthor>
-              <Span>From:</Span> {message.authorName} {message.authorSurname} - {message.authorUsername}
+              <Span>Od:</Span> {message.authorName} {message.authorSurname} - {message.authorUsername}
             </SingleAuthor>
             <SingleAuthor>
-              <Span>To:</Span> {message.receiverName} {message.receiverSurname} - {message.receiverUsername}
+              <Span>Do:</Span> {message.receiverName} {message.receiverSurname} - {message.receiverUsername}
             </SingleAuthor>
           </Authors>
 
           <DateWrapper>
-            <p>Date: {mapDateToString(message.date)}</p>
+            <p>Data: {mapDateToString(message.date)}</p>
             <AccordionIcon />
           </DateWrapper>
 

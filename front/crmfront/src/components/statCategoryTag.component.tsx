@@ -15,13 +15,13 @@ const StatCategoryTagComponent = ({ statCategory }: Props) => {
   const getProperTag = () => {
     switch (statCategory) {
       case StatCategory.TASK:
-        return <TagWrapper size="large" variant="solid" colorScheme="red">{StatCategory.TASK}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="red">USŁUGA</TagWrapper>;
       case StatCategory.PEOPLE:
-        return <TagWrapper size="large" variant="solid" colorScheme="green">{StatCategory.PEOPLE}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="green">UŻYTKOWNICY</TagWrapper>;
       case StatCategory.MESSAGE:
-        return <TagWrapper size="large" variant="solid" colorScheme="orange">{StatCategory.MESSAGE}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="orange">WIADOMOŚCI</TagWrapper>;
       case StatCategory.SUPPORT:
-        return <TagWrapper size="large" variant="solid" colorScheme="orange">{StatCategory.SUPPORT}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="pink">WSPARCIE</TagWrapper>;
       default:
         return <TagWrapper size="large" variant="solid" colorScheme="blue">ADMIN</TagWrapper>;
     }

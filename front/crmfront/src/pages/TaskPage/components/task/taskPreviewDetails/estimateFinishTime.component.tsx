@@ -12,14 +12,11 @@ interface Props {
   estimateFinishTime: string,
 }
 
-const EstimateFinishTimeComponent = ({ estimateFinishTime }: Props) => {
-  const g = 4;
-  return (
-    <EstimateFinishTimeWrapper>
-      <span>Estimate finish time:</span>
-      <CustomLabel text={mapDateToString(estimateFinishTime)} />
-    </EstimateFinishTimeWrapper>
-  );
-};
+const EstimateFinishTimeComponent = ({ estimateFinishTime }: Props) => (
+  <EstimateFinishTimeWrapper>
+    <span>Przewidywany czas zakończenia:</span>
+    <CustomLabel text={mapDateToString(estimateFinishTime)} />
+  </EstimateFinishTimeWrapper>
+);
 
 export default EstimateFinishTimeComponent;

@@ -25,41 +25,41 @@ const ConvertingToTaskContentComponent = ({ values, setState, selectUsers }: Pro
     <SelectComponent
       options={selectUsers}
       onChange={(value) => setState('assigneeId', value)}
-      label="Assignee"
+      label="Przypisany"
     />
     <SelectComponent
       options={TASK_TYPE_OPTIONS}
       onChange={(value) => setState('taskType', value)}
-      label="Task type"
+      label="Typ usługi"
     />
     <SelectComponent
       options={TASK_STATUS_OPTIONS}
       onChange={(value) => setState('taskStatus', value)}
-      label="Task status"
+      label="Status usługi"
     />
     <SelectComponent
       options={TASK_PRIORITY_OPTIONS}
       onChange={(value) => setState('taskPriority', value)}
-      label="Task priority"
+      label="Priorytet usługi"
     />
     <TextareaComponent
-      placeholder="Task description"
+      placeholder="Opis usługi"
       value={values.description}
       onChange={(value) => setState('description', value)}
-      label="Task description"
+      label="Dodaj opis usługi"
     />
     <DatePickerComponent
-      label="Select estimated finish time"
+      label="Wybierz przewidywalną datę zakończenia"
       onChange={(e) => setState('estimatedFinishTime', e.target.value)}
       value={values.estimatedFinishTime}
-      placeholder="Finish time"
+      placeholder="Data zakończenia"
     />
     <InputComponent
       name="estimatedCost"
       value={values.estimatedCost}
       onChange={(value) => setState('estimatedCost', value.target.value)}
-      placeholder="Estimated cost"
-      label="Estimated cost"
+      placeholder="Przewidywalny koszt"
+      label="Przewidywalny koszt"
       type="number"
       isInvalid={false}
     />

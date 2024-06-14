@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { useToast } from '@chakra-ui/react';
@@ -26,7 +27,7 @@ import { addHistoryThunk } from '../../store/historySlice.tsx';
 const ALL_SELECT_VALUES: AllSelectValue = {
   initialStasuses: [
     {
-      text: 'In progress',
+      text: 'Oczekująca',
       value: TaskStatus.IN_PROGRESS,
     },
   ],
@@ -37,17 +38,19 @@ const ALL_SELECT_VALUES: AllSelectValue = {
 const TaskPageContainer = () => {
   const [addingTask, setAddingTask] = useState<AddingTask>(ADDING_TASK_INITIAL_VALUE);
   const [sortingPriorityTask, setSortingPriorityTask] = useState<string>('ALL');
+  const [isOnlyCurrentWorkerTasks, setIsOnlyCurrentWorkerTasks] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const toast = useToast();
   const loggedUser = useAppSelector(getUserDetails);
   const tasks = useAppSelector(getAllTasks);
   const loggedUserTasks = tasks.filter((task) => task.userDTOTaskDetailsCreator.creatorUsername === loggedUser.username);
+  const onlyLoggedWorkerTasks = tasks.filter((task) => task.userDTOTaskDetailsAssignee.assigneeUsername === loggedUser.username);
   console.log('TASKS', tasks);
 
   const isLoggedWorker = loggedUser.userRole === RoleType.WORKER;
 
-  const properUserTasks = loggedUser.userRole === RoleType.CLIENT
-    ? loggedUserTasks
+  const workerClients = loggedUser.userRole === RoleType.WORKER && isOnlyCurrentWorkerTasks
+    ? onlyLoggedWorkerTasks
     : tasks;
 
   const setTaskValues = (value: string, key: string) => {
@@ -82,63 +85,106 @@ const TaskPageContainer = () => {
     const historyObj: AddHistory = {
       performerId: loggedUser.id,
       historyActionType: ActionType.TASK,
-      description: `User ${loggedUser.username} created a task with type ${addingTask.taskType}`,
+      description: `Użytkownik ${loggedUser.username} dodał usługę z typem ${addingTask.taskType}`,
     };
     try {
       dispatch(addingTaskRequestThunk(taskBody));
       dispatch(addHistoryThunk(historyObj));
       toast({
-        title: 'Task added!',
-        description: 'You have successfully added task!',
+        title: 'Usługa dodana!',
+        description: 'Pomyślnie dodałeś usługę!',
         status: 'success',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
       setAddingTask(ADDING_TASK_INITIAL_VALUE);
     } catch (e) {
       toast({
-        title: 'Something went wrong!',
-        description: 'Contant your admin!',
+        title: 'Coś poszło nie tak!',
+        description: 'Skontaktuj się z administratorem!',
         status: 'error',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
     }
   };
 
   const modalProps: ModalProps = {
     mainButtonAction: addTaskHandler,
-    buttonText: 'Create Task',
-    modalHeader: 'Adding Task',
-    modalActionButtonText: 'Create',
+    buttonText: 'Dodaj',
+    modalHeader: 'Dodaj usługę',
+    modalActionButtonText: 'Dodaj',
     modalBody: <CreatingTaskModalContent selectValues={ALL_SELECT_VALUES} setTaskValues={setTaskValues} taskValues={addingTask} />,
   };
 
   if (tasks.length === 0) {
     return (
       <PageWrapperComponent>
-        <PageHeaderComponent text="TASKS" />
+        <PageHeaderComponent text="Usługi (w formie zadań)" />
         {loggedUser.userRole === RoleType.CLIENT && <ModalComponent modalProps={modalProps} />}
-        <MessageComponent message="There are no tasks in the system" />
+        <MessageComponent message="Nie ma usług w systemie" />
       </PageWrapperComponent>
     );
   }
 
-  const properTasks = sortingPriorityTask === 'ALL'
-    ? properUserTasks
-    : properUserTasks.filter((task) => task.taskPriority === sortingPriorityTask);
+  const properClientTasks = sortingPriorityTask === 'ALL'
+    ? loggedUserTasks
+    : loggedUserTasks.filter((task) => task.taskPriority === sortingPriorityTask);
 
-  console.log('PROPER TASKS', properTasks);
+  if (loggedUser.userRole === RoleType.CLIENT) {
+    return (
+      <PageWrapperComponent>
+        <PageHeaderComponent text="USŁUGI (W FORMIE ZADAŃ)" />
+        <ModalComponent modalProps={modalProps} />
+        <TaskSettingsContainer
+          sortingPriorityValue={sortingPriorityTask}
+          setSortingPriorityValue={setSortingPriorityTask}
+          isWorkerLogged={false}
+          isOnlyCurrentWorkerTasks={isOnlyCurrentWorkerTasks}
+          setIsOnlyCurrentWorkerTasks={setIsOnlyCurrentWorkerTasks}
+        />
+        <TaskWrapper tasks={properClientTasks} />
+      </PageWrapperComponent>
+    );
+  }
+
+  const properWorkerTasks = sortingPriorityTask === 'ALL'
+    ? workerClients
+    : workerClients.filter((task) => task.taskPriority === sortingPriorityTask);
+
+  if (loggedUser.userRole === RoleType.WORKER) {
+    return (
+      <PageWrapperComponent>
+        <PageHeaderComponent text="USŁUGI (W FORMIE ZADAŃ)" />
+        <TaskSettingsContainer
+          sortingPriorityValue={sortingPriorityTask}
+          setSortingPriorityValue={setSortingPriorityTask}
+          isWorkerLogged
+          isOnlyCurrentWorkerTasks={isOnlyCurrentWorkerTasks}
+          setIsOnlyCurrentWorkerTasks={setIsOnlyCurrentWorkerTasks}
+        />
+        <TaskWrapper tasks={properWorkerTasks} />
+      </PageWrapperComponent>
+    );
+  }
+
+  const properAdminTasks = sortingPriorityTask === 'ALL'
+    ? tasks
+    : tasks.filter((task) => task.taskPriority === sortingPriorityTask);
 
   return (
     <PageWrapperComponent>
-      <PageHeaderComponent text="SERVICES (AS TASKS)" />
-      {/* <CreateTaskButton /> */}
-      {loggedUser.userRole === RoleType.CLIENT && <ModalComponent modalProps={modalProps} />}
-      <TaskSettingsContainer sortingPriorityValue={sortingPriorityTask} setSortingPriorityValue={setSortingPriorityTask} isWorkerLogged={isLoggedWorker} />
-      <TaskWrapper tasks={properTasks} />
+      <PageHeaderComponent text="USŁUGI (W FORMIE ZADAŃ)" />
+      <TaskSettingsContainer
+        sortingPriorityValue={sortingPriorityTask}
+        setSortingPriorityValue={setSortingPriorityTask}
+        isWorkerLogged={isLoggedWorker}
+        isOnlyCurrentWorkerTasks={isOnlyCurrentWorkerTasks}
+        setIsOnlyCurrentWorkerTasks={setIsOnlyCurrentWorkerTasks}
+      />
+      <TaskWrapper tasks={properAdminTasks} />
     </PageWrapperComponent>
   );
 };

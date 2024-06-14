@@ -9,7 +9,7 @@ interface Props {
 }
 
 const AuthorOfRequestComponent = ({ author }: Props) => (
-  <Paragraph>Raised by {author}</Paragraph>
+  <Paragraph>Zgłoszone przez {author}</Paragraph>
 );
 
 export default AuthorOfRequestComponent;

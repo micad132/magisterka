@@ -7,11 +7,11 @@ interface Props {
 const HistoryTableRows = ({ isAdmin }: Props) => (
   <Tr>
     <Th>ID</Th>
-    <Th>Action type:</Th>
-    <Th>Performer</Th>
-    <Th>Date:</Th>
-    <Th>Description:</Th>
-    {isAdmin && <Th>Delete</Th>}
+    <Th>Typ akcji:</Th>
+    <Th>Wykonawca</Th>
+    <Th>Data:</Th>
+    <Th>Szczegóły:</Th>
+    {isAdmin && <Th>Usuń</Th>}
   </Tr>
 );
 

@@ -7,49 +7,49 @@ export const API_URL = 'http://localhost:8080/api/v1';
 
 export const TASK_STATUS_OPTIONS: SelectValue[] = [
   {
-    text: 'In progress',
+    text: 'W trakcie',
     value: TaskStatus.IN_PROGRESS,
   },
   {
-    text: 'Pending',
+    text: 'Oczekujące',
     value: TaskStatus.PENDING,
   },
   {
-    text: 'Done',
+    text: 'Wykonane',
     value: TaskStatus.DONE,
   },
   {
-    text: 'Canceled',
+    text: 'Anulowane',
     value: TaskStatus.CANCELED,
   },
 ];
 
 export const TASK_PRIORITY_OPTIONS: SelectValue[] = [
   {
-    text: 'Minor',
+    text: 'Niski',
     value: TaskPriority.MINOR,
   },
   {
-    text: 'Major',
+    text: 'Poważny',
     value: TaskPriority.MAJOR,
   },
   {
-    text: 'Critical',
+    text: 'Krytyczny',
     value: TaskPriority.CRITICAL,
   },
 ];
 
 export const USER_ROLES_OPTIONS: SelectValue[] = [
   {
-    text: 'ALL',
+    text: 'Wszystko',
     value: 'ALL',
   },
   {
-    text: 'CLIENT',
+    text: 'KLIENT',
     value: RoleType.CLIENT,
   },
   {
-    text: 'WORKER',
+    text: 'PRACOWNIK',
     value: RoleType.WORKER,
   },
   {
@@ -60,26 +60,26 @@ export const USER_ROLES_OPTIONS: SelectValue[] = [
 
 export const TASK_TYPE_OPTIONS: SelectValue[] = [
   {
-    text: 'Logistic',
+    text: 'Logistyczny',
     value: TaskType.LOGISTIC,
   },
   {
-    text: 'Purchase',
+    text: 'Zakupowy',
     value: TaskType.PURCHASE,
   },
   {
-    text: 'Informatic',
+    text: 'Informatyczny',
     value: TaskType.INFORMATIC,
   },
 ];
 
 export const GENDER_SELECT_OPTIONS: SelectValue[] = [
   {
-    text: 'Man',
+    text: 'Mężczyzna',
     value: 'MAN',
   },
   {
-    text: 'Woman',
+    text: 'Kobieta',
     value: 'WOMAN',
   },
 ];
@@ -108,3 +108,22 @@ export type AllSelectValue = {
   taskPriority: SelectValue[],
   taskType: SelectValue[],
 };
+
+export const PROVINCES_VALUES: SelectValue[] = [
+  { text: 'Dolnośląskie', value: 'Dolnośląskie' },
+  { text: 'Kujawsko-Pomorskie', value: 'Kujawsko-Pomorskie' },
+  { text: 'Lubelskie', value: 'Lubelskie' },
+  { text: 'Lubuskie', value: 'Lubuskie' },
+  { text: 'Łódzkie', value: 'Łódzkie' },
+  { text: 'Małopolskie', value: 'Małopolskie' },
+  { text: 'Mazowieckie', value: 'Mazowieckie' },
+  { text: 'Opolskie', value: 'Opolskie' },
+  { text: 'Podkarpackie', value: 'Podkarpackie' },
+  { text: 'Podlaskie', value: 'Podlaskie' },
+  { text: 'Pomorskie', value: 'Pomorskie' },
+  { text: 'Śląskie', value: 'Śląskie' },
+  { text: 'Świętokrzyskie', value: 'Świętokrzyskie' },
+  { text: 'Warmińsko-Mazurskie', value: 'Warmińsko-Mazurskie' },
+  { text: 'Wielkopolskie', value: 'Wielkopolskie' },
+  { text: 'Zachodniopomorskie', value: 'Zachodniopomorskie' },
+];

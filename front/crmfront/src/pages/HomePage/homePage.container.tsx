@@ -6,9 +6,9 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import {
   fetchAllUsersThunk, fetchUserDetailsThunk, getUserDetails,
 } from '../../store/userSlice.tsx';
-import { fetchSupportRequestsThunk } from '../../store/supportRequestSlice.tsx';
-import { fetchMessagesThunk } from '../../store/messageSlice.tsx';
-import { fetchTasksThunk } from '../../store/taskSlice.tsx';
+import { fetchSupportRequestsThunk, getAllSupportRequests } from '../../store/supportRequestSlice.tsx';
+import { fetchMessagesThunk, getAllMessages } from '../../store/messageSlice.tsx';
+import { fetchTasksThunk, getAllTasks } from '../../store/taskSlice.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 import AdminHomePageContainer from './components/adminHomePage/adminHomePage.container.tsx';
@@ -17,6 +17,10 @@ import InfoCountWrapperComponent from './components/userHomePage/infoCountWrappe
 import SingleItemCountComponent from './components/userHomePage/singleItemCount.component.tsx';
 import SystemSingleInfoComponent from './components/adminHomePage/systemSingleInfo.component.tsx';
 import SingleInfoWrapperComponent from './components/singleInfoWrapper.component.tsx';
+import { getAllHistories } from '../../store/historySlice.tsx';
+import { getAllSurveys } from '../../store/surveySlice.tsx';
+import { getAllComments } from '../../store/commentsSlice.tsx';
+import { mapDateToString } from '../../utils/mappers/mapDateToString.ts';
 
 const HomePageHeader = styled.h1`
   color: var(--font-color);
@@ -29,55 +33,33 @@ const HomePage = () => {
   // const allUsers = useAppSelector(getAllUsers);
   // const [isUserDataFetched, setIsUserDataFetched] = useState<boolean>(false);
   // const [userInfoFetched, setUserInfoFetched] = useState(false);
+  const messages = useAppSelector(getAllMessages);
+  const tasks = useAppSelector(getAllTasks);
+  const histories = useAppSelector(getAllHistories);
+  const surveys = useAppSelector(getAllSurveys);
+  const support = useAppSelector(getAllSupportRequests);
+  const comments = useAppSelector(getAllComments);
 
-  useEffect(() => {
-    // console.log('hej');
-    // if (userDetails.username === '') {
-    //   dispatch(fetchUserDetailsThunk());
-    // } else if (allUsers.length === 0) {
-    //   dispatch(fetchAllUsersThunk());
-    // }
-    // const fetchUserData = async () => {
-    //   try {
-    //     const response = await axios.get('http://localhost:8080/api/v1/user/getLoggedUser');
-    //     setIsUserDataFetched(true);
-    //     setUserInfoFetched(response.data);
-    //     console.log('RESPONSE', response);
-    //   } catch (e) {
-    //     console.error(e);
-    //   }
-    // };
-    // if (!userInfoFetched && !isUserDataFetched) {
-    //   fetchUserData();
-    // }
-    // dispatch(fetchAllUsersThunk());
-    // dispatch(fetchSupportRequestsThunk());
-    // dispatch(fetchUserDetailsThunk());
-    // dispatch(fetchMessagesThunk());
-    // dispatch(fetchTasksThunk());
-  }, []);
-
-  // if(loggedUser.name === '') {
-  //   return(
-  //       <PageWrapperComponent>
-  //
-  //       </PageWrapperComponent>
-  //   )
-  // }
+  const loggedClientCreatedTasks = tasks.filter((task) => task.userDTOTaskDetailsCreator.creatorUsername === loggedUser.username);
+  const loggedClientCreatedMessages = messages.filter((msg) => msg.authorUsername || msg.receiverUsername === loggedUser.username);
+  const loggedClientCreatedHistories = histories.filter((history) => history.performerUsername === loggedUser.username);
+  const loggedClientCreatedSurveys = surveys.filter((survey) => survey.authorUsername === loggedUser.username);
+  const loggedClientCreatedSupports = support.filter((spr) => spr.username === loggedUser.username);
+  const loggedClientCreatedComments = comments.filter((comment) => comment.authorUsername === loggedUser.username);
 
   if (loggedUser.userRole === RoleType.CLIENT && loggedUser.name !== '') {
     return (
       <PageWrapperComponent>
-        <HomePageHeader>Hello {loggedUser.name} {loggedUser.surname}</HomePageHeader>
-        <p>You created account in this system at 28.03.2024 18:21</p>
-        <p>Until now you created:</p>
+        <HomePageHeader>Witaj {loggedUser.name} {loggedUser.surname}</HomePageHeader>
+        <p>Utworzyłeś konto: {mapDateToString(loggedUser.createdAccountDate)}</p>
+        <p>Do tej pory stworzyłeś:</p>
         <SingleInfoWrapperComponent>
-          <SystemSingleInfoComponent count={2} text="Usługi" />
-          <SystemSingleInfoComponent count={3} text="Wiadomości" />
-          <SystemSingleInfoComponent count={12} text="Historia" />
-          <SystemSingleInfoComponent count={4} text="Ankiety" />
-          <SystemSingleInfoComponent count={5} text="Zgłoszenia" />
-          <SystemSingleInfoComponent count={5} text="Komentarze" />
+          <SystemSingleInfoComponent count={loggedClientCreatedTasks.length} text="Usługi" />
+          <SystemSingleInfoComponent count={loggedClientCreatedMessages.length} text="Wiadomości" />
+          <SystemSingleInfoComponent count={loggedClientCreatedHistories.length} text="Historia" />
+          <SystemSingleInfoComponent count={loggedClientCreatedSurveys.length} text="Ankiety" />
+          <SystemSingleInfoComponent count={loggedClientCreatedSupports.length} text="Zgłoszenia" />
+          <SystemSingleInfoComponent count={loggedClientCreatedComments.length} text="Komentarze" />
         </SingleInfoWrapperComponent>
       </PageWrapperComponent>
     );

@@ -12,7 +12,7 @@ export type User = {
   userRole: RoleTypeType,
   userGender: UserGenderType,
   age: number,
-  countryName: string,
+  provinceName: string,
   pesel: string,
   username: string,
   streetName: string,
@@ -35,7 +35,7 @@ export type User = {
 
 export type SelfEditUser = {
   age: number,
-  countryName: string,
+  provinceName: string,
   pesel: string,
   username: string,
   streetName: string,
@@ -69,7 +69,7 @@ export type LoggedUserDetails = {
   name: string,
   surname: string,
   age: number,
-  countryName: string,
+  provinceName: string,
   streetName: string,
   cityName: string,
   postalCode: string,
@@ -81,7 +81,7 @@ export type LoggedUserDetails = {
 export type UserDTOTaskDetailsCreator = {
   creatorUsername: string,
   creatorAge: number,
-  creatorCountry: string,
+  creatorProvince: string,
   creatorName: string,
   creatorSurname: string,
   creatorRole: RoleTypeType,
@@ -90,7 +90,7 @@ export type UserDTOTaskDetailsCreator = {
 export type UserDTOTaskDetailsAssignee = {
   assigneeUsername: string,
   assigneeAge: number,
-  assigneeCountry: string,
+  assigneeProvince: string,
   assigneeName: string,
   assigneeSurname: string,
   assigneeRole: RoleTypeType,
@@ -119,7 +119,7 @@ export const INITIAL_EDIT_USER_VALUES: UserWithoutID = {
   username: '',
   age: 0,
   name: '',
-  countryName: '',
+  provinceName: '',
   pesel: '',
   surname: '',
   userGender: UserGender.MAN,
@@ -145,7 +145,7 @@ export const INITIAL_USER_DETAILS_VALUES: User = {
   username: '',
   age: 0,
   name: '',
-  countryName: '',
+  provinceName: '',
   pesel: '',
   surname: '',
   userGender: UserGender.MAN,
@@ -169,7 +169,7 @@ export const INITIAL_SELF_EDIT_USER_VALUES: SelfEditUser = {
   username: '',
   age: 0,
   name: '',
-  countryName: '',
+  provinceName: '',
   pesel: '',
   surname: '',
   cityName: '',
@@ -183,4 +183,12 @@ export type ProfileCount = {
   historiesCount: number,
   commentsCount: number,
   supportsCount: number,
+};
+
+export type WorkerProfileCount = {
+  messagesCount: number,
+  tasksMadeCount: number,
+  taskAssigneeCount: number,
+  historiesCount: number,
+  commentsCount: number,
 };

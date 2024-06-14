@@ -14,6 +14,8 @@ import { registerScheme } from '../../../services/validators/UserValidator.ts';
 import CodeModalComponent from './components/codeModal.component.tsx';
 import SelectComponent from '../../../components/form/select.component.tsx';
 import { SelectValue } from '../../../types/UtilTypes.ts';
+import { PROVINCES_VALUES } from '../../../utils/consts.ts';
+import RegisterSelectComponent from './components/registerSelect.component.tsx';
 
 const InitialRole = styled.div`
     display: flex;
@@ -48,7 +50,7 @@ const RegisterPage = () => {
 
   return (
     <AuthWrapper>
-      <h1>Register</h1>
+      <h1>Zarejestruj się</h1>
       <Formik
         initialValues={INITIAL_REGISTER_AUTH_VALUES}
         validationSchema={registerScheme}
@@ -114,8 +116,8 @@ const RegisterPage = () => {
                 name="name"
                 value={values.name}
                 onChange={handleChange}
-                placeholder="Name"
-                label="Name"
+                placeholder="Imię"
+                label="Imię"
                 type="text"
                 isInvalid={false}
                 error={errors.name}
@@ -124,8 +126,8 @@ const RegisterPage = () => {
                 name="surname"
                 value={values.surname}
                 onChange={handleChange}
-                placeholder="Surname"
-                label="Surname"
+                placeholder="Nazwisko"
+                label="Nazwisko"
                 type="text"
                 isInvalid={false}
                 error={errors.surname}
@@ -134,8 +136,8 @@ const RegisterPage = () => {
                 name="age"
                 value={values.age}
                 onChange={handleChange}
-                placeholder="Age"
-                label="Age"
+                placeholder="Wiek"
+                label="Wiek"
                 type="number"
                 isInvalid={false}
                 error={errors.age}
@@ -144,8 +146,8 @@ const RegisterPage = () => {
                 name="username"
                 value={values.username}
                 onChange={handleChange}
-                placeholder="Username"
-                label="Username"
+                placeholder="Nazwa użytkownika"
+                label="Nazwa użytkownika"
                 type="text"
                 isInvalid={false}
                 error={errors.username}
@@ -164,8 +166,8 @@ const RegisterPage = () => {
                 name="password"
                 value={values.password}
                 onChange={handleChange}
-                placeholder="Password"
-                label="Password"
+                placeholder="Hasło"
+                label="Hasło"
                 type="password"
                 isInvalid={false}
                 error={errors.password}
@@ -174,28 +176,23 @@ const RegisterPage = () => {
                 name="confirmPassword"
                 value={values.confirmPassword}
                 onChange={handleChange}
-                placeholder="Confirm password"
-                label="Confirm Password"
+                placeholder="Potwierdź hasło"
+                label="Potwierdź haslo"
                 type="password"
                 isInvalid={false}
                 error={errors.confirmPassword}
               />
-              <InputComponent
-                name="countryName"
-                value={values.countryName}
+              <RegisterSelectComponent
+                options={PROVINCES_VALUES}
                 onChange={handleChange}
-                placeholder="Country name"
-                label="Country name"
-                type="string"
-                isInvalid={false}
-                error={errors.countryName}
+                label="Wybierz województwo"
               />
               <InputComponent
                 name="cityName"
                 value={values.cityName}
                 onChange={handleChange}
-                placeholder="City name"
-                label="City name"
+                placeholder="Miasto"
+                label="Miasto"
                 type="string"
                 isInvalid={false}
                 error={errors.cityName}
@@ -204,8 +201,8 @@ const RegisterPage = () => {
                 name="streetName"
                 value={values.streetName}
                 onChange={handleChange}
-                placeholder="Street name"
-                label="Street name"
+                placeholder="Nazwa ulicy"
+                label="Nazwa ulicy"
                 type="string"
                 isInvalid={false}
                 error={errors.streetName}
@@ -214,8 +211,8 @@ const RegisterPage = () => {
                 name="postalCode"
                 value={values.postalCode}
                 onChange={handleChange}
-                placeholder="Postal code"
-                label="Postal code"
+                placeholder="Kod pocztowy"
+                label="Kod pocztowy"
                 type="string"
                 isInvalid={false}
                 error={errors.postalCode}
@@ -224,24 +221,24 @@ const RegisterPage = () => {
                 name="phoneNumber"
                 value={values.phoneNumber}
                 onChange={handleChange}
-                placeholder="Phone number"
-                label="Phone number"
+                placeholder="Numer telefonu"
+                label="Numer telefonu"
                 type="string"
                 isInvalid={false}
                 error={errors.phoneNumber}
               />
-              <SelectComponent
+              <RegisterSelectComponent
                 options={USER_GENDER}
                 onChange={handleChange}
-                label="Select gender"
+                label="Wybierz płeć"
               />
               <InitialRole>
-                <p>Your initial role:</p>
+                <p>Twoja początkowa rola to:</p>
                 <RoleTagComponent
                   role={RoleType.CLIENT}
                 />
               </InitialRole>
-              <Button type="submit" variant="solid" colorScheme="teal">Submit</Button>
+              <Button type="submit" variant="solid" colorScheme="teal">Zarejestruj się</Button>
             </AuthWrapperInside>
           </Form>
         )}

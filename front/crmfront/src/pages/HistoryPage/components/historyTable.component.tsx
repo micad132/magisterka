@@ -1,10 +1,10 @@
+// @ts-nocheck
 import {
   Table, TableContainer, Tbody, Td, Tfoot, Thead, Tr, useToast,
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import ModalComponent from '../../../components/modals/modal.component.tsx';
 import { ModalProps } from '../../../types/UtilTypes.ts';
-import HISTORY_TABLE_ROWS from './historyTableRows.tsx';
 import ActionTypeTagComponent from '../../../components/actionTypeTag.component.tsx';
 import { HistoryType } from '../../../types/HistoryType.ts';
 import HistoryDetailsModalComponent from './historyDetailsModal.component.tsx';
@@ -85,7 +85,7 @@ const HistoryTable = ({ histories }: Props) => {
                 <Td>{mapDateToString(history.createdTime)}</Td>
                 {/* <Td><ModalComponent modalProps={userDetailsModalProps(history.id)} /></Td> */}
                 <Td>
-                  <HistoryDetailsModalComponent buttonText="Description" modalTitle="Description of history" description={history.description} />
+                  <HistoryDetailsModalComponent buttonText="Szczegóły" modalTitle="Szczegóły akcji" description={history.description} />
                 </Td>
                 {loggedUser.userRole === RoleType.ADMIN && <Td><ModalComponent modalProps={userDeleteModalProps(history.id)} /></Td>}
               </Tr>

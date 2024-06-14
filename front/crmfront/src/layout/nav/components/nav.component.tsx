@@ -4,7 +4,6 @@ import TaskIcon from '@mui/icons-material/Task';
 import PersonIcon from '@mui/icons-material/Person';
 import HistoryIcon from '@mui/icons-material/History';
 import HelpIcon from '@mui/icons-material/Help';
-import EngineeringIcon from '@mui/icons-material/Engineering';
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import MessageIcon from '@mui/icons-material/Message';
 import QuizIcon from '@mui/icons-material/Quiz';
@@ -19,7 +18,7 @@ const NavWrapper = styled.nav`
     min-height: 100vh;
     background-color: var(--background-color);
     color: var(--nav-font-color);
-    font-size: 1.5rem;
+    font-size: 1.1rem;
 `;
 
 const LinksWrapper = styled.div`
@@ -27,7 +26,7 @@ const LinksWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
   position: sticky;
-  top: 20px;
+  top: 60px;
   left: 0px;
 `;
 
@@ -37,16 +36,16 @@ const NavComponent = () => {
   return (
     <NavWrapper>
       <LinksWrapper>
-        <SingleLink path="/" text="Home" icon={<HomeIcon />} />
-        {isLoggedUser && <SingleLink path="/tasks" text="Tasks" icon={<TaskIcon />} />}
-        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/people" text="People" icon={<PersonIcon />} />}
+        <SingleLink path="/" text="Strona główna" icon={<HomeIcon />} />
+        {isLoggedUser && <SingleLink path="/tasks" text="Usługi" icon={<TaskIcon />} />}
+        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/people" text="Ludzie" icon={<PersonIcon />} />}
         {/* {isLoggedUser && <SingleLink path="/workers" text="Workers" icon={<EngineeringIcon />} />} */}
-        {isLoggedUser && <SingleLink path="/messages" text="Messages" icon={<MessageIcon />} />}
-        {isLoggedUser && <SingleLink path="/history" text="History" icon={<HistoryIcon />} />}
-        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/stats" text="Stats" icon={<InsertChartIcon />} />}
-        {isLoggedUser && <SingleLink path="/support" text="Support" icon={<HelpIcon />} />}
-        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/survey" text="Survey" icon={<QuizIcon />} />}
-        {isLoggedUser && <SingleLink path="/comments" text="Comments" icon={<CommentIcon />} />}
+        {isLoggedUser && <SingleLink path="/messages" text="Wiadomości" icon={<MessageIcon />} />}
+        {isLoggedUser && <SingleLink path="/history" text="Historie" icon={<HistoryIcon />} />}
+        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/stats" text="Wykresy" icon={<InsertChartIcon />} />}
+        {isLoggedUser && <SingleLink path="/support" text="Wsparcie" icon={<HelpIcon />} />}
+        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/survey" text="Ankiety" icon={<QuizIcon />} />}
+        {isLoggedUser && <SingleLink path="/comments" text="Komentarze" icon={<CommentIcon />} />}
       </LinksWrapper>
     </NavWrapper>
   );

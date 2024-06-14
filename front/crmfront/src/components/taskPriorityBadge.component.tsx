@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Tag } from '@chakra-ui/react';
-import { TaskPriority, TaskPriorityType, TaskStatus } from '../types/TaskType.ts';
+import { TaskPriority, TaskPriorityType } from '../types/TaskType.ts';
 
 const TagWrapper = styled(Tag)`
   padding: 5px 10px !important;
@@ -15,11 +15,11 @@ const TaskPriorityBadgeComponent = ({ taskPriority }: Props) => {
   const getProperTag = () => {
     switch (taskPriority) {
       case TaskPriority.CRITICAL:
-        return <TagWrapper size="large" variant="solid" colorScheme="red">{TaskPriority.CRITICAL}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="red">KRYTYCZNY</TagWrapper>;
       case TaskPriority.MINOR:
-        return <TagWrapper size="large" variant="solid" colorScheme="green">{TaskPriority.MINOR}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="green">NISKI</TagWrapper>;
       case TaskPriority.MAJOR:
-        return <TagWrapper size="large" variant="solid" colorScheme="orange">{TaskPriority.MAJOR}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="orange">POWAŻNY</TagWrapper>;
       default:
         return <TagWrapper size="large" variant="solid" colorScheme="blue">ADMIN</TagWrapper>;
     }

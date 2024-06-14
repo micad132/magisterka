@@ -13,7 +13,7 @@ const CustomText = styled.p`
 `;
 
 const SendingMessageAuthorComponent = ({ author }: Props) => (
-  <CustomText>You are sending message as <span>{author}</span></CustomText>
+  <CustomText>Wysyłasz wiadomość jako <span>{author}</span></CustomText>
 );
 
 export default SendingMessageAuthorComponent;

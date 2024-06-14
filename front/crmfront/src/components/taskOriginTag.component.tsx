@@ -15,9 +15,9 @@ const TaskOriginTagComponent = ({ taskOrigin }: Props) => {
   const getProperTag = () => {
     switch (taskOrigin) {
       case TaskOrigin.CREATED:
-        return <TagWrapper size="large" variant="solid" colorScheme="purple">{TaskOrigin.CREATED}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="purple">Utworzony</TagWrapper>;
       case TaskOrigin.FROM_SUPPORT:
-        return <TagWrapper size="large" variant="solid" colorScheme="pink" key="worker">{TaskOrigin.FROM_SUPPORT}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="pink" key="worker">Ze zgł. wsparcia</TagWrapper>;
       default:
         return <TagWrapper size="large" variant="solid" colorScheme="blue">ADMIN</TagWrapper>;
     }

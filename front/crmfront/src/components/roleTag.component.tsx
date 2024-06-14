@@ -17,9 +17,9 @@ const RoleTag = ({ role }: Props) => {
       case RoleType.ADMIN:
         return <TagWrapper size="large" variant="solid" colorScheme="green">{RoleType.ADMIN}</TagWrapper>;
       case RoleType.WORKER:
-        return <TagWrapper size="large" variant="solid" colorScheme="orange" key="worker">{RoleType.WORKER}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="orange" key="worker">PRACOWNIK</TagWrapper>;
       case RoleType.CLIENT:
-        return <TagWrapper size="large" variant="solid" colorScheme="blue">{RoleType.CLIENT}</TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="blue">KLIENT</TagWrapper>;
       default:
         return <TagWrapper size="large" variant="solid" colorScheme="teal">Error</TagWrapper>;
     }

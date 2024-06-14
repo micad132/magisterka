@@ -23,7 +23,7 @@ interface Props {
 const LoggedUserHeaderComponent = ({ loggedUser }: Props) => (
   <LoggedUserHeader>
 
-    <p>Logged user:</p>
+    <p>Zalogowany jako:</p>
     <LoggedUserDetails>
       <span>{loggedUser.name} {loggedUser.surname}</span>
       <RoleTagComponent role={loggedUser.userRole} />

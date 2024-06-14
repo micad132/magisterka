@@ -2,19 +2,14 @@ package com.crmbackend.backend.Task;
 
 import com.crmbackend.backend.Comment.CommentMapper;
 import com.crmbackend.backend.Task.dto.TaskDTORequest;
-import com.crmbackend.backend.Task.dto.TaskDTOResponse;
 import com.crmbackend.backend.User.UserModel;
 import com.crmbackend.backend.User.UserRepository;
-import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsAssignee;
-import com.crmbackend.backend.User.dto.response.UserDTOTaskDetailsCreator;
-import com.crmbackend.backend.mappers.UserMapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor

@@ -13,7 +13,7 @@ interface Props {
 
 const TotalHoursSpentComponent = ({ totalHoursSpent }: Props) => (
   <TotalHoursSpentWrapper>
-    <span>Hours spent:</span>
+    <span>Ilość godzin:</span>
     <CustomLabel text={totalHoursSpent} />
   </TotalHoursSpentWrapper>
 );

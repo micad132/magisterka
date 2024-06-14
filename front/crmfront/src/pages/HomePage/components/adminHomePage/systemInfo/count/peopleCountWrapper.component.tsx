@@ -21,7 +21,7 @@ const PeopleCountWrapperComponent = () => {
   const adminUsers = users.filter((user) => user.userRole === RoleType.ADMIN);
   return (
     <Wrapper>
-      Users by roles
+      Użytkownicy według roli
       <CountDivComponent>
 
         <CountDivContentComponent>

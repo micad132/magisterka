@@ -64,8 +64,8 @@ public class UserModel {
     @Column(name = "age")
     private Integer age;
 
-    @Column(name = "country_name")
-    private String countryName;
+    @Column(name = "province_name")
+    private String provinceName;
 
     @Column(name = "pesel")
     private String pesel;

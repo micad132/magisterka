@@ -45,11 +45,11 @@ const AuthNavComponent = ({ isLogged }: Props) => {
         <Button
           type="submit"
         >
-          LOG OUT
+          WYLOGUJ
         </Button>
       </form>
     )
-    : <Button onClick={onLoginClick}>LOGIN</Button>;
+    : <Button onClick={onLoginClick}>ZALOGUJ</Button>;
 
   return (
     <div>

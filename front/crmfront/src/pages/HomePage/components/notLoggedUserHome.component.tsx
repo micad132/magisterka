@@ -2,39 +2,42 @@ import BadRouteWrapperComponent from '../../../components/routesComponents/badRo
 import NotLoggedUserFunctionsComponent from './notLoggedUserFunctions.component.tsx';
 
 const clientFunc: string[] = [
-  'Create tasks as services',
-  'Change your personal data',
-  'Send support requests',
-  'Do surveys',
-  'Message to other poeple in system',
-  'Create comments in tasks',
+  'Tworzyć usługi',
+  'Zmieniać swoje dane osobowe',
+  'Wysyłać i przeglądać swoje zgłoszenia wsparcia',
+  'Wykonywać ankiety',
+  'Wysyłać wiadomości do innych w systemie oraz przeglądać swoje wysłane i odebrane',
+  'Tworzyć i przeglądać komentarze pod zadaniami',
+  'Przeglądać swoją historię działań',
 ];
 
 const workerFunc: string[] = [
-  'Edit task details',
-  'Change task info',
-  'Preview existing data in system',
-
+  'Edytować szczegóły usług',
+  'Przeglądać wykresy w systemie',
+  'Przeglądać istniejące dane w systemie',
+  'Wysyłać wiadomości do innych w systemie',
+  'Tworzyć komentarze pod zadaniami',
+  'Zmieniać swoje dane osobowe',
 ];
 
 const adminFunc: string[] = [
-  'Delete tasks',
-  'Delete messages',
-  'Manage support requests',
-  'Manage surveys',
-  'Manage people',
-  'Manage stats',
-  'Filter people',
+  'Usuwać i przeglądać wszystkie usługi',
+  'Usuwać i przeglądać wszystkie zadania',
+  'Usuwań i przeglądać wszystkie zgłoszenia wsparcia',
+  'Usuwać i przeglądac ankiety',
+  'Usuwać i przeglądać wszystkich użytkowników',
+  'Zarządzać wykresami oraz je usuwać',
+  'Filtrować użytkowników oraz dane w systemie',
 ];
 
 const NotLoggedUserHomeComponent = () => (
   <BadRouteWrapperComponent>
-    <p>You are not logged into the system!</p>
-    <p>Login as client to:</p>
+    <p>Nie jesteś zalogowany do systemu</p>
+    <p>Zaloguj się jako klient aby:</p>
     <NotLoggedUserFunctionsComponent functions={clientFunc} />
-    <p>Login as worker to:</p>
+    <p>Zaloguj się jako pracownik aby:</p>
     <NotLoggedUserFunctionsComponent functions={workerFunc} />
-    <p>Login as admin to:</p>
+    <p>Zaloguj się jako admin aby:</p>
     <NotLoggedUserFunctionsComponent functions={adminFunc} />
   </BadRouteWrapperComponent>
 );

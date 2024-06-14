@@ -13,7 +13,7 @@ interface Props {
 
 const CreatedByComponent = ({ creator }: Props) => (
   <CreatedByWrapper>
-    <span>Created by:</span>
+    <span>Utworzona przez:</span>
     <CustomLabel text={creator} />
   </CreatedByWrapper>
 );

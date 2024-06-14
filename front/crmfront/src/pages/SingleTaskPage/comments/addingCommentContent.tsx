@@ -8,10 +8,10 @@ interface Props {
 const AddingCommentContent = ({ value, setValue }: Props) => (
   <div>
     <TextareaComponent
-      placeholder="Comment text"
+      placeholder="Treść komentarza"
       value={value}
       onChange={setValue}
-      label="Provide comment here"
+      label="Dodaj treść komentarza"
     />
   </div>
 );

@@ -3,7 +3,6 @@ package com.crmbackend.backend.User;
 import com.crmbackend.backend.User.dto.request.UserDTOEditPersonalInfoRequest;
 import com.crmbackend.backend.User.dto.request.UserDTORequest;
 import com.crmbackend.backend.User.dto.response.UserDTOResponse;
-import com.crmbackend.backend.mappers.UserMapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

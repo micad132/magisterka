@@ -120,7 +120,7 @@ const SingleCommentComponent = ({
       <TaskCreatedWrapper>
 
         <TaskCreatedInfo>
-          <FontBold>Task id:</FontBold>
+          <FontBold>ID Usługi:</FontBold>
           <TaskId>
             <p>{taskId}</p>
             <Icon onClick={() => navigate(`/tasks/${taskId}`, { replace: true })} />
@@ -128,20 +128,20 @@ const SingleCommentComponent = ({
 
         </TaskCreatedInfo>
         <TaskCreatedInfo>
-          <FontBold>Created:</FontBold>
+          <FontBold>Utworzony:</FontBold>
           <p> {createdAt}</p>
 
         </TaskCreatedInfo>
 
       </TaskCreatedWrapper>
-      <FontBold>Author:</FontBold>
+      <FontBold>Autor:</FontBold>
       <AuthorDetails>
         <p>{authorName} {authorSurname}</p>
         <RoleTagComponent role={authorRole} />
       </AuthorDetails>
       <Description>
-        <FontBold>Description:</FontBold>
-        <p> {description}</p>
+        <FontBold>Opis:</FontBold>
+        <p>{description}</p>
       </Description>
 
     </Wrapper>

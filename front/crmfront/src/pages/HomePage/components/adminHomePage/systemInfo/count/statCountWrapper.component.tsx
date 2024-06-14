@@ -37,7 +37,7 @@ const StatCountWrapperComponent = () => {
   return (
     <Wrapper>
       <div>
-        <p>Stats by category:</p>
+        <p>Wykresy według kategorii:</p>
         <CountDivComponent>
           <CountDivContentComponent>
             <StatCategoryTagComponent statCategory={StatCategory.TASK} />
@@ -58,7 +58,7 @@ const StatCountWrapperComponent = () => {
         </CountDivComponent>
       </div>
       <div>
-        <p>Stats by chart type:</p>
+        <p>Wykresy według typu wykresu:</p>
         <CountDivComponent>
           <CountDivContentComponent>
             <StatTypeTagComponent statType={StatType.BAR} />

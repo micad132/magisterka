@@ -13,10 +13,10 @@ const LinkWrapper = styled(Link)`
   justify-content: center;
   align-items: center;
   gap: 5px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   
   &:hover {
-    
+    color: blue;
   }
 `;
 

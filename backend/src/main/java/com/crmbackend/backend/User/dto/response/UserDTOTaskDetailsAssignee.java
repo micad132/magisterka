@@ -11,7 +11,7 @@ import lombok.*;
 public class UserDTOTaskDetailsAssignee {
     private String assigneeUsername;
     private Integer assigneeAge;
-    private String assigneeCountry;
+    private String assigneeProvince;
     private String assigneeName;
     private String assigneeSurname;
     private UserRole assigneeRole;

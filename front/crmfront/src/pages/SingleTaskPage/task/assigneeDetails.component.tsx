@@ -53,12 +53,12 @@ const AssigneeDetailsComponent = ({ assigneePreview }: Props) => {
 
   return (
     <Wrapper>
-      <h2>Assignee:</h2>
-      <p><span>Assignee</span> {assigneePreview.assigneeName} {assigneePreview.assigneeSurname}</p>
-      <p><span>Username:</span> {assigneePreview.assigneeUsername}</p>
-      <RoleWrapper><span>Role:</span> <RoleTagComponent role={assigneePreview.assigneeRole} /> </RoleWrapper>
-      <p><span>Age:</span> {assigneePreview.assigneeAge}</p>
-      <p><span>From:</span> {assigneePreview.assigneeCountry}</p>
+      <h2>Przypisany:</h2>
+      <p><span>Przypisany:</span> {assigneePreview.assigneeName} {assigneePreview.assigneeSurname}</p>
+      <p><span>Nazwa:</span> {assigneePreview.assigneeUsername}</p>
+      <RoleWrapper><span>Rola:</span> <RoleTagComponent role={assigneePreview.assigneeRole} /> </RoleWrapper>
+      <p><span>Wiek:</span> {assigneePreview.assigneeAge}</p>
+      <p><span>Województwo:</span> {assigneePreview.assigneeCountry}</p>
     </Wrapper>
   );
 };

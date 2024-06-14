@@ -41,12 +41,12 @@ const LoginPage = () => {
       console.log('wbilem', data.data);
       dispatch(setLoggedUser(data.data));
       toast({
-        title: 'Logged in!',
-        description: `You have successfully logged in as ${data.data.name} ${data.data.surname}`,
+        title: 'Zalogowano!',
+        description: `Pomyślnie zalogowałeś się jako ${data.data.name} ${data.data.surname}`,
         status: 'success',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
       dispatch(fetchAllUsersThunk());
       dispatch(fetchSupportRequestsThunk());
@@ -63,13 +63,12 @@ const LoginPage = () => {
     } catch (e: any) {
       console.log('e', e);
       toast({
-        title: 'Login went wrong!',
-        // description: `${e.response.data.message}`,
-        description: 'test',
+        title: 'Logowanie nie powiodło się!',
+        description: `${e.response.data.message}`,
         status: 'error',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
     }
   };
@@ -80,7 +79,7 @@ const LoginPage = () => {
       <form onSubmit={onSubmit}>
         <AuthWrapperInside>
           <InputComponent
-            label="Username"
+            label="Nazwa użytkownika"
             value={loginValues.username}
             onChange={(e) => {
               setLoginValues((prevState) => ({
@@ -89,12 +88,12 @@ const LoginPage = () => {
               }));
             }}
             name="username"
-            placeholder="Username"
+            placeholder="Nazwa użytkownika"
             type="text"
             isInvalid={false}
           />
           <InputComponent
-            label="Password"
+            label="Hasło"
             value={loginValues.password}
             onChange={(e) => {
               setLoginValues((prevState) => ({
@@ -103,7 +102,7 @@ const LoginPage = () => {
               }));
             }}
             name="password"
-            placeholder="Password"
+            placeholder="Hasło"
             type="password"
             isInvalid={false}
           />
@@ -115,9 +114,9 @@ const LoginPage = () => {
               }));
             }}
             value={loginValues.code}
-            label="Provide your secret 2fa code"
+            label="Wprowadź sekretny kod 2fa"
           />
-          <Button type="submit" variant="solid" colorScheme="twitter">Submit</Button>
+          <Button type="submit" variant="solid" colorScheme="twitter">Zaloguj się</Button>
           <RegisterLink />
         </AuthWrapperInside>
       </form>

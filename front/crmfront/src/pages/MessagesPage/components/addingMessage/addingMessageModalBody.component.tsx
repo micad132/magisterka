@@ -21,24 +21,21 @@ interface Props {
 
 const AddingMessageModalBodyComponent = ({
   author, users, messageText, onMessageTextChange, onReceiverChange,
-}: Props) => {
-  const c = 4;
-  return (
-    <Wrapper>
-      <SendingMessageAuthorComponent author={author} />
-      <SelectComponent
-        options={users}
-        onChange={onReceiverChange}
-        label="Select receiver"
-      />
-      <TextareaComponent
-        placeholder="Message text"
-        value={messageText}
-        onChange={onMessageTextChange}
-        label="Message text"
-      />
-    </Wrapper>
-  );
-};
+}: Props) => (
+  <Wrapper>
+    <SendingMessageAuthorComponent author={author} />
+    <SelectComponent
+      options={users}
+      onChange={onReceiverChange}
+      label="Wybierz odbiorcę"
+    />
+    <TextareaComponent
+      placeholder="Tekst wiadomości"
+      value={messageText}
+      onChange={onMessageTextChange}
+      label="Wprowadź tekst wiadomości"
+    />
+  </Wrapper>
+);
 
 export default AddingMessageModalBodyComponent;

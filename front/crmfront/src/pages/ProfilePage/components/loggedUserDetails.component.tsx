@@ -26,7 +26,7 @@ const LoggedUserDetailsComponent = ({
       <p>{username}</p>
       <RoleTag role={userRole} />
     </Wrapper>
-    User registered on {createdAccountDate}
+    Użytkownik zarejestrowany: {createdAccountDate}
   </div>
 );
 

@@ -39,10 +39,10 @@ const HistoryPageContainer = () => {
   if (loggedUser.userRole === RoleType.CLIENT) {
     return (
       <PageWrapperComponent>
-        <PageHeaderComponent text="History of actions" />
+        <PageHeaderComponent text="Historia akcji" />
         <LoggedUserInfoComponent name={loggedUser.name} role={loggedUser.userRole} surname={loggedUser.surname} />
         <HistoryPageHeaderComponent
-          text={`You performed ${clientHistories.length} actions`}
+          text={`Wykonałeś ${clientHistories.length} akcji`}
         />
         <HistoryTable histories={clientHistories} />
       </PageWrapperComponent>
@@ -56,16 +56,16 @@ const HistoryPageContainer = () => {
   if (loggedUser.userRole === RoleType.ADMIN || loggedUser.userRole === RoleType.WORKER) {
     return (
       <PageWrapperComponent>
-        <PageHeaderComponent text="History of actions" />
+        <PageHeaderComponent text="Historia akcji" />
         <LoggedUserInfoComponent name={loggedUser.name} role={loggedUser.userRole} surname={loggedUser.surname} />
         <HistoryPageHeaderComponent
-          text={`There are ${histories.length} actions in the system`}
+          text={`W systemie znajduje się ${histories.length} akcji`}
         />
         <SelectWrapper>
           <SelectComponent
             options={selectValues}
             onChange={setSelectedUserHistories}
-            label="Select user history"
+            label="Wybierz historie użytkownika"
             value={selectedUserHistories}
           />
         </SelectWrapper>

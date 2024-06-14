@@ -10,14 +10,15 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { editUserPersonalInfoThunk, getUserDetails } from '../../store/userSlice.tsx';
 import {
   LoggedUserDetails,
-  LoggedUserMainDetails, ProfileCount,
-  SelfEditUser, SelfEditUserRequest,
+  LoggedUserMainDetails, ProfileCount, RoleType,
+  SelfEditUser, SelfEditUserRequest, WorkerProfileCount,
 } from '../../types/UserType.ts';
 import NotLoggedComponent from '../../components/routesComponents/notLogged.component.tsx';
 import { mapDateToString } from '../../utils/mappers/mapDateToString.ts';
 import { sanitizeInput } from '../../utils/utilFunctions.ts';
 import { ActionType, AddHistory } from '../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../store/historySlice.tsx';
+import WorkerStatsWrapperComponent from './components/stats/workerStatsWrapper.component.tsx';
 
 const ProfilePageWrapper = styled.div`
   margin: 20px auto;
@@ -40,7 +41,7 @@ const ProfilePageContainer = () => {
     username: loggedUser.username,
     age: loggedUser.age,
     name: loggedUser.name,
-    countryName: loggedUser.countryName,
+    provinceName: loggedUser.provinceName,
     pesel: loggedUser.pesel,
     surname: loggedUser.surname,
     cityName: loggedUser.cityName,
@@ -106,7 +107,7 @@ const ProfilePageContainer = () => {
     surname: loggedUser.surname,
     age: loggedUser.age,
     cityName: loggedUser.cityName,
-    countryName: loggedUser.countryName,
+    provinceName: loggedUser.provinceName,
     email: loggedUser.email,
     phoneNumber: loggedUser.phoneNumber,
     postalCode: loggedUser.postalCode,
@@ -124,17 +125,35 @@ const ProfilePageContainer = () => {
     supportsCount: loggedUser.supportRequestModels.length,
   };
 
+  const workerCount: WorkerProfileCount = {
+    historiesCount: loggedUser.histories.length,
+    messagesCount: loggedUser.messages.length,
+    taskAssigneeCount: loggedUser.assignedTasks.length,
+    tasksMadeCount: loggedUser.createdTasks.length,
+    commentsCount: loggedUser.comments.length,
+  };
+
   const editUserModal: ModalProps = {
-    modalHeader: 'Edit your data',
-    buttonText: 'Edit',
+    modalHeader: 'Edytuj swoje dane',
+    buttonText: 'Edytuj dane',
     buttonSize: 'md',
-    modalActionButtonText: 'Edit',
+    modalActionButtonText: 'Edytuj',
     mainButtonAction: editPersonalInfoHandler,
     modalBody: <EditUserDataModalContentComponent values={editPersonalInfo} setPersonalInfo={setPersonalInfo} />,
   };
 
   if (loggedUser.name === '') {
     return <NotLoggedComponent />;
+  }
+
+  if (loggedUser.userRole === RoleType.WORKER) {
+    return (
+      <ProfilePageWrapper>
+        <LoggedUserDetailsComponent loggedUserMainDetails={loggedUserMainDetails} />
+        <PersonalInfoDetailsComponent modalProps={editUserModal} userDetails={userDetails} />
+        <WorkerStatsWrapperComponent count={workerCount} />
+      </ProfilePageWrapper>
+    );
   }
 
   return (

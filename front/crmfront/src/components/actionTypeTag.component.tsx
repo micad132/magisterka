@@ -19,38 +19,38 @@ const ActionTypeTagComponent = ({ actionType }: Props) => {
         return (
           <Tooltip label="Task related action">
             <TagWrapper size="large" variant="solid" colorScheme="green">
-              {ActionType.TASK}
+              USŁUGA
             </TagWrapper>
           </Tooltip>
         );
       case ActionType.COMMENT:
         return (
           <Tooltip label="Comment related action">
-            <TagWrapper size="large" variant="solid" colorScheme="purple" key="worker">{ActionType.COMMENT}</TagWrapper>
+            <TagWrapper size="large" variant="solid" colorScheme="purple" key="worker">KOMENTARZ</TagWrapper>
           </Tooltip>
         );
       case ActionType.SUPPORT:
         return (
           <Tooltip label="Support related action">
-            <TagWrapper size="large" variant="solid" colorScheme="pink">{ActionType.SUPPORT}</TagWrapper>
+            <TagWrapper size="large" variant="solid" colorScheme="pink">WSPARCIE</TagWrapper>
           </Tooltip>
         );
       case ActionType.PROFILE:
         return (
           <Tooltip label="Profile related action">
-            <TagWrapper size="large" variant="solid" colorScheme="orange">{ActionType.PROFILE}</TagWrapper>
+            <TagWrapper size="large" variant="solid" colorScheme="orange">PROFIL</TagWrapper>
           </Tooltip>
         );
       case ActionType.MESSAGE:
         return (
           <Tooltip label="Message related action">
-            <TagWrapper size="large" variant="solid" colorScheme="blue">{ActionType.MESSAGE}</TagWrapper>
+            <TagWrapper size="large" variant="solid" colorScheme="blue">WIADOMOŚĆ</TagWrapper>
           </Tooltip>
         );
       case ActionType.SURVEY:
         return (
           <Tooltip label="Survey related action">
-            <TagWrapper size="large" variant="solid" colorScheme="pink">{ActionType.SURVEY}</TagWrapper>
+            <TagWrapper size="large" variant="solid" colorScheme="pink">ANKIETA</TagWrapper>
           </Tooltip>
         );
       default:

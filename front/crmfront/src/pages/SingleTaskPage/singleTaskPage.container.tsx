@@ -44,8 +44,8 @@ const SingleTaskPageContainer = () => {
 
   return (
     <PageWrapperComponent>
-      <PageHeaderComponent text="Task details" />
-      <h1>TASK ID: {id}</h1>
+      <PageHeaderComponent text="Szczegóły usługi" />
+      <h1>ID Usługi: {id}</h1>
       <SingleTaskStasusesComponent taskPriority={singleTask?.taskPriority!} taskType={singleTask?.taskType!} taskStatus={singleTask?.taskStatus!} taskOrigin={singleTask.taskOrigin} />
       <TaskDatesComponent createdTime={mapDateToString(singleTask?.creationDate!)} estimatedFinishTime={mapDateToString(singleTask?.estimationFinishTime!)} />
       <UserDetailsWrapper>
@@ -58,9 +58,9 @@ const SingleTaskPageContainer = () => {
       </UserDetailsWrapper>
 
       <TaskDetailInfoWrapper>
-        <TaskDetailInfoComponent spanText="Estimated cost:" value={singleTask?.estimatedCost!} />
-        <TaskDetailInfoComponent spanText="Actual total cost:" value={singleTask?.cost!} />
-        <TaskDetailInfoComponent spanText="Total hours spent" value={singleTask?.hoursSpent!} />
+        <TaskDetailInfoComponent spanText="Przewidywany koszt(zł)" value={singleTask?.estimatedCost!} />
+        <TaskDetailInfoComponent spanText="Aktualny koszt(zł):" value={singleTask?.cost!} />
+        <TaskDetailInfoComponent spanText="Aktualna ilość godzin(h)" value={singleTask?.hoursSpent!} />
       </TaskDetailInfoWrapper>
 
       <TaskDescriptionComponent description={singleTask?.description!} />

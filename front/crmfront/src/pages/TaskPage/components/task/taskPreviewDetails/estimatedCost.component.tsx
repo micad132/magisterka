@@ -13,7 +13,7 @@ interface Props {
 
 const EstimatedCostComponent = ({ estimatedCost }: Props) => (
   <EstimatedCostWrapper>
-    <p>Estimated cost:</p>
+    <p>Przewidywany koszt:</p>
     <CustomLabel text={estimatedCost} />
   </EstimatedCostWrapper>
 );

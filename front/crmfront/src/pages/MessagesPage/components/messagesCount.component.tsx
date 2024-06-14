@@ -5,8 +5,8 @@ interface Props {
 
 const MessagesCountComponent = ({ count, isAdmin }: Props) => {
   const properMessage = isAdmin
-    ? <p>There are total of {count} messages in system!</p>
-    : <p>You have {count} messages</p>;
+    ? <p>W systemie jest {count} wiadomości</p>
+    : <p>Masz {count} wiadomości</p>;
   return (
     <div>
       {properMessage}

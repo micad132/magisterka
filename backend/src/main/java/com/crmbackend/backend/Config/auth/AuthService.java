@@ -5,9 +5,8 @@ import com.crmbackend.backend.User.UserModel;
 import com.crmbackend.backend.User.UserRepository;
 import com.crmbackend.backend.User.dto.request.UserDTORequest;
 import com.crmbackend.backend.exceptions.UserAlreadyExistsException;
-import com.crmbackend.backend.mappers.UserMapper.UserMapper;
+import com.crmbackend.backend.User.UserMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -40,7 +39,7 @@ public class AuthService {
             }
 
         } else {
-            return "Provided code is not correct!";
+            return "Podany kod jest niepoprawny!";
         }
     }
 

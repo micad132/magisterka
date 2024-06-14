@@ -24,7 +24,7 @@ const HistoryCountWrapperComponent = () => {
   const messageHistories = histories.filter((history) => history.historyActionType === ActionType.MESSAGE);
   return (
     <Wrapper>
-      <p>Histories by action type</p>
+      <p>Historia akcji według typu</p>
       <CountDivComponent>
         <CountDivContentComponent>
           <ActionTypeTagComponent actionType={ActionType.TASK} />

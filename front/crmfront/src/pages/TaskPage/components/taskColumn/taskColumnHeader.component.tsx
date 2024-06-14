@@ -44,7 +44,7 @@ interface Props {
 const TaskColumnHeaderComponent = ({ taskStatus, taskCount }: Props) => (
   <TaskColumnHeader $taskStatus={taskStatus}>
     <TaskStatusBadgeComponent taskStatus={taskStatus} />
-    <TaskCount>Task count: {taskCount}</TaskCount>
+    <TaskCount>Ilość usług: {taskCount}</TaskCount>
   </TaskColumnHeader>
 );
 

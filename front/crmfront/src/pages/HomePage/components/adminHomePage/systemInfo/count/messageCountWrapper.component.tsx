@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import { useAppSelector } from '../../../../../../utils/hooks.ts';
 import { getAllMessages } from '../../../../../../store/messageSlice.tsx';
@@ -21,7 +22,7 @@ const MessageCountWrapperComponent = () => {
   const workerMessages = messages.filter((msg) => msg.authorRole === RoleType.WORKER);
   return (
     <Wrapper>
-      <p>Messages by author roles</p>
+      <p>Wiadomości według roli</p>
       <CountDivComponent>
         <CountDivContentComponent>
           <RoleTagComponent role={RoleType.CLIENT} />

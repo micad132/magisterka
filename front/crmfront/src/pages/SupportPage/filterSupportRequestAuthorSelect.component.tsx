@@ -17,7 +17,7 @@ const FilterSupportRequestAuthorSelectComponent = ({ onChange, options }: Props)
     <SelectComponent
       options={options}
       onChange={onChange}
-      label="Filter support requests by author"
+      label="Wyświetl tylko zgłoszenia support typu:"
     />
   </Wrapper>
 );

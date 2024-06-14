@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { TaskPriorityType } from '../../../../../types/TaskType.ts';
-import CustomLabel from '../customLabel.component.tsx';
+import TaskPriorityBadgeComponent from '../../../../../components/taskPriorityBadge.component.tsx';
 
 const TaskPriorityComponentWrapper = styled.div`
   display: flex;
@@ -14,8 +14,8 @@ interface Props {
 
 const TaskPriorityComponent = ({ taskPriority }: Props) => (
   <TaskPriorityComponentWrapper>
-    <span>Priority:</span>
-    <CustomLabel text={taskPriority} />
+    <span>Priorytet:</span>
+    <TaskPriorityBadgeComponent taskPriority={taskPriority} />
   </TaskPriorityComponentWrapper>
 );
 

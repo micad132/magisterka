@@ -4,7 +4,6 @@ import { useToast } from '@chakra-ui/react';
 import SingleCommentComponent from './singleComment.component.tsx';
 import ModalComponent from '../../../components/modals/modal.component.tsx';
 import { ModalProps } from '../../../types/UtilTypes.ts';
-import TextareaComponent from '../../../components/form/textarea.component.tsx';
 import AddingCommentContent from './addingCommentContent.tsx';
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks.ts';
 import { addCommentThunk, getAllComments } from '../../../store/commentsSlice.tsx';
@@ -44,13 +43,13 @@ const CommentsWrapperComponent = ({ taskId }: Props) => {
       const historyObj: AddHistory = {
         performerId: loggedUser.id,
         historyActionType: ActionType.COMMENT,
-        description: `User ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} created comment in task with id: ${taskId}`,
+        description: `Użytkownik ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} stworzył komentarz pod usługą z id: ${taskId}`,
       };
       dispatch(addCommentThunk(addingCommentObj));
       dispatch(addHistoryThunk(historyObj));
       toast({
-        title: 'Comment added!',
-        description: 'You have successfully added a comment to this task',
+        title: 'Komentarz dodany!',
+        description: 'Pomyślnie dodałeś komentarz',
         status: 'success',
         duration: 4000,
         isClosable: true,
@@ -70,9 +69,9 @@ const CommentsWrapperComponent = ({ taskId }: Props) => {
 
   const modalProps: ModalProps = {
     mainButtonAction: onAddComment,
-    modalHeader: 'Add comment',
-    modalActionButtonText: 'Add',
-    buttonText: 'Add comment',
+    modalHeader: 'Dodaj komentarz',
+    modalActionButtonText: 'Dodaj',
+    buttonText: 'Dodaj komentarz',
     modalBody: <AddingCommentContent value={comment} setValue={setComment} />,
   };
 
@@ -83,7 +82,7 @@ const CommentsWrapperComponent = ({ taskId }: Props) => {
       <ModalComponent
         modalProps={modalProps}
       />
-      <p>Comments count: {taskComments.length}</p>
+      <p>Ilość komentarzy: {taskComments.length}</p>
       <CommentsWrapper>
         {commentsComps}
       </CommentsWrapper>

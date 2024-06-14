@@ -30,13 +30,13 @@ const SupportCategoryBadgeComponent = ({ supportType }: Props) => {
   const getProperTag = () => {
     switch (supportType) {
       case SupportRequest.IMPROVEMENT:
-        return <TagWrapper size="large" variant="solid" colorScheme="yellow"><TagInside><LightbulbIcon /> {SupportRequest.IMPROVEMENT}</TagInside></TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="yellow"><TagInside><LightbulbIcon />POMYSŁ</TagInside></TagWrapper>;
       case SupportRequest.SUPPORT:
-        return <TagWrapper size="large" variant="solid" colorScheme="teal"><TagInside><ContactSupportIcon /> {SupportRequest.SUPPORT}</TagInside></TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="teal"><TagInside><ContactSupportIcon />WSPARCIE</TagInside></TagWrapper>;
       case SupportRequest.BUG:
-        return <TagWrapper size="large" variant="solid" colorScheme="red"><TagInside><BugReportIcon /> {SupportRequest.BUG}</TagInside></TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="red"><TagInside><BugReportIcon />PROBLEM</TagInside></TagWrapper>;
       case SupportRequest.OTHER:
-        return <TagWrapper size="large" variant="solid" colorScheme="red"><TagInside><PendingIcon /> {SupportRequest.OTHER}</TagInside></TagWrapper>;
+        return <TagWrapper size="large" variant="solid" colorScheme="red"><TagInside><PendingIcon />INNA</TagInside></TagWrapper>;
       default:
         return <TagWrapper size="large" variant="solid" colorScheme="blue">ADMIN</TagWrapper>;
     }

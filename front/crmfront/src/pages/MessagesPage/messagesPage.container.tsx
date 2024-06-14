@@ -17,7 +17,6 @@ import ModalComponent from '../../components/modals/modal.component.tsx';
 import AddingMessageModalBodyComponent from './components/addingMessage/addingMessageModalBody.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import { addingMessageThunk, getAllMessages } from '../../store/messageSlice.tsx';
-import RoleTag from '../../components/roleTag.component.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import { ActionType, AddHistory } from '../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../store/historySlice.tsx';
@@ -69,18 +68,18 @@ const MessagesPageContainer = () => {
     const historyObj: AddHistory = {
       historyActionType: ActionType.MESSAGE,
       performerId: loggedUser.id,
-      description: `Message sent from ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} to ${receiver?.username}`,
+      description: `Użytkownik ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} wysłał wiadomość do ${receiver?.username}`,
     };
     try {
       dispatch(addingMessageThunk(obj));
       dispatch(addHistoryThunk(historyObj));
       toast({
-        title: 'Message sent!',
-        description: `You have successfully sent a message to ${receiver?.username}`,
+        title: 'Wiadomość wysłana!',
+        description: `Wiadomość wysłana pomyslnie do ${receiver?.username}`,
         status: 'success',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
     } catch (e) {
       toast({
@@ -89,7 +88,7 @@ const MessagesPageContainer = () => {
         status: 'error',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
     }
   };
@@ -97,9 +96,9 @@ const MessagesPageContainer = () => {
   const addingMessageModalProps: ModalProps = {
     mainButtonAction: onSendMessage,
     buttonSize: 'md',
-    modalActionButtonText: 'Send',
-    modalHeader: 'Send message to',
-    buttonText: 'Send message',
+    modalActionButtonText: 'Wyślij',
+    modalHeader: 'Wyślij wiadomość',
+    buttonText: 'Wyślij',
     modalBody: <AddingMessageModalBodyComponent
       author={loggedUser.username || ''}
       users={USER_SELECT_VALUES}
@@ -123,20 +122,25 @@ const MessagesPageContainer = () => {
 
   console.log('FILTERED', filterUser);
 
+  const properLackOfMessagesInfo = loggedUser.userRole === RoleType.CLIENT
+    ? 'Nie masz żadnych wiadomości'
+    : 'W systemie nie ma żadnych wiadomości';
+
   if (messages.length === 0) {
     return (
       <PageWrapperComponent>
+        <PageHeaderComponent text="Wiadomości" />
         <ModalComponent
           modalProps={addingMessageModalProps}
         />
-        <MessageComponent message="There are no messages in the system" />
+        <MessageComponent message={properLackOfMessagesInfo} />
       </PageWrapperComponent>
     );
   }
 
   return (
     <PageWrapperComponent>
-      <PageHeaderComponent text="Messages" />
+      <PageHeaderComponent text="Wiadomości" />
       <ModalComponent
         modalProps={addingMessageModalProps}
       />

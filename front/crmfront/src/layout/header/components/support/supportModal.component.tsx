@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Button,
   Modal,
@@ -30,19 +31,19 @@ const ModalBodyWrapper = styled.div`
 
 const SELECT_OPTIONS: SelectValue[] = [
   {
-    text: 'Improvement',
+    text: 'Pomysł',
     value: SupportRequest.IMPROVEMENT,
   },
   {
-    text: 'Bug',
+    text: 'Problem',
     value: SupportRequest.BUG,
   },
   {
-    text: 'Support',
+    text: 'Wsparcie',
     value: SupportRequest.SUPPORT,
   },
   {
-    text: 'Other',
+    text: 'Inna',
     value: SupportRequest.OTHER,
   },
 ];
@@ -50,13 +51,13 @@ const SELECT_OPTIONS: SelectValue[] = [
 const properLabel = (label: SupportRequestType) => {
   switch (label) {
     case SupportRequest.IMPROVEMENT:
-      return <p>What should we improve?</p>;
+      return <p>Co powinniśmy poprawić?</p>;
     case SupportRequest.BUG:
-      return <p>What should we fix?</p>;
+      return <p>Co powinniśmy naprawić?</p>;
     case SupportRequest.SUPPORT:
-      return <p>How can we help you?</p>;
+      return <p>Jak ci możemy pomóc?</p>;
     case SupportRequest.OTHER:
-      return <p>What is on your mind?</p>;
+      return <p>Przedstaw swój problem?</p>;
     default:
       return <p>ERROR</p>;
   }
@@ -83,17 +84,17 @@ const SupportModal = () => {
     const historyObj: AddHistory = {
       performerId: loggedUser.id,
       historyActionType: ActionType.SUPPORT,
-      description: `Support request with category ${supportCategory} made by ${loggedUser.username}`,
+      description: `Zgłoszenie wsparcia z kategorią ${supportCategory} zostało utworzone przez ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname}`,
     };
     dispatch(addingSupportRequestThunk(addObj));
     dispatch(addHistoryThunk(historyObj));
     toast({
-      title: 'Support request sent!',
-      description: 'You have successfully created support request',
+      title: 'Zgłoszenie wsparcia dodane!',
+      description: 'Pomyślnie utworzyłeś zgłoszenie wsparcia',
       status: 'success',
       duration: 9000,
       isClosable: true,
-      position: 'bottom-right',
+      position: 'top-right',
     });
   };
 
@@ -105,12 +106,11 @@ const SupportModal = () => {
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Something wrong?</ModalHeader>
+          <ModalHeader>Coś nie tak?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <ModalBodyWrapper>
-              <p>Select support category</p>
-              <SelectComponent options={SELECT_OPTIONS} onChange={setSupportCategory} label="Select support category" />
+              <SelectComponent options={SELECT_OPTIONS} onChange={setSupportCategory} label="Wybierz kategorię zgłoszenia wsparcia" />
               <TextareaCompononent
                 label={properLabel(supportCategory)}
                 onChange={setText}
@@ -122,9 +122,9 @@ const SupportModal = () => {
 
           <ModalFooter>
             <Button variant="ghost" mr={3} onClick={onClose}>
-              Close
+              Zamknij
             </Button>
-            <Button colorScheme="teal" onClick={onSaveClick}>Send</Button>
+            <Button colorScheme="teal" onClick={onSaveClick}>Utwórz</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

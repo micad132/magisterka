@@ -18,7 +18,7 @@ public class UserDTORequest {
     private String username;
     private String pesel;
     private String email;
-    private String countryName;
+    private String provinceName;
     private String cityName;
     private String streetName;
     private String postalCode;

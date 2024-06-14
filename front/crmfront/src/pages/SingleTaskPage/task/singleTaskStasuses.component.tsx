@@ -3,11 +3,8 @@ import TaskStatusBadgeComponent from '../../../components/taskStatusBadge.compon
 import TaskTypeBadge from '../../../components/taskTypeBadge.component.tsx';
 import {
   TaskOriginType,
-  TaskPriority,
   TaskPriorityType,
-  TaskStatus,
   TaskStatusType,
-  TaskType,
   TaskTypeType,
 } from '../../../types/TaskType.ts';
 import TaskPriorityBadgeComponent from '../../../components/taskPriorityBadge.component.tsx';
@@ -37,19 +34,19 @@ const SingleTaskStasusesComponent = ({
 }: Props) => (
   <SingleTaskStatuses>
     <SingleStatus>
-      <span>Task status</span>
+      <span>Status usługi:</span>
       <TaskStatusBadgeComponent taskStatus={taskStatus} />
     </SingleStatus>
     <SingleStatus>
-      <span>Task type</span>
+      <span>Typ usługi:</span>
       <TaskTypeBadge taskType={taskType} />
     </SingleStatus>
     <SingleStatus>
-      <span>Task priority</span>
+      <span>Priorytet usługi:</span>
       <TaskPriorityBadgeComponent taskPriority={taskPriority} />
     </SingleStatus>
     <SingleStatus>
-      <span>Task origin</span>
+      <span>Sposób powstania:</span>
       <TaskOriginTagComponent taskOrigin={taskOrigin} />
     </SingleStatus>
 

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Tag } from '@chakra-ui/react';
-import { TaskType } from '../types/TaskType.ts';
 import { SurveyRating, SurveyRatingType } from '../types/SurveyType.ts';
 
 const StyledTag = styled(Tag)`
@@ -16,11 +15,11 @@ const RateTagComponent = ({ rate }: Props) => {
   const properTaskType = () => {
     switch (rate) {
       case SurveyRating.LOW:
-        return <StyledTag size="large" colorScheme="red" variant="solid">{SurveyRating.LOW}</StyledTag>;
+        return <StyledTag size="large" colorScheme="red" variant="solid">NISKA</StyledTag>;
       case SurveyRating.MEDIUM:
-        return <StyledTag size="large" colorScheme="orange" variant="solid">{SurveyRating.MEDIUM}</StyledTag>;
+        return <StyledTag size="large" colorScheme="orange" variant="solid">ŚREDNIA</StyledTag>;
       case SurveyRating.HIGH:
-        return <StyledTag size="large" colorScheme="green" variant="solid">{SurveyRating.HIGH}</StyledTag>;
+        return <StyledTag size="large" colorScheme="green" variant="solid">WYSOKA</StyledTag>;
       default:
         return <StyledTag size="large" colorScheme="teal" variant="solid">Success</StyledTag>;
     }

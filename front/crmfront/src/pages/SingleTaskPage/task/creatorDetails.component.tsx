@@ -35,12 +35,12 @@ const CreatorDetailsComponent = ({
   creatorPreview,
 }: Props) => (
   <Wrapper>
-    <h2>Creator:</h2>
-    <p><span>Creator:</span> {creatorPreview.creatorName} {creatorPreview.creatorSurname} </p>
-    <p><span>Username:</span> {creatorPreview.creatorUsername}</p>
-    <RoleWrapper><span>Role:</span> <RoleTagComponent role={creatorPreview.creatorRole} /> </RoleWrapper>
-    <p><span>Age:</span> {creatorPreview.creatorAge}  </p>
-    <p><span>From:</span> {creatorPreview.creatorCountry}</p>
+    <h2>Twórca:</h2>
+    <p><span>Twórca:</span> {creatorPreview.creatorName} {creatorPreview.creatorSurname} </p>
+    <p><span>Nazwa:</span> {creatorPreview.creatorUsername}</p>
+    <RoleWrapper><span>Rola:</span> <RoleTagComponent role={creatorPreview.creatorRole} /> </RoleWrapper>
+    <p><span>Wiek:</span> {creatorPreview.creatorAge}  </p>
+    <p><span>Województwo:</span> {creatorPreview.creatorCountry}</p>
   </Wrapper>
 );
 

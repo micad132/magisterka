@@ -6,44 +6,41 @@ export const loginScheme = Yup.object().shape({
 });
 
 export const registerScheme = Yup.object().shape({
-  username: Yup.string().required('Username is required').min(5).max(30),
-  name: Yup.string().required('Name is required').min(3).max(30),
-  age: Yup.number().required('Age is required').positive('Age must be a positive number').integer('Age must be an integer'),
-  email: Yup.string().required('Email is required').email(),
+  username: Yup.string().required('Nazwa użytkownika jest wymagana').min(5).max(30),
+  name: Yup.string().required('Imię jest wymagane').min(3).max(30),
+  age: Yup.number().required('Wiek jest wymagany').positive('Wiek musi być liczbą dodatnią').integer('Wiek musi być liczbą całkowitą'),
+  email: Yup.string().required('Email jest wymagany').email('Nieprawidłowy format email'),
   surname: Yup.string()
-    .required('Surname is required')
-    .matches(/^[a-zA-Z]+$/, 'Name must contain only letters'),
+    .required('Nazwisko jest wymagane')
+    .matches(/^[a-zA-Z]+$/, 'Nazwisko musi zawierać tylko litery'),
   postalCode: Yup.string()
-    .matches(/^\d{2}-\d{3}$/, 'Postal code must be in the format XX-XXX')
-    .required('Postal code is required'),
+    .matches(/^\d{2}-\d{3}$/, 'Kod pocztowy musi być w formacie XX-XXX')
+    .required('Kod pocztowy jest wymagany'),
   cityName: Yup.string()
-    .required('City name is required')
-    .matches(/^[a-zA-Z]+$/, 'City name must contain only letters'),
-  countryName: Yup.string()
-    .required('City name is required')
-    .matches(/^[a-zA-Z]+$/, 'City name must contain only letters'),
+    .required('Nazwa miasta jest wymagana')
+    .matches(/^[a-zA-Z]+$/, 'Nazwa miasta musi zawierać tylko litery'),
   pesel: Yup.string()
-    .required('Pesel is required')
-    .min(11, 'Pesel must contain 11 digits')
-    .max(11, 'Pesel must contain 11 digits')
-    .matches(/^[0-9]+$/, 'Pesel must contain only digits'),
+    .required('PESEL jest wymagany')
+    .min(11, 'PESEL musi zawierać 11 cyfr')
+    .max(11, 'PESEL musi zawierać 11 cyfr')
+    .matches(/^[0-9]+$/, 'PESEL musi zawierać tylko cyfry'),
   password: Yup.string()
-    .required('Password is required')
-    .min(10)
-    .max(30)
+    .required('Hasło jest wymagane')
+    .min(10, 'Hasło musi mieć co najmniej 10 znaków')
+    .max(30, 'Hasło może mieć maksymalnie 30 znaków')
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!])(?=\S+$).{8,}$/,
-      'Password must be at least 10 characters long, contain one uppercase letter, one lowercase letter, one number, and one special character.',
+      'Hasło musi mieć co najmniej 10 znaków, zawierać jedną wielką literę, jedną małą literę, jedną cyfrę i jeden znak specjalny.',
     ),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password')], 'Confirmed password must be the same as password')
-    .required('Confirm password is required'),
+    .oneOf([Yup.ref('password')], 'Potwierdzone hasło musi być takie samo jak hasło')
+    .required('Potwierdzenie hasła jest wymagane'),
   streetName: Yup.string()
-    .required('Street name is required')
-    .matches(/^[a-zA-Z]+$/, 'Street name must contain only letters'),
+    .required('Nazwa ulicy jest wymagana')
+    .matches(/^[a-zA-Z]+$/, 'Nazwa ulicy musi zawierać tylko litery'),
   phoneNumber: Yup.string()
-    .required('Phone number is required')
-    .min(9, 'Phone number must have 9 digits')
-    .max(9, 'Phone number must have 9 digits')
-    .matches(/^[0-9]+$/, 'Phone number name must contain only digits'),
+    .required('Numer telefonu jest wymagany')
+    .min(9, 'Numer telefonu musi mieć 9 cyfr')
+    .max(9, 'Numer telefonu musi mieć 9 cyfr')
+    .matches(/^[0-9]+$/, 'Numer telefonu musi zawierać tylko cyfry'),
 });

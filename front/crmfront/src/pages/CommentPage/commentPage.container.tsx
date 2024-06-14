@@ -8,7 +8,6 @@ import { getUserDetails } from '../../store/userSlice.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import { mapDateToString } from '../../utils/mappers/mapDateToString.ts';
 import MessageComponent from '../../components/message.component.tsx';
-import CountHeaderComponent from '../HomePage/components/adminHomePage/systemInfo/count/countHeader.component.tsx';
 import ClientItemsCountComponent from '../../components/clientItemsCount.component.tsx';
 import PageItemsCountComponent from '../../components/pageItemsCount.component.tsx';
 
@@ -27,7 +26,7 @@ const CommentPageContainer = () => {
       authorSurname={comment.authorSurname}
       authorRole={comment.authorRole}
       description={comment.description}
-      isAdmin
+      isAdmin={false}
       commentId={comment.id}
     />
   ));
@@ -63,8 +62,8 @@ const CommentPageContainer = () => {
   if (comments.length === 0) {
     return (
       <PageWrapperComponent>
-        <PageHeaderComponent text="Comments" />
-        <MessageComponent message="There are no comments in the system" />
+        <PageHeaderComponent text="Komentarze" />
+        <MessageComponent message="W systemie nie ma komentarzy" />
       </PageWrapperComponent>
     );
   }
@@ -72,8 +71,8 @@ const CommentPageContainer = () => {
   if (loggedUser.userRole === RoleType.CLIENT) {
     return (
       <PageWrapperComponent>
-        <PageHeaderComponent text="Comments" />
-        <ClientItemsCountComponent count={clientComments.length} itemName="support requests" />
+        <PageHeaderComponent text="Komentarze" />
+        <ClientItemsCountComponent count={clientComments.length} itemName="komentarzy" name={loggedUser.name} surname={loggedUser.surname} />
         <CommentsWrapperComponent>
           {clientComponents}
         </CommentsWrapperComponent>
@@ -84,8 +83,8 @@ const CommentPageContainer = () => {
   if (loggedUser.userRole === RoleType.ADMIN) {
     return (
       <PageWrapperComponent>
-        <PageHeaderComponent text="Comments" />
-        <PageItemsCountComponent count={comments.length} text="comments" />
+        <PageHeaderComponent text="Komentarze" />
+        <PageItemsCountComponent count={comments.length} text="komentarzy" />
         <CommentsWrapperComponent>
           {adminComponents}
         </CommentsWrapperComponent>
@@ -96,8 +95,8 @@ const CommentPageContainer = () => {
   if (loggedUser.userRole === RoleType.WORKER) {
     return (
       <PageWrapperComponent>
-        <PageHeaderComponent text="Comments" />
-        <PageItemsCountComponent count={comments.length} text="comments" />
+        <PageHeaderComponent text="Komentarze" />
+        <PageItemsCountComponent count={comments.length} text="komentarzy" />
         <CommentsWrapperComponent>
           {workerComponents}
         </CommentsWrapperComponent>

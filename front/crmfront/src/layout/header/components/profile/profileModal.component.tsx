@@ -53,7 +53,7 @@ const ProfileModal = ({ user }: Props) => {
 
           <ModalFooter>
             <Button variant="ghost" colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+              Zamknij
             </Button>
             <Button
               colorScheme="teal"
@@ -61,7 +61,7 @@ const ProfileModal = ({ user }: Props) => {
                 onClose();
                 navigate('/profile', { replace: true });
               }}
-            >Visit profile
+            >Profil konta
             </Button>
           </ModalFooter>
         </ModalContent>

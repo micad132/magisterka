@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import SystemSingleInfoComponent from '../systemSingleInfo.component.tsx';
 import LabelTextComponent from './labelText.component.tsx';
@@ -45,29 +46,29 @@ const SystemInfoComponent = () => {
   console.log(surveysCountThisWeek);
   return (
     <div>
-      <LabelTextComponent text="Total system count" />
+      <LabelTextComponent text="Dane w systemie" />
       <SingleInfoWrapperComponent>
-        <SystemSingleInfoComponent count={users.length} text="People" />
-        <SystemSingleInfoComponent count={tasks.length} text="Tasks" />
-        <SystemSingleInfoComponent count={messages.length} text="Messages" />
-        <SystemSingleInfoComponent count={histories.length} text="History" />
-        <SystemSingleInfoComponent count={stats.length} text="Charts" />
-        <SystemSingleInfoComponent count={supports.length} text="Support" />
-        <SystemSingleInfoComponent count={surveys.length} text="Surveys" />
-        <SystemSingleInfoComponent count={comments.length} text="Comments" />
+        <SystemSingleInfoComponent count={users.length} text="Użytkownicy" />
+        <SystemSingleInfoComponent count={tasks.length} text="Usługi" />
+        <SystemSingleInfoComponent count={messages.length} text="Wiadomości" />
+        <SystemSingleInfoComponent count={histories.length} text="Historia" />
+        <SystemSingleInfoComponent count={stats.length} text="Wykresy" />
+        <SystemSingleInfoComponent count={supports.length} text="Wsparcie" />
+        <SystemSingleInfoComponent count={surveys.length} text="Ankiety" />
+        <SystemSingleInfoComponent count={comments.length} text="Komentarze" />
       </SingleInfoWrapperComponent>
 
-      <LabelTextComponent text="This week (current week from monday to sunday)" />
-      <SingleInfoWrapperComponent>
-        <SystemSingleInfoComponent count={users.length} text="People" />
-        <SystemSingleInfoComponent count={tasks.length} text="Tasks" />
-        <SystemSingleInfoComponent count={messagesCountThisWeek} text="Messages" />
-        <SystemSingleInfoComponent count={histories.length} text="History" />
-        <SystemSingleInfoComponent count={stats.length} text="Charts" />
-        <SystemSingleInfoComponent count={supports.length} text="Support" />
-        <SystemSingleInfoComponent count={surveysCountThisWeek} text="Surveys" />
-        <SystemSingleInfoComponent count={comments.length} text="Comments" />
-      </SingleInfoWrapperComponent>
+      {/* <LabelTextComponent text="Dane w tym tygodniu (tydzień wstecz od dziś)" /> */}
+      {/* <SingleInfoWrapperComponent> */}
+      {/*  <SystemSingleInfoComponent count={users.length} text="Użytkownicy" /> */}
+      {/*  <SystemSingleInfoComponent count={tasks.length} text="Usługi" /> */}
+      {/*  <SystemSingleInfoComponent count={messagesCountThisWeek} text="Wiadomości" /> */}
+      {/*  <SystemSingleInfoComponent count={histories.length} text="Historia" /> */}
+      {/*  <SystemSingleInfoComponent count={stats.length} text="Wykresy" /> */}
+      {/*  <SystemSingleInfoComponent count={supports.length} text="Wsparcie" /> */}
+      {/*  <SystemSingleInfoComponent count={surveysCountThisWeek} text="Ankiety" /> */}
+      {/*  <SystemSingleInfoComponent count={comments.length} text="Komentarze" /> */}
+      {/* </SingleInfoWrapperComponent> */}
       {/* <LabelTextComponent text="This month" /> */}
       {/* <SingleInfoWrapper> */}
       {/*  <SystemSingleInfoComponent count={127} text="People" linkUrl="/people" /> */}

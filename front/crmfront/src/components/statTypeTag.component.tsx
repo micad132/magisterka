@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Tag } from '@chakra-ui/react';
-import { TaskType } from '../types/TaskType.ts';
 import { StatType, StatTypeType } from '../types/StatType.ts';
 
 const TagWrapper = styled(Tag)`
@@ -16,13 +15,13 @@ const StatTypeTagComponent = ({ statType }: Props) => {
   const properTaskType = () => {
     switch (statType) {
       case StatType.BAR:
-        return <TagWrapper size="large" colorScheme="teal" variant="solid">{StatType.BAR}</TagWrapper>;
+        return <TagWrapper size="large" colorScheme="teal" variant="solid">SŁUPKOWY</TagWrapper>;
       case StatType.PIE:
-        return <TagWrapper size="large" colorScheme="purple" variant="solid">{StatType.PIE}</TagWrapper>;
+        return <TagWrapper size="large" colorScheme="purple" variant="solid">KOŁOWY</TagWrapper>;
       case StatType.LINE:
-        return <TagWrapper size="large" colorScheme="blue" variant="solid">{StatType.LINE}</TagWrapper>;
+        return <TagWrapper size="large" colorScheme="blue" variant="solid">LINIOWY</TagWrapper>;
       case StatType.DOUGHNUT:
-        return <TagWrapper size="large" colorScheme="blue" variant="solid">{StatType.DOUGHNUT}</TagWrapper>;
+        return <TagWrapper size="large" colorScheme="blue" variant="solid">PIERŚCIEŃ</TagWrapper>;
       default:
         return <TagWrapper size="large" colorScheme="teal" variant="solid">Success</TagWrapper>;
     }

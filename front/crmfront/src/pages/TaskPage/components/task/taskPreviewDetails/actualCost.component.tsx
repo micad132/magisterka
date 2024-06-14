@@ -13,7 +13,7 @@ interface Props {
 
 const ActualCostComponent = ({ actualCost }: Props) => (
   <ActualCostWrapper>
-    <span>Actual cost:</span>
+    <span>Aktualny koszt:</span>
     <CustomLabel text={actualCost} />
   </ActualCostWrapper>
 );

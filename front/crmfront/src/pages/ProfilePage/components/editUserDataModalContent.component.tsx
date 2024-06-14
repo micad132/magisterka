@@ -12,8 +12,8 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoUsername"
       value={values.username}
       onChange={(value) => setPersonalInfo(value.target.value, 'username')}
-      placeholder="New username"
-      label="Edit your username"
+      placeholder="Nowa nazwa"
+      label="Edytuj nazwe użytkownika"
       type="text"
       isInvalid={false}
     />
@@ -21,8 +21,8 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoName"
       value={values.name}
       onChange={(value) => setPersonalInfo(value.target.value, 'name')}
-      placeholder="New name"
-      label="Edit your name"
+      placeholder="Imię"
+      label="Edytuj imię"
       type="text"
       isInvalid={false}
     />
@@ -30,8 +30,8 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoSurname"
       value={values.surname}
       onChange={(value) => setPersonalInfo(value.target.value, 'surname')}
-      placeholder="New surname"
-      label="Edit your surname"
+      placeholder="Nazwisko"
+      label="Edytuj nazwisko"
       type="text"
       isInvalid={false}
     />
@@ -39,8 +39,8 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoEmail"
       value={values.email}
       onChange={(value) => setPersonalInfo(value.target.value, 'email')}
-      placeholder="New email"
-      label="Edit your email"
+      placeholder="Email"
+      label="Edytuj email"
       type="email"
       isInvalid={false}
     />
@@ -48,17 +48,17 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoAge"
       value={values.age}
       onChange={(value) => setPersonalInfo(value.target.value, 'age')}
-      placeholder="New age"
-      label="Edit your age"
+      placeholder="Wiek"
+      label="Edytuj wiek"
       type="number"
       isInvalid={false}
     />
     <InputComponent
       name="editPersonalInfoCountryName"
-      value={values.countryName}
-      onChange={(value) => setPersonalInfo(value.target.value, 'countryName')}
-      placeholder="New country name"
-      label="Edit your country name"
+      value={values.provinceName}
+      onChange={(value) => setPersonalInfo(value.target.value, 'provinceName')}
+      placeholder="Województwo"
+      label="Edytuj województwo"
       type="text"
       isInvalid={false}
     />
@@ -66,8 +66,8 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoCityName"
       value={values.cityName}
       onChange={(value) => setPersonalInfo(value.target.value, 'cityName')}
-      placeholder="New city name"
-      label="Edit your city name"
+      placeholder="Nazwa miasta"
+      label="Edytuj nazwę miasta"
       type="text"
       isInvalid={false}
     />
@@ -75,8 +75,8 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoStreetName"
       value={values.streetName}
       onChange={(value) => setPersonalInfo(value.target.value, 'streetName')}
-      placeholder="New street name"
-      label="Edit your street name"
+      placeholder="Ulica"
+      label="Edytuj ulicę"
       type="text"
       isInvalid={false}
     />
@@ -84,8 +84,8 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoPostalCode"
       value={values.postalCode}
       onChange={(value) => setPersonalInfo(value.target.value, 'postalCode')}
-      placeholder="New postal code"
-      label="Edit your postal code"
+      placeholder="Kod pocztowy"
+      label="Edytuj kod pocztowy"
       type="text"
       isInvalid={false}
     />
@@ -93,8 +93,8 @@ const EditUserDataModalContentComponent = ({ values, setPersonalInfo }: Props) =
       name="editPersonalInfoPhoneNumber"
       value={values.phoneNumber}
       onChange={(value) => setPersonalInfo(value.target.value, 'phoneNumber')}
-      placeholder="New postal code"
-      label="Edit your postal code"
+      placeholder="Kod pocztowy"
+      label="Edytuj kod pocztowy"
       type="text"
       isInvalid={false}
     />

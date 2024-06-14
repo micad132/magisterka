@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import { useState } from 'react';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';

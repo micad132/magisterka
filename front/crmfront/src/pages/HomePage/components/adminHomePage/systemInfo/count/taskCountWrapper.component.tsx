@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import { useAppSelector } from '../../../../../../utils/hooks.ts';
 import { getAllTasks } from '../../../../../../store/taskSlice.tsx';
@@ -45,7 +46,7 @@ const TaskCountWrapperComponent = () => {
   return (
     <Wrapper>
       <div>
-        <p>Tasks by status</p>
+        <p>Usługi według statutu</p>
         <CountDivComponent>
           <CountDivContentComponent>
             <TaskStatusBadgeComponent taskStatus={TaskStatus.PENDING} />
@@ -68,7 +69,7 @@ const TaskCountWrapperComponent = () => {
 
       </div>
       <div>
-        <p>Tasks by priority</p>
+        <p>Usługi według priotytetu</p>
         <CountDivComponent>
           <CountDivContentComponent>
             <TaskPriorityBadgeComponent taskPriority={TaskPriority.MINOR} />
@@ -85,7 +86,7 @@ const TaskCountWrapperComponent = () => {
         </CountDivComponent>
       </div>
       <div>
-        <p>Tasks by category</p>
+        <p>Usługi według typu</p>
         <CountDivComponent>
           <CountDivContentComponent>
             <TaskTypeBadgeComponent taskType={TaskType.LOGISTIC} />

@@ -12,9 +12,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<MessageResponse> handleAccessDeniedException(AccessDeniedException ex) {
-        // Tutaj możesz zdefiniować niestandardowy komunikat błędu
         String errorMessage = "You have no permission to do this!";
-
         return new ResponseEntity<>(new MessageResponse(errorMessage), HttpStatus.FORBIDDEN);
     }
 

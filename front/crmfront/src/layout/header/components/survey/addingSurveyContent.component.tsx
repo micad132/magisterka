@@ -1,4 +1,3 @@
-import InputComponent from '../../../../components/form/input.component.tsx';
 import { AddSurveyState, SurveyErrors } from '../../../../types/SurveyType.ts';
 import NumberInputComponent from '../../../../components/form/numberInput.component.tsx';
 
@@ -12,7 +11,7 @@ const AddingSurveyContentComponent = ({ surveyValues, setValues, errors }: Props
   console.log('ERRORS', errors);
   return (
     <div>
-      <p>Rates from 0 to 5</p>
+      <p>Oceny od 0.1 do 5.0</p>
       <NumberInputComponent
         defaultValue={0.1}
         minValue={0.1}
@@ -20,7 +19,7 @@ const AddingSurveyContentComponent = ({ surveyValues, setValues, errors }: Props
         value={surveyValues.taskRate}
         onChange={(e) => setValues('taskRate', e)}
         step={0.1}
-        label="How do you rate task experience?"
+        label="Jak oceniasz oferowane przez firmę usługi i ich realizację?"
       />
       <NumberInputComponent
         defaultValue={0.1}
@@ -29,7 +28,7 @@ const AddingSurveyContentComponent = ({ surveyValues, setValues, errors }: Props
         value={surveyValues.messageRate}
         onChange={(e) => setValues('messageRate', e)}
         step={0.1}
-        label="How do you rate message experience?"
+        label="Jak oceniasz wiadomości z firmą?"
       />
       <NumberInputComponent
         defaultValue={0.1}
@@ -38,7 +37,7 @@ const AddingSurveyContentComponent = ({ surveyValues, setValues, errors }: Props
         value={surveyValues.supportRate}
         onChange={(e) => setValues('supportRate', e)}
         step={0.1}
-        label="How do you rate support request experience?"
+        label="Jak oceniasz uzyskiwane wsparcie od firmy?"
       />
     </div>
   );

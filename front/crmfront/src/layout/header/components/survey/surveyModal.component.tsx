@@ -71,14 +71,14 @@ const SurveyModalComponent = () => {
     const historyObj: AddHistory = {
       performerId: loggedUser.id,
       historyActionType: ActionType.SURVEY,
-      description: `User ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} created a survey`,
+      description: `Klient ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} utworzył ankietę`,
     };
     try {
       dispatch(addingSurveyThunk(obj));
       dispatch(addHistoryThunk(historyObj));
       toast({
-        title: 'Survey made!',
-        description: 'You have successfully made a survey',
+        title: 'Ankieta utworzona!',
+        description: 'Pomyślnie utworzyłeś ankietę',
         status: 'success',
         duration: 4000,
         isClosable: true,
@@ -88,8 +88,8 @@ const SurveyModalComponent = () => {
       setSurveyValues(ADD_SURVEY_STATE_INITIAL_VALUES);
     } catch (e) {
       toast({
-        title: 'Survey not made',
-        description: 'Something went wrong, contact with your admin!',
+        title: 'Ankieta nie została utworzona',
+        description: 'Coś poszło nie tak, skontaktuj się z adminem!',
         status: 'error',
         duration: 4000,
         isClosable: true,
@@ -100,9 +100,9 @@ const SurveyModalComponent = () => {
 
   const modalProps: ModalProps = {
     modalBody: <AddingSurveyContentComponent surveyValues={surveyValues} setValues={setValues} errors={surveyErrors} />,
-    modalHeader: 'Add survey',
+    modalHeader: 'Dodaj ankietę',
     modalIcon: <Icon as={QuizIcon} boxSize="100%" />,
-    modalActionButtonText: 'Add',
+    modalActionButtonText: 'Dodaj',
     mainButtonAction: onAddSurvey,
     buttonText: '',
   };

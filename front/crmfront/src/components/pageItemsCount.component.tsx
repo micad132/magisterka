@@ -5,7 +5,7 @@ interface Props {
 
 const PageItemsCountComponent = ({ count, text }: Props) => (
   <p>
-    There are {count} {text} in system
+    W systemie znajduje się {count} {text}
   </p>
 );
 

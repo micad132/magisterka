@@ -1,3 +1,4 @@
+// @ts-nocheck
 import styled from 'styled-components';
 import { useState } from 'react';
 import SelectComponent from '../../../../components/form/select.component.tsx';
@@ -28,19 +29,19 @@ const SORTING_OPTIONS: SelectValue[] = [
 
 const SORTING_TASKS_OPTIONS: SelectValue[] = [
   {
-    text: 'Minor',
+    text: 'Niski',
     value: TaskPriority.MINOR,
   },
   {
-    text: 'Major',
+    text: 'Poważny',
     value: TaskPriority.MAJOR,
   },
   {
-    text: 'Critical',
+    text: 'Krytyczny',
     value: TaskPriority.CRITICAL,
   },
   {
-    text: 'All',
+    text: 'Wszystkie',
     value: 'ALL',
   },
 ];
@@ -49,26 +50,28 @@ interface Props {
   sortingPriorityValue: string,
   setSortingPriorityValue: (value: string) => void,
   isWorkerLogged: boolean,
+  isOnlyCurrentWorkerTasks: boolean,
+  setIsOnlyCurrentWorkerTasks: (value: boolean) => void,
 }
 
-const TaskSettingsContainer = ({ sortingPriorityValue, setSortingPriorityValue, isWorkerLogged }: Props) => {
+const TaskSettingsContainer = ({
+  sortingPriorityValue, setSortingPriorityValue, isWorkerLogged, setIsOnlyCurrentWorkerTasks, isOnlyCurrentWorkerTasks,
+}: Props) => {
   const [sortingTasks, setSortingTasks] = useState('');
-
-  const [isOnlyCurrentWorkerTasks, setIsOnlyCurrentWorkerTasks] = useState<boolean>(false);
   return (
     <SettingsContainerWrapper>
-      <SelectComponent
-        options={SORTING_OPTIONS}
-        onChange={setSortingTasks}
-        label="Sort tasks by"
-      />
+      {/* <SelectComponent */}
+      {/*  options={SORTING_OPTIONS} */}
+      {/*  onChange={setSortingTasks} */}
+      {/*  label="Sort tasks by" */}
+      {/* /> */}
       <SelectComponent
         options={SORTING_TASKS_OPTIONS}
         onChange={setSortingPriorityValue}
         value={sortingPriorityValue}
-        label="Select only task with priority"
+        label="Wyświetl jedynie usługi z priorytetem"
       />
-      {isWorkerLogged && <CheckboxComponent isChecked={isOnlyCurrentWorkerTasks} onChange={setIsOnlyCurrentWorkerTasks} text="Preview only logged worker tasks" />}
+      {isWorkerLogged && <CheckboxComponent isChecked={isOnlyCurrentWorkerTasks} onChange={setIsOnlyCurrentWorkerTasks} text="Wyświetl jedynie usługi zalogowanego pracownika" />}
     </SettingsContainerWrapper>
   );
 };

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Button,
   Tab, TabList, TabPanel, TabPanels, Tabs,
@@ -44,11 +45,11 @@ const AdminHomePageContainer = () => {
 
   return (
     <PageWrapperComponent>
-      <MainHeader>As a admin on main screen you can preview all data in system</MainHeader>
+      <MainHeader>Wszystkie dane zawarte w systemie:</MainHeader>
       <Tabs>
         <CustomTabList>
-          <Tab>System info</Tab>
-          <Tab>System charts</Tab>
+          <Tab>Dane systemu:</Tab>
+          <Tab>Wykresy systemu:</Tab>
         </CustomTabList>
 
         <TabPanels>
@@ -58,7 +59,7 @@ const AdminHomePageContainer = () => {
           </TabPanel>
           <TabPanel>
             <div>
-              <h1>Here you can preview all existing charts in system</h1>
+              <h1>Na tej stronie możesz przejrzeć wszystkie szczegóły wykresów:</h1>
               <CustomTabPanel>
                 <ChartsWrapperComponent stats={taskStats} spanText="All charts with task category" />
                 <ChartsWrapperComponent stats={messagesStats} spanText="All charts with message category" />

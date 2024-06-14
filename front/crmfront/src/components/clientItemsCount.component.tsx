@@ -1,11 +1,15 @@
 interface Props {
   count: number,
   itemName: string,
+  name: string,
+  surname: string,
 }
 
-const ClientItemsCountComponent = ({ count, itemName }: Props) => (
+const ClientItemsCountComponent = ({
+  count, itemName, name, surname,
+}: Props) => (
   <p>
-    You have {count} {itemName} in system
+    Jako {name} {surname} posiadasz {count} {itemName}
   </p>
 );
 
