@@ -1,7 +1,7 @@
-import { Form, Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import { Button, useDisclosure, useToast } from '@chakra-ui/react';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { INITIAL_REGISTER_AUTH_VALUES, RegisterAuth, RegisterAuthResponse } from '../../../types/AuthTypes.ts';
 import AuthWrapperInside from '../../../components/authWrapperInside.component.tsx';
@@ -12,10 +12,10 @@ import { RoleType, UserGender } from '../../../types/UserType.ts';
 import AuthService from '../../../services/AuthService.ts';
 import { registerScheme } from '../../../services/validators/UserValidator.ts';
 import CodeModalComponent from './components/codeModal.component.tsx';
-import SelectComponent from '../../../components/form/select.component.tsx';
 import { SelectValue } from '../../../types/UtilTypes.ts';
 import { PROVINCES_VALUES } from '../../../utils/consts.ts';
 import RegisterSelectComponent from './components/registerSelect.component.tsx';
+import { sanitizeInput } from '../../../utils/utilFunctions.ts';
 
 const InitialRole = styled.div`
     display: flex;
@@ -54,12 +54,12 @@ const RegisterPage = () => {
       <Formik
         initialValues={INITIAL_REGISTER_AUTH_VALUES}
         validationSchema={registerScheme}
-        validateOnBlur={false}
+        validateOnBlur
         validateOnChange={false}
         onSubmit={async (values: RegisterAuth, actions) => {
           console.log('HALO');
           try {
-            console.log('WCHODZI');
+            console.log('WCHODZI', values);
             const tescik: RegisterAuth = {
               ...values,
               userRole: RoleType.CLIENT,
@@ -95,16 +95,23 @@ const RegisterPage = () => {
           values,
           handleChange,
           errors,
-          handleSubmit,
-          isSubmitting,
-          /* and other goodies */
         }) => (
           <Form>
             <AuthWrapperInside>
               <InputComponent
                 name="email"
                 value={values.email}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Email"
                 label="Email"
                 type="email"
@@ -114,7 +121,17 @@ const RegisterPage = () => {
               <InputComponent
                 name="name"
                 value={values.name}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Imię"
                 label="Imię"
                 type="text"
@@ -124,7 +141,17 @@ const RegisterPage = () => {
               <InputComponent
                 name="surname"
                 value={values.surname}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Nazwisko"
                 label="Nazwisko"
                 type="text"
@@ -144,7 +171,17 @@ const RegisterPage = () => {
               <InputComponent
                 name="username"
                 value={values.username}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Nazwa użytkownika"
                 label="Nazwa użytkownika"
                 type="text"
@@ -154,7 +191,17 @@ const RegisterPage = () => {
               <InputComponent
                 name="pesel"
                 value={values.pesel}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Pesel"
                 label="Pesel"
                 type="text"
@@ -185,11 +232,23 @@ const RegisterPage = () => {
                 options={PROVINCES_VALUES}
                 onChange={handleChange}
                 label="Wybierz województwo"
+                name="provinceName"
+                value={values.provinceName}
               />
               <InputComponent
                 name="cityName"
                 value={values.cityName}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Miasto"
                 label="Miasto"
                 type="string"
@@ -199,7 +258,17 @@ const RegisterPage = () => {
               <InputComponent
                 name="streetName"
                 value={values.streetName}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Nazwa ulicy"
                 label="Nazwa ulicy"
                 type="string"
@@ -209,7 +278,17 @@ const RegisterPage = () => {
               <InputComponent
                 name="postalCode"
                 value={values.postalCode}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Kod pocztowy"
                 label="Kod pocztowy"
                 type="string"
@@ -219,7 +298,17 @@ const RegisterPage = () => {
               <InputComponent
                 name="phoneNumber"
                 value={values.phoneNumber}
-                onChange={handleChange}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                  handleChange({
+                    ...e,
+                    target: {
+                      ...e.target,
+                      value: sanitizeInput(e.target.value),
+                      name: e.target.name,
+                      id: e.target.id,
+                    },
+                  });
+                }}
                 placeholder="Numer telefonu"
                 label="Numer telefonu"
                 type="string"
@@ -230,6 +319,8 @@ const RegisterPage = () => {
                 options={USER_GENDER}
                 onChange={handleChange}
                 label="Wybierz płeć"
+                name="userGender"
+                value={values.userGender}
               />
               <InitialRole>
                 <p>Twoja początkowa rola to:</p>

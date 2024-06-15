@@ -6,11 +6,17 @@ export const loginScheme = Yup.object().shape({
 });
 
 export const registerScheme = Yup.object().shape({
-  username: Yup.string().required('Nazwa użytkownika jest wymagana').min(5).max(30),
-  name: Yup.string().required('Imię jest wymagane').min(3).max(30),
+  username: Yup.string().required('Nazwa użytkownika jest wymagana')
+    .min(5, 'Nazwa użytkownika musi mieć co najmniej 5 znaków')
+    .max(30, 'Nazwa użytkownika może mieć maksymalnie 30 znaków'),
+  name: Yup.string().required('Imię jest wymagane')
+    .min(3, 'Imię musi mieć co najmniej 3 znaki')
+    .max(30, 'Imię może mieć maksymalnie 30 znaków'),
   age: Yup.number().required('Wiek jest wymagany').positive('Wiek musi być liczbą dodatnią').integer('Wiek musi być liczbą całkowitą'),
   email: Yup.string().required('Email jest wymagany').email('Nieprawidłowy format email'),
   surname: Yup.string()
+    .min(5, 'Nazwisko musi miec minimum 5 znaków')
+    .max(30, 'Nazwisko może mieć maksymalnie 30 znaków')
     .required('Nazwisko jest wymagane')
     .matches(/^[a-zA-Z]+$/, 'Nazwisko musi zawierać tylko litery'),
   postalCode: Yup.string()
@@ -18,6 +24,8 @@ export const registerScheme = Yup.object().shape({
     .required('Kod pocztowy jest wymagany'),
   cityName: Yup.string()
     .required('Nazwa miasta jest wymagana')
+    .min(5, 'Nazwa miasta musi mieć co najmniej 5 znaków')
+    .max(30, 'Nazwa miasta może mieć maksymalnie 30 znaków')
     .matches(/^[a-zA-Z]+$/, 'Nazwa miasta musi zawierać tylko litery'),
   pesel: Yup.string()
     .required('PESEL jest wymagany')
@@ -36,6 +44,8 @@ export const registerScheme = Yup.object().shape({
     .oneOf([Yup.ref('password')], 'Potwierdzone hasło musi być takie samo jak hasło')
     .required('Potwierdzenie hasła jest wymagane'),
   streetName: Yup.string()
+    .min(5, 'Nazwa ulicy musi mieć co najmniej 5 znaków')
+    .max(30, 'Nazwa ulicy może mieć maksymalnie 30 znaków')
     .required('Nazwa ulicy jest wymagana')
     .matches(/^[a-zA-Z]+$/, 'Nazwa ulicy musi zawierać tylko litery'),
   phoneNumber: Yup.string()

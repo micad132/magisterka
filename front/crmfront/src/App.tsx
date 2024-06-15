@@ -61,7 +61,7 @@ const App = () => {
     dispatch(fetchSurveysThunk());
     dispatch(fetchCommentsThunk());
     // dispatch(setLoggedUser({
-    //   name: 'michal',
+    //   name: 'Klaudia',
     //   userRole: RoleType.ADMIN,
     //   age: 12,
     //   cityName: 'Krakow',
@@ -69,7 +69,7 @@ const App = () => {
     //   createdAccountDate: '2024-12-23',
     //   email: 'mikad@mikad.pl',
     //   pesel: '111',
-    //   surname: 'mosiolek',
+    //   surname: 'Pracownik',
     //   username: 'mikad132',
     //   id: 1,
     //   phoneNumber: '72',
