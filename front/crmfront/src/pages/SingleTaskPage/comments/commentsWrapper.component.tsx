@@ -12,6 +12,7 @@ import { getUserDetails } from '../../../store/userSlice.tsx';
 import { mapDateToString } from '../../../utils/mappers/mapDateToString.ts';
 import { ActionType, AddHistory } from '../../../types/HistoryType.ts';
 import { addHistoryThunk } from '../../../store/historySlice.tsx';
+import { sanitizeInput } from '../../../utils/utilFunctions.ts';
 
 const Wrapper = styled.div`
 `;
@@ -31,6 +32,10 @@ const CommentsWrapperComponent = ({ taskId }: Props) => {
   const comments = useAppSelector(getAllComments);
   const taskComments = comments.filter((com) => com.taskId === taskId);
   const toast = useToast();
+
+  const setCommentValue = (value: string) => {
+    setComment(sanitizeInput(value));
+  };
 
   const onAddComment = () => {
     console.log('djd');
@@ -72,7 +77,7 @@ const CommentsWrapperComponent = ({ taskId }: Props) => {
     modalHeader: 'Dodaj komentarz',
     modalActionButtonText: 'Dodaj',
     buttonText: 'Dodaj komentarz',
-    modalBody: <AddingCommentContent value={comment} setValue={setComment} />,
+    modalBody: <AddingCommentContent value={comment} setValue={setCommentValue} />,
   };
 
   const commentsComps = taskComments.map((com) => <SingleCommentComponent key={com.id} authorUsername={com.authorUsername} authorSurname={com.authorSurname} authorName={com.authorName} date={mapDateToString(com.createdTime)} description={com.description} />);

@@ -1,5 +1,6 @@
 package com.crmbackend.backend.User;
 
+import com.crmbackend.backend.User.dto.request.EditUserDTORequest;
 import com.crmbackend.backend.User.dto.request.UserDTOEditPersonalInfoRequest;
 import com.crmbackend.backend.User.dto.request.UserDTORequest;
 import com.crmbackend.backend.User.dto.response.UserDTOResponse;
@@ -62,6 +63,13 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<UserDTOResponse> editPersonalInfo(@RequestBody UserDTOEditPersonalInfoRequest userDTOEditPersonalInfoRequest) {
         return ResponseEntity.ok(userService.editPersonalInfo(userDTOEditPersonalInfoRequest));
+    }
+
+    @PatchMapping("/editUser")
+    @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
+    public ResponseEntity<String> editUser(@RequestBody EditUserDTORequest editUserDTORequest) {
+        userService.editUser(editUserDTORequest);
+        return ResponseEntity.ok("Edytowano użytkownika!");
     }
 
 //    @GetMapping("/details/{id}")

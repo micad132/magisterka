@@ -7,7 +7,7 @@ import { useAppSelector } from '../../utils/hooks.ts';
 import { getAllUsers } from '../../store/userSlice.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import SelectComponent from '../../components/form/select.component.tsx';
-import { USER_ROLES_OPTIONS } from '../../utils/consts.ts';
+import { PROVINCES_VALUES, USER_ROLES_OPTIONS } from '../../utils/consts.ts';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 import { SelectValue } from '../../types/UtilTypes.ts';
 
@@ -21,27 +21,8 @@ const PeoplePageContainer = () => {
   const [countryFilter, setCountryFilter] = useState<string>('ALL');
   const allUsers = useAppSelector(getAllUsers);
 
-  const uniqueCountries = new Set<string>();
+  const provinceSelectValues: SelectValue[] = [...PROVINCES_VALUES, { text: 'wszyscy', value: 'all' }];
 
-  const countrySelectValues: SelectValue[] = allUsers
-    .filter((user) => {
-      if (!uniqueCountries.has(user.countryName)) {
-        uniqueCountries.add(user.countryName);
-        return true;
-      }
-      return false;
-    })
-    .map((user) => ({
-      value: user.countryName,
-      text: user.countryName,
-    }));
-
-  countrySelectValues.push({
-    value: 'ALL',
-    text: 'ALL',
-  });
-
-  console.log('country', countrySelectValues);
   console.log('filtered', filteredUser);
 
   const clientUsers = allUsers?.filter((client) => client.userRole === RoleType.CLIENT);
@@ -52,28 +33,28 @@ const PeoplePageContainer = () => {
 
   const properUsersAfterCountryFilter = countryFilter === 'ALL'
     ? properUsers
-    : properUsers.filter((user) => user.countryName === countryFilter);
+    : properUsers.filter((user) => user.provinceName === countryFilter);
 
   const singlePersonComponents = properUsersAfterCountryFilter.map((user) => <SinglePersonComponent key={user.username} user={user} />);
 
   return (
     <PageWrapperComponent>
-      <PageHeaderComponent text="People" />
-      <h3>Total amount of users in system: {allUsers.length}</h3>
-      <h3>Total amount of clients in system: {clientUsers.length}</h3>
+      <PageHeaderComponent text="Użytkownicy" />
+      <h3>Ilość wszystkich użytkowników w systemie: {allUsers.length}</h3>
+      <h3>Ilość klientów w systemie: {clientUsers.length}</h3>
       <SelectWrapper>
         <SelectComponent
           options={USER_ROLES_OPTIONS}
           onChange={setFilteredUser}
-          label="Select only people with role"
+          label="Wyświetl jedynie użytkowników z rolą"
           value={filteredUser}
         />
       </SelectWrapper>
       <SelectWrapper>
         <SelectComponent
-          options={countrySelectValues}
+          options={provinceSelectValues}
           onChange={setCountryFilter}
-          label="Select only people from country"
+          label="Wyświetl jedynie użytkowników z województwa"
           value={countryFilter}
         />
       </SelectWrapper>

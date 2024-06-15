@@ -38,7 +38,7 @@ const NavComponent = () => {
       <LinksWrapper>
         <SingleLink path="/" text="Strona główna" icon={<HomeIcon />} />
         {isLoggedUser && <SingleLink path="/tasks" text="Usługi" icon={<TaskIcon />} />}
-        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/people" text="Ludzie" icon={<PersonIcon />} />}
+        {loggedUser.userRole === RoleType.ADMIN && <SingleLink path="/people" text="Użytkownicy" icon={<PersonIcon />} />}
         {/* {isLoggedUser && <SingleLink path="/workers" text="Workers" icon={<EngineeringIcon />} />} */}
         {isLoggedUser && <SingleLink path="/messages" text="Wiadomości" icon={<MessageIcon />} />}
         {isLoggedUser && <SingleLink path="/history" text="Historie" icon={<HistoryIcon />} />}

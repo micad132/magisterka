@@ -47,13 +47,13 @@ const SurveyPageContainer = () => {
 
   return (
     <PageWrapperComponent>
-      <PageHeaderComponent text="Client surveys" />
-      <PageItemsCountComponent count={surveys.length} text="surveys" />
+      <PageHeaderComponent text="Ankiety klienta" />
+      <PageItemsCountComponent count={surveys.length} text="ankiety" />
       <SelectWrapper>
         <SelectComponent
           options={selectOptions}
           onChange={setFilterSurvey}
-          label={'Select user\'s surveys'}
+          label="Wybierz ankiety użytkownika"
           value={filterSurvey}
         />
       </SelectWrapper>

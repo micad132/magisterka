@@ -20,9 +20,9 @@ interface Props {
 }
 
 const SingleStatComponent = ({ text, count }: Props) => (
-  <SingleStat>
+  <SingleStat data-testid={`single-stat-${text}`}>
     {text}
-    <span>{count}</span>
+    <span data-testid={`single-stat-count-${text}`}>{count}</span>
   </SingleStat>
 );
 

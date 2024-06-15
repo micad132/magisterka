@@ -3,7 +3,7 @@ interface Props {
 }
 
 const CreatedAtComponent = ({ createdDate }: Props) => (
-  <p>Created: {createdDate}</p>
+  <p>Utworzona: {createdDate}</p>
 );
 
 export default CreatedAtComponent;

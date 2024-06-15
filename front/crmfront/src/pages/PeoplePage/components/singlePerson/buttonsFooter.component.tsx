@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { useToast } from '@chakra-ui/react';
+import { useState } from 'react';
 import ModalComponent from '../../../../components/modals/modal.component.tsx';
-import { ModalProps } from '../../../../types/UtilTypes.ts';
+import { ModalProps, SelectValue } from '../../../../types/UtilTypes.ts';
 import EditUserContentComponent from './editUserContent.component.tsx';
 import { useAppDispatch } from '../../../../utils/hooks.ts';
-import { deleteUserThunk } from '../../../../store/userSlice.tsx';
-import { User } from '../../../../types/UserType.ts';
+import { deleteUserThunk, editUserData } from '../../../../store/userSlice.tsx';
+import { EditUser, RoleType, User } from '../../../../types/UserType.ts';
 
 const ButtonsWrapper = styled.div`
   display: flex;
@@ -30,28 +31,54 @@ const DeletingWrapper = styled.div`
 const ButtonsFooterComponent = ({ userId, user }: Props) => {
   const dispatch = useAppDispatch();
   const toast = useToast();
+  const [selectedRole, setSelectedRole] = useState<string>('');
 
   const deletingUserContent = (
     <DeletingWrapper>
-      <h1>Are you sure you want to delete this user?</h1>
-      <p>Deleting this user will also delete all connected and created data by this user</p>
-      <p>All surveys, supports, charts, messages, comments, tasks will be gone!</p>
+      <h1>Czy na pewno chcesz usunąć tego użytkownika?</h1>
+      <p>Usunięcie tego użytkownika spowoduje również usunięcie wszystkich powiązanych i stworzonych przez niego danych</p>
+      <p>Wszystkie ankiety, wsparcia, wiadomości, komentarze, zadania zostaną usunięte!</p>
     </DeletingWrapper>
   );
 
+  const changeRole = async () => {
+    console.log('TEST', selectedRole);
+    const obj: EditUser = {
+      userRole: selectedRole,
+      id: userId,
+    };
+    try {
+      dispatch(editUserData(obj));
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  const userRoles: SelectValue[] = [
+
+    {
+      text: 'klient',
+      value: RoleType.CLIENT,
+    },
+    {
+      text: 'pracownik',
+      value: RoleType.WORKER,
+    },
+  ];
+
   const editPersonModalContent: ModalProps = {
-    modalHeader: 'Edit person',
-    buttonText: 'Edit',
-    modalActionButtonText: 'Edit',
-    modalBody: <EditUserContentComponent user={user} />,
+    modalHeader: 'Edytuj rolę użytkownika',
+    buttonText: 'Edytuj',
+    modalActionButtonText: 'Edytuj',
+    modalBody: <EditUserContentComponent userRoles={userRoles} changeRole={setSelectedRole} />,
     buttonSize: 'md',
-    mainButtonAction: () => {},
+    mainButtonAction: changeRole,
   };
 
   const deletePersonModalContent: ModalProps = {
-    modalHeader: 'Delete person',
-    buttonText: 'Delete',
-    modalActionButtonText: 'Delete',
+    modalHeader: 'Usun użytkownika',
+    buttonText: 'Usuń',
+    modalActionButtonText: 'Usuń',
     modalBody: deletingUserContent,
     buttonColor: 'red',
     buttonSize: 'md',

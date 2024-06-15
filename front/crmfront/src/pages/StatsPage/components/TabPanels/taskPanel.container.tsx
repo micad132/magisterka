@@ -5,7 +5,12 @@ import { SelectValue } from '../../../../types/UtilTypes.ts';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { getUserDetails } from '../../../../store/userSlice.tsx';
 import { addingStatThunk, getAllStats } from '../../../../store/statSlice.tsx';
-import { taskPriorityPieChart, taskStatusPieChart, taskTypePieChart } from '../../../../utils/diagramUtils.ts';
+import {
+  taskByUserPieChart,
+  taskPriorityPieChart,
+  taskStatusPieChart,
+  taskTypePieChart,
+} from '../../../../utils/diagramUtils.ts';
 import { AddStat, StatCategory, StatType } from '../../../../types/StatType.ts';
 import PieChartComponent from '../../../../components/diagrams/pieChart.component.tsx';
 import { mapJsonToPieChart } from '../../../../utils/mappers/chartUtils/mapJsonToChart.ts';
@@ -13,22 +18,25 @@ import SelectWrapperComponent from '../selectWrapper.component.tsx';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import TaskChartWrapperComponent from '../taskChartWrapper.component.tsx';
 import { mapDateToString } from '../../../../utils/mappers/mapDateToString.ts';
+import { getAllTasks } from '../../../../store/taskSlice.tsx';
+import { TaskPriority, TaskStatus, TaskType } from '../../../../types/TaskType.ts';
+import { RoleType } from '../../../../types/UserType.ts';
 
 const TASK_DIAGRAM_TYPE: SelectValue[] = [
   {
-    text: 'Tasks by task status',
+    text: 'Statusy usług',
     value: 'taskStatus',
   },
   {
-    text: 'Tasks by task type',
+    text: 'Typy usług',
     value: 'taskType',
   },
   {
-    text: 'Tasks by tasks priority',
+    text: 'Priorytet usług',
     value: 'taskPriority',
   },
   {
-    text: 'Tasks made by user',
+    text: 'Usługi względem roli',
     value: 'taskByUser',
   },
 ];
@@ -38,27 +46,77 @@ const TaskPanelContainer = () => {
   const dispatch = useAppDispatch();
   const loggedUser = useAppSelector(getUserDetails);
   const stats = useAppSelector(getAllStats);
+  const tasks = useAppSelector(getAllTasks);
 
-  const properTaskBody = (): ChartData<'pie'> => {
+  // status
+
+  const pendingTasks = tasks.filter((task) => task.taskStatus === TaskStatus.PENDING);
+  const inProgressTasks = tasks.filter((task) => task.taskStatus === TaskStatus.IN_PROGRESS);
+  const doneTasks = tasks.filter((task) => task.taskStatus === TaskStatus.DONE);
+  const canceledTasks = tasks.filter((task) => task.taskStatus === TaskStatus.CANCELED);
+
+  // type
+
+  const logisticTasks = tasks.filter((task) => task.taskType === TaskType.LOGISTIC);
+  const purchaseTasks = tasks.filter((task) => task.taskType === TaskType.PURCHASE);
+  const informaticTasks = tasks.filter((task) => task.taskType === TaskType.INFORMATIC);
+
+  // priority
+
+  const minorTasks = tasks.filter((task) => task.taskPriority === TaskPriority.MINOR);
+  const majorTasks = tasks.filter((task) => task.taskPriority === TaskPriority.MAJOR);
+  const criticalTasks = tasks.filter((task) => task.taskPriority === TaskPriority.CRITICAL);
+
+  // doneBy
+
+  const doneByClient = tasks.filter((task) => task.userDTOTaskDetailsCreator.creatorRole === RoleType.CLIENT);
+  const doneByWorker = tasks.filter((task) => task.userDTOTaskDetailsCreator.creatorRole === RoleType.WORKER);
+
+  const properTaskBody = () => {
     switch (taskDiagramType) {
       case 'taskStatus':
-        return taskStatusPieChart([3, 5, 2, 1]);
+        return {
+          type: StatType.PIE,
+          chart: taskStatusPieChart([pendingTasks.length, inProgressTasks.length, doneTasks.length, canceledTasks.length]),
+          description: 'Usługi ze względu na status',
+        };
       case 'taskType':
-        return taskTypePieChart([1, 2, 3]);
+        return {
+          type: StatType.PIE,
+          chart: taskTypePieChart([logisticTasks.length, purchaseTasks.length, informaticTasks.length]),
+          description: 'Usługi ze względu na typ',
+        };
       case 'taskPriority':
-        return taskPriorityPieChart([2, 2, 3]);
+        return {
+          type: StatType.PIE,
+          chart: taskPriorityPieChart([minorTasks.length, majorTasks.length, criticalTasks.length]),
+          description: 'Usługi ze względu na priorytet',
+        };
       case 'taskByUser':
+        return {
+          type: StatType.PIE,
+          chart: taskByUserPieChart([doneByClient.length, doneByWorker.length]),
+          description: 'Usługi ze względu na rolę twórcy',
+        };
+      default:
+        return {
+          type: StatType.PIE,
+          chart: taskPriorityPieChart([2, 2, 3]),
+          description: 'Usługi ze względu na priorytet',
+        };
     }
     return taskStatusPieChart([0, 0, 0, 0]);
   };
 
   const onCreateDiagramHandler = () => {
+    const { type, chart, description } = properTaskBody();
+
     const statBody: AddStat = {
       creatorId: loggedUser.id,
-      chartData: JSON.stringify(properTaskBody()),
+      chartData: JSON.stringify(chart),
       statCategory: StatCategory.TASK,
-      statType: StatType.PIE,
-      description: 'test',
+      statType: type,
+      description,
     };
     try {
       dispatch(addingStatThunk(statBody));
@@ -69,7 +127,7 @@ const TaskPanelContainer = () => {
 
   const taskPieCharts = stats?.filter((s) => s.statCategory === StatCategory.TASK).map((stat) => (
 
-    <PieChartComponent key={stat.id} description={stat.description} chartData={mapJsonToPieChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />));
+    <PieChartComponent isStatPage id={stat.id} key={stat.id} description={stat.description} chartData={mapJsonToPieChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />));
 
   return (
     <div>
@@ -78,11 +136,11 @@ const TaskPanelContainer = () => {
           options={TASK_DIAGRAM_TYPE}
           onChange={setTaskDiagramType}
           value={taskDiagramType}
-          label="Select which task chart you want to make"
+          label="Wybierz jaki wykres ma być utworzony"
         />
       </SelectWrapperComponent>
-      <Button onClick={onCreateDiagramHandler} colorScheme="teal">Create task chart</Button>
-      <p>Task diagrams preview:</p>
+      <Button onClick={onCreateDiagramHandler} colorScheme="teal">Utwórz wykres:</Button>
+      <p>Przegląd wykresów:</p>
       <TaskChartWrapperComponent>
         {taskPieCharts}
       </TaskChartWrapperComponent>

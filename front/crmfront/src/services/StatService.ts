@@ -20,6 +20,14 @@ const StatService = {
       throw e;
     }
   },
+
+  deleteStat: async (id: number) => {
+    try {
+      await axios.delete(`${API_URL}/stat/${id}`);
+    } catch (e) {
+      throw e;
+    }
+  },
 };
 
 export default StatService;

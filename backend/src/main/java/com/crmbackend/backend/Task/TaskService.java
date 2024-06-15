@@ -4,6 +4,7 @@ import com.crmbackend.backend.Task.dto.TaskDTOEditPreviewRequest;
 import com.crmbackend.backend.Task.dto.TaskDTORequest;
 import com.crmbackend.backend.Task.dto.TaskDTOResponse;
 import com.crmbackend.backend.Task.enums.TaskStatus;
+import com.crmbackend.backend.Task.enums.TaskType;
 import com.crmbackend.backend.User.UserModel;
 import com.crmbackend.backend.User.UserRepository;
 import com.crmbackend.backend.User.UserMapper;
@@ -38,9 +39,19 @@ public class TaskService {
         TaskModel taskModel = taskRepository.findById(taskDTOEditPreviewRequest.getId()).orElseThrow();
         UserModel userModel = userRepository.findById(taskDTOEditPreviewRequest.getAssigneeId()).orElseThrow();
         UserModel creatorModel = taskModel.getCreatorModel();
+
+        String properTaskTypeForSms = "";
+        if (taskModel.getTaskType() == TaskType.INFORMATIC) {
+            properTaskTypeForSms = "Informatyczna";
+        } else if(taskModel.getTaskType() == TaskType.PURCHASE) {
+            properTaskTypeForSms = "Zakupowa";
+        } else if(taskModel.getTaskType() == TaskType.LOGISTIC) {
+            properTaskTypeForSms = "Logistyczna";
+        }
+
         if(taskDTOEditPreviewRequest.getTaskStatus() == TaskStatus.DONE) {
-            smsService.sendSms("+48530079391", "Dear " + creatorModel.getName() + " " + creatorModel.getSurname() +
-                    ", your task with id: " + taskModel.getId() + "and type: " + taskModel.getTaskType() + " is done");
+            smsService.sendSms("+48530079391", "Drogi " + creatorModel.getName() + " " + creatorModel.getSurname() +
+                    ", twoja usługa z id: " + taskModel.getId() + " i typem: " + properTaskTypeForSms + " została wykonana");
         }
         taskModel.setAssigneeModel(userModel);
         taskModel.setTaskPriority(taskDTOEditPreviewRequest.getTaskPriority());

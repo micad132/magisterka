@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { Button } from '@chakra-ui/react';
 import SelectComponent from '../../../../components/form/select.component.tsx';
 import { SelectValue } from '../../../../types/UtilTypes.ts';
-import { clientByGenderPie, clientsByCountry, usersByRoleDoughnut } from '../../../../utils/peopleCharts.ts';
+import {
+  clientByGenderPie,
+  clientsByCountry,
+  clientsByProvince,
+  usersByRoleDoughnut,
+} from '../../../../utils/peopleCharts.ts';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks.ts';
 import { getAllUsers, getUserDetails } from '../../../../store/userSlice.tsx';
 import { RoleType, User, UserGender } from '../../../../types/UserType.ts';
@@ -16,15 +21,15 @@ import SelectWrapperComponent from '../selectWrapper.component.tsx';
 
 const PEOPLE_CHART_VALUES: SelectValue[] = [
   {
-    text: 'Client by gender',
+    text: 'Płeć klientów',
     value: 'clientByGender',
   },
   {
-    text: 'Users by roles',
+    text: 'Role klientów',
     value: 'usersByRole',
   },
   {
-    text: 'Users by country name',
+    text: 'Klienci z województw',
     value: 'usersByCountry',
   },
 ];
@@ -48,33 +53,33 @@ const PeoplePanelContainer = () => {
 
   // country
 
-  const countryCounts = clientUsers.reduce((acc: CountryCounts, user: User) => {
-    acc[user.countryName] = (acc[user.countryName] || 0) + 1;
+  const provinceCounts = clientUsers.reduce((acc: CountryCounts, user: User) => {
+    acc[user.provinceName] = (acc[user.provinceName] || 0) + 1;
     return acc;
   }, {});
 
-  const countryNames = Object.keys(countryCounts);
-  const countryValues = Object.values(countryCounts);
+  const provinceNames = Object.keys(provinceCounts);
+  const provinceValues = Object.values(provinceCounts);
 
   const getProperChart = () => {
     switch (peopleChartType) {
       case 'clientByGender':
         return {
           type: StatType.PIE,
-          chart: clientByGenderPie([5, 3]),
-          description: 'Amount of clients by gender',
+          chart: clientByGenderPie([manClients.length, womanClients.length]),
+          description: 'Liczba klientów ze względu na płeć',
         };
       case 'usersByRole':
         return {
           type: StatType.DOUGHNUT,
           chart: usersByRoleDoughnut([clientUsers.length, workerUsers.length, adminUsers.length]),
-          description: 'Amount of users by role',
+          description: 'Liczba użytkowników ze względu na role',
         };
       case 'usersByCountry':
         return {
           type: StatType.BAR,
-          chart: clientsByCountry(countryNames, countryValues),
-          description: 'Amount of clients by country',
+          chart: clientsByProvince(provinceNames, provinceValues),
+          description: 'Liczba klientów ze względu na województwo',
         };
       default:
         return {
@@ -103,7 +108,7 @@ const PeoplePanelContainer = () => {
   };
 
   const peopleStats = stats?.filter((stat) => stat.statCategory === StatCategory.PEOPLE)
-    .map((s) => <PieChartComponent key={s.id} description={s.description} chartData={getProperJsonMap(s.statType, s.chartData)} creatorUsername={s.creatorUsername} createdTime={mapDateToString(s.createdTime)} chartType={s.statType} />);
+    .map((s) => <PieChartComponent isStatPage id={s.id} key={s.id} description={s.description} chartData={getProperJsonMap(s.statType, s.chartData)} creatorUsername={s.creatorUsername} createdTime={mapDateToString(s.createdTime)} chartType={s.statType} />);
 
   return (
     <div>
@@ -111,10 +116,10 @@ const PeoplePanelContainer = () => {
         <SelectComponent
           options={PEOPLE_CHART_VALUES}
           onChange={setPeopleChartType}
-          label="Select which people chart you want to make"
+          label="Wybierz jaki wykres ma zostać stworzony"
         />
       </SelectWrapperComponent>
-      <Button colorScheme="teal" onClick={createPeopleChartHandler}>Create people chart</Button>
+      <Button colorScheme="teal" onClick={createPeopleChartHandler}>Utwórz wykres</Button>
       <TaskChartWrapperComponent>
         {peopleStats}
       </TaskChartWrapperComponent>

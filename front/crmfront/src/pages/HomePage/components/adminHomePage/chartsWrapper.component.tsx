@@ -48,7 +48,7 @@ interface Props {
 
 const ChartsWrapperComponent = ({ spanText, stats }: Props) => {
   const mappedCharts = stats.map((s) => (
-    <PieChartComponent key={s.id} description={s.description} chartData={getProperJsonMap(s.statType, s.chartData)} creatorUsername={s.creatorUsername} createdTime={mapDateToString(s.createdTime)} chartType={s.statType} />
+    <PieChartComponent isStatPage={false} key={s.id} id={s.id} description={s.description} chartData={getProperJsonMap(s.statType, s.chartData)} creatorUsername={s.creatorUsername} createdTime={mapDateToString(s.createdTime)} chartType={s.statType} />
   ));
   return (
     <Wrapper>

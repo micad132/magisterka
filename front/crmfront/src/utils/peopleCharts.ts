@@ -42,7 +42,7 @@ export const usersByRoleDoughnut = (data: number[]): ChartData<'doughnut'> => ({
   ],
 });
 
-export const clientsByCountry = (labels: string[], values: number[]): ChartData<'bar'> => ({
+export const clientsByProvince = (labels: string[], values: number[]): ChartData<'bar'> => ({
   labels,
   datasets: [
     {

@@ -62,8 +62,8 @@ const SupportPageContainer = () => {
   //   : <PageItemsCountComponent count={supportRequests.length} text="zgłoszeń wsparcia" />;
 
   const properClientsSupports = filteredSupportRequest === 'all'
-    ? clientSupports.map((support) => <SingleSupportComponent key={support.id} support={support} isAdminOrWorker={false} />)
-    : clientSupports.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} isAdminOrWorker={false} />);
+    ? clientSupports.map((support) => <SingleSupportComponent key={support.id} support={support} isAdmin={false} isWorker={false} />)
+    : clientSupports.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} isAdmin={false} isWorker={false} />);
 
   if (supports.length === 0) {
     return (
@@ -75,8 +75,8 @@ const SupportPageContainer = () => {
   }
 
   const properWorkerSupports = filteredSupportRequest === 'all'
-    ? supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} isAdminOrWorker />)
-    : clientSupports.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} isAdminOrWorker />);
+    ? supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} isAdmin={false} isWorker />)
+    : supportRequests.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} isAdmin={false} isWorker />);
 
   if (loggedUser.userRole === RoleType.CLIENT) {
     return (
@@ -91,11 +91,11 @@ const SupportPageContainer = () => {
     );
   }
 
-  if (loggedUser.userRole === RoleType.WORKER || loggedUser.userRole === RoleType.ADMIN) {
+  if (loggedUser.userRole === RoleType.WORKER) {
     return (
       <PageWrapperComponent>
         <PageHeaderComponent text="Zgłoszenia wsparcia" />
-        <PageItemsCountComponent count={supportRequests.length} text="zgłoszeń wsparcia" />;
+        <PageItemsCountComponent count={supportRequests.length} text="zgłoszeń wsparcia" />
         <FilterSupportRequestAuthorSelectComponent onChange={setFilteredSupportRequest} options={SUPPORT_REQUEST_SELECT_OPTIONS} />
         <SupportItemsWrapperComponent>
           {properWorkerSupports}
@@ -104,16 +104,22 @@ const SupportPageContainer = () => {
     );
   }
 
-  // return (
-  //   <PageWrapperComponent>
-  //     <PageHeaderComponent text="Zgłoszenia wsparcia" />
-  //     {properHeaderInfo}
-  //     <FilterSupportRequestAuthorSelectComponent onChange={setFilteredSupportRequest} options={SUPPORT_REQUEST_SELECT_OPTIONS} />
-  //     <SupportItemsWrapperComponent>
-  //       {filteredSupports}
-  //     </SupportItemsWrapperComponent>
-  //   </PageWrapperComponent>
-  // );
+  const properAdminSupports = filteredSupportRequest === 'all'
+    ? supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} isAdmin isWorker={false} />)
+    : supportRequests.filter(((support) => support.supportCategory === filteredSupportRequest)).map((item) => <SingleSupportComponent key={item.id} support={item} isAdmin isWorker={false} />);
+
+  if (loggedUser.userRole === RoleType.ADMIN) {
+    return (
+      <PageWrapperComponent>
+        <PageHeaderComponent text="Zgłoszenia wsparcia" />
+        <PageItemsCountComponent count={supportRequests.length} text="zgłoszeń wsparcia" />
+        <FilterSupportRequestAuthorSelectComponent onChange={setFilteredSupportRequest} options={SUPPORT_REQUEST_SELECT_OPTIONS} />
+        <SupportItemsWrapperComponent>
+          {properAdminSupports}
+        </SupportItemsWrapperComponent>
+      </PageWrapperComponent>
+    );
+  }
 };
 
 export default SupportPageContainer;

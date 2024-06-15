@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../utils/consts.ts';
-import { SelfEditUserRequest } from '../types/UserType.ts';
+import { EditUser, SelfEditUserRequest } from '../types/UserType.ts';
 
 const UserService = {
   getUserDetails: async () => {
@@ -26,6 +26,14 @@ const UserService = {
     try {
       const res = await axios.patch(`${API_URL}/user/editPersonalInfo`, editData);
       return res.data;
+    } catch (e) {
+      throw e;
+    }
+  },
+
+  editUser: async (editBody: EditUser) => {
+    try {
+      await axios.patch(`${API_URL}/user/editUser`, editBody);
     } catch (e) {
       throw e;
     }

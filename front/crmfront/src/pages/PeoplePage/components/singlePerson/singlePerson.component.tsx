@@ -3,7 +3,9 @@ import {
 } from '@chakra-ui/react';
 import styled from 'styled-components';
 import RoleTagComponent from '../../../../components/roleTag.component.tsx';
-import { User } from '../../../../types/UserType.ts';
+import {
+  RoleType, RoleTypeType, User, UserGender, UserGenderType,
+} from '../../../../types/UserType.ts';
 import ButtonsFooterComponent from './buttonsFooter.component.tsx';
 import SinglePersonInfoComponent from './singlePersonInfo.component.tsx';
 
@@ -27,6 +29,25 @@ interface Props {
   user: User,
 }
 
+const mapGender = (gender: UserGenderType) => {
+  if (gender === UserGender.MAN) {
+    return 'Mężczyzna';
+  } if (gender === UserGender.WOMAN) {
+    return 'Kobieta';
+  }
+  return '';
+};
+
+const mapRole = (role: RoleTypeType) => {
+  if (role === RoleType.WORKER) {
+    return 'Pracownik';
+  } if (role === RoleType.ADMIN) {
+    return 'Admin';
+  } if (role === RoleType.CLIENT) {
+    return 'Klient';
+  }
+};
+
 const SinglePersonComponent = ({ user }: Props) => (
 
   <StyledAccordion allowToggle>
@@ -42,46 +63,46 @@ const SinglePersonComponent = ({ user }: Props) => (
       </h2>
       <AccordionPanel pb={4}>
         <SinglePersonInfoComponent
-          label="Name"
+          label="Imię"
           text={user.name}
         />
         <SinglePersonInfoComponent
-          label="Surname"
+          label="Nazwisko"
           text={user.surname}
         />
         <SinglePersonInfoComponent
-          label="Age"
+          label="Wiek"
           text={String(user.age)}
         />
         <SinglePersonInfoComponent
-          label="Gender"
-          text={user.userGender}
+          label="Płeć"
+          text={mapGender(user.userGender)}
         />
         <SinglePersonInfoComponent
-          label="Role"
-          text={user.userRole}
+          label="Rola"
+          text={mapRole(user.userRole)}
         />
         <SinglePersonInfoComponent
-          label="Country name"
-          text={user.countryName}
+          label="Województwo"
+          text={user.provinceName}
         />
         <SinglePersonInfoComponent
-          label="Street"
+          label="Ulica"
           text={user.streetName}
         />
         <SinglePersonInfoComponent
-          label="Postal code"
+          label="Kod pocztowy"
           text={user.postalCode}
         />
         <SinglePersonInfoComponent
-          label="Phone number"
+          label="Numer telefonu"
           text={user.phoneNumber}
         />
         <SinglePersonInfoComponent
           label="Pesel"
           text={user.pesel}
         />
-        <ButtonsFooterComponent userId={user.id} user={user} />
+        {user.userRole !== RoleType.ADMIN && <ButtonsFooterComponent userId={user.id} user={user} />}
       </AccordionPanel>
     </AccordionItem>
   </StyledAccordion>

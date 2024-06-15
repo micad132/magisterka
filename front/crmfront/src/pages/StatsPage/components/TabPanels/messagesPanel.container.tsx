@@ -27,11 +27,11 @@ const MESSAGE_DIAGRAM_TYPE_VALUES = {
 
 const MESSAGE_DIAGRAM_TYPE: SelectValue[] = [
   {
-    text: 'Messages in time',
+    text: 'Wiadomości w czasie',
     value: MESSAGE_DIAGRAM_TYPE_VALUES.MESSAGES_IN_TIME,
   },
   {
-    text: 'Role messages count',
+    text: 'Wiadomości dla ról',
     value: MESSAGE_DIAGRAM_TYPE_VALUES.ROLE_MESSAGES,
   },
 ];
@@ -57,12 +57,20 @@ const MessagesPanelContainer = () => {
   console.log('MESSAGES', messages);
   const g = 4;
 
-  const properTaskBody = (): ChartData<'doughnut' | 'line'> => {
+  const properTaskBody = () => {
     switch (messageDiagramType) {
       case MESSAGE_DIAGRAM_TYPE_VALUES.ROLE_MESSAGES:
-        return roleMessageCountDoughnout([clientMessages.length, workerMessages.length]);
+        return {
+          type: StatType.DOUGHNUT,
+          chart: roleMessageCountDoughnout([clientMessages.length, workerMessages.length]),
+          description: 'Wiadomości ze względu na rolę',
+        };
       case MESSAGE_DIAGRAM_TYPE_VALUES.MESSAGES_IN_TIME:
-        return roleMessagesWithTimeLine(dates, clientCounts, workerCounts);
+        return {
+          type: StatType.LINE,
+          chart: roleMessagesWithTimeLine(dates, clientCounts, workerCounts),
+          description: 'Wiadomości ze względu na czas',
+        };
       default:
         roleMessageCountDoughnout([0, 0, 0, 0]);
     }
@@ -70,13 +78,13 @@ const MessagesPanelContainer = () => {
   };
 
   const onAddMessageChart = () => {
-    const properStatType = messageDiagramType === 'messagesInTime' ? StatType.LINE : StatType.DOUGHNUT;
+    const { type, chart, description } = properTaskBody();
     const statBody: AddStat = {
       creatorId: loggedUser.id,
-      chartData: JSON.stringify(properTaskBody()),
+      chartData: JSON.stringify(chart),
       statCategory: StatCategory.MESSAGE,
-      statType: properStatType,
-      description: '',
+      statType: type,
+      description,
     };
     try {
       dispatch(addingStatThunk(statBody));
@@ -86,7 +94,7 @@ const MessagesPanelContainer = () => {
   };
 
   const messageChart = stats?.filter((s) => s.statCategory === StatCategory.MESSAGE).map((stat) => (
-    <PieChartComponent key={stat.id} description={stat.description} chartData={mapJsonToDoughnutChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />
+    <PieChartComponent isStatPage key={stat.id} id={stat.id} description={stat.description} chartData={mapJsonToDoughnutChart(stat.chartData)} creatorUsername={stat.creatorUsername} createdTime={mapDateToString(stat.createdTime)} chartType={stat.statType} />
   ));
 
   return (
@@ -95,11 +103,11 @@ const MessagesPanelContainer = () => {
         <SelectComponent
           options={MESSAGE_DIAGRAM_TYPE}
           onChange={setMessageDiagramType}
-          label="Select which message chart you want to make"
+          label="Wybierz jaki wykres dla wiadomości ma zostać utworzony"
           value={messageDiagramType}
         />
       </SelectWrapperComponent>
-      <Button onClick={onAddMessageChart} colorScheme="teal">Create message chart</Button>
+      <Button onClick={onAddMessageChart} colorScheme="teal">Utwórz wykres wiadomości</Button>
       <TaskChartWrapperComponent>
         {messageChart}
       </TaskChartWrapperComponent>

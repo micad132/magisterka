@@ -2,10 +2,10 @@ import { ChartData } from 'chart.js';
 import { TaskPriority, TaskStatus, TaskType } from '../types/TaskType.ts';
 
 export const taskStatusPieChart = (data: number[]): ChartData<'pie'> => ({
-  labels: [TaskStatus.IN_PROGRESS, TaskStatus.PENDING, TaskStatus.DONE, TaskStatus.CANCELED],
+  labels: ['Oczekujące', 'W trakcie', 'Wykonane', 'Anulowane'],
   datasets: [
     {
-      label: 'Status',
+      label: 'Ilość',
       data,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -25,10 +25,10 @@ export const taskStatusPieChart = (data: number[]): ChartData<'pie'> => ({
 });
 
 export const taskPriorityPieChart = (data: number[]): ChartData<'pie'> => ({
-  labels: [TaskPriority.MINOR, TaskPriority.MAJOR, TaskPriority.CRITICAL],
+  labels: ['Niski', 'Poważny', 'Krytyczny'],
   datasets: [
     {
-      label: 'Priority',
+      label: 'Ilość',
       data,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -46,10 +46,10 @@ export const taskPriorityPieChart = (data: number[]): ChartData<'pie'> => ({
 });
 
 export const taskTypePieChart = (data: number[]): ChartData<'pie'> => ({
-  labels: [TaskType.LOGISTIC, TaskType.PURCHASE, TaskType.INFORMATIC],
+  labels: ['Logistyczna', 'Zakupowa', 'Informatyczna'],
   datasets: [
     {
-      label: 'Type',
+      label: 'Ilość',
       data,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -67,20 +67,18 @@ export const taskTypePieChart = (data: number[]): ChartData<'pie'> => ({
 });
 
 export const taskByUserPieChart = (data: number[]): ChartData<'pie'> => ({
-  labels: [TaskType.LOGISTIC, TaskType.PURCHASE, TaskType.INFORMATIC],
+  labels: ['Klient', 'Pracownik'],
   datasets: [
     {
-      label: 'Amount created by',
+      label: 'Ilość',
       data,
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
       ],
       borderColor: [
         'rgba(255, 99, 132, 1)',
         'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
       ],
       borderWidth: 1,
     },

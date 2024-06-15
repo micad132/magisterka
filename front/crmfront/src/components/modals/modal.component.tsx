@@ -26,6 +26,7 @@ const ModalComponent = ({ modalProps }:Props) => {
         onClick={onOpen}
         colorScheme={modalProps.buttonColor ?? 'teal'}
         size={modalProps.buttonSize ?? 'lg'}
+        data-test-id="opening-modal-button"
       >
         {modalProps.buttonText}
       </Button>

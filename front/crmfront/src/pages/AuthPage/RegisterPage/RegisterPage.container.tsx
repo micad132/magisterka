@@ -88,7 +88,6 @@ const RegisterPage = () => {
               position: 'bottom-right',
             });
             console.log(e);
-            // Jeśli są błędy walidacji, nie ma potrzeby wyświetlania komunikatu błędu, ponieważ zostaną one już wyświetlone przez Formik
           }
         }}
       >

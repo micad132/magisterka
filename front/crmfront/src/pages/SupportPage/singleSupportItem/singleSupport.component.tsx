@@ -48,10 +48,13 @@ const ModalWrapper = styled.div`
 
 interface Props {
   support: Support,
-  isAdminOrWorker: boolean,
+  isAdmin: boolean,
+  isWorker: boolean,
 }
 
-const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
+const SingleSupportComponent = ({
+  support, isWorker, isAdmin,
+}: Props) => {
   const [convertingToTask, setConvertingToTask] = useState<AddingTask>(ADDING_TASK_INITIAL_VALUE);
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -164,9 +167,22 @@ const SingleSupportComponent = ({ support, isAdminOrWorker }: Props) => {
     },
   ];
 
+  const menuItemsWorker: ModalProps = [
+
+    {
+      modalHeader: 'Zamień na usługę',
+      buttonText: 'Zamień na usługę',
+      modalActionButtonText: 'Zamień',
+      buttonSize: 'md',
+      mainButtonAction: convertToTask,
+      modalBody: <ConvertingToTaskContentComponent values={convertingToTask} setState={setState} selectUsers={SELECT_USERS} />,
+    },
+  ];
+
   return (
     <SingleSupportWrapper>
-      {isAdminOrWorker && <MenuComponent menuItems={menuItems} />}
+      {isAdmin && <MenuComponent menuItems={menuItems} />}
+      {isWorker && <MenuComponent menuItems={menuItemsWorker} />}
       <CreatedDateComponent date={mapDateToString(support.dateTime)} />
       <AuthorOfRequestComponent author={support.username} />
       <SupportCategoryBadgeComponent supportType={support.supportCategory} />

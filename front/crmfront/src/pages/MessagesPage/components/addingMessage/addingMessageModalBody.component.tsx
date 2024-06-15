@@ -34,6 +34,7 @@ const AddingMessageModalBodyComponent = ({
       value={messageText}
       onChange={onMessageTextChange}
       label="Wprowadź tekst wiadomości"
+      data-test-id="message-sent-textarea"
     />
   </Wrapper>
 );

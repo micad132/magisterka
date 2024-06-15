@@ -22,14 +22,14 @@ const StatsPageContainer = () => {
   const a = 3;
   return (
     <PageWrapperComponent>
-      <PageHeaderComponent text="STATS PAGE" />
+      <PageHeaderComponent text="Wykresy" />
       <StatsPageInfoComponent />
       <Tabs>
         <CustomTabList>
-          <Tab>Support request diagrams</Tab>
-          <Tab>Task diagrams</Tab>
-          <Tab>Messages diagrams</Tab>
-          <Tab>People diagrams</Tab>
+          <Tab>Wykresy zgłoszeń wsparcia</Tab>
+          <Tab>Wykresy zadań</Tab>
+          <Tab>Wykresy wiadomości</Tab>
+          <Tab>Wykresy użytkowników</Tab>
         </CustomTabList>
 
         <TabPanels>

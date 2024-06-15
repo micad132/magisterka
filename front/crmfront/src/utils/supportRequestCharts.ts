@@ -2,7 +2,7 @@ import { ChartData } from 'chart.js';
 import { SupportRequest } from '../types/SupportRequest.ts';
 
 export const supportRequestCategoriesPie = (data: number[]): ChartData<'doughnut'> => ({
-  labels: [SupportRequest.IMPROVEMENT, SupportRequest.SUPPORT, SupportRequest.BUG, SupportRequest.OTHER],
+  labels: ['Pomysł', 'Wsparcie', 'Problem', 'Inny'],
   datasets: [
     {
       label: 'Count',

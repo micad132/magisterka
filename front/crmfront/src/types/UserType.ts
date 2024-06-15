@@ -33,6 +33,11 @@ export type User = {
   assignedTasks: TaskResponseDTO[],
 };
 
+export type EditUser = {
+  id: number,
+  userRole: RoleTypeType,
+};
+
 export type SelfEditUser = {
   age: number,
   provinceName: string,

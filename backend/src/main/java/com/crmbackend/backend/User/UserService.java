@@ -1,5 +1,6 @@
 package com.crmbackend.backend.User;
 
+import com.crmbackend.backend.User.dto.request.EditUserDTORequest;
 import com.crmbackend.backend.User.dto.request.UserDTOEditPersonalInfoRequest;
 import com.crmbackend.backend.User.dto.request.UserDTORequest;
 import com.crmbackend.backend.User.dto.response.UserDTOResponse;
@@ -54,5 +55,11 @@ public class UserService implements UserDetailsService {
         userRepository.save(userModel);
         UserDTOResponse userDTOResponse = userMapper.mapEntityToDTO(userModel);
         return userDTOResponse;
+    }
+
+    public void editUser(EditUserDTORequest editUserDTORequest) {
+        UserModel userModel = userRepository.findById(editUserDTORequest.getId()).orElseThrow();
+        userModel.setUserRole(editUserDTORequest.getUserRole());
+        userRepository.save(userModel);
     }
 }

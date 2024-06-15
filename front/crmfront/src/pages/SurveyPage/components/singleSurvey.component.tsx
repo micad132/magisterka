@@ -13,9 +13,9 @@ import { deleteSurveyThunk } from '../../../store/surveySlice.tsx';
 
 const SingleSurveyWrapper = styled.div`
   border-radius: 10px;
-  max-width: 500px;
+  max-width: 600px;
   padding: 15px 0;
-  min-width: 400px;
+  min-width: 500px;
   border: 2px solid teal;
   border-left: 20px solid teal;
   
@@ -69,10 +69,10 @@ const SingleSurveyComponent = ({ survey }: Props) => {
 
   const modalProps: ModalProps = {
     modalIcon: <DeleteIcon color="red.500" boxSize={6} />,
-    modalHeader: 'Deleting survey',
+    modalHeader: 'Usunięcie ankiety',
     mainButtonAction: deleteSurveyHandler,
-    modalActionButtonText: 'Delete',
-    modalBody: <p>Are you sure you want to delete this survey?</p>,
+    modalActionButtonText: 'Usuń',
+    modalBody: <p>Czy na pewno chcesz usunąć te ankietę?</p>,
     buttonText: '',
 
   };
@@ -86,9 +86,9 @@ const SingleSurveyComponent = ({ survey }: Props) => {
       <CreatedAtComponent createdDate={mapDateToString(survey.createdTime)} />
 
       <RateWrapper>
-        <SingleRateComponent count={survey.taskRate} text="Task rate" />
-        <SingleRateComponent count={survey.messageRate} text="Message rate" />
-        <SingleRateComponent count={survey.supportRate} text="Support rate" />
+        <SingleRateComponent count={survey.taskRate} text="Ocena zadań" />
+        <SingleRateComponent count={survey.messageRate} text="Ocena wiadomości" />
+        <SingleRateComponent count={survey.supportRate} text="Ocena zgłoszeń wsparcia" />
       </RateWrapper>
 
     </SingleSurveyWrapper>

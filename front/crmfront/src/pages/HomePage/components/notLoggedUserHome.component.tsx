@@ -18,6 +18,7 @@ const workerFunc: string[] = [
   'Wysyłać wiadomości do innych w systemie',
   'Tworzyć komentarze pod zadaniami',
   'Zmieniać swoje dane osobowe',
+  'Zamieniać zgłoszenia wsparcia na usługi',
 ];
 
 const adminFunc: string[] = [

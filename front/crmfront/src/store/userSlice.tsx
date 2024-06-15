@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { INITIAL_USER_DETAILS_VALUES, SelfEditUserRequest, User } from '../types/UserType.ts';
+import {
+  EditUser, INITIAL_USER_DETAILS_VALUES, SelfEditUserRequest, User,
+} from '../types/UserType.ts';
 import UserService from '../services/UserService.ts';
 import { RootState } from '../types/StoreTypes.ts';
 
@@ -70,6 +72,19 @@ export const editUserPersonalInfoThunk = createAsyncThunk(
   },
 );
 
+export const editUserData = createAsyncThunk(
+  'userSlice/editUserData',
+  async (editBody: EditUser) => {
+    try {
+      await UserService.editUser(editBody);
+      const allUsers = await UserService.getAllUsers();
+      return allUsers;
+    } catch (e) {
+      throw e;
+    }
+  },
+);
+
 export const getUserDetails = (state: RootState): User => state.user.userDetails;
 export const getAllUsers = (state: RootState): User[] => state.user.users;
 
@@ -96,6 +111,9 @@ const userSlice = createSlice({
     builder.addCase(editUserPersonalInfoThunk.fulfilled, (state, action) => {
       state.users = action.payload.allUsers;
       state.userDetails = action.payload.data;
+    });
+    builder.addCase(editUserData.fulfilled, (state, action) => {
+      state.users = action.payload;
     });
   },
 });

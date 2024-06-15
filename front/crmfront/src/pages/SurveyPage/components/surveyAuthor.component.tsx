@@ -10,7 +10,7 @@ interface Props {
 }
 
 const SurveyAuthorComponent = ({ authorUsername }: Props) => (
-  <StyledP>Made by: {authorUsername}</StyledP>
+  <StyledP>Wykonana przez: {authorUsername}</StyledP>
 );
 
 export default SurveyAuthorComponent;

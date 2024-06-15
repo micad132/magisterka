@@ -48,10 +48,10 @@ export const addingStatThunk = createAsyncThunk(
 
 export const deleteStatThunk = createAsyncThunk(
   'statSlice/deleteStat',
-  async (supportId: number) => {
+  async (id: number) => {
     try {
-      await SupportRequestService.deleteSupportRequest(supportId);
-      const data = await UserService.getAllUsers();
+      await StatService.deleteStat(id);
+      const data = await StatService.getAllStats();
       return data;
     } catch (e: any) {
       // eslint-disable-next-line @typescript-eslint/no-throw-literal
@@ -73,6 +73,9 @@ const statSlice = createSlice({
         state.stats = action.payload;
       });
     builder.addCase(addingStatThunk.fulfilled, (state, action) => {
+      state.stats = action.payload;
+    });
+    builder.addCase(deleteStatThunk.fulfilled, (state, action) => {
       state.stats = action.payload;
     });
   },

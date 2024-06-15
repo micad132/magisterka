@@ -61,10 +61,10 @@ const AdminHomePageContainer = () => {
             <div>
               <h1>Na tej stronie możesz przejrzeć wszystkie szczegóły wykresów:</h1>
               <CustomTabPanel>
-                <ChartsWrapperComponent stats={taskStats} spanText="All charts with task category" />
-                <ChartsWrapperComponent stats={messagesStats} spanText="All charts with message category" />
-                <ChartsWrapperComponent stats={supportStats} spanText="All charts with support category" />
-                <ChartsWrapperComponent stats={peopleStats} spanText="All charts with people category" />
+                <ChartsWrapperComponent stats={taskStats} spanText="Wykresy o tematyce usług:" />
+                <ChartsWrapperComponent stats={messagesStats} spanText="Wykresy o tematyce wiadomości:" />
+                <ChartsWrapperComponent stats={supportStats} spanText="Wykresy o tematyce zgłoszeń wsparcia:" />
+                <ChartsWrapperComponent stats={peopleStats} spanText="Wykresy o tematyce użytkowników:" />
               </CustomTabPanel>
             </div>
           </TabPanel>
