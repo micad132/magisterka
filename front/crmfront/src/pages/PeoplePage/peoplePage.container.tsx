@@ -23,8 +23,6 @@ const PeoplePageContainer = () => {
 
   const provinceSelectValues: SelectValue[] = [...PROVINCES_VALUES, { text: 'wszyscy', value: 'all' }];
 
-  console.log('filtered', filteredUser);
-
   const clientUsers = allUsers?.filter((client) => client.userRole === RoleType.CLIENT);
 
   const properUsers = filteredUser === 'ALL'

@@ -28,7 +28,6 @@ const ProfilePageWrapper = styled.div`
 `;
 
 const ProfilePageContainer = () => {
-  console.log('djjdd');
   const loggedUser = useAppSelector(getUserDetails);
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -71,14 +70,14 @@ const ProfilePageContainer = () => {
     const historyObj: AddHistory = {
       performerId: loggedUser.id,
       historyActionType: ActionType.PROFILE,
-      description: `User ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} changed account details`,
+      description: `Uzytkownik ${loggedUser.username} - ${loggedUser.name} ${loggedUser.surname} zmienil swoje dane osobowe`,
     };
     try {
       dispatch(editUserPersonalInfoThunk(editBody));
       dispatch(addHistoryThunk(historyObj));
       toast({
-        title: 'Personal info edited!',
-        description: 'You have successfully edited your personal info!',
+        title: 'Edytowano!',
+        description: 'Edytowano dane osobowe!!',
         status: 'success',
         duration: 4000,
         isClosable: true,
@@ -86,8 +85,8 @@ const ProfilePageContainer = () => {
       });
     } catch (e) {
       toast({
-        title: 'Editing went wrong',
-        description: 'Contact your admin!',
+        title: 'Cos poszlo nie tak!',
+        description: 'Skontaktuj sie z adminem!!',
         status: 'error',
         duration: 4000,
         isClosable: true,

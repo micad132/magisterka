@@ -38,12 +38,7 @@ const SystemInfoComponent = () => {
   const supports = useAppSelector(getAllSupportRequests);
   const surveys = useAppSelector(getAllSurveys);
   const comments = useAppSelector(getAllComments);
-  console.log('messages', messages);
 
-  // this week
-  const surveysCountThisWeek = filterSurveysByCurrentWeek(surveys);
-  const messagesCountThisWeek = filterMessagesByCurrentWeek(messages);
-  console.log(surveysCountThisWeek);
   return (
     <div>
       <LabelTextComponent text="Dane w systemie" />
@@ -57,29 +52,6 @@ const SystemInfoComponent = () => {
         <SystemSingleInfoComponent count={surveys.length} text="Ankiety" />
         <SystemSingleInfoComponent count={comments.length} text="Komentarze" />
       </SingleInfoWrapperComponent>
-
-      {/* <LabelTextComponent text="Dane w tym tygodniu (tydzień wstecz od dziś)" /> */}
-      {/* <SingleInfoWrapperComponent> */}
-      {/*  <SystemSingleInfoComponent count={users.length} text="Użytkownicy" /> */}
-      {/*  <SystemSingleInfoComponent count={tasks.length} text="Usługi" /> */}
-      {/*  <SystemSingleInfoComponent count={messagesCountThisWeek} text="Wiadomości" /> */}
-      {/*  <SystemSingleInfoComponent count={histories.length} text="Historia" /> */}
-      {/*  <SystemSingleInfoComponent count={stats.length} text="Wykresy" /> */}
-      {/*  <SystemSingleInfoComponent count={supports.length} text="Wsparcie" /> */}
-      {/*  <SystemSingleInfoComponent count={surveysCountThisWeek} text="Ankiety" /> */}
-      {/*  <SystemSingleInfoComponent count={comments.length} text="Komentarze" /> */}
-      {/* </SingleInfoWrapperComponent> */}
-      {/* <LabelTextComponent text="This month" /> */}
-      {/* <SingleInfoWrapper> */}
-      {/*  <SystemSingleInfoComponent count={127} text="People" linkUrl="/people" /> */}
-      {/*  <SystemSingleInfoComponent count={127} text="Tasks" linkUrl="/tasks" /> */}
-      {/*  <SystemSingleInfoComponent count={127} text="Messages" linkUrl="/messages" /> */}
-      {/*  <SystemSingleInfoComponent count={127} text="History" linkUrl="/history" /> */}
-      {/*  <SystemSingleInfoComponent count={127} text="Charts" linkUrl="/stats" /> */}
-      {/*  <SystemSingleInfoComponent count={127} text="Support" linkUrl="/support" /> */}
-      {/*  <SystemSingleInfoComponent count={127} text="Surveys" linkUrl="/survey" /> */}
-      {/*  <SystemSingleInfoComponent count={127} text="Comments" linkUrl="/comments" /> */}
-      {/* </SingleInfoWrapper> */}
       <TaskCountWrapperComponent />
       <FlexContainer>
         <PeopleCountWrapperComponent />

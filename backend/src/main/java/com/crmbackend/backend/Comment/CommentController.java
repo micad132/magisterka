@@ -20,7 +20,7 @@ public class CommentController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> addComment(@RequestBody CommentDTORequest commentDTORequest) {
         commentService.addComment(commentDTORequest);
-        return ResponseEntity.ok("Successfully added message!");
+        return ResponseEntity.ok("Dodano komentarz!");
     }
 
     @GetMapping
@@ -34,7 +34,7 @@ public class CommentController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<String> deleteComment(@PathVariable("id") Long id) {
         commentService.deleteComment(id);
-        return ResponseEntity.ok("Successfully deleted comment!");
+        return ResponseEntity.ok("Usunieto komentarz!");
     }
 
 

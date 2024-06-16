@@ -38,7 +38,6 @@ const CommentsWrapperComponent = ({ taskId }: Props) => {
   };
 
   const onAddComment = () => {
-    console.log('djd');
     try {
       const addingCommentObj: AddingComment = {
         authorId: loggedUser.id,

@@ -42,7 +42,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody UserDTORequest userDTORequest) {
         userService.registerUser(userDTORequest);
-        return ResponseEntity.ok("Successfully registered!");
+        return ResponseEntity.ok("Uzytkownik zarejestrowany!");
     }
 
     @GetMapping("/users")
@@ -56,7 +56,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<String> deleteUser(@PathVariable ("id") String id) {
         userService.deleteUser(id);
-        return ResponseEntity.ok("Successfully deleted user!");
+        return ResponseEntity.ok("Uzytkownik usuniety!");
     }
 
     @PatchMapping("/editPersonalInfo")

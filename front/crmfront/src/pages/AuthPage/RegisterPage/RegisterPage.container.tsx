@@ -57,9 +57,7 @@ const RegisterPage = () => {
         validateOnBlur
         validateOnChange={false}
         onSubmit={async (values: RegisterAuth, actions) => {
-          console.log('HALO');
           try {
-            console.log('WCHODZI', values);
             const tescik: RegisterAuth = {
               ...values,
               userRole: RoleType.CLIENT,
@@ -67,25 +65,23 @@ const RegisterPage = () => {
             const { message, qrURL }: RegisterAuthResponse = await AuthService.registerUser(tescik);
             setQRURL(qrURL);
             onOpen();
-            console.log('DATA', message);
-            console.log('CODE QRURL', qrURL);
             toast({
-              title: 'Successfully registered!',
-              description: 'You have successfully registered your account!',
+              title: 'Pomyslnie zarejestrowano!',
+              description: 'Rejestracja powodiodla sie!!',
               status: 'success',
               duration: 9000,
               isClosable: true,
-              position: 'bottom-right',
+              position: 'top-right',
             });
             actions.resetForm();
           } catch (e) {
             toast({
-              title: 'Something went wrong!',
-              description: 'There was an error with registering',
+              title: 'Cos poszlo nie tak!',
+              description: 'Skontaktuj sie z adminem!',
               status: 'error',
               duration: 9000,
               isClosable: true,
-              position: 'bottom-right',
+              position: 'top-right',
             });
             console.log(e);
           }

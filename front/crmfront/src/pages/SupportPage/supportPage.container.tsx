@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PageWrapperComponent from '../../components/pageWrapper.component.tsx';
 import PageHeaderComponent from '../../components/pageHeader.component.tsx';
 import SingleSupportComponent from './singleSupportItem/singleSupport.component.tsx';
@@ -8,7 +8,7 @@ import PageItemsCountComponent from '../../components/pageItemsCount.component.t
 import FilterSupportRequestAuthorSelectComponent from './filterSupportRequestAuthorSelect.component.tsx';
 import { SelectValue } from '../../types/UtilTypes.ts';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
-import { fetchSupportRequestsThunk, getAllSupportRequests } from '../../store/supportRequestSlice.tsx';
+import { getAllSupportRequests } from '../../store/supportRequestSlice.tsx';
 import { getUserDetails } from '../../store/userSlice.tsx';
 import { RoleType } from '../../types/UserType.ts';
 import ClientItemsCountComponent from '../../components/clientItemsCount.component.tsx';
@@ -46,8 +46,8 @@ const SupportPageContainer = () => {
 
   const clientSupports = supportRequests.filter((support) => support.username === loggedUser.username);
   const supports = (loggedUser.userRole === RoleType.ADMIN || loggedUser.userRole === RoleType.WORKER)
-    ? supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} isAdminOrWorker />)
-    : clientSupports.map((support) => <SingleSupportComponent key={support.id} support={support} isAdminOrWorker={false} />);
+    ? supportRequests.map((support) => <SingleSupportComponent key={support.id} support={support} isAdmin isWorker />)
+    : clientSupports.map((support) => <SingleSupportComponent key={support.id} support={support} isAdmin={false} isWorker={false} />);
 
   // useEffect(() => {
   //   dispatch(fetchSupportRequestsThunk());

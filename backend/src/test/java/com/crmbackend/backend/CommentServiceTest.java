@@ -13,17 +13,23 @@ import com.crmbackend.backend.Message.mappers.MessageMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 @TestPropertySource(properties = {
         "TWILIO_ACCOUNT_SID=xjs",
         "TWILIO_AUTH_TOKEN=fdsfds",
@@ -39,6 +45,9 @@ public class CommentServiceTest {
 
     @MockBean
     private CommentMapper commentMapper;
+
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     void addAndDisplayComment() {
@@ -70,34 +79,40 @@ public class CommentServiceTest {
                 .build();
 
         CommentModel commentModel = new CommentModel();
-        commentModel.setId(1L); // Dodanie ID dla modelu
+        commentModel.setId(1L);
         commentModel.setDescription("testowy komentarz");
 
-        // Mockowanie mapowania DTO do encji
+
         when(commentMapper.mapDTOToEntity(commentDTORequest)).thenReturn(commentModel);
 
-        // Mockowanie zachowania repozytorium przy dodawaniu komentarza
+
         when(commentRepository.save(any(CommentModel.class))).thenReturn(commentModel);
         when(commentRepository.findAll()).thenReturn(Collections.singletonList(commentModel));
 
-        // When - Dodawanie komentarza
+
         commentService.addComment(commentDTORequest);
 
-        // Then - Weryfikacja, czy metoda save została wywołana
         verify(commentRepository, times(1)).save(commentModel);
 
-        // Then - Weryfikacja, czy komentarz został dodany
+
         List<CommentDTOResponse> allComments = commentService.getAllComments();
         assertEquals(1, allComments.size());
 
-        // When - Usunięcie komentarza
+
         commentService.deleteComment(commentModel.getId());
 
-        // Mockowanie zachowania repozytorium przy usuwaniu komentarza
+
         when(commentRepository.findAll()).thenReturn(Collections.emptyList());
 
-        // Then - Weryfikacja, czy komentarz został usunięty
         allComments = commentService.getAllComments();
         assertEquals(0, allComments.size());
     }
+
+    @Test
+    void shouldThrow401WhenTryingToAddGetCommentsWithoutJWT() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/comment")
+                        .with(csrf()))
+                .andExpect(status().isUnauthorized());
+    }
+
 }

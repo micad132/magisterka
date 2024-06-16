@@ -26,13 +26,13 @@ public class SurveyController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('CLIENT'))")
     public ResponseEntity<String> addSurvey(@RequestBody SurveyDTORequest surveyDTORequest) {
         surveyService.addSurvey(surveyDTORequest);
-        return ResponseEntity.ok("Successfully added survey!");
+        return ResponseEntity.ok("Ankieta dodana!");
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<String> deleteSurvey(@PathVariable("id") Long id) {
         surveyService.deleteSurvey(id);
-        return ResponseEntity.ok("Successfully deleted survey!");
+        return ResponseEntity.ok("Usunieto ankiete!");
     }
 }

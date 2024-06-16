@@ -15,8 +15,6 @@ const AuthNavComponent = ({ isLogged }: Props) => {
   const loggedUser = useAppSelector(getUserDetails);
   const dispatch = useAppDispatch();
 
-  console.log('LOGGED USER', loggedUser);
-
   const onLogoutClick = async () => {
     try {
       await axios.post('http://localhost:8080/logout', {}, { withCredentials: true });

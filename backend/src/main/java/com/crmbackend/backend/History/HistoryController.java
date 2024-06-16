@@ -27,13 +27,13 @@ public class HistoryController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<MessageResponse> addHistory(@RequestBody HistoryDTORequest historyDTORequest) {
         historyService.addHistory(historyDTORequest);
-        return ResponseEntity.ok(new MessageResponse("Successfully added history!"));
+        return ResponseEntity.ok(new MessageResponse("Akcja zapisana w historii!"));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<MessageResponse> deleteHistory(@PathVariable("id") Long id) {
         historyService.deleteHistory(id);
-        return ResponseEntity.ok(new MessageResponse("Successfully deleted history!"));
+        return ResponseEntity.ok(new MessageResponse("Akcja z historii usunieta!"));
     }
 }

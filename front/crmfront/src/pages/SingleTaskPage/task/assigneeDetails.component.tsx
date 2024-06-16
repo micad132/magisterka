@@ -44,7 +44,6 @@ interface Props {
 }
 
 const AssigneeDetailsComponent = ({ assigneePreview }: Props) => {
-  console.log('assignee preview', assigneePreview);
   if (!assigneePreview.assigneeUsername) {
     return (
       <NotAssignedWrapper><h2>N/A</h2></NotAssignedWrapper>

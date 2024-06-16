@@ -62,7 +62,7 @@ const App = () => {
     dispatch(fetchCommentsThunk());
     // dispatch(setLoggedUser({
     //   name: 'Klaudia',
-    //   userRole: RoleType.ADMIN,
+    //   userRole: RoleType.CLIENT,
     //   age: 12,
     //   cityName: 'Krakow',
     //   countryName: 'Polska',

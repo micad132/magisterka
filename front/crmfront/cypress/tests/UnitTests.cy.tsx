@@ -1,7 +1,6 @@
 import LoggedUserDetailsComponent from "../../src/pages/ProfilePage/components/loggedUserDetails.component";
 import {mount} from "cypress/react18";
-import {LoggedUserMainDetails, RoleType, WorkerProfileCount} from "../../src/types/UserType";
-import WorkerStatsWrapperComponent from "../../src/pages/ProfilePage/components/stats/workerStatsWrapper.component";
+import {LoggedUserMainDetails, RoleType } from "../../src/types/UserType";
 import PageHeaderComponent from "../../src/components/pageHeader.component";
 import PageItemsCountComponent from "../../src/components/pageItemsCount.component";
 import TaskTypeBadge from "../../src/components/taskTypeBadge.component";
@@ -18,12 +17,14 @@ import CreatedAtComponent from "../../src/pages/SurveyPage/components/createdAt.
 import SurveyAuthorComponent from "../../src/pages/SurveyPage/components/surveyAuthor.component";
 
 
+
 const userData: LoggedUserMainDetails = {
     username: 'testuser',
     userRole: RoleType.WORKER,
     createdAccountDate: '12-12-2023',
 };
-describe('Profile Page', () => {
+
+describe('Components tests', () => {
     it('Should display proper logged user details', () => {
         // see: https://on.cypress.io/mounting-react
         mount(<LoggedUserDetailsComponent  loggedUserMainDetails={userData} />);
@@ -34,37 +35,6 @@ describe('Profile Page', () => {
         // Sprawdzanie, czy komponent renderuje datę utworzenia konta
         cy.contains('Użytkownik zarejestrowany: 12-12-2023').should('exist');
     });
-
-    it('Should display proper worker data count', () => {
-
-        const count: WorkerProfileCount = {
-            historiesCount: 3,
-            commentsCount: 2,
-            messagesCount: 7,
-            taskAssigneeCount: 1,
-            tasksMadeCount: 2,
-        }
-
-        mount(<WorkerStatsWrapperComponent  count={count} />);
-        cy.get('[data-testid="single-stat-Wiadomości"]').contains('Wiadomości');
-        cy.get('[data-testid="single-stat-count-Wiadomości"]').contains('7');
-
-        cy.get('[data-testid="single-stat-Stworzone Usługi"]').contains('Stworzone Usługi');
-        cy.get('[data-testid="single-stat-count-Stworzone Usługi"]').contains('2');
-
-        cy.get('[data-testid="single-stat-Przypisane Usługi"]').contains('Przypisane Usługi');
-        cy.get('[data-testid="single-stat-count-Przypisane Usługi"]').contains('1');
-
-        cy.get('[data-testid="single-stat-Komentarze"]').contains('Komentarze');
-        cy.get('[data-testid="single-stat-count-Komentarze"]').contains('2');
-
-        cy.get('[data-testid="single-stat-Historia akcji"]').contains('Historia akcji');
-        cy.get('[data-testid="single-stat-count-Historia akcji"]').contains('3');
-
-    })
-});
-
-describe('Components tests', () => {
     it('Should display proper page header', () => {
         mount(<PageHeaderComponent text={'Wiadomości'} />);
         cy.contains('Wiadomości').should('exist');

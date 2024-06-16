@@ -21,14 +21,14 @@ public class SupportRequestController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('CLIENT'))")
     public ResponseEntity<String> addSupportRequest(@RequestBody SupportRequestRequest supportRequestRequest) {
         supportRequestService.addSupportRequest(supportRequestRequest);
-        return ResponseEntity.ok("Support request successfully added!");
+        return ResponseEntity.ok("Zgloszenie wsparcia dodane!");
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<String> deleteSupportRequest(@PathVariable("id") Long id) {
         supportRequestService.deleteSupportRequest(id);
-        return ResponseEntity.ok("Support request successfully deleted!");
+        return ResponseEntity.ok("Usunieto zgloszenie wsparcia!");
     }
 
     @GetMapping
@@ -42,7 +42,7 @@ public class SupportRequestController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('WORKER'))")
     public ResponseEntity<String> editSupportRequest(@RequestBody SupportRequestEditRequest supportRequestEditRequest) {
         supportRequestService.editSupportRequest(supportRequestEditRequest);
-        return ResponseEntity.ok("Support request successfully edited!");
+        return ResponseEntity.ok("Zgloszenie wsparcia edytowane!");
     }
 
 }

@@ -51,7 +51,6 @@ const MessagesPageContainer = () => {
   };
 
   const onReceiverChange = (value: string) => {
-    console.log('VALUE', value);
     setMessage((prevState) => ({
       ...prevState,
       receiver: value,
@@ -108,8 +107,6 @@ const MessagesPageContainer = () => {
     />,
   };
 
-  console.log('MESSAGES', messages);
-
   const properMessages = loggedUser.userRole === RoleType.ADMIN
     ? messages
     : messages?.filter((msg) => msg.authorUsername === loggedUser.username || msg.receiverUsername === loggedUser.username);
@@ -119,8 +116,6 @@ const MessagesPageContainer = () => {
     : properMessages?.filter((filteredMessage) => filteredMessage.receiverUsername === filterUser);
 
   const messagesComponents = filteredMessages?.map((messageType) => <SingleMessageComponent key={messageType.id} message={messageType} loggedUserRole={loggedUser.userRole} />);
-
-  console.log('FILTERED', filterUser);
 
   const properLackOfMessagesInfo = loggedUser.userRole === RoleType.CLIENT
     ? 'Nie masz żadnych wiadomości'

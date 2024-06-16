@@ -29,21 +29,21 @@ public class TaskController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('CLIENT') || hasAnyAuthority('WORKER'))")
     public ResponseEntity<String> addTask(@RequestBody TaskDTORequest taskDTORequest) {
         taskService.addTask(taskDTORequest);
-        return ResponseEntity.ok("Successfully added!");
+        return ResponseEntity.ok("Usluga dodana!");
     }
 
     @PatchMapping("/editPreview")
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('WORKER'))")
     public ResponseEntity<String> editPreviewTask(@RequestBody TaskDTOEditPreviewRequest taskDTOEditPreviewRequest) {
         taskService.editPreview(taskDTOEditPreviewRequest);
-        return ResponseEntity.ok("Successfully edited preview!");
+        return ResponseEntity.ok("Edytowano szczegoly uslugi!");
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<String> deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTask(id);
-        return ResponseEntity.ok("Successfully deleted task!");
+        return ResponseEntity.ok("Usunieto usluge!");
     }
 
 }

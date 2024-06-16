@@ -24,7 +24,6 @@ const CommentPageContainer = () => {
   const comments = useAppSelector(getAllComments);
   const loggedUser = useAppSelector(getUserDetails);
   const users = useAppSelector(getAllUsers);
-  console.log('co,ments', comments);
   const [filterComments, setFilterComments] = useState<string>('');
 
   const mappedSelectValues: SelectValue[] = users.map((user) => ({

@@ -26,14 +26,14 @@ public class MessageController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<String> deleteMessage(@PathVariable("id") Long id) {
         messageService.deleteMessage(id);
-        return ResponseEntity.ok("Successfully deleted message!");
+        return ResponseEntity.ok("Usunieto wiadomosc!");
     }
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> addMessage(@RequestBody MessageDTORequest messageDTORequest) {
         messageService.addMessage(messageDTORequest);
-        return ResponseEntity.ok("Successfully added message!");
+        return ResponseEntity.ok("Dodano wiadomosc!!");
     }
 
 

@@ -27,7 +27,7 @@ public class AuthService {
         try {
             Integer.parseInt(loginRequest.getCode2FA());
         } catch (NumberFormatException ex) {
-            return "Provided code is not properly formatted!";
+            return "Kod jest niepoprawnie sformatowany!";
         }
 
         if (totpService.verifyCode(userModel.getSecret2FA(), Integer.parseInt(loginRequest.getCode2FA()))) {
@@ -35,7 +35,7 @@ public class AuthService {
                 return authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
             } catch (AuthenticationException authenticationException) {
-                return "Incorrect data!";
+                return "Niewlasciwe dane!";
             }
 
         } else {
@@ -45,10 +45,10 @@ public class AuthService {
 
     public String registerUser(UserDTORequest userDTORequest) {
         if(userRepository.existsByEmail(userDTORequest.getEmail())) {
-            throw new UserAlreadyExistsException("User with that email already exists in the system!");
+            throw new UserAlreadyExistsException("Uzytkownik z takim emailem juz istnieje!");
         }
         if(userRepository.existsByUsername(userDTORequest.getUsername())) {
-            throw new UserAlreadyExistsException("User with that username already exists in the system!");
+            throw new UserAlreadyExistsException("Uzytkownik z taka nazwa juz istnieje!");
         }
         String secretCode = totpService.generateSecret();
         UserModel userModel = userMapper.mapUserDTOToEntity(userDTORequest);

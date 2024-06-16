@@ -41,7 +41,6 @@ const AdminHomePageContainer = () => {
   const messagesStats = stats.filter((s) => s.statCategory === StatCategory.MESSAGE);
   const supportStats = stats.filter((s) => s.statCategory === StatCategory.SUPPORT);
   const peopleStats = stats.filter((s) => s.statCategory === StatCategory.PEOPLE);
-  console.log('task stats', taskStats);
 
   return (
     <PageWrapperComponent>

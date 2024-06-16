@@ -81,32 +81,32 @@ const SingleCommentComponent = ({
     try {
       dispatch(deleteCommentThunk(commentId));
       toast({
-        title: 'Comment deleted!',
-        description: 'You have successfully deleted comment!',
-        status: 'error',
+        title: 'Komentarz usuniety!',
+        description: 'Pomyslnie usunales komentarz!!',
+        status: 'success',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
     } catch (e) {
       toast({
-        title: 'Something went wrong!',
-        description: 'Check logs or contact with your admin',
+        title: 'Cos poszlo nie tak!',
+        description: 'Skontaktuj sie z adminem!',
         status: 'error',
         duration: 4000,
         isClosable: true,
-        position: 'bottom-right',
+        position: 'top-right',
       });
     }
   };
 
   const modalProps: ModalProps = {
     mainButtonAction: onDeleteHandler,
-    modalHeader: 'Delete comment',
-    modalBody: <h1>Are you sure you want to delete this comment?</h1>,
-    buttonText: 'Delete',
+    modalHeader: 'Usuń komentarz',
+    modalBody: <h1>Czy na pewno chcesz usunac ten komentarz?</h1>,
+    buttonText: 'Usuń',
     modalIcon: <DeleteIcon color="red.500" boxSize={6} />,
-    modalActionButtonText: 'Delete',
+    modalActionButtonText: 'Usuń',
 
   };
 

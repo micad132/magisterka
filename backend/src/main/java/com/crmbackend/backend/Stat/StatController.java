@@ -21,7 +21,7 @@ public class StatController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<MessageResponse> addStat(@RequestBody StatDTORequest statDTORequest) {
         statService.addStat(statDTORequest);
-        return ResponseEntity.ok(new MessageResponse("Successfully added new stat!"));
+        return ResponseEntity.ok(new MessageResponse("Dodano wykres!"));
     }
 
     @GetMapping
@@ -34,7 +34,7 @@ public class StatController {
     @PreAuthorize("isAuthenticated() && (hasAnyAuthority('ADMIN'))")
     public ResponseEntity<MessageResponse> deleteStat(@PathVariable("id") Long id) {
         statService.deleteStat(id);
-        return ResponseEntity.ok(new MessageResponse("Successfully deleted stat!"));
+        return ResponseEntity.ok(new MessageResponse("Usunieto wykres!"));
     }
 
 }

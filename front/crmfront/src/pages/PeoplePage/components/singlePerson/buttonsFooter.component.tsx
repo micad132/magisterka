@@ -42,7 +42,6 @@ const ButtonsFooterComponent = ({ userId, user }: Props) => {
   );
 
   const changeRole = async () => {
-    console.log('TEST', selectedRole);
     const obj: EditUser = {
       userRole: selectedRole,
       id: userId,
@@ -85,7 +84,6 @@ const ButtonsFooterComponent = ({ userId, user }: Props) => {
     mainButtonAction: async () => {
       try {
         const resultAction = await dispatch(deleteUserThunk(userId)).unwrap();
-        console.log('RESULT', resultAction);
       } catch (error: any) {
         console.error('An error occurred:', error);
         toast({

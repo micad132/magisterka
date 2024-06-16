@@ -4,7 +4,9 @@ import {Provider} from "react-redux";
 import {Survey} from "../../src/types/SurveyType";
 import configureStore, { MockStoreCreator } from 'redux-mock-store';
 import { RootState } from "../../src/types/StoreTypes";
-import {RoleType, User, UserGender} from "../../src/types/UserType";
+import { RoleType, User, UserGender, WorkerProfileCount} from "../../src/types/UserType";
+import WorkerStatsWrapperComponent from "../../src/pages/ProfilePage/components/stats/workerStatsWrapper.component";
+import SupportPageContainer from "../../src/pages/SupportPage/supportPage.container";
 
 
 const mockedSurveys: Survey[] = [
@@ -88,6 +90,10 @@ const initialState: RootState = {
     },
     user: {
         users: mockedUsers,
+        userDetails: mockedUsers[0],
+    },
+    supportRequest: {
+        supportRequests: [],
     }
 };
 
@@ -119,4 +125,49 @@ it('Should display proper info on SurveyPage', () => {
             expect(response.status).to.eq(401);
         });
     });
+
+
+
+
+
+    it('Should display proper worker data count', () => {
+
+        const count: WorkerProfileCount = {
+            historiesCount: 3,
+            commentsCount: 2,
+            messagesCount: 7,
+            taskAssigneeCount: 1,
+            tasksMadeCount: 2,
+        }
+
+        mount(<WorkerStatsWrapperComponent  count={count} />);
+        cy.get('[data-testid="single-stat-Wiadomości"]').contains('Wiadomości');
+        cy.get('[data-testid="single-stat-count-Wiadomości"]').contains('7');
+
+        cy.get('[data-testid="single-stat-Stworzone Usługi"]').contains('Stworzone Usługi');
+        cy.get('[data-testid="single-stat-count-Stworzone Usługi"]').contains('2');
+
+        cy.get('[data-testid="single-stat-Przypisane Usługi"]').contains('Przypisane Usługi');
+        cy.get('[data-testid="single-stat-count-Przypisane Usługi"]').contains('1');
+
+        cy.get('[data-testid="single-stat-Komentarze"]').contains('Komentarze');
+        cy.get('[data-testid="single-stat-count-Komentarze"]').contains('2');
+
+        cy.get('[data-testid="single-stat-Historia akcji"]').contains('Historia akcji');
+        cy.get('[data-testid="single-stat-count-Historia akcji"]').contains('3');
+
+    })
+
+it('Should display proper info when there are no supports', () => {
+
+    const store = mockStore(initialState);
+    mount(
+        <Provider store={store}>
+            <SupportPageContainer />
+        </Provider>
+    );
+    cy.contains('Zgłoszenia wsparcia').should('exist');
+    cy.contains('W systemie nie ma zgłoszeń wsparcia').should('exist');
+
+})
 

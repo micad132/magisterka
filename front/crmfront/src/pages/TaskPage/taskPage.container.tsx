@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { useToast } from '@chakra-ui/react';
 import ModalComponent from '../../components/modals/modal.component.tsx';
@@ -14,7 +14,7 @@ import {
 import {
   AllSelectValue, TASK_PRIORITY_OPTIONS, TASK_TYPE_OPTIONS,
 } from '../../utils/consts.ts';
-import { addingTaskRequestThunk, getAllTasks } from '../../store/taskSlice.tsx';
+import { addingTaskRequestThunk, fetchTasksThunk, getAllTasks } from '../../store/taskSlice.tsx';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks.ts';
 import { getUserDetails } from '../../store/userSlice.tsx';
 import MessageComponent from '../../components/message.component.tsx';
@@ -40,6 +40,11 @@ const TaskPageContainer = () => {
   const [sortingPriorityTask, setSortingPriorityTask] = useState<string>('ALL');
   const [isOnlyCurrentWorkerTasks, setIsOnlyCurrentWorkerTasks] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTasksThunk());
+  }, []);
+
   const toast = useToast();
   const loggedUser = useAppSelector(getUserDetails);
   const tasks = useAppSelector(getAllTasks);

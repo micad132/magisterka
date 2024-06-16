@@ -116,13 +116,13 @@ public class AuthController {
                 }
             }
         }
-        return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body("Invalid refresh token");
+        return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).body("Niepoprawny token");
     }
 
 
     @PostMapping("/register")
     public ResponseEntity<Response2FA> registerUser(@RequestBody UserDTORequest userDTORequest) {
        String qURL = authService.registerUser(userDTORequest);
-       return ResponseEntity.ok(new Response2FA(qURL, "Successfully registered user!"));
+       return ResponseEntity.ok(new Response2FA(qURL, "Zarejestrowano uzytkownika!"));
     }
 }
